@@ -35,7 +35,7 @@ body {
         <th class="text-center">#</th>
         <th class="text-center">First Name</th>
         <th class="text-center">Last Name</th>
-        <th class="text-center">username</th>
+        <th class="text-center">@username</th>
       </tr>
     </thead>
     <tbody>
