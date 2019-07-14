@@ -153,7 +153,7 @@ function processQuery($inline_query)
             'id'           => '0',
             'title'        => 'Esperando una consulta...',
             'message_text' => 'Tienes que introducir el monto*tasa.
-            Ejemplo: 50*7500',
+Ejemplo: 50*7500',
             'description'  => 'Ejemplo: 50*7500',
         ];
     }
