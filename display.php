@@ -50,7 +50,7 @@ body {
           echo '<td class="text-center">'.substr($row['first_name'], 0, 15)."</td>";
           echo '<td class="text-center">'.substr($row['last_name'],0, 15)."</td>";
           echo '<td class="text-center">'.substr($row['username'],0, 15)."</td>";
-          echo '<td class="text-center">'.substr($row['reg_date'],0, 9)."</td>";
+          echo '<td class="text-center">'.substr($row['reg_date'],0, 10)."</td>";
           echo "</tr>";
       }
       ?>
