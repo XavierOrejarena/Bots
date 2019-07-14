@@ -240,9 +240,9 @@ Total: ".number_format($USD, 2, ',', '')." Bs.";
             }
 
             sendMessage($chat_id, $msg1);
-            if ($msg2 !== NULL) {
+            // if ($msg2 !== NULL) {
                 sendMessage($chat_id, "test");
-            }
+            // }
             
         }
 }
