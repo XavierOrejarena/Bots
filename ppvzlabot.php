@@ -152,8 +152,8 @@ function processQuery($inline_query)
             'type'         => 'article',
             'id'           => '0',
             'title'        => 'Esperando una consulta...',
-            'message_text' => 'Tienes que introducir la cantidad de dólares y su tasa.',
-            'description'  => 'Ejemplo: 10*80',
+            'message_text' => 'Tienes que introducir el monto*tasa.',
+            'description'  => 'Ejemplo: 50*7500',
         ];
     }
     else if ($signal == 'x' || $signal == '*' || is_null($signal) || $signal == 'X') {
