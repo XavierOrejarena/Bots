@@ -35,12 +35,13 @@ body {
         <th class="text-center">First Name</th>
         <th class="text-center">Last Name</th>
         <th class="text-center">@</th>
+        <th class="text-center">Last use</th>
       </tr>
     </thead>
     <tbody>
       <?php 
 
-      $result = mysqli_query($link, "SELECT first_name, last_name, username FROM users ORDER BY ppvzlabot DESC");
+      $result = mysqli_query($link, "SELECT first_name, last_name, username, reg_date FROM users ORDER BY ppvzlabot DESC");
       $count = 0;
       while($row = mysqli_fetch_array($result)){
           $count++;
@@ -49,6 +50,7 @@ body {
           echo '<td class="text-center">'.$row['first_name']."</td>";
           echo '<td class="text-center">'.$row['last_name']."</td>";
           echo '<td class="text-center">'.$row['username']."</td>";
+          echo '<td class="text-center">'.$row['reg_date']."</td>";
           echo "</tr>";
       }
       ?>
