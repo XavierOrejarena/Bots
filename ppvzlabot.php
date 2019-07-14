@@ -221,24 +221,25 @@ function processMessage($message) {
             if ($signal == 'x' || $signal == '*' || is_null($signal) || $signal == 'X') {
                 $receive = round(($USD-$USD*(0.054)-0.3), 2);
                 $msg1 = "Envían: $USD
-        Llegarán: $receive $
-        \xE2\x98\x95: $Bolivares Bs.
-        Total: ".number_format($receive*$Bolivares, 2, ',', '')." Bs.";
+Llegarán: $receive $
+\xE2\x98\x95: $Bolivares Bs.
+Total: ".number_format($receive*$Bolivares, 2, ',', '')." Bs.";
                 $sent = round((100*($USD+0.3)/94.6),2);
-                $msg1 = "Envían: $sent
-        Llegarán: $USD $
-        \xE2\x98\x95: $Bolivares Bs.
-        Total: ".number_format($USD*$Bolivares, 2, ',', '')." Bs.";
+                $msg2 = "Envían: $sent
+Llegarán: $USD $
+\xE2\x98\x95: $Bolivares Bs.
+Total: ".number_format($USD*$Bolivares, 2, ',', '')." Bs.";
             }
             else if ($signal == "/" || $signal == '\\') {
                 $sent = round((100*(($USD/$BS)+0.3)/94.6),2);
                 $receive = round($USD/$BS,2);
                 $msg1 = "Envían: $sent $
-        Llegarán: $receive $
-        \xE2\x98\x95: $BS Bs.
-        Total: ".number_format($USD, 2, ',', '')." Bs.";
+Llegarán: $receive $
+\xE2\x98\x95: $BS Bs.
+Total: ".number_format($USD, 2, ',', '')." Bs.";
             }
 
+            sendMessage($chat_id, $msg1);
             sendMessage($chat_id, $msg1);
             
         }
