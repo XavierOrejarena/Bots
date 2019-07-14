@@ -47,7 +47,7 @@ body {
           $count++;
           echo "<tr>";
           echo '<td class="text-center">'.$count."</td>";
-          echo '<td class="text-center">'.$row['first_name']."</td>";
+          echo '<td class="text-center">'.substr($row['first_name'], 0, 10)."</td>";
           echo '<td class="text-center">'.$row['last_name']."</td>";
           echo '<td class="text-center">'.$row['username']."</td>";
           echo '<td class="text-center">'.$row['reg_date']."</td>";
