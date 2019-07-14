@@ -202,8 +202,55 @@ if (php_sapi_name() == 'cli') {
   apiRequest('setWebhook', ['url' => isset($argv[1]) && $argv[1] == 'delete' ? '' : WEBHOOK_URL]);
     exit;
 }
+
+function processMessage($message) {
+    $message_id = $message['message_id'];
+    $chat_id = $message['chat']['id'];
+    $text = $message['text'];
+
+    if(strtolower($text) == "/start") {
+    sendMessage($chat_id, "Hola ".$message['from']['first_name'].", solo escribe monto*tasa y espera el resultado.");
+
+    } else {
+            $text   = str_replace('x','*',$text);
+            $USD = str_word_count($text, 1, '0123456789.')[0];
+            $BS = str_word_count($text, 1, '0123456789.')[1];
+            $signal = str_word_count($text, 1, '*xX/\def')[0];
+            $Bolivares = pow(1000,strlen(strstr($BS, 'k')))*(real)$BS;
+
+            if ($signal == 'x' || $signal == '*' || is_null($signal) || $signal == 'X') {
+                $receive = round(($USD-$USD*(0.054)-0.3), 2);
+                $msg1 = "Envían: $USD
+        Llegarán: $receive $
+        \xE2\x98\x95: $Bolivares Bs.
+        Total: ".number_format($receive*$Bolivares, 2, ',', '')." Bs.";
+                $sent = round((100*($USD+0.3)/94.6),2);
+                $msg1 = "Envían: $sent
+        Llegarán: $USD $
+        \xE2\x98\x95: $Bolivares Bs.
+        Total: ".number_format($USD*$Bolivares, 2, ',', '')." Bs.";
+            }
+            else if ($signal == "/" || $signal == '\\') {
+                $sent = round((100*(($USD/$BS)+0.3)/94.6),2);
+                $receive = round($USD/$BS,2);
+                $msg1 = "Envían: $sent $
+        Llegarán: $receive $
+        \xE2\x98\x95: $BS Bs.
+        Total: ".number_format($USD, 2, ',', '')." Bs.";
+            }
+
+            sendMessage($chat_id, $msg1);
+            
+        }
+}
+
 $content = file_get_contents('php://input');
 $update = json_decode($content, true);
+
+if (isset($update['message'])) {
+    processMessage($update['message']);
+    saveUser($update['message']['from']);
+}
 
 if (isset($update['inline_query'])) {
     if (!in_array($update['inline_query']['from']['id'], array(350624626, 270551497, 3247447, 390988751, 8260118, 134852004, 1231821, 214608241, 340381568, 522739070, 196129611, 4769326, 514121441))) {

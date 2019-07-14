@@ -197,8 +197,7 @@ function processQuery($inline_query)
     apiRequest('answerInlineQuery', array('inline_query_id' => $inline_query['id'], 'results' => $results, 'cache_time' => 0));
 }
 
-function processMessage($message)
-{
+function processMessage($message) {
     $message_id = $message['message_id'];
     $chat_id = $message['chat']['id'];
     $text = $message['text'];
