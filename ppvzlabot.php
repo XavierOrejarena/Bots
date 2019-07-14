@@ -240,7 +240,9 @@ Total: ".number_format($USD, 2, ',', '')." Bs.";
             }
 
             sendMessage($chat_id, $msg1);
-            sendMessage($chat_id, $msg2);
+            if (!empty($msg2)) {
+                sendMessage($chat_id, $msg2);
+            }
             
         }
 }
