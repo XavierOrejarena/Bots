@@ -23,11 +23,11 @@ body {
 </head>
 <body>
 
-<div class="container col-lg-5">
+<div class="container col-lg-4">
   <img src="https://i0.wp.com/boxmining.com/wp-content/uploads/2017/08/binancelogoblack.jpg" width="200">
 </div>
 
-<div class="container col-lg-5"> 
+<div class="container col-lg-4"> 
   <table class="table table-bordered table-inverse table-hover">
     <thead>
       <tr>
