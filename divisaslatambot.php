@@ -1,57 +1,11 @@
 #!/usr/bin/env php
 <?php
 
-define('BOT_TOKEN', '1228539660:AAENYRaMlIR84VtmTSO5MHg13saDL3epHkk');
+define('BOT_TOKEN', '1224010504:AAE42bCZS8A6rhmTHq15EnFkogVARy9utnU');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
-define('WEBHOOK_URL', 'https://xavier.mer.web.ve/LBCVESbot.php');
-
-function getS() {
-  $rdata = array("COMPRA\t\tVENTA");
-  $priceBTC = getBTCValue();
-  $URL = file_get_contents("https://localbitcoins.com/buy-bitcoins-online/ve/venezuela/.json");
-  $DATA = json_decode($URL, true);
-  $text = '';
-  $i = 0;
-  foreach ($DATA['data']['ad_list'] as $oferta) {
-    if ($oferta['data']['currency'] == 'VES' && !stripos($oferta['data']['msg'], 'bitmain') && !stripos($oferta['data']['bank_name'], 'bitmain')) {
-      $rdata[] = number_format(round($oferta['data']['temp_price']/$priceBTC));
-      $i++;
-      if ($i > 9) break;
-    }
-  }
-  
-  $URL = file_get_contents("https://localbitcoins.com/sell-bitcoins-online/ve/venezuela/.json");
-  $DATA = json_decode($URL, true);
-  
-  $i = 1;
-  foreach ($DATA['data']['ad_list'] as $oferta) {
-    if ($oferta['data']['currency'] == 'VES'  && !stripos($oferta['data']['msg'], 'bitmain') && !stripos($oferta['data']['bank_name'], 'bitmain')) {
-      $rdata[$i] = $rdata[$i]."\t\t\t".number_format(round($oferta['data']['temp_price']/$priceBTC));
-      $i++;
-      if ($i > 10) break;
-    }
-  }
-
-  foreach ($rdata as $key) {
-    $text = $text.$key."\n";
-  }
-  return $text;
-
-}
-
-function getBTCValue() {
-  $BINANCE_BTCUSDT = file_get_contents("https://www.bitmex.com/api/v1/trade/bucketed?binSize=1m&partial=true&count=100&reverse=true");
-  $BINANCE_BTCUSDT = json_decode($BINANCE_BTCUSDT, true);
-
-  foreach ($BINANCE_BTCUSDT as $coin) {
-      if ($coin['symbol'] == 'XBTUSD') {
-          return round($coin['open'],2);
-          break;
-      }
-  }
-  
-  return 0;
-}
+define('WEBHOOK_URL', 'https://xavier.mer.web.ve/divisaslatambot.php');
+define('appID', '36cab38e64694c14bc52931f371b4fbc');
+define('API_URL_RATES', 'https://openexchangerates.org/api/latest.json?app_id='.appID);
 
 function apiRequestWebhook($method, $parameters) {
   if (!is_string($method)) {
@@ -166,16 +120,47 @@ function apiRequestJson($method, $parameters) {
 
 function processMessage($message) {
   // process incoming message
-  $message_id = $message['message_id'];
-  $chat_id = $message['chat']['id'];
-  $text = $message['text'];
+	$message_id = $message['message_id'];
+	$chat_id = $message['chat']['id'];
+    
+	$text = $message['text'];
 
-  if ($text == '/s') {
-    apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "<pre>".getS()."</pre>", 'parse_mode' => 'HTML'));
-  } else if ($text == '/start'){
-    apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "El único comando /s te muestra la tasa del dolar en VES dividiendo las 10 primeras ofertas en localbitcoins.com entre la tasa del BTC segun Bitmex.com"));
-  }
-  
+
+  if ($text == "/start") {
+    apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'La función de este bot es unicamente hacer cambio entre divisas, ejemplo para convertir 100 EUR a USD solo hace falta escribir:
+
+"100 EUR"
+
+Ahora si quieres convertir 50 CLP a VES solo debes escribir:
+
+"50 CLP VES"
+
+Obviamente sin las comillas, no seas tont@
+
+Los datos son obtenidos de openexchangerates.org
+No se hace distinción entre mayúsculas.'));
+  }else{
+    $size = sizeof(str_word_count($text, 1, "0123456789."));
+    $first = strtoupper(str_word_count($text, 1, "0123456789.")[1]);
+    $second = strtoupper(str_word_count($text, 1, "0123456789.")[2]);
+
+    if (($size == 2 && $first != 'USD') || ($size == 3 && $second == 'USD')) {
+      $data = file_get_contents(API_URL_RATES);
+      $data = json_decode(utf8_encode($data), true);
+      $amount = str_word_count($text, 1, "0123456789.")[0];
+      $result = $amount/$data['rates'][$first];
+    } elseif ($size == 3) {
+      $data = file_get_contents(API_URL_RATES);
+      $data = json_decode(utf8_encode($data), true);
+      $amount = str_word_count($text, 1, "0123456789.")[0];
+      $result_1 = $data['rates'][$first];
+      $result_2 = $data['rates'][$second];
+      $result = $amount*$result_2/$result_1;
+    }
+    $result = number_format(round($result,2), 2, '.', ',');
+    apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => $result));
+
+	}
 }
 
 if (php_sapi_name() == 'cli') {

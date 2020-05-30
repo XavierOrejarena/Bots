@@ -1,57 +1,9 @@
 #!/usr/bin/env php
 <?php
 
-define('BOT_TOKEN', '1228539660:AAENYRaMlIR84VtmTSO5MHg13saDL3epHkk');
+define('BOT_TOKEN', '1269735857:AAGhTR4HFBPf2gLvSf80dEjOB4f54UEnt5I');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
-define('WEBHOOK_URL', 'https://xavier.mer.web.ve/LBCVESbot.php');
-
-function getS() {
-  $rdata = array("COMPRA\t\tVENTA");
-  $priceBTC = getBTCValue();
-  $URL = file_get_contents("https://localbitcoins.com/buy-bitcoins-online/ve/venezuela/.json");
-  $DATA = json_decode($URL, true);
-  $text = '';
-  $i = 0;
-  foreach ($DATA['data']['ad_list'] as $oferta) {
-    if ($oferta['data']['currency'] == 'VES' && !stripos($oferta['data']['msg'], 'bitmain') && !stripos($oferta['data']['bank_name'], 'bitmain')) {
-      $rdata[] = number_format(round($oferta['data']['temp_price']/$priceBTC));
-      $i++;
-      if ($i > 9) break;
-    }
-  }
-  
-  $URL = file_get_contents("https://localbitcoins.com/sell-bitcoins-online/ve/venezuela/.json");
-  $DATA = json_decode($URL, true);
-  
-  $i = 1;
-  foreach ($DATA['data']['ad_list'] as $oferta) {
-    if ($oferta['data']['currency'] == 'VES'  && !stripos($oferta['data']['msg'], 'bitmain') && !stripos($oferta['data']['bank_name'], 'bitmain')) {
-      $rdata[$i] = $rdata[$i]."\t\t\t".number_format(round($oferta['data']['temp_price']/$priceBTC));
-      $i++;
-      if ($i > 10) break;
-    }
-  }
-
-  foreach ($rdata as $key) {
-    $text = $text.$key."\n";
-  }
-  return $text;
-
-}
-
-function getBTCValue() {
-  $BINANCE_BTCUSDT = file_get_contents("https://www.bitmex.com/api/v1/trade/bucketed?binSize=1m&partial=true&count=100&reverse=true");
-  $BINANCE_BTCUSDT = json_decode($BINANCE_BTCUSDT, true);
-
-  foreach ($BINANCE_BTCUSDT as $coin) {
-      if ($coin['symbol'] == 'XBTUSD') {
-          return round($coin['open'],2);
-          break;
-      }
-  }
-  
-  return 0;
-}
+define('WEBHOOK_URL', 'https://xavier.mer.web.ve/Gastodaybot.php');
 
 function apiRequestWebhook($method, $parameters) {
   if (!is_string($method)) {
@@ -168,15 +120,27 @@ function processMessage($message) {
   // process incoming message
   $message_id = $message['message_id'];
   $chat_id = $message['chat']['id'];
-  $text = $message['text'];
+  if (isset($message['text'])) {
+    // incoming text message
+    $text = $message['text'];
 
-  if ($text == '/s') {
-    apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "<pre>".getS()."</pre>", 'parse_mode' => 'HTML'));
-  } else if ($text == '/start'){
-    apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "El único comando /s te muestra la tasa del dolar en VES dividiendo las 10 primeras ofertas en localbitcoins.com entre la tasa del BTC segun Bitmex.com"));
+    if (strpos($text, "/start") === 0) {
+      apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'Hello', 'reply_markup' => array(
+        'keyboard' => array(array('Hello', 'Hi')),
+        'one_time_keyboard' => true,
+        'resize_keyboard' => true)));
+    } else if ($text === "Hello" || $text === "Hi") {
+      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Nice to meet you'));
+    } else if (strpos($text, "/stop") === 0) {
+      // stop now
+    } else {
+      apiRequestWebhook("sendMessage", array('chat_id' => $chat_id, "reply_to_message_id" => $message_id, "text" => 'Cool'));
+    }
+  } else {
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'I understand only text messages'));
   }
-  
 }
+
 
 if (php_sapi_name() == 'cli') {
   // if run from console, set or delete webhook
