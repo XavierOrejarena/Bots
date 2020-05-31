@@ -215,6 +215,8 @@ If you want to know all token listed in Binance.com just type /coins");
 
 "/MYALARMS to manage all your alarms.
 
+"/COINS" to list all the binance pairs.
+
 upper case and lower case does not matter.');
     }
     elseif (strtolower($text) == "/coins") {
