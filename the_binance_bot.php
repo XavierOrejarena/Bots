@@ -217,7 +217,9 @@ If you want to know all token listed in Binance.com just type /coins");
 
 "/COINS" to list all the Binance pairs.
 
-Upper case and lower case does not matter.');
+Upper case and lower case does not matter.
+
+Any bug or sugestions @XavierOrejarena');
     }
     elseif (strtolower($text) == "/coins") {
         $Binance = json_decode(file_get_contents("https://api.binance.com//api/v1/exchangeInfo"), true);
