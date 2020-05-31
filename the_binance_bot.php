@@ -209,7 +209,7 @@ If you want to know all token listed in Binance.com just type /coins");
 
     }
     elseif (strtolower($text) == "/help") {
-        sendMessage($chat_id, "You are retarded, please don't use this Bot");
+        sendMessage($chat_id, "/BTCUSDT command for BTC USDT Price");
     }
     elseif (strtolower($text) == "/coins") {
         $Binance = json_decode(file_get_contents("https://api.binance.com//api/v1/exchangeInfo"), true);
