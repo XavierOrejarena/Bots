@@ -1,2 +1,2 @@
 #!/bin/bash
-`git pull https://github.com/XavierOrejarena/Bots.git`
+exec("git pull https://user:password@bitbucket.org/user/repo.git master");
