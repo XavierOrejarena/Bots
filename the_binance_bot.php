@@ -273,6 +273,7 @@ CAPs does not matter.');
     		$coin = strtoupper($text);
 	        $coin = ltrim($coin, '/');
 	        $price = json_decode(file_get_contents("https://api.binance.com/api/v1/ticker/price?symbol=$coin"), true)['price'];
+            $price = round($price,2);
             $text = "/".$coin." ".$price;
             if ($price > 0) {
                 sendMessage($chat_id, $text);
