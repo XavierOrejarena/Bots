@@ -211,7 +211,7 @@ If you want to know all token listed in Binance.com just type /coins");
     elseif (strtolower($text) == "/help") {
         sendMessage($chat_id, '"/BTCUSDT" for USDT/BTC rate.
 
-"/ALARM BTCUSDT 9500" to receive a notification when BTC reaches 9500.
+"/ALARM BTCUSDT 10000" to receive a notification when BTC reaches 10000.
 
 "/MYALARMS to manage all your alarms.
 
@@ -225,7 +225,7 @@ Any bug or suggestion @XavierOrejarena');
         $Binance = json_decode(file_get_contents("https://api.binance.com//api/v1/exchangeInfo"), true);
         $coins = "";
         // for ($i= 0; $i < sizeof($Binance['symbols']) ; $i++) { 
-        for ($i= 0; $i < 50 ; $i++) { 
+        for ($i= 0; $i < 20 ; $i++) { 
             $coin = $Binance['symbols'][$i]['symbol'];
             $coins = $coins."
 /".$coin;
