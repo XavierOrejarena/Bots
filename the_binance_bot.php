@@ -209,13 +209,14 @@ If you want to know all token listed in Binance.com just type /coins");
 
     }
     elseif (strtolower($text) == "/help") {
-        sendMessage($chat_id, '3"/BTCUSDT" for USDT/BTC price
+        sendMessage($chat_id, '0"/BTCUSDT" for USDT/BTC price
 
 "/ALARM BTCUSDT 8500" to receive an alarm when BTC reaches that rate.
 
 "/MYALARMS to manage all your alarms.
 
-"/COINS" to list all the Binance pairs.3
+"/COINS" to list all the Binance pairs.
+
 Upper case and lower case does not matter.
 
 Any bug or suggestions @XavierOrejarena');
