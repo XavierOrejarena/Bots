@@ -1,3 +1,3 @@
 #!/usr/bin/php
 <?php
-echo shell_exec("git pull https://github.com/XavierOrejarena/Bots.git");
+exec("git pull https://github.com/XavierOrejarena/Bots.git");
