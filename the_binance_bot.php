@@ -209,7 +209,7 @@ If you want to know all token listed in Binance.com just type /coins");
 
     }
     elseif (strtolower($text) == "/help") {
-        sendMessage($chat_id, '9"/BTCUSDT" for USDT/BTC price
+        sendMessage($chat_id, '0"/BTCUSDT" for USDT/BTC price
 
 "/ALARM BTCUSDT 8500" to receive an alarm when BTC reaches that rate.
 
