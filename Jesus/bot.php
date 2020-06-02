@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
-include "../connect.php";
+include(dirname(__FILE__)."/../connect.php");
+
 
 function getBTCValue() {
   $BINANCE_BTCUSDT = file_get_contents("https://www.bitmex.com/api/v1/trade/bucketed?binSize=1m&partial=true&count=100&reverse=true");
