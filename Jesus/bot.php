@@ -288,7 +288,7 @@ function processMessage($message) {
       $sql = "SELECT tasa FROM DICOM WHERE id = 1";
       $result = $link->query($sql);
       $OldText = mysqli_fetch_assoc($result)['tasa'];
-      apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => $OldText, 'parse_mode' => 'HTML'));
+      apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => $sql, 'parse_mode' => 'HTML'));
       // $result = $link->query($sql);
       // apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => $text));
     } else if (strpos($text,"/colombia") !== false) {
