@@ -284,10 +284,12 @@ function processMessage($message) {
       apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "<pre>".getPeru()."</pre>", 'parse_mode' => 'HTML'));
     } else if (strpos($text,"/tasa") !== false) {
       $tasa = str_word_count($text, 1, "0123456789.")[1];
-      apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => $tasa, 'parse_mode' => 'HTML'));
       $sql = "UPDATE DICOM SET tasa = '$tasa' WHERE id = 2";
+      $sql = "SELECT tasa FROM DICOM WHERE id = 1";
       $result = $link->query($sql);
-      apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => $text));
+      apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => $result, 'parse_mode' => 'HTML'));
+      // $result = $link->query($sql);
+      // apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => $text));
     } else if (strpos($text,"/colombia") !== false) {
       apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "<pre>".getColombia()."</pre>", 'parse_mode' => 'HTML'));
     }
