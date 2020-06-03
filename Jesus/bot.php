@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php
-include(dirname(__FILE__)."/../connect.php");
+include "connect.php";
 
 
 function getBTCValue() {
@@ -283,8 +283,8 @@ function processMessage($message) {
     } else if (strpos($text,"/peru") !== false) {
       apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "<pre>".getPeru()."</pre>", 'parse_mode' => 'HTML'));
     } else if (strpos($text,"/tasa") !== false) {
-      $tasa = str_word_count($text, 1, "0123456789.")[1];
-      $sql = "UPDATE DICOM SET tasa = '$tasa' WHERE id = 2";
+      // $tasa = str_word_count($text, 1, "0123456789.")[1];
+      // $sql = "UPDATE DICOM SET tasa = '$tasa' WHERE id = 2";
       $sql = "SELECT tasa FROM DICOM WHERE id = 1";
       $result = $link->query($sql);
       $OldText = mysqli_fetch_assoc($result)['tasa'];
