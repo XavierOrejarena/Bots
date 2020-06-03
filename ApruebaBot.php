@@ -3,7 +3,7 @@
 // @ApruebaBot
 define('BOT_TOKEN', '695950939:AAHfKc9Lv1yceBT9yPkpcxNlAeRsLPuFGHw');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
-define('WEBHOOK_URL', 'https://xavier.mer.web.ve/ApruebaBot.php');
+define('WEBHOOK_URL', '149.56.110.162/ApruebaBot.php');
 
 function apiRequestWebhook($method, $parameters) {
   if (!is_string($method)) {
