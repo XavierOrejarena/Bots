@@ -134,6 +134,7 @@ function processMessage($message) {
   $message_id = $message['message_id'];
   $chat_id = $message['chat']['id'];
   if (isset($message['text'])) {
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Ok'));
     $word = $message['text'];
     $URL = (file_get_contents("https://dictionary.cambridge.org/es/diccionario/ingles/$word"));
     preg_match_all('/data-src-mp3="/', $URL, $matches, PREG_OFFSET_CAPTURE);
