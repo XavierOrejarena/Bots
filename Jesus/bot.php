@@ -283,6 +283,7 @@ function processMessage($message) {
     } else if (strpos($text,"/peru") !== false) {
       apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "<pre>".getPeru()."</pre>", 'parse_mode' => 'HTML'));
     } else if (strpos($text,"/tasa") !== false) {
+      apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "Hola", 'parse_mode' => 'HTML'));
       $tasa = str_word_count($text, 1, "0123456789.")[1];
       $sql = "UPDATE DICOM SET tasa = '$tasa' WHERE id = 2";
       $result = $link->query($sql);
