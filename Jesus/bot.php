@@ -286,7 +286,7 @@ function processMessage($message) {
       $tasa = str_word_count($text, 1, "0123456789.")[1];
       $sql = "UPDATE DICOM SET tasa = '$tasa' WHERE id = 2";
       $result = $link->query($sql);
-      apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => $result));
+      apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => $text));
     } else if (strpos($text,"/colombia") !== false) {
       apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "<pre>".getColombia()."</pre>", 'parse_mode' => 'HTML'));
     }
