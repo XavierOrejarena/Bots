@@ -84,6 +84,11 @@ function getVenezuela() {
 }
 
 function getPeru() {
+  include "../connect.php";
+  $sql = "SELECT tasa FROM DICOM WHERE id = 2";
+  $result = $link->query($sql);
+  $tasa = mysqli_fetch_assoc($result)['tasa'];
+
   $text = "COMPRA\nPEN\t\t\t\t\t\tUSD\n";
   $priceBTC = getBTCValue();
   $URL = file_get_contents("https://localbitcoins.com/buy-bitcoins-online/pe/peru/.json");
@@ -92,7 +97,7 @@ function getPeru() {
   $i = 0;
   foreach ($DATA['data']['ad_list'] as $oferta) {
     if ($oferta['data']['currency'] == 'PEN') {
-      $text = $text.number_format(round($oferta['data']['temp_price']))."\t\t\t".round($oferta['data']['temp_price']/3.33,2)."\n";
+      $text = $text.number_format(round($oferta['data']['temp_price']))."\t\t\t".round($oferta['data']['temp_price']/$tasa,2)."\n";
       $i++;
       if ($i > 9) break;
     }
@@ -105,7 +110,7 @@ function getPeru() {
   $text = $text."\nVENTA\nPEN\t\t\t\t\t\tUSD\n";
   foreach ($DATA['data']['ad_list'] as $oferta) {
     if ($oferta['data']['currency'] == 'PEN') {
-      $text = $text.number_format(round($oferta['data']['temp_price']))."\t\t\t".round($oferta['data']['temp_price']/3.33,2)."\n";
+      $text = $text.number_format(round($oferta['data']['temp_price']))."\t\t\t".round($oferta['data']['temp_price']/$tasa,2)."\n";
       $i++;
       if ($i > 9) break;
     }
