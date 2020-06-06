@@ -1,9 +1,9 @@
 #!/usr/bin/env php
 <?php
-// @ApruebaBot
+
 define('BOT_TOKEN', '695950939:AAHfKc9Lv1yceBT9yPkpcxNlAeRsLPuFGHw');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
-define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/ApruebaBot.php');
+define('WEBHOOK_URL', 'https://b009fd832324.ngrok.io/igor.php');
 
 function apiRequestWebhook($method, $parameters) {
   if (!is_string($method)) {
@@ -120,28 +120,34 @@ function processMessage($message) {
   // process incoming message
   $message_id = $message['message_id'];
   $chat_id = $message['chat']['id'];
-  if (isset($message['text'])) {
-    // incoming text message
-    $text = $message['text'];
+    
+  $text = $message['text'];
 
-    if (strpos($text, "/start") === 0) {
-      apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'Hello', 'reply_markup' => array(
-        'keyboard' => array(array('Hello', 'Hi')),
-        'one_time_keyboard' => true,
-        'resize_keyboard' => true)));
-    } else if ($text === "Hello" || $text === "Hi") {
-      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Nice to meet you'));
-    } else if (strpos($text, "/stop") === 0) {
-      // stop now
+
+  if (strtolower($text) == "!bin") {
+    $text = str_word_count($text, 1, "0123456789.")[1];
+    $data = file_get_contents("https://lookup.binlist.net/$text");
+    $data = json_decode($data);
+    if ($data->number->luhn) {
+      $luhn = ✅." Valid";
     } else {
-      apiRequestWebhook("sendMessage", array('chat_id' => $chat_id, "reply_to_message_id" => $message_id, "text" => 'Cool'));
-    }
-  } else {
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'I understand only text messages'));
+    $luhn = ❌." Invalid";}
+    $scheme = $data->scheme;
+    $type = $data->type;
+    $brand = $data->brand;
+    $bank = $data->bank->name;
+    $country = $data->country->emoji;
+
+    $result = "$luhn
+Scheme: $scheme
+Type: $type
+Brand: $brand
+Bank: $bank
+Country: $country";
+    // $result = $luhn;
+    apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => $result));
   }
 }
-
-
 
 if (php_sapi_name() == 'cli') {
   // if run from console, set or delete webhook
