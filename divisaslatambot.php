@@ -221,7 +221,7 @@ function processQuery($inline_query)
         'id'           => gen_uuid(),
         'title'        => $result,
         'description'  => $result,
-        'message_text' => $inline_query['query']."
+        'message_text' => $text."
 
 ".$result,
         ];
