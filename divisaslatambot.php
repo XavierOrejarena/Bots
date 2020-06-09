@@ -199,7 +199,7 @@ function processQuery($inline_query)
     }else {
       $size = sizeof(str_word_count($text, 1, "0123456789."));
       $first = str_word_count($text, 1, "0123456789.")[1];
-      $second = str_word_count($text, 1, "0123456789.")[2];
+      $second = str_word_count($text, 1, "0123456789.")[2] || "USD";
 
       if (($size == 2 && $first != 'USD') || ($size == 3 && $second == 'USD')) {
         $data = file_get_contents(API_URL_RATES);
