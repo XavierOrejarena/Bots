@@ -181,7 +181,7 @@ if (php_sapi_name() == 'cli') {
 
 function processQuery($inline_query)
 {
-    $text = $inline_query['query'];
+    $text = strtoupper($inline_query['query']);
     $query_id = $inline_query['id'];
     $results = [];
     if (!empty($inline_query['query'])) {
@@ -198,8 +198,8 @@ function processQuery($inline_query)
         ];
     }else {
       $size = sizeof(str_word_count($text, 1, "0123456789."));
-      $first = strtoupper(str_word_count($text, 1, "0123456789.")[1]);
-      $second = strtoupper(str_word_count($text, 1, "0123456789.")[2]);
+      $first = str_word_count($text, 1, "0123456789.")[1];
+      $second = str_word_count($text, 1, "0123456789.")[2];
 
       if (($size == 2 && $first != 'USD') || ($size == 3 && $second == 'USD')) {
         $data = file_get_contents(API_URL_RATES);
