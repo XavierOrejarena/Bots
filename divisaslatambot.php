@@ -221,7 +221,7 @@ function processQuery($inline_query)
         'id'           => gen_uuid(),
         'title'        => $amount." ".$first." Equivale a:",
         'description'  => $result." ".$second,
-        'message_text' => $amount." ".$first." = ".$result,
+        'message_text' => $amount." ".$first." = ".$result." ".$second,
         ];
     }
     
