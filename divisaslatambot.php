@@ -195,45 +195,35 @@ function processQuery($inline_query)
             'message_text' => 'Tienes que escribir monto DIVISA1 DIVISA2',
             'description'  => 'Ejemplo: 100 EUR USD',
         ];
-    }
-    else if ($signal == 'x' || $signal == '*' || is_null($signal) || $signal == 'X') {
-        $receive = round(($USD-$USD*(0.054)-0.3), 2);
+    }else {
+      $size = sizeof(str_word_count($text, 1, "0123456789."));
+      $first = strtoupper(str_word_count($text, 1, "0123456789.")[1]);
+      $second = strtoupper(str_word_count($text, 1, "0123456789.")[2]);
+
+      if (($size == 2 && $first != 'USD') || ($size == 3 && $second == 'USD')) {
+        $data = file_get_contents(API_URL_RATES);
+        $data = json_decode(utf8_encode($data), true);
+        $amount = str_word_count($text, 1, "0123456789.")[0];
+        $result = $amount/$data['rates'][$first];
+      } elseif ($size == 3) {
+        $data = file_get_contents(API_URL_RATES);
+        $data = json_decode(utf8_encode($data), true);
+        $amount = str_word_count($text, 1, "0123456789.")[0];
+        $result_1 = $data['rates'][$first];
+        $result_2 = $data['rates'][$second];
+        $result = $amount*$result_2/$result_1;
+      }
+      $result = number_format(round($result,2), 2, '.', ',');
+
         $results[] = [
         'type'         => 'article',
         'id'           => gen_uuid(),
-        'title'        => "Si envían: $USD $",
-        'message_text' => "Envían: $USD
-Llegarán: $receive $
-\xE2\x98\x95: $Bolivares Bs.
-Total: ".number_format($receive*$Bolivares, 2, ',', '')." Bs.",
-        'description'  => "Llegaran: $receive",
-        ];
-        $sent = round((100*($USD+0.3)/94.6),2);
-        $results[] = [
-        'type'         => 'article',
-        'id'           => gen_uuid(),
-        'title'        => "Para que lleguen: $USD $",
-        'message_text' => "Envían: $sent
-Llegarán: $USD $
-\xE2\x98\x95: $Bolivares Bs.
-Total: ".number_format($USD*$Bolivares, 2, ',', '')." Bs.",
-        'description'  => "Deben enviar: $sent",
+        'title'        => "TEST1",
+        'message_text' => $result,
+        'description'  => "TEST2",
         ];
     }
-    else if ($signal == "/" || $signal == '\\') {
-        $sent = round((100*(($USD/$BS)+0.3)/94.6),2);
-        $receive = round($USD/$BS,2);
-        $results[] = [
-    'type'         => 'article',
-    'id'           => gen_uuid(),
-    'title'        => "Para pagar $USD Bs.",
-    'message_text' => "Envían: $sent $
-Llegarán: $receive $
-\xE2\x98\x95: $BS Bs.
-Total: ".number_format($USD, 2, ',', '')." Bs.",
-    'description'  => "Deben enviar $sent",
-    ];
-    }
+    
     apiRequest('answerInlineQuery', array('inline_query_id' => $inline_query['id'], 'results' => $results, 'cache_time' => 0));
 }
 
