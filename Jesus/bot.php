@@ -50,16 +50,18 @@ function getS() {
 }
 
 function getVenezuela() {
-  $text = "COMPRA\nVES\t\t\t\t\t\t\t\tUSD\t\t\t\t\t\tPEN\t\t\tDIV\n";
-  $priceBTC = getBTCValue();
-  $URL = file_get_contents("https://localbitcoins.com/buy-bitcoins-online/ve/venezuela/.json");
-  $DATA = json_decode($URL, true);
+	include "../connect.php";
+	$tasa = mysqli_fetch_assoc($result)['tasa'];
+	$text = "COMPRA\nVES\t\t\t\t\t\t\t\tUSD\t\t\t\t\t\tPEN\t\t\tDIV\n";
+	$priceBTC = getBTCValue();
+	$URL = file_get_contents("https://localbitcoins.com/buy-bitcoins-online/ve/venezuela/.json");
+	$DATA = json_decode($URL, true);
   
   $i = 0;
   foreach ($DATA['data']['ad_list'] as $oferta) {
     if ($oferta['data']['currency'] == 'VES' && !stripos($oferta['data']['msg'], 'bitmain') && !stripos($oferta['data']['bank_name'], 'bitmain')) {
       $aux = $oferta['data']['temp_price']/$priceBTC;
-      $text = $text.number_format(round($oferta['data']['temp_price']/1000000,2), 2, ',', ' ')."M\t\t\t".number_format(round($aux))."\t\t\t".number_format(round($oferta['data']['temp_price']/$priceBTC/3.33))."\t\t\t".round(3000/$aux,3)."\n";
+      $text = $text.number_format(round($oferta['data']['temp_price']/1000000,2), 2, ',', ' ')."M\t\t\t".number_format(round($aux))."\t\t\t".number_format(round($oferta['data']['temp_price']/$priceBTC/$tasa))."\t\t\t".round(3000/$aux,3)."\n";
       $i++;
       if ($i > 9) break;
     }
@@ -73,7 +75,7 @@ function getVenezuela() {
   foreach ($DATA['data']['ad_list'] as $oferta) {
     if ($oferta['data']['currency'] == 'VES'  && !stripos($oferta['data']['msg'], 'bitmain') && !stripos($oferta['data']['bank_name'], 'bitmain')) {
       $aux = $oferta['data']['temp_price']/$priceBTC;
-      $text = $text.number_format(round($oferta['data']['temp_price']/1000000,2), 2, ',', ' ')."M\t\t\t".number_format(round($aux))."\t\t\t".number_format(round($oferta['data']['temp_price']/$priceBTC/3.33))."\t\t\t".round(3000/$aux,3)."\n";
+      $text = $text.number_format(round($oferta['data']['temp_price']/1000000,2), 2, ',', ' ')."M\t\t\t".number_format(round($aux))."\t\t\t".number_format(round($oferta['data']['temp_price']/$priceBTC/$tasa))."\t\t\t".round(3000/$aux,3)."\n";
       $i++;
       if ($i > 9) break;
     }
@@ -85,9 +87,9 @@ function getVenezuela() {
 
 function getPeru() {
   include "../connect.php";
+  $tasa = mysqli_fetch_assoc($result)['tasa'];
   $sql = "SELECT tasa FROM DICOM WHERE id = 2";
   $result = $link->query($sql);
-  $tasa = mysqli_fetch_assoc($result)['tasa'];
 
   $text = "COMPRA\nPEN\t\t\t\t\t\tUSD\n";
   $priceBTC = getBTCValue();

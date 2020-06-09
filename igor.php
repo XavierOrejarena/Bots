@@ -3,7 +3,7 @@
 
 define('BOT_TOKEN', '695950939:AAHfKc9Lv1yceBT9yPkpcxNlAeRsLPuFGHw');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
-define('WEBHOOK_URL', 'https://b009fd832324.ngrok.io/igor.php');
+define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/igor.php');
 
 function apiRequestWebhook($method, $parameters) {
   if (!is_string($method)) {
