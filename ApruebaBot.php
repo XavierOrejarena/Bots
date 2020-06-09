@@ -125,7 +125,7 @@ function processMessage($message) {
     $text = $message['text'];
 
     if (strpos($text, "/start") === 0) {
-      apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'Hello', 'reply_markup' => array(
+      apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'jelow', 'reply_markup' => array(
         'keyboard' => array(array('Hello', 'Hi')),
         'one_time_keyboard' => true,
         'resize_keyboard' => true)));
