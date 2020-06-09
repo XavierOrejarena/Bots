@@ -219,11 +219,9 @@ function processQuery($inline_query)
         $results[] = [
         'type'         => 'article',
         'id'           => gen_uuid(),
-        'title'        => $result,
-        'description'  => $result,
-        'message_text' => $text."
-
-".$result,
+        'title'        => $amount." ".$first." Equivale a:",
+        'description'  => $result." ".$second,
+        'message_text' => $amount." ".$first." = ".$result,
         ];
     }
     
