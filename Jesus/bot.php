@@ -53,7 +53,10 @@ function getVenezuela() {
 	include "../connect.php";
   $sql = "SELECT tasa FROM DICOM WHERE id = 2";
   $result = $link->query($sql);
-  $tasa = mysqli_fetch_assoc($result)['tasa'];
+  $tasaPEN = mysqli_fetch_assoc($result)['tasa'];
+  $sql = "SELECT tasa FROM DICOM WHERE id = 3";
+  $result = $link->query($sql);
+  $tasaCOL = mysqli_fetch_assoc($result)['tasa'];
   
 	$text = "COMPRA\nVES\t\t\t\t\t\t\t\tUSD\t\t\t\t\t\tPEN\t\t\tDIV\n";
 	$priceBTC = getBTCValue();
@@ -64,7 +67,7 @@ function getVenezuela() {
   foreach ($DATA['data']['ad_list'] as $oferta) {
     if ($oferta['data']['currency'] == 'VES' && !stripos($oferta['data']['msg'], 'bitmain') && !stripos($oferta['data']['bank_name'], 'bitmain')) {
       $aux = $oferta['data']['temp_price']/$priceBTC;
-      $text = $text.number_format(round($oferta['data']['temp_price']/1000000,2), 2, ',', ' ')."M\t\t\t".number_format(round($aux))."\t\t\t".number_format(round($oferta['data']['temp_price']/$priceBTC/$tasa))."\t\t\t".round(3000/$aux,3)."\n";
+      $text = $text.number_format(round($oferta['data']['temp_price']/1000000,2), 2, ',', ' ')."M\t\t\t".number_format(round($aux))."\t\t\t".number_format(round($oferta['data']['temp_price']/$priceBTC/$tasaPEN))."\t\t\t".round($tasaCOL/$aux,3)."\n";
       $i++;
       if ($i > 9) break;
     }
@@ -78,7 +81,7 @@ function getVenezuela() {
   foreach ($DATA['data']['ad_list'] as $oferta) {
     if ($oferta['data']['currency'] == 'VES'  && !stripos($oferta['data']['msg'], 'bitmain') && !stripos($oferta['data']['bank_name'], 'bitmain')) {
       $aux = $oferta['data']['temp_price']/$priceBTC;
-      $text = $text.number_format(round($oferta['data']['temp_price']/1000000,2), 2, ',', ' ')."M\t\t\t".number_format(round($aux))."\t\t\t".number_format(round($oferta['data']['temp_price']/$priceBTC/$tasa))."\t\t\t".round(3000/$aux,3)."\n";
+      $text = $text.number_format(round($oferta['data']['temp_price']/1000000,2), 2, ',', ' ')."M\t\t\t".number_format(round($aux))."\t\t\t".number_format(round($oferta['data']['temp_price']/$priceBTC/$tasaPEN))."\t\t\t".round($tasaCOL/$aux,3)."\n";
       $i++;
       if ($i > 9) break;
     }
