@@ -7,6 +7,16 @@ define('WEBHOOK_URL', 'https://xavier.mer.web.ve/divisaslatambot.php');
 define('appID', '36cab38e64694c14bc52931f371b4fbc');
 define('API_URL_RATES', 'https://openexchangerates.org/api/latest.json?app_id='.appID);
 
+function gen_uuid() {
+  return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+      mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
+      mt_rand( 0, 0xffff ),
+      mt_rand( 0, 0x0fff ) | 0x4000,
+      mt_rand( 0, 0x3fff ) | 0x8000,
+      mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
+  );
+}
+
 function apiRequestWebhook($method, $parameters) {
   if (!is_string($method)) {
     error_log("Method name must be a string\n");
@@ -169,6 +179,63 @@ if (php_sapi_name() == 'cli') {
   exit;
 }
 
+function processQuery($inline_query)
+{
+    $query_id = $inline_query['id'];
+    $results = [];
+    if (!empty($inline_query['query'])) {
+        
+    }
+
+    if (empty($inline_query['query'])) {
+        $results[] = [
+            'type'         => 'article',
+            'id'           => '0',
+            'title'        => 'Esperando una consulta...',
+            'message_text' => 'Tienes que escribir monto DIVISA1 DIVISA2',
+            'description'  => 'Ejemplo: 100 EUR USD',
+        ];
+    }
+    else if ($signal == 'x' || $signal == '*' || is_null($signal) || $signal == 'X') {
+        $receive = round(($USD-$USD*(0.054)-0.3), 2);
+        $results[] = [
+        'type'         => 'article',
+        'id'           => gen_uuid(),
+        'title'        => "Si envían: $USD $",
+        'message_text' => "Envían: $USD
+Llegarán: $receive $
+\xE2\x98\x95: $Bolivares Bs.
+Total: ".number_format($receive*$Bolivares, 2, ',', '')." Bs.",
+        'description'  => "Llegaran: $receive",
+        ];
+        $sent = round((100*($USD+0.3)/94.6),2);
+        $results[] = [
+        'type'         => 'article',
+        'id'           => gen_uuid(),
+        'title'        => "Para que lleguen: $USD $",
+        'message_text' => "Envían: $sent
+Llegarán: $USD $
+\xE2\x98\x95: $Bolivares Bs.
+Total: ".number_format($USD*$Bolivares, 2, ',', '')." Bs.",
+        'description'  => "Deben enviar: $sent",
+        ];
+    }
+    else if ($signal == "/" || $signal == '\\') {
+        $sent = round((100*(($USD/$BS)+0.3)/94.6),2);
+        $receive = round($USD/$BS,2);
+        $results[] = [
+    'type'         => 'article',
+    'id'           => gen_uuid(),
+    'title'        => "Para pagar $USD Bs.",
+    'message_text' => "Envían: $sent $
+Llegarán: $receive $
+\xE2\x98\x95: $BS Bs.
+Total: ".number_format($USD, 2, ',', '')." Bs.",
+    'description'  => "Deben enviar $sent",
+    ];
+    }
+    apiRequest('answerInlineQuery', array('inline_query_id' => $inline_query['id'], 'results' => $results, 'cache_time' => 0));
+}
 
 $content = file_get_contents("php://input");
 $update = json_decode($content, true);
@@ -180,4 +247,8 @@ if (!$update) {
 
 if (isset($update["message"])) {
   processMessage($update["message"]);
+}
+
+if (isset($update['inline_query'])) {
+  processQuery($update['inline_query']);
 }
