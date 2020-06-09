@@ -181,6 +181,7 @@ if (php_sapi_name() == 'cli') {
 
 function processQuery($inline_query)
 {
+    $text = $inline_query['query'];
     $query_id = $inline_query['id'];
     $results = [];
     if (!empty($inline_query['query'])) {
