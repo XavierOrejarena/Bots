@@ -51,7 +51,10 @@ function getS() {
 
 function getVenezuela() {
 	include "../connect.php";
-	$tasa = mysqli_fetch_assoc($result)['tasa'];
+  $sql = "SELECT tasa FROM DICOM WHERE id = 2";
+  $result = $link->query($sql);
+  $tasa = mysqli_fetch_assoc($result)['tasa'];
+  
 	$text = "COMPRA\nVES\t\t\t\t\t\t\t\tUSD\t\t\t\t\t\tPEN\t\t\tDIV\n";
 	$priceBTC = getBTCValue();
 	$URL = file_get_contents("https://localbitcoins.com/buy-bitcoins-online/ve/venezuela/.json");
@@ -87,9 +90,9 @@ function getVenezuela() {
 
 function getPeru() {
   include "../connect.php";
-  $tasa = mysqli_fetch_assoc($result)['tasa'];
   $sql = "SELECT tasa FROM DICOM WHERE id = 2";
   $result = $link->query($sql);
+  $tasa = mysqli_fetch_assoc($result)['tasa'];
 
   $text = "COMPRA\nPEN\t\t\t\t\t\tUSD\n";
   $priceBTC = getBTCValue();
