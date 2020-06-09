@@ -194,7 +194,7 @@ function processQuery($inline_query)
             'id'           => '0',
             'title'        => 'Esperando una consulta...',
             'message_text' => 'Tienes que escribir monto DIVISA1 DIVISA2',
-            'description'  => 'Ejemplo: 100 EUR USD',
+            'description'  => 'Ejemplo: 100 USD EUR',
         ];
     }else {
       $size = sizeof(str_word_count($text, 1, "0123456789."));
@@ -219,9 +219,9 @@ function processQuery($inline_query)
         $results[] = [
         'type'         => 'article',
         'id'           => gen_uuid(),
-        'title'        => "TEST1",
+        'title'        => $result,
+        'description'  => $result,
         'message_text' => $result,
-        'description'  => "TEST2",
         ];
     }
     
