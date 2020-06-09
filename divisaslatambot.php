@@ -222,6 +222,7 @@ function processQuery($inline_query)
         'title'        => $result,
         'description'  => $result,
         'message_text' => $inline_query['query']."
+
 ".$result,
         ];
     }
