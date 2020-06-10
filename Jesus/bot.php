@@ -56,7 +56,7 @@ function getVenezuela() {
   $tasaPEN = mysqli_fetch_assoc($result)['tasa'];
   $sql = "SELECT tasa FROM DICOM WHERE id = 3";
   $result = $link->query($sql);
-  $tasaCOL = mysqli_fetch_assoc($result)['tasa'];
+  $tasaCOP = mysqli_fetch_assoc($result)['tasa'];
   
 	$text = "COMPRA\nVES\t\t\t\t\t\t\t\tUSD\t\t\t\t\t\tPEN\t\t\tDIV\n";
 	$priceBTC = getBTCValue();
@@ -67,7 +67,7 @@ function getVenezuela() {
   foreach ($DATA['data']['ad_list'] as $oferta) {
     if ($oferta['data']['currency'] == 'VES' && !stripos($oferta['data']['msg'], 'bitmain') && !stripos($oferta['data']['bank_name'], 'bitmain')) {
       $aux = $oferta['data']['temp_price']/$priceBTC;
-      $text = $text.number_format(round($oferta['data']['temp_price']/1000000,2), 2, ',', ' ')."M\t\t\t".number_format(round($aux))."\t\t\t".number_format(round($oferta['data']['temp_price']/$priceBTC/$tasaPEN))."\t\t\t".round($tasaCOL/$aux,3)."\n";
+      $text = $text.number_format(round($oferta['data']['temp_price']/1000000,2), 2, ',', ' ')."M\t\t\t".number_format(round($aux))."\t\t\t".number_format(round($oferta['data']['temp_price']/$priceBTC/$tasaPEN))."\t\t\t".round($tasaCOP/$aux,3)."\n";
       $i++;
       if ($i > 9) break;
     }
@@ -81,7 +81,7 @@ function getVenezuela() {
   foreach ($DATA['data']['ad_list'] as $oferta) {
     if ($oferta['data']['currency'] == 'VES'  && !stripos($oferta['data']['msg'], 'bitmain') && !stripos($oferta['data']['bank_name'], 'bitmain')) {
       $aux = $oferta['data']['temp_price']/$priceBTC;
-      $text = $text.number_format(round($oferta['data']['temp_price']/1000000,2), 2, ',', ' ')."M\t\t\t".number_format(round($aux))."\t\t\t".number_format(round($oferta['data']['temp_price']/$priceBTC/$tasaPEN))."\t\t\t".round($tasaCOL/$aux,3)."\n";
+      $text = $text.number_format(round($oferta['data']['temp_price']/1000000,2), 2, ',', ' ')."M\t\t\t".number_format(round($aux))."\t\t\t".number_format(round($oferta['data']['temp_price']/$priceBTC/$tasaPEN))."\t\t\t".round($tasaCOP/$aux,3)."\n";
       $i++;
       if ($i > 9) break;
     }
@@ -293,10 +293,16 @@ function processMessage($message) {
       apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "<pre>".getVenezuela()."</pre>", 'parse_mode' => 'HTML'));
     } else if (strpos($text,"/peru") !== false) {
       apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "<pre>".getPeru()."</pre>", 'parse_mode' => 'HTML'));
-    } else if (strpos($text,"/tasa") !== false) {
+    } else if (strpos($text,"PEN") !== false) {
       include "../connect.php";
       $tasa = str_word_count($text, 1, "0123456789.")[1];
       $sql = "UPDATE DICOM SET tasa = '$tasa' WHERE id = 2";
+      $result = $link->query($sql);
+      apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => $result));
+    } else if (strpos($text,"COP") !== false) {
+      include "../connect.php";
+      $tasa = str_word_count($text, 1, "0123456789.")[1];
+      $sql = "UPDATE DICOM SET tasa = '$tasa' WHERE id = 3";
       $result = $link->query($sql);
       apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => $result));
     } else if (strpos($text,"/colombia") !== false) {
