@@ -170,7 +170,7 @@ function processMessage($message) {
   $chat_id = $message['chat']['id'];
   $text = $message['text'];
 
-  if ($text == '/s') {
+  if ($text == '/s' || $text == '/s@LBCVESbot') {
     apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "<pre>".getS()."</pre>", 'parse_mode' => 'HTML'));
   } else if ($text == '/start'){
     apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "El único comando /s te muestra la tasa del dolar en VES dividiendo las 10 primeras ofertas en localbitcoins.com entre la tasa del BTC segun Bitmex.com"));
