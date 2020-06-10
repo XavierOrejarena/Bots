@@ -6,7 +6,7 @@ define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
 define('WEBHOOK_URL', 'https://xavier.mer.web.ve/LBCVESbot.php');
 
 function getS() {
-  $rdata = array("COMPRA\t\tVENTA");
+  $rdata = array("COMPRA\t\t\t\tVENTA");
   $priceBTC = getBTCValue();
   $URL = file_get_contents("https://localbitcoins.com/buy-bitcoins-online/ve/venezuela/.json");
   $DATA = json_decode($URL, true);
