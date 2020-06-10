@@ -295,13 +295,13 @@ function processMessage($message) {
       apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "<pre>".getVenezuela()."</pre>", 'parse_mode' => 'HTML'));
     } else if (strpos($text,"/peru") !== false) {
       apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "<pre>".getPeru()."</pre>", 'parse_mode' => 'HTML'));
-    } else if (strpos($text,"PEN") !== false) {
+    } else if (strpos(strtoupper($text),"PEN") !== false) {
       include "../connect.php";
       $tasa = str_word_count($text, 1, "0123456789.")[1];
       $sql = "UPDATE DICOM SET tasa = '$tasa' WHERE id = 2";
       $result = $link->query($sql);
       apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => $result));
-    } else if (strpos($text,"COP") !== false) {
+    } else if (strpos(strtoupper($text),"COP") !== false) {
       include "../connect.php";
       $tasa = str_word_count($text, 1, "0123456789.")[1];
       $sql = "UPDATE DICOM SET tasa = '$tasa' WHERE id = 3";
