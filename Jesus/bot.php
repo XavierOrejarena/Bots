@@ -67,7 +67,8 @@ function getVenezuela() {
   foreach ($DATA['data']['ad_list'] as $oferta) {
     if ($oferta['data']['currency'] == 'VES' && !stripos($oferta['data']['msg'], 'bitmain') && !stripos($oferta['data']['bank_name'], 'bitmain')) {
       $aux = $oferta['data']['temp_price']/$priceBTC;
-      $text = $text.number_format(round($oferta['data']['temp_price']/1000000,2), 2, ',', ' ')."M\t\t\t".number_format(round($aux))."\t\t\t".number_format(round($oferta['data']['temp_price']/$priceBTC/$tasaPEN))."\t\t\t".round($tasaCOP/$aux,3)."\n";
+      $last = round($tasaCOP/$aux,3);
+      $text = $text.number_format(round($oferta['data']['temp_price']/1000000,2), 2, ',', ' ')."M\t\t\t".number_format(round($aux))."\t\t\t".number_format(round($oferta['data']['temp_price']/$priceBTC/$tasaPEN))."\t\t\t".$last."\n";
       $i++;
       if ($i > 9) break;
     }
@@ -81,7 +82,8 @@ function getVenezuela() {
   foreach ($DATA['data']['ad_list'] as $oferta) {
     if ($oferta['data']['currency'] == 'VES'  && !stripos($oferta['data']['msg'], 'bitmain') && !stripos($oferta['data']['bank_name'], 'bitmain')) {
       $aux = $oferta['data']['temp_price']/$priceBTC;
-      $text = $text.number_format(round($oferta['data']['temp_price']/1000000,2), 2, ',', ' ')."M\t\t\t".number_format(round($aux))."\t\t\t".number_format(round($oferta['data']['temp_price']/$priceBTC/$tasaPEN))."\t\t\t".round($tasaCOP/$aux,3)."\n";
+      $last = round($tasaCOP/$aux,3);
+      $text = $text.number_format(round($oferta['data']['temp_price']/1000000,2), 2, ',', ' ')."M\t\t\t".number_format(round($aux))."\t\t\t".number_format(round($oferta['data']['temp_price']/$priceBTC/$tasaPEN))."\t\t\t".$last."\n";
       $i++;
       if ($i > 9) break;
     }
