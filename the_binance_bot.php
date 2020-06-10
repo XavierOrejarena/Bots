@@ -271,7 +271,7 @@ Any bug or suggestion @XavierOrejarena');
         }
     } else if (stripos($text, "/BTCUSDT") !== false) {
         $price = json_decode(file_get_contents("https://api.binance.com/api/v1/ticker/price?symbol=BTCUSDT"), true)['price'];
-        $text = "/BTCUSDT ".$price;
+        $text = "/BTCUSDT ".round($price);
         if ($price > 0) {
             sendMessage($chat_id, $text);
         }
