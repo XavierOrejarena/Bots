@@ -33,7 +33,7 @@ function getS() {
   }
 
   foreach ($rdata as $key) {
-    $text = $text.$key."\n";
+    $text = $text.$key."\n\n\n$priceBTC";
   }
   return $text;
 
