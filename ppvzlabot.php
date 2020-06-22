@@ -153,12 +153,13 @@ function processQuery($inline_query)
             'id'           => '0',
             'title'        => 'Esperando una consulta...',
             'message_text' => 'Tienes que escribir el monto*tasa.
-Ejemplo: 50*7500',
+            Ejemplo: 50*7500',
             'description'  => 'Ejemplo: 50*7500',
         ];
     }
     else if ($signal == 'x' || $signal == '*' || is_null($signal) || $signal == 'X') {
         $receive = round(($USD-$USD*(0.054)-0.3), 2);
+        $sent = round((100*($USD+0.3)/94.6),2);
         if ($BS) {
             $message_text1 = "Envían: $USD
 Llegarán: $receive $
@@ -181,7 +182,6 @@ Llegarán: $USD $";
         'message_text' => $message_text1,
         'description'  => "Llegaran: $receive",
         ];
-        $sent = round((100*($USD+0.3)/94.6),2);
         $results[] = [
         'type'         => 'article',
         'id'           => gen_uuid(),
