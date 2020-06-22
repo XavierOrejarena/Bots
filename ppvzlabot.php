@@ -221,6 +221,7 @@ function processMessage($message) {
 
             if ($signal == 'x' || $signal == '*' || is_null($signal) || $signal == 'X') {
                 $receive = round(($USD-$USD*(0.054)-0.3), 2);
+                $sent = round((100*($USD+0.3)/94.6),2);
                 if ($BS) {
                     $msg1 = "Envían: $USD $
 Llegarán: $receive $
@@ -236,7 +237,6 @@ Llegarán: $receive $";
                     $msg2 = "Envían: $sent $
 Llegarán: $USD $";
                 }
-                $sent = round((100*($USD+0.3)/94.6),2);
             }
             else if ($signal == "/" || $signal == '\\') {
                 $sent = round((100*(($USD/$BS)+0.3)/94.6),2);
