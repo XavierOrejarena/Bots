@@ -159,14 +159,26 @@ Ejemplo: 50*7500',
     }
     else if ($signal == 'x' || $signal == '*' || is_null($signal) || $signal == 'X') {
         $receive = round(($USD-$USD*(0.054)-0.3), 2);
+        if ($BS) {
+            $message_text1 = "Envían: $USD
+Llegarán: $receive $
+\xE2\x98\x95: $Bolivares Bs.
+Total: ".number_format($receive*$Bolivares, 2, ',', '')." Bs.";
+            $message_text2 = "Envían: $sent
+Llegarán: $USD $
+\xE2\x98\x95: $Bolivares Bs.
+Total: ".number_format($USD*$Bolivares, 2, ',', '')." Bs.";
+        } else {
+            $message_text1 = "Envían: $USD
+Llegarán: $receive $";
+            $message_text2 = "Envían: $sent
+Llegarán: $USD $";
+        }
         $results[] = [
         'type'         => 'article',
         'id'           => gen_uuid(),
         'title'        => "Si envían: $USD $",
-        'message_text' => "Envían: $USD
-Llegarán: $receive $
-\xE2\x98\x95: $Bolivares Bs.
-Total: ".number_format($receive*$Bolivares, 2, ',', '')." Bs.",
+        'message_text' => $message_text1,
         'description'  => "Llegaran: $receive",
         ];
         $sent = round((100*($USD+0.3)/94.6),2);
@@ -174,10 +186,7 @@ Total: ".number_format($receive*$Bolivares, 2, ',', '')." Bs.",
         'type'         => 'article',
         'id'           => gen_uuid(),
         'title'        => "Para que lleguen: $USD $",
-        'message_text' => "Envían: $sent
-Llegarán: $USD $
-\xE2\x98\x95: $Bolivares Bs.
-Total: ".number_format($USD*$Bolivares, 2, ',', '')." Bs.",
+        'message_text' => $message_text2,
         'description'  => "Deben enviar: $sent",
         ];
     }
