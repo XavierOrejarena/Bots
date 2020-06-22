@@ -223,18 +223,20 @@ function processMessage($message) {
                 $receive = round(($USD-$USD*(0.054)-0.3), 2);
                 if ($BS) {
                     $msg1 = "Envían: $USD $
-    Llegarán: $receive $
-    \xE2\x98\x95: $Bolivares Bs.
-    Total: ".number_format($receive*$Bolivares, 2, ',', '')." Bs.";
-                } else {
-                    $msg1 = "Envían: $USD $
-    Llegarán: $receive $";
-                }
-                $sent = round((100*($USD+0.3)/94.6),2);
-                $msg2 = "Envían: $sent $
+Llegarán: $receive $
+\xE2\x98\x95: $Bolivares Bs.
+Total: ".number_format($receive*$Bolivares, 2, ',', '')." Bs.";
+                    $msg2 = "Envían: $sent $
 Llegarán: $USD $
 \xE2\x98\x95: $Bolivares Bs.
 Total: ".number_format($USD*$Bolivares, 2, ',', '')." Bs.";
+                } else {
+                    $msg1 = "Envían: $USD $
+Llegarán: $receive $";
+                    $msg2 = "Envían: $sent $
+Llegarán: $USD $";
+                }
+                $sent = round((100*($USD+0.3)/94.6),2);
             }
             else if ($signal == "/" || $signal == '\\') {
                 $sent = round((100*(($USD/$BS)+0.3)/94.6),2);
