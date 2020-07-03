@@ -23,9 +23,8 @@ $result = $link->query($sql);
 if ($result->num_rows > 0) {
     $OldText = mysqli_fetch_assoc($result)['tasa'];
 	if ($text != $OldText && strlen($text) > 7) {
-		if (is_numeric($text)) {
+		if (!is_numeric($text)) {
 			$sql = "UPDATE DICOM SET tasa = '$text' WHERE id = 1";
-
 			if ($link->query($sql) === TRUE) {
 				file_get_contents("https://api.telegram.org/bot$token/sendMessage?chat_id=$chat_id&text=$text");
 				// file_get_contents("https://api.telegram.org/bot$token/sendMessage?chat_id=$chat_id&text=old: $OldText");
