@@ -11,7 +11,6 @@ function getBTCValue() {
           break;
       }
   }
-  
   return 0;
 }
 
