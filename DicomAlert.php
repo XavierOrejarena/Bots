@@ -12,8 +12,6 @@ $token = '716396100:AAFbVh6W950S4goHt30TVUXW3cuKGdWQmKM';
 $chat_id = '@dicomalert';
 // $chat_id = 149273661;
 
-// $link = mysqli_connect('localhost', 'xavierorejarena', 'NX)[XDCM5~=f', 'bitnehuc_Telegram');
-
 $sql = "SELECT tasa FROM DICOM WHERE id = 1";
 $result = $link->query($sql);
 

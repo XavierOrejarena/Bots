@@ -5,6 +5,54 @@ define('BOT_TOKEN', '1228539660:AAENYRaMlIR84VtmTSO5MHg13saDL3epHkk');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
 define('WEBHOOK_URL', 'https://xavier.mer.web.ve/LBCVESbot.php');
 
+function getS() {
+  $rdata = array("COMPRA\t\t\t\tVENTA");
+  $priceBTC = getBTCValue();
+  $URL = file_get_contents("https://localbitcoins.com/buy-bitcoins-online/ve/venezuela/.json");
+  $DATA = json_decode($URL, true);
+  $text = '';
+  $i = 0;
+  foreach ($DATA['data']['ad_list'] as $oferta) {
+    if ($oferta['data']['currency'] == 'VES' && !stripos($oferta['data']['msg'], 'bitmain') && !stripos($oferta['data']['bank_name'], 'bitmain')) {
+      $rdata[] = number_format(round($oferta['data']['temp_price']/$priceBTC));
+      $i++;
+      if ($i > 9) break;
+    }
+  }
+  
+  $URL = file_get_contents("https://localbitcoins.com/sell-bitcoins-online/ve/venezuela/.json");
+  $DATA = json_decode($URL, true);
+  
+  $i = 1;
+  foreach ($DATA['data']['ad_list'] as $oferta) {
+    if ($oferta['data']['currency'] == 'VES'  && !stripos($oferta['data']['msg'], 'bitmain') && !stripos($oferta['data']['bank_name'], 'bitmain')) {
+      $rdata[$i] = $rdata[$i]."\t\t\t".number_format(round($oferta['data']['temp_price']/$priceBTC));
+      $i++;
+      if ($i > 10) break;
+    }
+  }
+
+  foreach ($rdata as $key) {
+    $text = $text.$key."\n";
+  }
+  return $text."\n\n$priceBTC";
+
+}
+
+function getBTCValue() {
+  $BINANCE_BTCUSDT = file_get_contents("https://www.bitmex.com/api/v1/trade/bucketed?binSize=1m&partial=true&count=100&reverse=true");
+  $BINANCE_BTCUSDT = json_decode($BINANCE_BTCUSDT, true);
+
+  foreach ($BINANCE_BTCUSDT as $coin) {
+      if ($coin['symbol'] == 'XBTUSD') {
+          return round($coin['open'],2);
+          break;
+      }
+  }
+  
+  return 0;
+}
+
 function apiRequestWebhook($method, $parameters) {
   if (!is_string($method)) {
     error_log("Method name must be a string\n");
@@ -123,21 +171,7 @@ function processMessage($message) {
   $text = $message['text'];
 
   if ($text == '/s' || $text == '/s@LBCVESbot') {
-    include "connect.php";
-    $chat_id = 149273661;
-    $text = "COMPRA\t\tVENTA\n";
-    $sql = "SELECT COMPRA,VENTA FROM LocalBitcoins";
-    $result = $link->query($sql);
-
-    if ($result->num_rows > 0) {
-      while($row = $result->fetch_assoc()) {
-        $text = $text. $row["COMPRA"]. "\t\t" . $row["VENTA"]."\n";
-      }
-    } else {
-      $text = "0 results";
-    }
-
-    apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "<pre>".$text."</pre>", 'parse_mode' => 'HTML'));
+    apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "<pre>".getS()."</pre>", 'parse_mode' => 'HTML'));
   } else if ($text == '/start'){
     apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "El único comando /s te muestra la tasa del dolar en VES dividiendo las 10 primeras ofertas en localbitcoins.com entre la tasa del BTC segun Bitmex.com"));
   }
