@@ -132,7 +132,7 @@ function processMessage($message) {
     if ($result->num_rows > 0) {
       while($row = $result->fetch_assoc()) {
         $i++;
-        if ($i > 9) {
+        if ($i > 10) {
           $text = $text. "\n\nUSD/BTC = ";
         }
         $text = $text. $row["COMPRA"]. "\t\t" . $row["VENTA"]."\n";
