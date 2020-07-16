@@ -32,6 +32,7 @@ function getS() {
       $i++;
       if ($i > 9){
         $sql = "UPDATE LocalBitcoins SET COMPRA='$priceBTC' WHERE id='$i'";
+        $link->query($sql);
         break; 
       }
     }
