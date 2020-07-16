@@ -124,7 +124,6 @@ function processMessage($message) {
 
   if ($text == '/s' || $text == '/s@LBCVESbot') {
     include "connect.php";
-    $chat_id = 149273661;
     $text = "COMPRA\t\tVENTA\n";
     $sql = "SELECT COMPRA,VENTA FROM LocalBitcoins";
     $result = $link->query($sql);
