@@ -138,7 +138,8 @@ function processMessage($message) {
 
     apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "<pre>".$text."</pre>", 'parse_mode' => 'HTML'));
   } else if ($text == '/start'){
-    apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "El único comando /s te muestra la tasa del dolar en VES dividiendo las 10 primeras ofertas en localbitcoins.com entre la tasa del BTC segun Bitmex.com"));
+    apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "El único comando es: /s
+Te muestra la tasa del dolar en VES dividiendo las 10 primeras ofertas en localbitcoins.com entre la tasa del BTC segun Bitmex.com"));
   }
   
 }
