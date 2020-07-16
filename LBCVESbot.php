@@ -131,6 +131,7 @@ function processMessage($message) {
 
     if ($result->num_rows > 0) {
       while($row = $result->fetch_assoc()) {
+        $i++;
         if ($i > 9) {
           $text = $text. "\n\nUSD/BTC = ";
         }
