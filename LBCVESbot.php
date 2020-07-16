@@ -140,7 +140,7 @@ function processMessage($message) {
   } else if ($text == '/start'){
     apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "El único comando es: /s
 
-    Te muestra la tasa del dólar en VES dividiendo las 10 primeras ofertas en localbitcoins.com entre la tasa del BTC según Bitmex.com"));
+Te muestra la tasa del dólar en VES dividiendo las 10 primeras ofertas en localbitcoins.com entre la tasa del BTC según Bitmex.com"));
   }
   
 }

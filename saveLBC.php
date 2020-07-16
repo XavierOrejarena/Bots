@@ -30,7 +30,10 @@ function getS() {
         echo "Error updating record: " . $link->error;
       }
       $i++;
-      if ($i > 9) break;
+      if ($i > 9){
+        $sql = "UPDATE LocalBitcoins SET COMPRA='$priceBTC' WHERE id='$i'";
+        break; 
+      }
     }
   }
   
