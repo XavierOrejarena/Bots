@@ -226,7 +226,8 @@ function processMessage($message) {
             $USD = str_word_count($text, 1, '0123456789.')[0];
             $BS = str_word_count($text, 1, '0123456789.')[1];
             $signal = str_word_count($text, 1, '*xX/\def')[0];
-            $Bolivares = pow(1000,strlen(strstr($BS, 'Kk')))*(real)$BS;
+            $BS = pow(1000,strlen(strstr($BS, 'k')))*(real)$BS;
+            $BS = pow(1000,strlen(strstr($BS, 'K')))*(real)$BS;
 
             if ($signal == 'x' || $signal == '*' || is_null($signal) || $signal == 'X') {
                 $receive = round(($USD-$USD*(0.054)-0.3), 2);
@@ -234,12 +235,12 @@ function processMessage($message) {
                 if ($BS) {
                     $msg1 = "Envían: $USD $
 Llegarán: $receive $
-\xE2\x98\x95: $Bolivares Bs.
-Total: ".number_format($receive*$Bolivares, 2, ',', '')." Bs.";
+\xE2\x98\x95: $BS Bs.
+Total: ".number_format($receive*$BS, 2, ',', '')." Bs.";
                     $msg2 = "Envían: $sent $
 Llegarán: $USD $
-\xE2\x98\x95: $Bolivares Bs.
-Total: ".number_format($USD*$Bolivares, 2, ',', '')." Bs.";
+\xE2\x98\x95: $BS Bs.
+Total: ".number_format($USD*$BS, 2, ',', '')." Bs.";
                 } else {
                     $msg1 = "Envían: $USD $
 Llegarán: $receive $";
