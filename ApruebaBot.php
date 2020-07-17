@@ -145,6 +145,7 @@ function processQuery($inline_query)
         $BS = str_word_count($text, 1, '0123456789.')[1];
         $signal = str_word_count($text, 1, '*xX/\def')[0];
         $Bolivares = pow(1000,strlen(strstr($BS, 'k')))*(real)$BS;
+        $Bolivares = pow(1000,strlen(strstr($BS, 'K')))*(real)$BS;
     }
 
     if (empty($inline_query['query'])) {
