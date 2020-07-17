@@ -1,9 +1,9 @@
 #!/usr/bin/env php
 <?php
 //@ppvzlabot
-define('BOT_TOKEN', '695950939:AAHfKc9Lv1yceBT9yPkpcxNlAeRsLPuFGHw');
+define('BOT_TOKEN', '533073153:AAHkJZRvA_ZOXLT63ftnIApWuZPzpDtyScM');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
-define('WEBHOOK_URL', 'https://xavier.mer.web.ve/ApruebaBot.php');
+define('WEBHOOK_URL', 'https://xavier.mer.web.ve/ppvzlabot.php');
 
 function gen_uuid() {
     return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
