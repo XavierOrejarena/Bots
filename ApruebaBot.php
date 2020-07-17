@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 //@ppvzlabot
-define('BOT_TOKEN', '533073153:AAHkJZRvA_ZOXLT63ftnIApWuZPzpDtyScM');
+define('BOT_TOKEN', '695950939:AAHfKc9Lv1yceBT9yPkpcxNlAeRsLPuFGHw');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
 define('WEBHOOK_URL', 'https://xavier.mer.web.ve/ppvzlabot.php');
 
