@@ -146,6 +146,24 @@ function processMessage($message) {
     apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "El único comando es: /s
 
 Te muestra la tasa del dólar en VES dividiendo las 10 primeras ofertas en localbitcoins.com entre la tasa del BTC según Bitmex.com"));
+  } else if ($text == '/r' || $text == '/r@LBCVESbot') {
+    include "connect.php";
+    $sql = "SELECT INDICADOR,TASA FROM Dolar";
+    $result = $link->query($sql);
+    $i = 0;
+
+    if ($result->num_rows > 0) {
+      while($row = $result->fetch_assoc()) {
+        $i++;
+        $str =  $row["INDICADOR"]."                                                                ";
+        $str = substr_replace($str,$row["TASA"],15);
+        $text = $text."\n".$str;
+      }
+    } else {
+      $text = "0 results";
+    }
+
+    apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "<pre>".$text."</pre>", 'parse_mode' => 'HTML'));
   }
   
 }

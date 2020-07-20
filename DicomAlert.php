@@ -6,7 +6,7 @@ include "connect.php";
 
 $data = file_get_contents("http://www.bcv.org.ve");
 preg_match_all('/USD/', $data, $matches, PREG_OFFSET_CAPTURE);
-$text = substr($data, $matches[0][0][1]+85, 9);
+$text = substr($data, $matches[0][0][1]+85, 10);
 $text = (string)$text;
 $token = '716396100:AAFbVh6W950S4goHt30TVUXW3cuKGdWQmKM';
 $chat_id = '@dicomalert';
