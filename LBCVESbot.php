@@ -143,11 +143,16 @@ function processMessage($message) {
 
     apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "<pre>".$text."</pre>", 'parse_mode' => 'HTML'));
   } else if ($text == '/start'){
-    apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "El único comando es: /s
+    apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => "Comando: /s
 
-Te muestra la tasa del dólar en VES dividiendo las 10 primeras ofertas en localbitcoins.com entre la tasa del BTC según Bitmex.com"));
+Muestra la tasa del dólar en VES dividiendo las 10 primeras ofertas en localbitcoins.com entre la tasa del BTC según Bitmex.com
+
+Comando: /s
+
+Muestra la tasa del dolar en VES segun varios indicadores."));
   } else if ($text == '/r' || $text == '/r@LBCVESbot') {
     include "connect.php";
+    $text = '';
     $sql = "SELECT INDICADOR,TASA FROM Dolar";
     $result = $link->query($sql);
     $i = 0;
