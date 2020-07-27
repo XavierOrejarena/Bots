@@ -147,7 +147,7 @@ function processMessage($message) {
 
 Muestra la tasa del dólar en VES dividiendo las 10 primeras ofertas en localbitcoins.com entre la tasa del BTC según Bitmex.com
 
-Comando: /s
+Comando: /r
 
 Muestra la tasa del dolar en VES segun varios indicadores."));
   } else if ($text == '/r' || $text == '/r@LBCVESbot') {
