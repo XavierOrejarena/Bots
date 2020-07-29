@@ -5,6 +5,21 @@ define('BOT_TOKEN', '1228539660:AAENYRaMlIR84VtmTSO5MHg13saDL3epHkk');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
 define('WEBHOOK_URL', 'https://xavier.mer.web.ve/LBCVESbot.php');
 
+function saveUser($user) {
+  include "connect.php";
+  $chat_id = $user['id'];
+  $first_name = $user['first_name'];
+  $last_name = $user['last_name'];
+  $username = $user['username'];
+  $result = mysqli_query($link, "SELECT chat_id FROM users WHERE chat_id = '$chat_id'");
+  if (mysqli_num_rows($result) == 0){
+      mysqli_query($link, "INSERT INTO users (chat_id, first_name, last_name, username, LBCVESbot) VALUES ('$chat_id', '$first_name', '$last_name', '$username', 1)");
+  }else {
+      mysqli_query($link, "UPDATE users SET LBCVESbot = LBCVESbot+1, first_name = '$first_name', last_name = '$last_name', username = '$username' WHERE chat_id = '$chat_id';");
+  }
+  mysqli_close($link);
+}
+
 function apiRequestWebhook($method, $parameters) {
   if (!is_string($method)) {
     error_log("Method name must be a string\n");
@@ -190,4 +205,5 @@ if (!$update) {
 
 if (isset($update["message"])) {
   processMessage($update["message"]);
+  saveUser($update['message']['from']);
 }
