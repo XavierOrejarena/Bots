@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php
-define('TOKEN',"542182830:AAEnF11eBwR5lXeRMg2maZcBgPRZajVkV5A");
+define('TOKEN',"716396100:AAE1NzJX7KzdAXG1655jjCrI6IAG3JtXvsc");
 $users = ['149273661','309646792','319720914'];
 setlocale(LC_MONETARY, 'en_US.UTF-8');
 

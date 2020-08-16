@@ -1,5 +1,9 @@
 #!/usr/bin/env php
 <?php
+define('BOT_TOKEN', '716396100:AAFbVh6W950S4goHt30TVUXW3cuKGdWQmKM');
+define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
+// define('WEBHOOK_URL', 'https://xavier.mer.web.ve/Jesus/bot.php');
+define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/Jesus/bot.php');
 
 function getBTCValue() {
   $BINANCE_BTCUSDT = file_get_contents("https://www.bitmex.com/api/v1/trade/bucketed?binSize=1m&partial=true&count=100&reverse=true");
@@ -162,10 +166,6 @@ function getColombia() {
 }
 
 
-define('BOT_TOKEN', '716396100:AAFbVh6W950S4goHt30TVUXW3cuKGdWQmKM');
-define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
-// define('WEBHOOK_URL', 'https://xavier.mer.web.ve/Jesus/bot.php');
-define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/Jesus/bot.php');
 
 function apiRequestWebhook($method, $parameters) {
   if (!is_string($method)) {
