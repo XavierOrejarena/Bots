@@ -329,7 +329,7 @@ if (!$update) {
 }
 
 if (isset($update["message"])) {
-  if ($update["message"]["from"]["username"] == 'Jesussk') {
+  if (!in_array($update["message"]["from"]["username"], array('Jesussk', 'XavierOrejarena', 'peruzuela'))) {
     processMessage($update["message"]);
   } else {
     apiRequestJson("sendMessage", array('chat_id' => $update["message"]["from"]["id"], "text" => "Este bot es privado, para mayor información comunicarse con @Jesussk"));
