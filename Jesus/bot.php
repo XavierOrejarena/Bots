@@ -329,5 +329,9 @@ if (!$update) {
 }
 
 if (isset($update["message"])) {
-  processMessage($update["message"]);
+  if ($update["message"]["from"]["username"] == 'Jesussk' || 'XavierOrejarena') {
+    processMessage($update["message"]);
+  } else {
+    apiRequestJson("sendMessage", array('chat_id' => $update["message"]["from"]["id"], "text" => "Este bot es privado, para mayor información comunicarse con @Jesussk", 'parse_mode' => 'HTML'));
+  }
 }
