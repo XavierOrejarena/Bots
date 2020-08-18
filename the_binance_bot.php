@@ -4,7 +4,7 @@
 define('BOT_TOKEN', '411509742:');
 define('TOKEN_BOT', 'AAFKzBXmOO0fx8e3bXDHBo4tj-QMazfre2E');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.TOKEN_BOT.'/');
-define('WEBHOOK_URL', 'https://xavier.mer.web.ve/the_binance_bot.php');
+define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/the_binance_bot.php');
 
 function gen_uuid() {
     return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
