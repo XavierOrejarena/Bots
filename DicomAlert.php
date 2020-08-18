@@ -8,7 +8,7 @@ $data = file_get_contents("http://www.bcv.org.ve");
 preg_match_all('/USD/', $data, $matches, PREG_OFFSET_CAPTURE);
 $text = substr($data, $matches[0][0][1]+85, 10);
 $text = (string)$text;
-$token = '716396100:AAFbVh6W950S4goHt30TVUXW3cuKGdWQmKM';
+$token = '716396100:AAE1MzNEEHrTixztiwFJZEhjt0loVK6eJFE';
 $chat_id = '@dicomalert';
 // $chat_id = 149273661;
 
