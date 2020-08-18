@@ -1,9 +1,10 @@
 #!/usr/bin/env php
 <?php
 
-define('BOT_TOKEN', '1224010504:AAE42bCZS8A6rhmTHq15EnFkogVARy9utnU');
-define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
-define('WEBHOOK_URL', 'https://xavier.mer.web.ve/divisaslatambot.php');
+define('BOT_TOKEN', '1224010504:');
+define('TOKEN_BOT', 'AAHzQrmF7_wlKumAqoHvJ2v_xNDpkqD6kV0');
+define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.TOKEN_BOT.'/');
+define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/divisaslatambot.php');
 define('appID', '36cab38e64694c14bc52931f371b4fbc');
 define('API_URL_RATES', 'https://openexchangerates.org/api/latest.json?app_id='.appID);
 
