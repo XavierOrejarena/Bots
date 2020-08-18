@@ -1,6 +1,8 @@
 #!/usr/bin/env php
 <?php
-	$api = "411509742:AAF0EfG_R-0mp3nL_KRTanuwDF79MiY2FRs";
+	$tkn = "411509742:";
+	$token = 'AAFKzBXmOO0fx8e3bXDHBo4tj-QMazfre2E';
+	$api = $tkn.$token;
 	function sendMessage($chat_id, $text)
 	{
 	    global $api;

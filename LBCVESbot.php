@@ -3,7 +3,7 @@
 
 define('BOT_TOKEN', '1228539660:AAENYRaMlIR84VtmTSO5MHg13saDL3epHkk');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
-define('WEBHOOK_URL', 'https://xavier.mer.web.ve/LBCVESbot.php');
+define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/LBCVESbot.php');
 
 function saveUser($user) {
   include "connect.php";
