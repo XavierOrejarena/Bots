@@ -1,8 +1,9 @@
 #!/usr/bin/env php
 <?php
 //@the_binance_bot
-define('BOT_TOKEN', '411509742:AAF0EfG_R-0mp3nL_KRTanuwDF79MiY2FRs');
-define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
+define('BOT_TOKEN', '411509742:AAFKzBXmOO0fx8e3bXDHBo4tj-QMazfre2E');
+define('TOKEN_BOT', 'AAFKzBXmOO0fx8e3bXDHBo4tj-QMazfre2E');
+define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.TOKEN_BOT.'/');
 define('WEBHOOK_URL', 'https://xavier.mer.web.ve/the_binance_bot.php');
 
 function gen_uuid() {
