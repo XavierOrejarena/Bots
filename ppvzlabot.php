@@ -4,7 +4,7 @@
 define('BOT_TOKEN', '533073153:');
 define('TOKEN_BOT', 'AAFvG-HB0EGdd3BQQW6d-ADu7FAIsFnAe9I');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.TOKEN_BOT.'/');
-define('WEBHOOK_URL', 'https://xavier.mer.web.ve/ppvzlabot.php');
+define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/ppvzlabot.php');
 
 function gen_uuid() {
     return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
