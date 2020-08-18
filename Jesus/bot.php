@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php
-define('BOT_TOKEN', '716396100:AAEp-UJE5sSZ3VCF9O1x2O8xuNFG5LlIFvA');
+define('BOT_TOKEN', '716396100:AAGPS36GmpXkjg5uLrFoLuAxZvfwv3DJeWY');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
 // define('WEBHOOK_URL', 'https://xavier.mer.web.ve/Jesus/bot.php');
 define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/Jesus/bot.php');
