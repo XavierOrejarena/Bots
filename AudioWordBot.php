@@ -1,8 +1,9 @@
 #!/usr/bin/env php
 <?php
 //@AudioWordBot
-define('BOT_TOKEN', '814434766:AAEpIZOreTpDpIG_j2xiIW6bYqNTnwm_JOQ');
-define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
+define('BOT_TOKEN', '814434766:');
+define('TOKEN_BOT', 'AAGrhC_63CicSgyzXdArOwlhznQEI0os1gY');
+define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.TOKEN_BOT.'/');
 define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/AudioWordBot.php');
 
 function saveUser($user) {
