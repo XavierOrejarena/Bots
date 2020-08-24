@@ -1,9 +1,10 @@
 #!/usr/bin/env php
 <?php
 //@the_poloniex_bot
-define('BOT_TOKEN', '537798935:AAGQFjvZCqLz0PrgG8GwVU-hi64X9N6r2qk');
-define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
-define('WEBHOOK_URL', 'https://xavier.mer.web.ve/the_poloniex_bot.php');
+define('BOT_TOKEN', '537798935:');
+define('TOKEN_BOT', 'AAGQFjvZCqLz0PrgG8GwVU-hi64X9N6r2qk');
+define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.TOKEN_BOT.'/');
+define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/the_poloniex_bot.php');
 
 function gen_uuid() {
     return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
