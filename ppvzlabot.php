@@ -142,6 +142,7 @@ function processQuery($inline_query)
     if (!empty($inline_query['query'])) {
         $text = $inline_query['query'];
         $text   = str_replace('x','*',$text);
+        $text   = str_replace('X','*',$text);
         $USD = str_word_count($text, 1, '0123456789.')[0];
         $BS = str_word_count($text, 1, '0123456789.')[1];
         $signal = str_word_count($text, 1, '*xX/\def')[0];
