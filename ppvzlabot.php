@@ -166,7 +166,7 @@ function processQuery($inline_query)
             $message_text1 = "Envían: $USD
 Llegarán: $receive $
 \xE2\x98\x95: $BS Bs.
-Total: ".number_format($receive*$BS, 2, ',', '')." Bs.";
+Total: ".(number_format($receive*$BS, 2, ',', '')+0)." Bs.";
             $message_text2 = "Envían: $sent
 Llegarán: $USD $
 \xE2\x98\x95: $BS Bs.
