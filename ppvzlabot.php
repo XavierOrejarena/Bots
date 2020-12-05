@@ -146,7 +146,7 @@ function processQuery($inline_query)
         $USD = str_word_count($text, 1, '0123456789.')[0];
         $BS = str_word_count($text, 1, '0123456789.')[1];
         $signal = str_word_count($text, 1, '*xX/\def')[0];
-        $BS = floatval(pow(1000,strlen(stristr($BS, 'k')))*(real)$BS);
+        $BS = pow(1000,strlen(stristr($BS, 'k')))*(real)$BS;
     }
 
     if (empty($inline_query['query'])) {
@@ -166,11 +166,11 @@ function processQuery($inline_query)
             $message_text1 = "Envían: $USD
 Llegarán: $receive $
 \xE2\x98\x95: $BS Bs.
-Total: ".number_format($receive*$BS, 2, ',', '')." Bs.";
+Total: ".floatval(number_format($receive*$BS, 2, ',', ''))." Bs.";
             $message_text2 = "Envían: $sent
 Llegarán: $USD $
 \xE2\x98\x95: $BS Bs.
-Total: ".number_format($USD*$BS, 2, ',', '')." Bs.";
+Total: ".floatval(number_format($USD*$BS, 2, ',', ''))." Bs.";
         } else {
             $message_text1 = "Envían: $USD
 Llegarán: $receive $";
