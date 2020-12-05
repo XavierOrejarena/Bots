@@ -240,7 +240,8 @@ Any bug or suggestion @XavierOrejarena');
             $seted_price = floatval($text[2]);
             $price = floatval(json_decode(file_get_contents("https://api.binance.com/api/v1/ticker/price?symbol=$coin"), true)['price']);
             sendMessage($chat_id, "You will receive a notification when /$coin reaches $seted_price
-if you want to see all your alarms /myalarms");
+
+If you want to see all your alarms /MYALARMS");
             if ($seted_price > $price) {
                 $type = "high";
             }
