@@ -223,7 +223,7 @@ function processMessage($message) {
     sendMessage($chat_id, "Hola ".$message['from']['first_name'].", solo escribe Monto*Tasa y espera el resultado.");
 
     } else {
-            $text   = str_replace('x','/X','*',$text);
+            $text   = str_replace('x','\X','*',$text);
             $USD = str_word_count($text, 1, '0123456789.')[0];
             $BS = str_word_count($text, 1, '0123456789.')[1];
             $signal = str_word_count($text, 1, '*xX/\def')[0];
