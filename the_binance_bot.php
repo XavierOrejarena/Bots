@@ -281,7 +281,11 @@ Any bug or suggestion @XavierOrejarena');
     		$coin = strtoupper($text);
 	        $coin = ltrim($coin, '/');
 	        $price = json_decode(file_get_contents("https://api.binance.com/api/v1/ticker/price?symbol=$coin"), true)['price'];
-            $price = round($price,2);
+	        if ($price > 10) {
+	        	$price = round($price,2);
+	        }else {
+	        	$price = round($price,6);
+	        }
             $text = "/".$coin." ".$price;
             if ($price > 0) {
                 sendMessage($chat_id, $text);
