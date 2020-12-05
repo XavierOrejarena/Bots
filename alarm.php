@@ -20,7 +20,6 @@
 		$row_num = $row['row_num'];
 		$price = json_decode(file_get_contents("https://api.binance.com/api/v1/ticker/price?symbol=$coin"), true)['price'];
 		if (is_numeric($price)) {
-			# code...
 			$seted_price = floatval($seted_price);
 			$price = floatval($price);
 			if ($price >= $seted_price and $type == "high") {
