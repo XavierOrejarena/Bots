@@ -162,15 +162,25 @@ function processQuery($inline_query)
     else if ($signal == 'x' || $signal == '*' || is_null($signal) || $signal == 'X') {
         $receive = round(($USD-$USD*(0.054)-0.3), 2);
         $sent = round((100*($USD+0.3)/94.6),2);
+        if ((fmod($receive*$BS,    1) !== 0.00) ) {
+            $Total = number_format($receive*$BS, 2, ',', '');
+        }else {
+            $Total = number_format($receive*$BS, 0, '', '');
+        }
         if ($BS) {
             $message_text1 = "Envían: $USD
 Llegarán: $receive $
 \xE2\x98\x95: $BS Bs.
-Total: ".number_format($receive*$BS, 2, ',', '')." Bs.";
+Total: ".$Total." Bs.";
+            if ((fmod($USD*$BS,    1) !== 0.00) ) {
+                $Total = number_format($USD*$BS, 2, ',', '');
+            }else {
+                $Total = number_format($USD*$BS, 0, '', '');
+            }
             $message_text2 = "Envían: $sent
 Llegarán: $USD $
 \xE2\x98\x95: $BS Bs.
-Total: ".number_format($USD*$BS, 2, ',', '')." Bs.";
+Total: ".$Total." Bs.";
         } else {
             $message_text1 = "Envían: $USD
 Llegarán: $receive $";
