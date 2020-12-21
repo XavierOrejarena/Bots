@@ -278,10 +278,15 @@ Llegarán: $USD $";
             else if ($signal == "/" || $signal == '\\') {
                 $sent = round((100*(($USD/$BS)+0.3)/94.6),2);
                 $receive = round($USD/$BS,2);
+                if ((fmod($USD,    1) !== 0.00) ) {
+                    $Total = number_format($USD, 2, ',', '');
+                }else {
+                    $Total = number_format($USD, 0, '', '');
+                }
                 $msg1 = "Envían: $sent $
 Llegarán: $receive $
 \xE2\x98\x95: $BS Bs.
-Total: ".number_format($USD, 2, ',', '')." Bs.";
+Total: ".$Total." Bs.";
             }
 
             sendMessage($chat_id, $msg1);
