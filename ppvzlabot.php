@@ -205,10 +205,10 @@ Llegarán: $USD $";
     else if ($signal == "/" || $signal == '\\') {
         $sent = round((100*(($USD/$BS)+0.3)/94.6),2);
         $receive = round($USD/$BS,2);
-        if ((fmod($sent,    1) !== 0.00) ) {
-            $Total = number_format($sent, 2, ',', '');
+        if ((fmod($receive,    1) !== 0.00) ) {
+            $Total = number_format($receive, 2, ',', '');
         }else {
-            $Total = number_format($sent, 0, '', '');
+            $Total = number_format($receive, 0, '', '');
         }
         $results[] = [
     'type'         => 'article',
