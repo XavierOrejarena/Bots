@@ -170,7 +170,7 @@ Total: ".number_format($receive*$BS, 2, ',', '')." Bs.";
             $message_text2 = "Envían: $sent
 Llegarán: $USD $
 \xE2\x98\x95: $BS Bs.
-Total: ".str_replace(',0', '', number_format($USD*$BS, 2, ',', ''))." Bs.";
+Total: ".number_format($USD*$BS, 2, ',', '')." Bs.";
         } else {
             $message_text1 = "Envían: $USD
 Llegarán: $receive $";
