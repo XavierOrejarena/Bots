@@ -1,6 +1,6 @@
 <table>
 <?php 
-
+echo "PHP!<br>";
 if (!empty($_POST)) {
     echo "<h2>PHP is Fun!</h2>";
     echo "Hello world!<br>";
