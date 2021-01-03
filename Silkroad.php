@@ -1,4 +1,6 @@
 <?php
-Hello1;
+echo "<h2>PHP is Fun!</h2>";
+echo "Hello world!<br>";
+
 echo $_POST
 ?>
