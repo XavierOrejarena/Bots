@@ -1,3 +1,4 @@
 <?php
-print_r($_POST[0]);
+Hello1;
+print_r($_POST);
 ?>
