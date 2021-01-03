@@ -1,5 +1,1 @@
-<?php
-header( 'Content-type: application/json' );
-
-echo json_encode($_POST);
-?>
+<?php print_r($_POST); ?>
