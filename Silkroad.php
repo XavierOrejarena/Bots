@@ -1,4 +1,4 @@
 <?php
 Hello1;
-print_r($_POST);
+echo $_POST
 ?>
