@@ -14,6 +14,8 @@ if (!empty($_POST)) {
         echo "</td>";
         echo "</tr>";
     }
+}else {
+    var_dump($_POST);
 }
 
 ?>
