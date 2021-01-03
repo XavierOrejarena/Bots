@@ -2,5 +2,5 @@
 echo "<h2>PHP is Fun!</h2>";
 echo "Hello world!<br>";
 
-echo $_POST
+echo $_POST[0]
 ?>
