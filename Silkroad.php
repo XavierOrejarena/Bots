@@ -1,6 +1,5 @@
 <?php
-echo "<h2>PHP is Fun!</h2>";
-echo "Hello world!<br>";
+header( 'Content-type: application/json' );
 
-echo $_POST[data]
+echo json_encode($_POST);
 ?>
