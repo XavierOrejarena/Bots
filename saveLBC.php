@@ -16,7 +16,7 @@ function getBTCValue() {
 
 function getS() {
   include "connect.php";
-  $priceBTC = getBTCValue();
+  $priceBTC = 1
   $URL = file_get_contents("https://localbitcoins.com/buy-bitcoins-online/ve/venezuela/.json");
   $DATA = json_decode($URL, true);
   $i = 0;
