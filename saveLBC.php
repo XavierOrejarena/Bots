@@ -1,17 +1,11 @@
 #!/usr/bin/env php
 <?php
 function getBTCValue() {
-  $BINANCE_BTCUSDT = file_get_contents("https://www.bitmex.com/api/v1/trade/bucketed?binSize=1m&partial=true&count=100&reverse=true");
-  $BINANCE_BTCUSDT = json_decode($BINANCE_BTCUSDT, true);
+	$BINANCE_BTCUSDT = file_get_contents("https://www.bitmex.com/api/v1/instrument?symbol=XBT");
+	$BINANCE_BTCUSDT = json_decode($BINANCE_BTCUSDT, true);
 
-  foreach ($BINANCE_BTCUSDT as $coin) {
-      if ($coin['symbol'] == '.XBT') {
-          return round($coin['open'],2);
-          break;
-      }
-  }
   
-  return 0;
+  return $BINANCE_BTCUSDT['lastPrice'];
 }
 
 function getS() {
