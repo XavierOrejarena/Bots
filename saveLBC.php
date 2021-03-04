@@ -5,7 +5,7 @@ function getBTCValue() {
 	$BINANCE_BTCUSDT = json_decode($BINANCE_BTCUSDT, true);
 
   
-  return $BINANCE_BTCUSDT['lastPrice'];
+  return $BINANCE_BTCUSDT[0]['lastPrice'];
 }
 
 function getS() {
