@@ -11,12 +11,12 @@ function getBTCValue() {
       }
   }
   
-  return 1;
+  return 0;
 }
 
 function getS() {
   include "connect.php";
-  $priceBTC = 1;
+  $priceBTC = getBTCValue();
   $URL = file_get_contents("https://localbitcoins.com/buy-bitcoins-online/ve/venezuela/.json");
   $DATA = json_decode($URL, true);
   $i = 0;
