@@ -5,7 +5,7 @@ function getBTCValue() {
   $BINANCE_BTCUSDT = json_decode($BINANCE_BTCUSDT, true);
 
   foreach ($BINANCE_BTCUSDT as $coin) {
-      if ($coin['symbol'] == 'XBTUSD') {
+      if ($coin['symbol'] == '.XBT') {
           return round($coin['open'],2);
           break;
       }
