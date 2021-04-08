@@ -9,8 +9,8 @@ preg_match_all('/USD/', $data, $matches, PREG_OFFSET_CAPTURE);
 $text = substr($data, $matches[0][0][1]+85, 12);
 $text = (string)$text;
 $token = '716396100:AAHDXQnj-ZyxqrObv0IsdzrjE3zPtIu5n6M';
-$chat_id = '@dicomalert';
-// $chat_id = 149273661;
+// $chat_id = '@dicomalert';
+$chat_id = 149273661;
 
 $sql = "SELECT tasa FROM DICOM WHERE id = 1";
 $result = $link->query($sql);
@@ -20,12 +20,12 @@ $result = $link->query($sql);
 
 if ($result->num_rows > 0) {
     $OldText = mysqli_fetch_assoc($result)['tasa'];
-	if ($text != $OldText && strlen($text) > 7) {
-		if (!is_numeric($text)) {
+	if ($text != $OldText && strlen($text) > 11) {
+		if (!preg_match('/[a-zA-Z]/', $text)) {
 			$sql = "UPDATE DICOM SET tasa = '$text' WHERE id = 1";
 			if ($link->query($sql) === TRUE) {
 				file_get_contents("https://api.telegram.org/bot$token/sendMessage?chat_id=$chat_id&text=$text");
-				// file_get_contents("https://api.telegram.org/bot$token/sendMessage?chat_id=$chat_id&text=old: $OldText");
+				file_get_contents("https://api.telegram.org/bot$token/sendMessage?chat_id=$chat_id&text=old: $OldText");
 			} else {
 				file_get_contents("https://api.telegram.org/bot$token/sendMessage?chat_id=149273661&text=error".$conn->error); 
 			}
@@ -36,6 +36,6 @@ if ($result->num_rows > 0) {
 
 	}
 } else {
-    file_get_contents("https://api.telegram.org/bot$token/sendMessage?chat_id=$chat_id&text=0 Results");
+    file_get_contents("https://api.telegram.org/bot$token/sendMessage?chat_id=149273661&text=0 Results");
 }
 ?>
