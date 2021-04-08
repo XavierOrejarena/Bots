@@ -14,5 +14,5 @@ $link = mysqli_connect($host, $usr, $password, $database);
 if (!$link) {
     die("Connection failed: " . mysqli_connect_error());
   }
-  echo "Connected successfully\n";
+  // echo "Connected successfully\n";
 ?>
