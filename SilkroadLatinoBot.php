@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 
 define('BOT_TOKEN', '1221990015:AAFhQ8b6fcE_1EheOo_UebwtrA98a7yLrNc');
