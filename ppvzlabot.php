@@ -165,7 +165,7 @@ function processQuery($inline_query)
         if ((fmod($receive*$BS,    1) !== 0.00) ) {
             $Total = number_format($receive*$BS, 2, ',', '');
         }else {
-            $Total = number_format($receive*$BS, 0, '', '');
+            $Total = number_format($receive*$BS, 2, ',', '');
         }
         if ($BS) {
             $message_text1 = "Envían: $USD
@@ -175,7 +175,7 @@ Total: ".$Total." Bs.";
             if ((fmod($USD*$BS,    1) !== 0.00) ) {
                 $Total = number_format($USD*$BS, 2, ',', '');
             }else {
-                $Total = number_format($USD*$BS, 0, '', '');
+                $Total = number_format($USD*$BS, 2, ',', '');
             }
             $message_text2 = "Envían: $sent
 Llegarán: $USD $
@@ -208,7 +208,7 @@ Llegarán: $USD $";
         if ((fmod($USD,    1) !== 0.00) ) {
             $Total = number_format($USD, 2, ',', '');
         }else {
-            $Total = number_format($USD, 0, '', '');
+            $Total = number_format($USD, 2, ',', '');
         }
         $results[] = [
     'type'         => 'article',
@@ -251,7 +251,7 @@ function processMessage($message) {
                 if ((fmod($receive*$BS,    1) !== 0.00) ) {
                     $Total = number_format($receive*$BS, 2, ',', '');
                 }else {
-                    $Total = number_format($receive*$BS, 0, '', '');
+                    $Total = number_format($receive*$BS, 2, ',', '');
                 }
                 $sent = round((100*($USD+0.3)/94.6),2);
                 if ($BS) {
@@ -262,7 +262,7 @@ Total: ".$Total." Bs.";
                     if ((fmod($USD*$BS,    1) !== 0.00) ) {
                         $Total = number_format($USD*$BS, 2, ',', '');
                     }else {
-                        $Total = number_format($USD*$BS, 0, '', '');
+                        $Total = number_format($USD*$BS, 2, ',', '');
                     }
                     $msg2 = "Envían: $sent $
 Llegarán: $USD $
@@ -281,7 +281,7 @@ Llegarán: $USD $";
                 if ((fmod($USD,    1) !== 0.00) ) {
                     $Total = number_format($USD, 2, ',', '');
                 }else {
-                    $Total = number_format($USD, 0, '', '');
+                    $Total = number_format($USD, 2, ',', '');
                 }
                 $msg1 = "Envían: $sent $
 Llegarán: $receive $
