@@ -1,3 +1,1 @@
-<?php
-    echo file_get_contents("Plugin.py");
-?>
+<h1><?php echo file_get_contents("Plugin.py");?></h1>
