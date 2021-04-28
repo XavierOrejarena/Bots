@@ -11,8 +11,6 @@ bol = True
 players = ['Xiomi','xTai','Viraqui','Sheon','Casito','Delu','Teimio','Tiranicuz','Nelliel1123']
 
 def handle_chat(t,player,msg):
-	global bol
-	name = get_character_data()['name']
 	log(msg)
 
 def handle_event(t, data):
