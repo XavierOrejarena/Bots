@@ -97,7 +97,7 @@ def tlp(x):
 	log('Teleport chat Command')
 	return 0
 
-def useSpecialReturnScroll():
+def scroll(x):
 	phBotChat.Private('Nelliel1123','useSpecialReturnScroll')
 	return 0
 
