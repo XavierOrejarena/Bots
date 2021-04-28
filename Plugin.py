@@ -15,18 +15,6 @@ def handle_chat(t,player,msg):
 	name = get_character_data()['name']
 	if msg == "scroll":
 		log('Return Scroll por comando')
-		i = 0
-		for x in get_inventory()['items']:
-			if x:
-				if x['name'] == 'Special Return Scroll':
-					Packet = bytearray()
-					Packet.append(i)
-					Packet.append(0xEC)
-					Packet.append(0x09)
-					inject_joymax(0x704C, Packet, True)
-					break
-			i+=1
-
 	if t == 7 and bol and 'CONTROL BOT' in msg and name in players and Path(__file__).stem == '1auhASa1vckjbw2he-AS21FSADs':
 		data = re.findall(r'\d+', msg)
 		a = int(data[0])
