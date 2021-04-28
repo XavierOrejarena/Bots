@@ -15,7 +15,7 @@ def handle_chat(t,player,msg):
 	name = get_character_data()['name']
 	if msg == 'scroll':
 		log('Return Scroll por comando')
-	else :
+	else:
 		log('XD')
 
 def handle_event(t, data):
