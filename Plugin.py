@@ -78,7 +78,7 @@ def teleport(source,destination):
 				return
 
 def tlp(x):
-	phBotChat.Private('Nelliel1123','#'+x)
+	phBotChat.Private('Nelliel1123','#1')
 	log('Teleport chat Command')
 	return 0
 
