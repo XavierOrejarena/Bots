@@ -13,21 +13,17 @@ players = ['Xiomi','xTai','Viraqui','Sheon','Casito','Delu','Teimio','Tiranicuz'
 def handle_chat(t,player,msg):
 	global bol
 	name = get_character_data()['name']
-	if msg == "useSpecialReturnScroll":
+	if msg == "scroll":
 		log('Return Scroll por comando')
 		i = 0
 		for x in get_inventory()['items']:
 			if x:
-				log(x['name'])
 				if x['name'] == 'Special Return Scroll':
 					Packet = bytearray()
 					Packet.append(i)
 					Packet.append(0xEC)
 					Packet.append(0x09)
 					inject_joymax(0x704C, Packet, True)
-					stop_bot()
-					stop_trace()
-					start_bot()
 					break
 			i+=1
 
@@ -101,7 +97,7 @@ def tlp(x):
 	return 0
 
 def scroll(x):
-	phBotChat.Private('Nelliel1123','useSpecialReturnScroll')
+	phBotChat.Private('Nelliel1123','scroll')
 	return 0
 
 log("************************* Teleport Chat Command *************************")
