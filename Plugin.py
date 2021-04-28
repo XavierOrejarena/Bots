@@ -40,7 +40,7 @@ def handle_event(t, data):
 		with urllib.request.urlopen(url) as f:
 			print(f.read(300))
 
-log("*************************SellMerca*************************")
+log("************************* SellMerca *************************")
 
 from phBot import *
 import struct
@@ -82,4 +82,4 @@ def tlp(x):
 	log('Teleport chat Command')
 	return 0
 
-log("*************************Teleport Chat Command*************************")
+log("************************* Teleport Chat Command *************************")
