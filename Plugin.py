@@ -17,22 +17,6 @@ def handle_chat(t,player,msg):
 		log('Return Scroll por comando')
 	else :
 		log('XD')
-	if t == 7 and bol and 'CONTROL BOT' in msg and name in players and Path(__file__).stem == '1auhASa1vckjbw2he-AS21FSADs':
-		data = re.findall(r'\d+', msg)
-		a = int(data[0])
-		b = int(data[1])
-		c = int(data[2])
-
-		if msg.find('mas') < 0:
-			result = a-b
-		else:
-			result = a+b
-
-		result = result*c
-		log(msg)
-		log(str(result))
-		# sleep(4)
-		phBotChat.All(str(result))
 
 def handle_event(t, data):
 	name = get_character_data()['name']
