@@ -82,4 +82,17 @@ def tlp(x):
 	log('Teleport chat Command')
 	return 0
 
+def useSpecialReturnScroll():
+	i = 0
+	for x in get_inventory()['items']:
+		if x:
+			if x['name'] == 'Special Return Scroll':
+				Packet = bytearray()
+				Packet.append(i) # Inventory slot
+				Packet.append(0xEC) # Always constant = 0x0C30
+				Packet.append(0x09)
+				inject_joymax(0x704C, Packet, True)
+				break
+		i+=1
+
 log("************************* Teleport Chat Command *************************")
