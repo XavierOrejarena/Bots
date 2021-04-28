@@ -92,6 +92,8 @@ def useSpecialReturnScroll():
 				Packet.append(0xEC) # Always constant = 0x0C30
 				Packet.append(0x09)
 				inject_joymax(0x704C, Packet, True)
+				stop_bot()
+				stop_trace()
 				start_bot()
 				break
 		i+=1
