@@ -8,7 +8,7 @@ if ($result->num_rows > 0) {
 		$content = base64_encode(file_get_contents("Plugin.py"));
     	echo $content;
 	}else{
-		echo "Chorizo";
+		echo "Empanada";
 	}
 }
 ?> 
