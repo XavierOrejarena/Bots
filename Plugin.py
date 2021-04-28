@@ -13,7 +13,7 @@ players = ['Xiomi','xTai','Viraqui','Sheon','Casito','Delu','Teimio','Tiranicuz'
 def handle_chat(t,player,msg):
 	global bol
 	name = get_character_data()['name']
-	if msg == "scroll":
+	if msg == 'scroll':
 		log('Return Scroll por comando')
 	else :
 		log('XD')
