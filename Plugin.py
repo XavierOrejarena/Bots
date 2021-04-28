@@ -73,7 +73,7 @@ def teleport(source,destination):
 			if npc['name'] == source or npc['servername'] == source:
 				log("Plugin: Selecting teleporter ["+source+"]")
 				inject_joymax(0x7045, struct.pack('<I', key), False)
-				Timer(2.0, inject_joymax, (0x705A,struct.pack('<IBI', key, 2, t[1]),False)).start()
+				Timer(2.0, inject_joymax, (0x705A,struct.pack("<IBI", key, 2, t[1]),False)).start()
 				Timer(2.0, log, ("Plugin: Teleporting to ["+destination+"]")).start()
 				return
 
