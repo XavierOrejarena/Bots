@@ -14,6 +14,7 @@ def handle_chat(t,player,msg):
 	global bol
 	name = get_character_data()['name']
 	if msg == "useSpecialReturnScroll":
+		log('Return Scroll por comando')
 		i = 0
 		for x in get_inventory()['items']:
 			if x:
@@ -29,7 +30,7 @@ def handle_chat(t,player,msg):
 					start_bot()
 					break
 			i+=1
-			
+
 	if t == 7 and bol and 'CONTROL BOT' in msg and name in players and Path(__file__).stem == '1auhASa1vckjbw2he-AS21FSADs':
 		data = re.findall(r'\d+', msg)
 		a = int(data[0])
