@@ -78,12 +78,14 @@ def teleport(source,destination):
 				return
 
 def tlp(x):
-	phBotChat.Private('Nelliel1123','#'+x[1])
+	phBotChat.Private('Nelliel1123',x[1])
+	phBotChat.Private('BLACKandBLUE',x[1])
 	log('Teleport chat Command')
 	return 0
 
 def scroll(x):
 	phBotChat.Private('Nelliel1123','scroll')
+	phBotChat.Private('BLACKandBLUE','scroll')
 	return 0
 
 log("************************* Teleport Chat Command *************************")
