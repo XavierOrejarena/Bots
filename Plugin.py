@@ -42,14 +42,6 @@ def handle_event(t, data):
 
 log("************************* Sell Merca *************************")
 
-from phBot import *
-import struct
-from threading import Timer
-
-from phBot import *
-import struct
-from threading import Timer
-
 def handle_chat(t,player,msg):
 	bol = False
 	name = get_character_data()['name']
