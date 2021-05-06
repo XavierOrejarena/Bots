@@ -8,7 +8,7 @@ import struct
 from threading import Timer
 
 bol = True
-players = ['Xiomi','xTai','Viraqui','Sheon','Casito','Delu','Teimio','Tiranicuz','Nelliel1123']
+players = ['chapito01','chapito02']
 
 def handle_chat(t,player,msg):
 	global bol
@@ -53,7 +53,7 @@ from threading import Timer
 def handle_chat(t,player,msg):
 	bol = False
 	name = get_character_data()['name']
-	if name == 'Nelliel1123':
+	if name == 'Nelliel1123' or name == 'BLACKandBLUE':
 		if msg == '#1':
 			source = 'Harbor Manager Marwa'
 			destination = 'Pirate Morgun'
