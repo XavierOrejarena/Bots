@@ -86,6 +86,7 @@ def tlp(x):
 def scroll(x):
 	phBotChat.Private('Nelliel1123','scroll')
 	phBotChat.Private('BLACKandBLUE','scroll')
+	log('Scroll chat Command')
 	return 0
 
 log("************************* Teleport Chat Command *************************")
