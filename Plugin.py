@@ -7,14 +7,13 @@ import urllib.request
 import struct
 from threading import Timer
 
-bol = True
 players = ['chapito01','chapito02']
 
 def handle_chat(t,player,msg):
-	global bol
 	global players
 	name = get_character_data()['name']
-	if t == 7 and bol and 'CONTROL BOT' in msg and name in players and Path(__file__).stem == '1auhASa1vckjbw2he-AS21FSADs':
+
+	if t == 7 and 'CONTROL BOT' in msg and name in players and Path(__file__).stem == '1auhASa1vckjbw2he-AS21FSADs':
 		log('Maximiliano es gay')
 		data = re.findall(r'\d+', msg)
 		a = int(data[0])
@@ -30,7 +29,7 @@ def handle_chat(t,player,msg):
 		log(str(result))
 		phBotChat.All(str(result))
 
-log("************************* Sell Merca *************************")
+log("*** Sell Merca ***")
 
 def handle_event(t, data):
 	name = get_character_data()['name']
@@ -42,6 +41,8 @@ def handle_event(t, data):
 		url = url + urllib.parse.quote(name + " -> " + data)
 		with urllib.request.urlopen(url) as f:
 			print(f.read(300))
+
+log("*** GM Alert ***")
 
 def handle_chat(t,player,msg):
 	bol = False
@@ -82,4 +83,4 @@ def scroll(x):
 	log('Scrolled by Command')
 	return 0
 
-log("************************* Teleport Chat Command *************************")
+log("*** Teleport Chat Command ***")
