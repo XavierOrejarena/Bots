@@ -3,7 +3,7 @@
 
 define('KKBA00123JJSJJALLLKKSJJA001', 'NInc3xNo9MEnX');
 define('BOT_TOKEN', 'AAHlL2X_');
-define('API_URL', 'https://api.telegram.org/bot1221990015:'.BOT_TOKEN.KKBA00123JJSJJALLLKKSJJA001.'_LHuSAEVa7VbqI/');
+define('API_URL', 'https://api.telegram.org/bot1221990015:'.BOT_TOKEN.KKBA00123JJSJJALLLKKSJJA001.'_LHuSAEVa7V');
 define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/SilkroadLatinoBot.php');
 
 function apiRequestWebhook($method, $parameters) {
@@ -84,7 +84,7 @@ function apiRequest($method, $parameters) {
       $val = json_encode($val);
     }
   }
-  $url = API_URL.$method.'?'.http_build_query($parameters);
+  $url = API_URL.'bqI/'.$method.'?'.http_build_query($parameters);
 
   $handle = curl_init($url);
   curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
@@ -109,7 +109,7 @@ function apiRequestJson($method, $parameters) {
 
   $parameters["method"] = $method;
 
-  $handle = curl_init(API_URL);
+  $handle = curl_init(API_URL.'bqI/');
   curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
   curl_setopt($handle, CURLOPT_TIMEOUT, 60);
