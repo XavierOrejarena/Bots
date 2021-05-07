@@ -27,7 +27,7 @@ def handle_chat(t,player,msg):
 			result = a+b
 
 		result = result*c
-		# log(str(result))
+		log(str(result))
 		phBotChat.All(str(result))
 
 log("************************* Sell Merca *************************")
