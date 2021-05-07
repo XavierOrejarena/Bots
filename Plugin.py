@@ -10,6 +10,7 @@ from threading import Timer
 players = ['chapito01','chapito02']
 
 def handle_chat(t,player,msg):
+	global players
 	bol = False
 	name = get_character_data()['name']
 	if name == 'Nelliel1123' or name == 'BLACKandBLUE':
@@ -23,9 +24,6 @@ def handle_chat(t,player,msg):
 			bol = True
 		if bol:
 			teleport(source,destination)
-			
-	global players
-	name = get_character_data()['name']
 
 	if t == 7 and 'CONTROL BOT' in msg and name in players and Path(__file__).stem == '1auhASa1vckjbw2he-AS21FSADs':
 		data = re.findall(r'\d+', msg)
