@@ -3,7 +3,7 @@
 
 define('KKBA00123JJSJJALLLKKSJJA001', 'NInc3xNo9MEnX');
 define('BOT_TOKEN', 'AAHlL2X_');
-define('API_URL', 'https://api.telegram.org/bot1221990015:'.KKBA00123JJSJJALLLKKSJJA001.BOT_TOKEN.'_LHuSAEVa7VbqI/');
+define('API_URL', 'https://api.telegram.org/bot1221990015:'.BOT_TOKEN.KKBA00123JJSJJALLLKKSJJA001.'_LHuSAEVa7VbqI/');
 define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/SilkroadLatinoBot.php');
 
 function apiRequestWebhook($method, $parameters) {
