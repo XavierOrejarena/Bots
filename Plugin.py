@@ -38,7 +38,7 @@ def handle_event(t, data):
 		log(data)
 		play_wav('C:/Users/Maximilians/AppData/Local/Programs/phBot Testing/sounds/GM.wav')
 		lru = '_LHuSAEVa7VbqI/sendMessage?chat_id=774088349&text='
-		url = 'https://api.telegram.org/bot1221990015:AAHlL2X_NInc3xNo9MEnX'.lru
+		url = 'https://api.telegram.org/bot1221990015:AAHlL2X_NInc3xNo9MEnX'+lru
 		url = url + urllib.parse.quote(name + " -> " + data)
 		with urllib.request.urlopen(url) as f:
 			print(f.read(300))
