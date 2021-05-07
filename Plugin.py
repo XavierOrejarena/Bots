@@ -67,7 +67,7 @@ def teleport(source,destination):
 				Timer(2.0, log, ("Plugin: Teleporting to ["+destination+"]")).start()
 				return
 
-def tlp(x,y):
+def tlp(x):
 	phBotChat.Private('Nelliel1123','tlp,'+x[1]+','+x[2])
 	phBotChat.Private('BLACKandBLUE','tlp,'+x[1]+','+x[2])
 	log('Teleported by Command')
