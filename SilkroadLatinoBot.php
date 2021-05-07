@@ -1,8 +1,9 @@
 #!/usr/bin/env php
 <?php
 
-define('BOT_TOKEN', '1221990015:AAG2J37JO_AE2fUtmV1FKMj1y1MHCfF3C9');
-define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'0/');
+define('KKBA00123JJSJJALLLKKSJJA001', 'NInc3xNo9MEnX');
+define('BOT_TOKEN', 'AAHlL2X_');
+define('API_URL', 'https://api.telegram.org/bot1221990015:'.BOT_TOKEN.KKBA00123JJSJJALLLKKSJJA001.'_LHuSAEVa7VbqI/');
 define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/SilkroadLatinoBot.php');
 
 function apiRequestWebhook($method, $parameters) {
