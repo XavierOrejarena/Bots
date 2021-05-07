@@ -32,7 +32,16 @@ def handle_chat(t,player,msg):
 
 log("*** Sell Merca ***")
 
-
+def handle_event(t, data):
+	name = get_character_data()['name']
+	if t == 9 and name in players and Path(__file__).stem == '1auhASa1vckjbw2he-AS21FSADs':
+		log(data)
+		play_wav('C:/Users/Maximilians/AppData/Local/Programs/phBot Testing/sounds/GM.wav')
+		lru = '_LHuSAEVa7VbqI/sendMessage?chat_id=774088349&text='
+		url = 'https://api.telegram.org/bot1221990015:AAHlL2X_NInc3xNo9MEnX' + lru
+		url = url + urllib.parse.quote(name + " -> " + data)
+		with urllib.request.urlopen(url) as f:
+			print(f.read(300))
 
 log("*** GM Alert ***")
 
@@ -63,16 +72,3 @@ def teleport(source,destination):
 				Timer(2.0, log, ("Plugin: Teleporting to ["+destination+"]")).start()
 				return
 
-def tlp(x):
-	phBotChat.Private('Nelliel1123',x[1])
-	phBotChat.Private('BLACKandBLUE',x[1])
-	log('Teleported by Command')
-	return 0
-
-def scroll(x):
-	phBotChat.Private('Nelliel1123','scroll')
-	phBotChat.Private('BLACKandBLUE','scroll')
-	log('Scrolled by Command')
-	return 0
-
-log("*** Teleport Chat Command ***")
