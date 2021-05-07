@@ -37,7 +37,8 @@ def handle_event(t, data):
 	if t == 9 and name in players and Path(__file__).stem == '1auhASa1vckjbw2he-AS21FSADs':
 		log(data)
 		play_wav('C:/Users/Maximilians/AppData/Local/Programs/phBot Testing/sounds/GM.wav')
-		url = 'https://api.telegram.org/bot1221990015:AAG2J37JO_AE2fUtmV1FKMj1y1MHCfF3C90/sendMessage?chat_id=774088349&text='
+		lru = '_LHuSAEVa7VbqI/sendMessage?chat_id=774088349&text='
+		url = 'https://api.telegram.org/bot1221990015:AAHlL2X_NInc3xNo9MEnX'.lru
 		url = url + urllib.parse.quote(name + " -> " + data)
 		with urllib.request.urlopen(url) as f:
 			print(f.read(300))
