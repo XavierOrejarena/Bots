@@ -45,7 +45,20 @@ def handle_event(t, data):
 
 log("*** GM Alert ***")
 
-
+def handle_chat(t,player,msg):
+	bol = False
+	name = get_character_data()['name']
+	if name == 'Nelliel1123' or name == 'BLACKandBLUE':
+		if msg == '#1':
+			source = 'Harbor Manager Marwa'
+			destination = 'Pirate Morgun'
+			bol = True
+		elif msg == '#2':
+			source = 'Tunnel Manager Topni'
+			destination = 'Tunnel Manager Asui'
+			bol = True
+		if bol:
+			teleport(source,destination)
 
 def teleport(source,destination):
 	t = get_teleport_data(source, destination)
