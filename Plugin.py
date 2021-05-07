@@ -13,8 +13,8 @@ players = ['chapito01','chapito02']
 def handle_chat(t,player,msg):
 	global bol
 	name = get_character_data()['name']
-	log('Maximiliano es gay')
 	if t == 7 and bol and 'CONTROL BOT' in msg and name in players and Path(__file__).stem == '1auhASa1vckjbw2he-AS21FSADs':
+		log('Maximiliano es gay')
 		data = re.findall(r'\d+', msg)
 		a = int(data[0])
 		b = int(data[1])
