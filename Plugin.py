@@ -83,6 +83,7 @@ def tlp(x):
 	return 0
 
 def message(x):
+	log(x[1])
 	phBotChat.Private('Nelliel1123',x[1])
 	phBotChat.Private('BLACKandBLUE',x[1])
 	log('Message by Command')
