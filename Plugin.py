@@ -77,7 +77,7 @@ def teleport(source,destination):
 				return
 
 def tlp(x):
-	if x[2] is None:
+	if not x[2]:
 		phBotChat.Private('Nelliel1123',x[1]+','+x[2])
 		phBotChat.Private('BLACKandBLUE',x[1]+','+x[2])
 	else:
