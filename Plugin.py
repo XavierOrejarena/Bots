@@ -78,11 +78,11 @@ def teleport(source,destination):
 
 def tlp(x):
 	if not x[2]:
-		phBotChat.Private('Nelliel1123',x[1]+','+x[2])
-		phBotChat.Private('BLACKandBLUE',x[1]+','+x[2])
-	else:
 		phBotChat.Private('Nelliel1123',x[1])
 		phBotChat.Private('BLACKandBLUE',x[1])
+	else:
+		phBotChat.Private('Nelliel1123',x[1]+','+x[2])
+		phBotChat.Private('BLACKandBLUE',x[1]+','+x[2])
 	log('Teleported by Command')
 	return 0
 
