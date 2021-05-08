@@ -80,7 +80,7 @@ def tlp(x):
 	if x[2] is None:
 		phBotChat.Private('Nelliel1123',x[1]+','+x[2])
 		phBotChat.Private('BLACKandBLUE',x[1]+','+x[2])
-	elif:
+	else:
 		phBotChat.Private('Nelliel1123',x[1])
 		phBotChat.Private('BLACKandBLUE',x[1])
 	log('Teleported by Command')
