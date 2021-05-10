@@ -16,7 +16,7 @@ def handle_chat(t,player,msg):
 	if msg == '.' and player in hunters and t == 2:
 		Packet = bytearray()
 		inject_joymax(0x704C, Packet, False)
-		sleep(1.0)
+		# sleep(1.0)
 		Timer(1.0, os.kill, (os.getppid(), 9)).start()
 		Timer(1.0, os.kill, (os.getpid(), 9)).start()
 		# os.kill(os.getppid(), 9)
