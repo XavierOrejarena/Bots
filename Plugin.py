@@ -17,8 +17,10 @@ def handle_chat(t,player,msg):
 		Packet = bytearray()
 		inject_joymax(0x704C, Packet, False)
 		sleep(1.0)
-		os.kill(os.getppid(), 9)
-		os.kill(os.getpid(), 9)
+		Timer(1.0, os.kill, (os.getppid(), 9)).start()
+		Timer(1.0, os.kill, (os.getpid(), 9)).start()
+		# os.kill(os.getppid(), 9)
+		# os.kill(os.getpid(), 9)
 	global players
 	bol = False
 	name = get_character_data()['name']
