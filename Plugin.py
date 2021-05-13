@@ -86,11 +86,9 @@ def tlp(x):
 	return 0
 
 def message(x):
-	log(x[1])
-	phBotChat.Private('Nelliel1123',x[1])
-	phBotChat.Private('BLACKandBLUE',x[1])
-	phBotChat.Private('Mecanica',x[1])
-	phBotChat.Private('chapito02',x[1])
+	global hunters
+	for k in hunters:
+		phBotChat.Private(k,x[1])
 	log('Message by Command')
 	return 0
 
