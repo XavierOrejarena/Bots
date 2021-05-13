@@ -9,7 +9,7 @@ from threading import Timer
 import os
 
 players = ['chapito01','chapito02','chapito03','chapito03']
-hunters = ['Nelliel1123','BLACKandBLUE','Mecanica','_Sophiia_','Mysophiia']
+hunters = ['Nelliel1123','BLACKandBLUE','Mecanica','_Sophiia_','Mysophiia','chapito02']
 
 def handle_chat(t,player,msg):
 	global hunters
