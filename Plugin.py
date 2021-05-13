@@ -9,7 +9,7 @@ from threading import Timer
 import os
 
 players = ['chapito01','chapito02','chapito03','chapito03']
-hunters = ['Nelliel1123','BLACKandBLUE','Mecanica','_Sophiia_','Mysophiia','chapito02']
+hunters = ['Nelliel1123','BLACKandBLUE','_Sophiia_','Mysophiia','chapito02']
 
 def handle_chat(t,player,msg):
 	global hunters
@@ -82,6 +82,11 @@ def tlp(x):
 	global hunters
 	for k in hunters:
 		phBotChat.Private(k,x[1]+','+x[2])
+	log('Teleported by Command')
+	return 0
+
+def msg(x,y):
+	phBotChat.Private(x,y)
 	log('Teleported by Command')
 	return 0
 
