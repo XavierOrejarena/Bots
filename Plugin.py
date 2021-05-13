@@ -85,8 +85,8 @@ def tlp(x):
 	log('Teleported by Command')
 	return 0
 
-def msg(x,y):
-	phBotChat.Private(x,y)
+def msg(x):
+	phBotChat.Private(x[1],x[2])
 	log('Teleported by Command')
 	return 0
 
