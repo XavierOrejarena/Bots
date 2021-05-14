@@ -80,8 +80,7 @@ def teleport(source,destination):
 
 def tlp(x):
 	global hunters
-	for k in hunters:
-		phBotChat.Private(k,x[1]+','+x[2])
+	phBotChat.Private(x[1],x[2]+','+x[3])
 	log('Teleported by Command')
 	return 0
 
