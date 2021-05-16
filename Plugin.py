@@ -7,6 +7,17 @@ import urllib.request
 import struct
 from threading import Timer
 import os
+import QtBind
+
+gui = QtBind.init(__name__,'Super DC')
+button1 = QtBind.createButton(gui, 'dc_traders', 'DC ALL TRADERS', 100, 120)
+
+def dc_traders():
+	phBotChat.Private('chapito01','.')
+	phBotChat.Private('chapito02','.')
+	phBotChat.Private('chapito03','.')
+	phBotChat.Private('chapito04','.')
+
 
 players = ['chapito01','chapito02','chapito03','chapito04']
 hunters = ['chapito01','chapito02','chapito03','chapito04','Nelliel1123','BLACKandBLUE','_Sophiia_','Mysophiia','chapito02']
