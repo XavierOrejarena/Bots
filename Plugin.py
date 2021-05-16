@@ -15,6 +15,10 @@ def handle_chat(t,player,msg):
 	global hunters
 	name = get_character_data()['name']
 	if msg == '.' and player in hunters and t == 2:
+		if name == 'chapito01':
+			phBotChat.Private('chapito02','.')
+			phBotChat.Private('chapito03','.')
+			phBotChat.Private('chapito04','.')
 		Packet = bytearray()
 		inject_joymax(0x704C, Packet, False)
 		# sleep(1.0)
@@ -22,10 +26,6 @@ def handle_chat(t,player,msg):
 		Timer(1.0, os.kill, (os.getpid(), 9)).start()
 		# os.kill(os.getppid(), 9)
 		# os.kill(os.getpid(), 9)
-	if msg == '.' and player in hunters and t == 2 and name == 'chapito01':
-		phBotChat.Private('chapito02','.')
-		phBotChat.Private('chapito03','.')
-		phBotChat.Private('chapito04','.')
 	global players
 	bol = False
 	if name == 'Nelliel1123' or name == 'BLACKandBLUE':
