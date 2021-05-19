@@ -29,7 +29,7 @@
 
     $airtm = file_get_contents("https://rates.airtm.com/");
     preg_match_all('/class="rate--general"/', $airtm, $matches, PREG_OFFSET_CAPTURE);
-    $airtm = substr($airtm, $matches[0][0][1]+22, 6);
+    $airtm = substr($airtm, $matches[0][0][1]+22, 7);
     $airtm = number_format($airtm, 2, ',', '.');
 
     $sql = "UPDATE Dolar SET TASA='$airtm' WHERE id='$i'";
