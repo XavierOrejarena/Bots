@@ -13,17 +13,17 @@
         echo "Error updating record: " . $link->error;
     }
 
-    $i++;
+    // $i++;
 
-    $bolivarcucuta = json_decode(utf8_encode(file_get_contents("https://s3.amazonaws.com/frontcloud/data.json")))->USDVEF->dolarcucuta_efe;
-    $bolivarcucuta = number_format($bolivarcucuta, 2, ',', '.');
+    // $bolivarcucuta = json_decode(utf8_encode(file_get_contents("https://s3.amazonaws.com/frontcloud/data.json")))->USDVEF->dolarcucuta_efe;
+    // $bolivarcucuta = number_format($bolivarcucuta, 2, ',', '.');
 
-    $sql = "UPDATE Dolar SET TASA='$bolivarcucuta' WHERE id='$i'";
-    if ($link->query($sql) === TRUE) {
-        echo "Record updated successfully\n";
-    } else {
-        echo "Error updating record: " . $link->error;
-    }
+    // $sql = "UPDATE Dolar SET TASA='$bolivarcucuta' WHERE id='$i'";
+    // if ($link->query($sql) === TRUE) {
+    //     echo "Record updated successfully\n";
+    // } else {
+    //     echo "Error updating record: " . $link->error;
+    // }
 
     $i++;
 
