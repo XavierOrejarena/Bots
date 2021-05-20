@@ -43,7 +43,7 @@
 
     $dicom = file_get_contents("http://www.bcv.org.ve");
     preg_match_all('/USD/', $dicom, $matches, PREG_OFFSET_CAPTURE);
-    $dicom = substr($dicom, $matches[0][0][1]+85, 10);
+    $dicom = substr($dicom, $matches[0][0][1]+85, 12);
     // $dicom = number_format($dicom, 2, ',', '.');
 
     $sql = "UPDATE Dolar SET TASA='$dicom' WHERE id='$i'";
