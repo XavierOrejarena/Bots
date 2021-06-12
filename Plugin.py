@@ -123,7 +123,5 @@ search = True
 def event_loop():
 	global search
 	if search:
-		players = get_players()
-		if players:
-			log('xd')
+		log(str(get_players()))
 	search = False
