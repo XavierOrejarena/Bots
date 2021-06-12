@@ -123,9 +123,9 @@ search = True
 def event_loop():
 	global search
 	if search:
-		log('xd')
 		players = get_players()
 		if players:
+			log('xd')
 			for playerID in players:
-				log(str(playerID))
+				log(str(playerID['name']))
 	search = False
