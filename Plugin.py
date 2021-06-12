@@ -121,12 +121,11 @@ log("*** Teleport Chat Command ***")
 
 search = True
 def event_loop():
+	log('xd')
 	global search
 	if search:
 		players = get_players()
 		if players:
 			for playerID in players:
-				if players[playerID]["name"] == 'xNeonwarr':
-					log(players[playerID]["name"])
-					play_wav('C:/Users/Maximilians/AppData/Local/Programs/phBot Testing/sounds/GM.wav')
-	search = not search
+				log(players[playerID]["name"])
+	search = False
