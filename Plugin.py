@@ -127,5 +127,5 @@ def event_loop():
 		if players:
 			log('xd')
 			for playerID in players:
-				log(str(playerID['name']))
+				log(players[playerID]["name"])
 	search = False
