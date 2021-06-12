@@ -121,9 +121,9 @@ log("*** Teleport Chat Command ***")
 
 search = True
 def event_loop():
-	log('xd')
 	global search
 	if search:
+		log('xd')
 		players = get_players()
 		if players:
 			for playerID in players:
