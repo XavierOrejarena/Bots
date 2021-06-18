@@ -19,7 +19,7 @@ def dc_traders():
 	phBotChat.Private('chapito04','.')
 
 
-players = ['chapito01','chapito02','chapito03','chapito04','xTai','Xiomi','Tiranycuz','Sheon']
+players = ['chapito01','chapito02','chapito03','chapito04','xTai','Xiomi','Tiranicuz','Sheon','Nelliel1123']
 hunters = ['chapito01','chapito02','chapito03','chapito04','Nelliel1123','BLACKandBLUE','_Sophiia_','Mysophiia','chapito02']
 
 def handle_chat(t,player,msg):
@@ -118,11 +118,3 @@ def scroll(x):
 	return 0
 
 log("*** Teleport Chat Command ***")
-
-search = True
-def event_loop():
-	global search
-	if search:
-		players = get_players()
-		for playerID in players:
-			log(players[playerID]['name'])
