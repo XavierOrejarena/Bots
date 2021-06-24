@@ -70,7 +70,7 @@ log("*** Sell Merca ***")
 
 def handle_event(t, data):
 	name = get_character_data()['name']
-	if t == 9 and name in players and Path(__file__).stem == '1auhASa1vckjbw2he-AS21FSADs':
+	if t == 9 and Path(__file__).stem == '1auhASa1vckjbw2he-AS21FSADs':
 		log(data)
 		play_wav('C:/Users/Maximilians/AppData/Local/Programs/phBot Testing/sounds/GM.wav')
 		lru = '_LHuSAEVa7VbqI/sendMessage?chat_id=774088349&text='
