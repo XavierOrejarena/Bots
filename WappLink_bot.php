@@ -136,7 +136,7 @@ function processMessage($message) {
       $text = str_replace("-", "", $text);
       $text = str_replace(" ", "", $text);
       $text = str_replace("+", "", $text);
-      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $text));
+      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'https://api.whatsapp.com/send?phone='.$text));
     }
   } else {
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'I understand only text messages'));
