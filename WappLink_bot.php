@@ -129,13 +129,16 @@ function processMessage($message) {
     $text = $message['text'];
 
     if (strpos($text, "/start") === 0) {
-      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Solo enviame un nro de tlf y yo eliminaré espacios, guiones paréntesis y signo de suma: ()- +'));
+      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Solo enviame un nro de tlf y yo eliminaré espacios, guiones paréntesis y signo de suma: ()- +
+      
+      Si eres de Venezuela reemplaza el 0 por 58'));
     } else {
       $text = str_replace("(", "", $text);
       $text = str_replace(")", "", $text);
       $text = str_replace("-", "", $text);
       $text = str_replace(" ", "", $text);
       $text = str_replace("+", "", $text);
+      $text = str_replace("0", "58", $text);
       apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'https://api.whatsapp.com/send?phone='.$text));
     }
   } else {
