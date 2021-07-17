@@ -138,8 +138,10 @@ function processMessage($message) {
       $text = str_replace("-", "", $text);
       $text = str_replace(" ", "", $text);
       $text = str_replace("+", "", $text);
-      $text = str_replace("0", "58", $text);
-      
+      if ($text[0] == '0') {
+        $text = '58'.substr($text, 1);
+      }
+
       apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'https://api.whatsapp.com/send?phone='.$text));
     }
   } else {
