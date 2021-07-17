@@ -1,9 +1,10 @@
 #!/usr/bin/env php
 <?php
-
-define('BOT_TOKEN', '1269735857:AAGhTR4HFBPf2gLvSf80dEjOB4f54UEnt5I');
-define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.'/');
-define('WEBHOOK_URL', 'https://xavier.mer.web.ve/Gastodaybot.php');
+//@ppvzlabot
+define('BOT_TOKEN', '1945917541:');
+define('TOKEN_BOT', 'AAFsRSvHp5prwyDWFkF_OljkZ2yT2sog9Zc');
+define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.TOKEN_BOT.'/');
+define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/VenezuelaCodebot.php');
 
 function apiRequestWebhook($method, $parameters) {
   if (!is_string($method)) {
@@ -20,8 +21,11 @@ function apiRequestWebhook($method, $parameters) {
 
   $parameters["method"] = $method;
 
-  header("Content-Type: application/json");
-  echo json_encode($parameters);
+  $payload = json_encode($parameters);
+  header('Content-Type: application/json');
+  header('Content-Length: '.strlen($payload));
+  echo $payload;
+
   return true;
 }
 
@@ -125,21 +129,20 @@ function processMessage($message) {
     $text = $message['text'];
 
     if (strpos($text, "/start") === 0) {
-      apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'Hello', 'reply_markup' => array(
-        'keyboard' => array(array('Hello', 'Hi')),
-        'one_time_keyboard' => true,
-        'resize_keyboard' => true)));
-    } else if ($text === "Hello" || $text === "Hi") {
-      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Nice to meet you'));
-    } else if (strpos($text, "/stop") === 0) {
-      // stop now
+      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Go!'));
     } else {
-      apiRequestWebhook("sendMessage", array('chat_id' => $chat_id, "reply_to_message_id" => $message_id, "text" => 'Cool'));
+      include "connect.php";
+      $SYMBOL = $text[0];
+      $COD = $text[1];
+      $sql = "SELECT $SYMBOL FROM venezuela WHERE id = $COD";
+      $result = $link->query($sql);
+      apiRequestWebhook("sendMessage", array('chat_id' => $chat_id, "reply_to_message_id" => $message_id, "text" => $result));
     }
   } else {
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'I understand only text messages'));
   }
 }
+
 
 
 if (php_sapi_name() == 'cli') {
