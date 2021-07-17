@@ -131,12 +131,12 @@ function processMessage($message) {
     if (strpos($text, "/start") === 0) {
       apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Go!'));
     } else {
-      // include "connect.php";
+      include "connect.php";
       $SYMBOL = $text[0];
       $COD = $text[1];
       // $sql = "SELECT $SYMBOL FROM venezuela WHERE id = $COD";
       // $result = $link->query($sql);
-      apiRequestWebhook("sendMessage", array('chat_id' => $chat_id, "reply_to_message_id" => $message_id, "text" => $text));
+      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $SYMBOL));
     }
   } else {
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'I understand only text messages'));
