@@ -136,7 +136,7 @@ function processMessage($message) {
       $COD = $text[1];
       $sql = "SELECT $SYMBOL FROM venezuela WHERE id = $COD";
       $result = $link->query($sql);
-      $value = $result->fetch_row()[0] ?? false;
+      $value = $result->fetch_row()[0];
       apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $value));
     }
   } else {
