@@ -129,7 +129,7 @@ function processMessage($message) {
     $text = $message['text'];
 
     if (strpos($text, "/start") === 0) {
-      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Go!'));
+      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Solo enviame un nro de tlf y yo eliminaré espacios, guiones paréntesis y signo de suma: ()- +'));
     } else {
       $text = str_replace("(", "", $text);
       $text = str_replace(")", "", $text);
