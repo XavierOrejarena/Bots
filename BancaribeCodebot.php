@@ -124,12 +124,12 @@ function processMessage($message) {
   // process incoming message
   $message_id = $message['message_id'];
   $chat_id = $message['chat']['id'];
-  if (isset($message['text'])) {
+  if ($chat_id == 149273661) {
     // incoming text message
     $text = $message['text'];
 
     if (strpos($text, "/start") === 0) {
-      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $chat_id));
+      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Go!'));
     } else {
       include "connect.php";
       $SYMBOL = strtoupper($text[0]);
