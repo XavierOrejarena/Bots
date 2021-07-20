@@ -129,7 +129,7 @@ function processMessage($message) {
     $text = $message['text'];
 
     if (strpos($text, "/start") === 0) {
-      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Go!'));
+      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $chat_id));
     } else {
       include "connect.php";
       $SYMBOL = strtoupper($text[0]);
