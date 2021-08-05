@@ -51,7 +51,7 @@ def handle_chat(t,player,msg):
 		if bol:
 			teleport(source,destination)
 
-	if t == 7 and 'CONTROL BOT' in msg and name in players and Path(__file__).stem == '1auhASa1vckjbw2he-AS21FSADs':
+	if t == 7 and 'CONTROL BOT' in msg and Path(__file__).stem == '1auhASa1vckjbw2he-AS21FSADs':
 		data = re.findall(r'\d+', msg)
 		a = int(data[0])
 		b = int(data[1])
