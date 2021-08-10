@@ -204,9 +204,7 @@ function processMessage($message) {
     $text = $message['text'];
 
     if(strtolower($text) == "/start") {
-    sendMessage($chat_id, "Hello ".$message['from']['first_name'].", to use the bot just type the token you want to know the price, for example: /BTCUSDT
-
-If you want to know all token listed in Binance.com just type /coins");
+    sendMessage($chat_id, "Hello ".$message['from']['first_name'].", to use the bot just type the token you want to know the price, for example: /BTCUSDT");
 
     }
     elseif (strtolower($text) == "/help") {
@@ -216,22 +214,20 @@ If you want to know all token listed in Binance.com just type /coins");
 
 "/MYALARMS to manage all your alarms.
 
-"/COINS" to list all the Binance pairs.
-
 Upper case and lower case does not matter.
 
 Any bug or suggestion @XavierOrejarena');
     }
     elseif (strtolower($text) == "/coins") {
-        $Binance = json_decode(file_get_contents("https://api.binance.com//api/v1/exchangeInfo"), true);
-        $coins = "";
-        // for ($i= 0; $i < sizeof($Binance['symbols']) ; $i++) { 
-        for ($i= 0; $i < 20 ; $i++) { 
-            $coin = $Binance['symbols'][$i]['symbol'];
-            $coins = $coins."
-/".$coin;
-        }
-        sendMessage($chat_id, $coins);
+//         $Binance = json_decode(file_get_contents("https://api.binance.com//api/v1/exchangeInfo"), true);
+//         $coins = "";
+//         // for ($i= 0; $i < sizeof($Binance['symbols']) ; $i++) { 
+//         for ($i= 0; $i < 20 ; $i++) { 
+//             $coin = $Binance['symbols'][$i]['symbol'];
+//             $coins = $coins."
+// /".$coin;
+//         }
+//         sendMessage($chat_id, $coins);
     }
     elseif (strtolower(substr($text, 0, 6)) == '/alarm') {
         $text = str_word_count($text, 1, "0123456789.");
