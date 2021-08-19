@@ -139,7 +139,7 @@ function processMessage($message) {
       // $value = $result->fetch_row()[0];
       $fecha = date('z');
       $fecha = $fecha%5+7;
-      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $fecha.'-'.$fecha+1));
+      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $fecha.'-'.($fecha+1)));
     }
   } else {
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'I understand only text messages'));
