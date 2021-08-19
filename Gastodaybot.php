@@ -137,7 +137,7 @@ function processMessage($message) {
       // $sql = "SELECT $SYMBOL FROM dolar WHERE id = $COD";
       // $result = $link->query($sql);
       // $value = $result->fetch_row()[0];
-      $fecha = date('d');
+      $fecha = date('D');
       // $fecha = (int)$fecha;
       apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $fecha));
     }
