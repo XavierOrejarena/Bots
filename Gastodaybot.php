@@ -138,7 +138,7 @@ function processMessage($message) {
       // $result = $link->query($sql);
       // $value = $result->fetch_row()[0];
       $fecha = date('z');
-      $fecha = $fecha%10;
+      $fecha = $fecha%10+8;
       apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $fecha.'-'.($fecha+1)));
     }
   } else {
