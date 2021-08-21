@@ -31,7 +31,7 @@ body {
   <table class="table table-bordered table-inverse table-hover">
     <thead>
       <tr>
-        <th class="text-center">#</th>
+        <!-- <th class="text-center">#</th> -->
         <th class="text-center">First Name</th>
         <th class="text-center">Last Name</th>
         <th class="text-center">@</th>
@@ -47,7 +47,7 @@ body {
       while($row = mysqli_fetch_array($result)){
           $count++;
           echo "<tr>";
-          echo '<td class="text-center">'.$count."</td>";
+          // echo '<td class="text-center">'.$count."</td>";
           echo '<td class="text-center">'.substr($row['first_name'],0, 15)."</td>";
           echo '<td class="text-center">'.substr($row['last_name'],0, 15)."</td>";
           echo '<td class="text-center">'.substr($row['username'],0, 15)."</td>";
