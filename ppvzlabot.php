@@ -237,72 +237,74 @@ function processMessage($message) {
     $chat_id = $message['chat']['id'];
     $text = $message['text'];
 
-    sendMessage($chat_id, $message['from']['id']);
+    // sendMessage($chat_id, $message['from']['id']);
 
     if (in_array($message['from']['id'], $malaPaga)) {
-        sendMessage($chat_id, "Hola");
+        sendMessage($chat_id, "Hola ".$message['from']['first_name'].", comunícate con @OrejarenaXavier para activar el bot.");
+    }else {
+        if(strtolower($text) == "/start") {
+        sendMessage($chat_id, "Hola ".$message['from']['first_name'].", solo escribe Monto*Tasa y espera el resultado.");
+    
+        } else {
+                $text   = str_replace('x','*',$text);
+                $text   = str_replace('X','*',$text);
+                $USD = str_word_count($text, 1, '0123456789.')[0];
+                $BS = str_word_count($text, 1, '0123456789.')[1];
+                $signal = str_word_count($text, 1, '*xX/\def')[0];
+                $BS = pow(1000,strlen(stristr($BS, 'k')))*(real)$BS;
+    
+                if ($signal == 'x' || $signal == '*' || is_null($signal) || $signal == 'X') {
+                    $receive = round(($USD-$USD*(0.054)-0.3), 2);
+                    if ((fmod($receive*$BS,    1) !== 0.00) ) {
+                        $Total = number_format($receive*$BS, 2, ',', '');
+                    }else {
+                        $Total = number_format($receive*$BS, 2, ',', '');
+                    }
+                    $sent = round((100*($USD+0.3)/94.6),2);
+                    if ($BS) {
+                        $msg1 = "Envían: $USD $
+    Llegarán: $receive $
+    \xE2\x98\x95: $BS Bs.
+    Total: ".$Total." Bs.";
+                        if ((fmod($USD*$BS,    1) !== 0.00) ) {
+                            $Total = number_format($USD*$BS, 2, ',', '');
+                        }else {
+                            $Total = number_format($USD*$BS, 2, ',', '');
+                        }
+                        $msg2 = "Envían: $sent $
+    Llegarán: $USD $
+    \xE2\x98\x95: $BS Bs.
+    Total: ".$Total." Bs.";
+                    } else {
+                        $msg1 = "Envían: $USD $
+    Llegarán: $receive $";
+                        $msg2 = "Envían: $sent $
+    Llegarán: $USD $";
+                    }
+                }
+                else if ($signal == "/" || $signal == '\\') {
+                    $sent = round((100*(($USD/$BS)+0.3)/94.6),2);
+                    $receive = round($USD/$BS,2);
+                    if ((fmod($USD,    1) !== 0.00) ) {
+                        $Total = number_format($USD, 2, ',', '');
+                    }else {
+                        $Total = number_format($USD, 2, ',', '');
+                    }
+                    $msg1 = "Envían: $sent $
+    Llegarán: $receive $
+    \xE2\x98\x95: $BS Bs.
+    Total: ".$Total." Bs.";
+                }
+    
+                sendMessage($chat_id, $msg1);
+                if ($msg2 !== NULL) {
+                    sendMessage($chat_id, $msg2);
+                }
+                
+            }
+
     }
 
-    if(strtolower($text) == "/start") {
-    sendMessage($chat_id, "Hola ".$message['from']['first_name'].", solo escribe Monto*Tasa y espera el resultado.");
-
-    } else {
-            $text   = str_replace('x','*',$text);
-            $text   = str_replace('X','*',$text);
-            $USD = str_word_count($text, 1, '0123456789.')[0];
-            $BS = str_word_count($text, 1, '0123456789.')[1];
-            $signal = str_word_count($text, 1, '*xX/\def')[0];
-            $BS = pow(1000,strlen(stristr($BS, 'k')))*(real)$BS;
-
-            if ($signal == 'x' || $signal == '*' || is_null($signal) || $signal == 'X') {
-                $receive = round(($USD-$USD*(0.054)-0.3), 2);
-                if ((fmod($receive*$BS,    1) !== 0.00) ) {
-                    $Total = number_format($receive*$BS, 2, ',', '');
-                }else {
-                    $Total = number_format($receive*$BS, 2, ',', '');
-                }
-                $sent = round((100*($USD+0.3)/94.6),2);
-                if ($BS) {
-                    $msg1 = "Envían: $USD $
-Llegarán: $receive $
-\xE2\x98\x95: $BS Bs.
-Total: ".$Total." Bs.";
-                    if ((fmod($USD*$BS,    1) !== 0.00) ) {
-                        $Total = number_format($USD*$BS, 2, ',', '');
-                    }else {
-                        $Total = number_format($USD*$BS, 2, ',', '');
-                    }
-                    $msg2 = "Envían: $sent $
-Llegarán: $USD $
-\xE2\x98\x95: $BS Bs.
-Total: ".$Total." Bs.";
-                } else {
-                    $msg1 = "Envían: $USD $
-Llegarán: $receive $";
-                    $msg2 = "Envían: $sent $
-Llegarán: $USD $";
-                }
-            }
-            else if ($signal == "/" || $signal == '\\') {
-                $sent = round((100*(($USD/$BS)+0.3)/94.6),2);
-                $receive = round($USD/$BS,2);
-                if ((fmod($USD,    1) !== 0.00) ) {
-                    $Total = number_format($USD, 2, ',', '');
-                }else {
-                    $Total = number_format($USD, 2, ',', '');
-                }
-                $msg1 = "Envían: $sent $
-Llegarán: $receive $
-\xE2\x98\x95: $BS Bs.
-Total: ".$Total." Bs.";
-            }
-
-            sendMessage($chat_id, $msg1);
-            if ($msg2 !== NULL) {
-                sendMessage($chat_id, $msg2);
-            }
-            
-        }
 }
 
 $content = file_get_contents('php://input');
