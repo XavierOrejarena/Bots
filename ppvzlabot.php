@@ -6,7 +6,7 @@ define('TOKEN_BOT', 'AAFvG-HB0EGdd3BQQW6d-ADu7FAIsFnAe9I');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.TOKEN_BOT.'/');
 define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/ppvzlabot.php');
 
-$malaPaga = array(149273661);
+$malaPaga = array(149273661,440413394);
 
 function gen_uuid() {
     return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
@@ -263,9 +263,9 @@ function processMessage($message) {
                     $sent = round((100*($USD+0.3)/94.6),2);
                     if ($BS) {
                         $msg1 = "Envían: $USD $
-    Llegarán: $receive $
+Llegarán: $receive $
     \xE2\x98\x95: $BS Bs.
-    Total: ".$Total." Bs.";
+Total: ".$Total." Bs.";
                         if ((fmod($USD*$BS,    1) !== 0.00) ) {
                             $Total = number_format($USD*$BS, 2, ',', '');
                         }else {
@@ -277,9 +277,9 @@ function processMessage($message) {
     Total: ".$Total." Bs.";
                     } else {
                         $msg1 = "Envían: $USD $
-    Llegarán: $receive $";
+Llegarán: $receive $";
                         $msg2 = "Envían: $sent $
-    Llegarán: $USD $";
+Llegarán: $USD $";
                     }
                 }
                 else if ($signal == "/" || $signal == '\\') {
@@ -291,9 +291,9 @@ function processMessage($message) {
                         $Total = number_format($USD, 2, ',', '');
                     }
                     $msg1 = "Envían: $sent $
-    Llegarán: $receive $
+Llegarán: $receive $
     \xE2\x98\x95: $BS Bs.
-    Total: ".$Total." Bs.";
+Total: ".$Total." Bs.";
                 }
     
                 sendMessage($chat_id, $msg1);
