@@ -236,7 +236,7 @@ function processMessage($message) {
     $message_id = $message['message_id'];
     $chat_id = $message['chat']['id'];
     $text = $message['text'];
-    $id = $message['from']['id'];
+    $id = strval($message['from']['id']);
 
     // sendMessage($chat_id, $message['from']['id']);
 
