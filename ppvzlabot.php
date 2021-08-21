@@ -239,7 +239,7 @@ function processMessage($message) {
 
     // sendMessage($chat_id, $message['from']['id']);
 
-    if (in_array($message['from']['id'], $malaPaga)) {
+    if (!in_array($message['from']['id'], $malaPaga)) {
         sendMessage($chat_id, "Hola ".$message['from']['first_name'].", comunícate con @OrejarenaXavier para activar el bot.");
     }else {
         if(strtolower($text) == "/start") {
