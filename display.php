@@ -36,6 +36,7 @@ body {
         <th class="text-center">Last Name</th>
         <th class="text-center">@</th>
         <th class="text-center">Last use</th>
+        <th class="text-center">ID</th>
       </tr>
     </thead>
     <tbody>
@@ -51,6 +52,7 @@ body {
           echo '<td class="text-center">'.substr($row['last_name'],0, 15)."</td>";
           echo '<td class="text-center">'.substr($row['username'],0, 15)."</td>";
           echo '<td class="text-center">'.substr($row['reg_date'],0, 10)."</td>";
+          echo '<td class="text-center">'.substr($row['chat_id'],0, 10)."</td>";
           echo "</tr>";
       }
       ?>
