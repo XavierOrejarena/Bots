@@ -240,7 +240,7 @@ function processMessage($message) {
     sendMessage($chat_id, $message['from']['id']);
 
     if (in_array($message['from']['id'], $malaPaga)) {
-        sendMessage($chat_id, "Hola ".$message['from']['first_name'].", comunicate con @OrejarenaXavier para pagar la suscripción del bot.");
+        sendMessage($chat_id, "Hola");
     }
 
     if(strtolower($text) == "/start") {
