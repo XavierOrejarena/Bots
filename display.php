@@ -42,7 +42,7 @@ body {
     <tbody>
       <?php 
 
-      $result = mysqli_query($link, "SELECT first_name, last_name, username, reg_date FROM users ORDER BY ppvzlabot DESC");
+      $result = mysqli_query($link, "SELECT first_name, last_name, username, reg_date, chat_id FROM users ORDER BY ppvzlabot DESC");
       $count = 0;
       while($row = mysqli_fetch_array($result)){
           $count++;
@@ -52,7 +52,7 @@ body {
           echo '<td class="text-center">'.substr($row['last_name'],0, 15)."</td>";
           echo '<td class="text-center">'.substr($row['username'],0, 15)."</td>";
           echo '<td class="text-center">'.substr($row['reg_date'],0, 10)."</td>";
-          echo '<td class="text-center">'.substr($row['AudioWordBot'],0, 20)."</td>";
+          echo '<td class="text-center">'.substr($row['chat_id'],0, 20)."</td>";
           echo "</tr>";
       }
       ?>
