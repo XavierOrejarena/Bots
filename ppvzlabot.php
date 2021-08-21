@@ -6,7 +6,7 @@ define('TOKEN_BOT', 'AAFvG-HB0EGdd3BQQW6d-ADu7FAIsFnAe9I');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.TOKEN_BOT.'/');
 define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/ppvzlabot.php');
 
-$malaPaga[] = array();
+$malaPaga = array(149273661);
 
 function gen_uuid() {
     return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
@@ -236,6 +236,10 @@ function processMessage($message) {
     $message_id = $message['message_id'];
     $chat_id = $message['chat']['id'];
     $text = $message['text'];
+
+    if (in_array($chat_id, $malaPaga)) {
+        sendMessage($chat_id, "Hola ".$message['from']['first_name'].", comunicate con @OrejarenaXavier para pagar la suscripción del bot.");
+    }
 
     if(strtolower($text) == "/start") {
     sendMessage($chat_id, "Hola ".$message['from']['first_name'].", solo escribe Monto*Tasa y espera el resultado.");
