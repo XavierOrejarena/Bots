@@ -6,8 +6,6 @@ define('TOKEN_BOT', 'AAFvG-HB0EGdd3BQQW6d-ADu7FAIsFnAe9I');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.TOKEN_BOT.'/');
 define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/ppvzlabot.php');
 
-$malaPaga = array(149273661,440413394);
-
 function gen_uuid() {
     return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
         mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
@@ -232,14 +230,17 @@ if (php_sapi_name() == 'cli') {
     exit;
 }
 
+$malaPaga = array(149273661,440413394);
+
 function processMessage($message) {
     $message_id = $message['message_id'];
     $chat_id = $message['chat']['id'];
     $text = $message['text'];
+    $id = $message['from']['id'];
 
     // sendMessage($chat_id, $message['from']['id']);
 
-    if (in_array($message['from']['id'], $malaPaga)) {
+    if (in_array($id, $malaPaga)) {
         sendMessage($chat_id, "Hola ".$message['from']['first_name'].", comunícate con @OrejarenaXavier para activar el bot.");
     }else {
         if(strtolower($text) == "/start") {
