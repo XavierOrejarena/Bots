@@ -237,7 +237,7 @@ function processMessage($message) {
     $chat_id = $message['chat']['id'];
     $text = $message['text'];
 
-    if (in_array($chat_id, $malaPaga)) {
+    if (in_array($message['from']['id'], $malaPaga)) {
         sendMessage($chat_id, "Hola ".$message['from']['first_name'].", comunicate con @OrejarenaXavier para pagar la suscripción del bot.");
     }
 
