@@ -230,7 +230,7 @@ if (php_sapi_name() == 'cli') {
     exit;
 }
 
-$malaPaga = array('149273661','440413394');
+$malaPaga = array('Xavier','440413394');
 
 function processMessage($message) {
     $message_id = $message['message_id'];
@@ -240,7 +240,7 @@ function processMessage($message) {
 
     // sendMessage($chat_id, $message['from']['id']);
 
-    if (in_array($id, $malaPaga)) {
+    if (in_array($message['from']['first_name'], $malaPaga)) {
         sendMessage($chat_id, "Hola ".$message['from']['first_name'].", comunícate con @OrejarenaXavier para activar el bot.");
     }else {
         if(strtolower($text) == "/start") {
