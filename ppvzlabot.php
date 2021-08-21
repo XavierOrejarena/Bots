@@ -6,6 +6,8 @@ define('TOKEN_BOT', 'AAFvG-HB0EGdd3BQQW6d-ADu7FAIsFnAe9I');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.TOKEN_BOT.'/');
 define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/ppvzlabot.php');
 
+$malaPaga[] = array('XavierOrejarena','PedroGaona','coalitionrecord','nehomarpalma','PerezP','Daniel_Gut77','Carola87','Jonacosta','jesusalbertof','AlexaMariaNaza','alejol','iliasapia','Fjch66','PersaudSamueL','zhandrik','yassenca','AsDinero','ArepaLover')
+
 function gen_uuid() {
     return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
         mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),

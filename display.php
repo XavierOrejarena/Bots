@@ -48,11 +48,11 @@ body {
           $count++;
           echo "<tr>";
           echo '<td class="text-center">'.$count."</td>";
-          echo '<td class="text-center">'.substr($row['first_name'], 0, 15)."</td>";
+          echo '<td class="text-center">'.substr($row['first_name'],0, 15)."</td>";
           echo '<td class="text-center">'.substr($row['last_name'],0, 15)."</td>";
           echo '<td class="text-center">'.substr($row['username'],0, 15)."</td>";
           echo '<td class="text-center">'.substr($row['reg_date'],0, 10)."</td>";
-          echo '<td class="text-center">'.substr($row['chat_id'],0, 10)."</td>";
+          echo '<td class="text-center">'.substr($row['chat_id'],0, 20)."</td>";
           echo "</tr>";
       }
       ?>
