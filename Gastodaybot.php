@@ -124,24 +124,19 @@ function processMessage($message) {
   // process incoming message
   $message_id = $message['message_id'];
   $chat_id = $message['chat']['id'];
-  if ($chat_id == 149273661) {
-    // incoming text message
-    $text = $message['text'];
+  $text = $message['text'];
 
-    if (strpos($text, "/start") === 0) {
-      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Go!'));
-    } else {
-      $fecha = date('z');
-      $fecha = ($fecha*2+7)%10;
-      if ($fecha == 9) {
-        $fecha2 = 0;
-      } else {
-        $fecha2 = $fecha+1;
-      }
-      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $fecha.'-'.($fecha2)));
-    }
+  if (strpos($text, "/start") === 0) {
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Go!'));
   } else {
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'I understand only text messages'));
+    $fecha = date('z');
+    $fecha = ($fecha*2+7)%10;
+    if ($fecha == 9) {
+      $fecha2 = 0;
+    } else {
+      $fecha2 = $fecha+1;
+    }
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $fecha.'-'.($fecha2)));
   }
 }
 
