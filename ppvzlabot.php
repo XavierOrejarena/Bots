@@ -273,9 +273,9 @@ Total: ".$Total." Bs.";
                             $Total = number_format($USD*$BS, 2, ',', '');
                         }
                         $msg2 = "Envían: $sent $
-    Llegarán: $USD $
-    \xE2\x98\x95: $BS Bs.
-    Total: ".$Total." Bs.";
+Llegarán: $USD $
+\xE2\x98\x95: $BS Bs.
+Total: ".$Total." Bs.";
                     } else {
                         $msg1 = "Envían: $USD $
 Llegarán: $receive $";
