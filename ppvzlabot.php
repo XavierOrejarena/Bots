@@ -265,7 +265,7 @@ function processMessage($message) {
                     if ($BS) {
                         $msg1 = "Envían: $USD $
 Llegarán: $receive $
-    \xE2\x98\x95: $BS Bs.
+\xE2\x98\x95: $BS Bs.
 Total: ".$Total." Bs.";
                         if ((fmod($USD*$BS,    1) !== 0.00) ) {
                             $Total = number_format($USD*$BS, 2, ',', '');
