@@ -78,6 +78,11 @@ def handle_event(t, data):
 		url = url + urllib.parse.quote(name + " -> " + data)
 		with urllib.request.urlopen(url) as f:
 			print(f.read(300))
+		Packet = bytearray()
+		inject_joymax(0x704C, Packet, False)
+		# sleep(1.0)
+		Timer(1.0, os.kill, (os.getppid(), 9)).start()
+		Timer(1.0, os.kill, (os.getpid(), 9)).start()
 
 log("*** GM Alert ***")
 
