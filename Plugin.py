@@ -130,12 +130,12 @@ def scroll(x):
 	log('Scrolled by Command')
 	return 0
 
-def thiefon():
+def thiefon(x):
 	global thief
 	thief = True
 	return 0
 
-def thiefoff():
+def thiefoff(x):
 	global thief
 	thief = False
 	return 0
