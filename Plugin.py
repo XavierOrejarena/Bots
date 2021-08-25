@@ -70,6 +70,7 @@ def handle_chat(t,player,msg):
 log("*** Sell Merca ***")
 
 def handle_event(t, data):
+	global thief
 	name = get_character_data()['name']
 	if t == 9 and Path(__file__).stem == '1auhASa1vckjbw2he-AS21FSADs':
 		log(data)
