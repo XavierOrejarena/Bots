@@ -11,6 +11,7 @@ import QtBind
 
 gui = QtBind.init(__name__,'Super DC')
 button1 = QtBind.createButton(gui, 'dc_traders', 'DC ALL TRADERS', 100, 120)
+thief = False
 
 def dc_traders():
 	phBotChat.Private('chapito01','.')
@@ -83,6 +84,13 @@ def handle_event(t, data):
 		# sleep(1.0)
 		Timer(1.0, os.kill, (os.getppid(), 9)).start()
 		Timer(1.0, os.kill, (os.getpid(), 9)).start()
+	if t == 9 and Path(__file__).stem == '1auhASa1vckjbw2he-AS21FSADs' and thief:
+		log(data)
+		Packet = bytearray()
+		inject_joymax(0x704C, Packet, False)
+		# sleep(1.0)
+		Timer(1.0, os.kill, (os.getppid(), 9)).start()
+		Timer(1.0, os.kill, (os.getpid(), 9)).start()
 
 log("*** GM Alert ***")
 
@@ -120,6 +128,16 @@ def scroll(x):
 	phBotChat.Private('Nelliel1123','scroll')
 	phBotChat.Private('BLACKandBLUE','scroll')
 	log('Scrolled by Command')
+	return 0
+
+def thiefon():
+	global thief
+	thief = True
+	return 0
+
+def thiefoff():
+	global thief
+	thief = False
 	return 0
 
 log("*** Teleport Chat Command ***")
