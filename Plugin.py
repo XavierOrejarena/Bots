@@ -134,7 +134,7 @@ def scroll(x):
 def thiefon(x):
 	global thief
 	thief = True
-	log((str)thief)
+	log(str(thief))
 	return 0
 
 def thiefoff(x):
