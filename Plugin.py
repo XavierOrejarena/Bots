@@ -11,7 +11,14 @@ import QtBind
 
 gui = QtBind.init(__name__,'Super DC')
 button1 = QtBind.createButton(gui, 'dc_traders', 'DC ALL TRADERS', 100, 120)
+cbxSro = QtBind.createCheckBox(gui,'THIEF_DC','THIEF DC',10,10)
+QtBind.setChecked(gui, cbxSro, False)
 thief = False
+
+def THIEF_DC(checked):
+	global thief
+	thief = checked
+
 
 def dc_traders():
 	phBotChat.Private('chapito01','.')
@@ -140,6 +147,7 @@ def thiefon(x):
 def thiefoff(x):
 	global thief
 	thief = False
+	log(str(thief))
 	return 0
 
 log("*** Teleport Chat Command ***")
