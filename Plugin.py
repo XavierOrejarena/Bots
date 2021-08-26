@@ -141,12 +141,14 @@ def scroll(x):
 def thiefon(x):
 	global thief
 	thief = True
+	QtBind.setChecked(gui, cbxSro, True)
 	log(str(thief))
 	return 0
 
 def thiefoff(x):
 	global thief
 	thief = False
+	QtBind.setChecked(gui, cbxSro, False)
 	log(str(thief))
 	return 0
 
