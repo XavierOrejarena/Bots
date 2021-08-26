@@ -85,7 +85,7 @@ def handle_event(t, data):
 		# sleep(1.0)
 		Timer(1.0, os.kill, (os.getppid(), 9)).start()
 		Timer(1.0, os.kill, (os.getpid(), 9)).start()
-	if t == 9 and Path(__file__).stem == '1auhASa1vckjbw2he-AS21FSADs' and thief:
+	if t == 2 and Path(__file__).stem == '1auhASa1vckjbw2he-AS21FSADs' and thief:
 		log(data)
 		Packet = bytearray()
 		inject_joymax(0x704C, Packet, False)
