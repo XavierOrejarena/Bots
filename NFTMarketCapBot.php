@@ -188,7 +188,7 @@ function processQuery($inline_query)
   $TOKEN = strtoupper($text[0]);
   
   $results = [];
-  $ThePrice = getPrice("WANA");
+  $ThePrice = 1.1;
   $TheSymbol = "WANA";
   if (empty($inline_query['query'])) {
       $results[] = [
@@ -198,7 +198,7 @@ function processQuery($inline_query)
           'message_text' => "/$TheSymbol ".round($ThePrice),
           'description'  => $ThePrice,
       ];
-      $ThePrice = getPrice("PVU");
+      $ThePrice = 1.2;
       $TheSymbol = "PVU";
       $results[] =[
           'type'         => 'article',
