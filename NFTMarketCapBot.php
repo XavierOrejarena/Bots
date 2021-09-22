@@ -195,8 +195,8 @@ if (!$update) {
 function processQuery($inline_query)
 { 
   $results = [];
-  $ThePrice = getPrice("WANA");
-  $TheSymbol = "WANA";
+  $TheSymbol = "AXS";
+  $ThePrice = getPrice($TheSymbol);
   if (empty($inline_query['query'])) {
       $results[] = [
           'type'         => 'article',
@@ -205,8 +205,35 @@ function processQuery($inline_query)
           'message_text' => "/$TheSymbol $ThePrice",
           'description'  => $ThePrice,
       ];
-      $ThePrice = getPrice("PVU");
       $TheSymbol = "PVU";
+      $ThePrice = getPrice($TheSymbol);
+      $results[] =[
+          'type'         => 'article',
+          'id'           => gen_uuid(),
+          'title'        => $TheSymbol,
+          'message_text' => "/$TheSymbol $ThePrice",
+          'description'  => $ThePrice,
+      ];
+      $TheSymbol = "WANA";
+      $ThePrice = getPrice($TheSymbol);
+      $results[] =[
+          'type'         => 'article',
+          'id'           => gen_uuid(),
+          'title'        => $TheSymbol,
+          'message_text' => "/$TheSymbol $ThePrice",
+          'description'  => $ThePrice,
+      ];
+      $TheSymbol = "CCAR";
+      $ThePrice = getPrice($TheSymbol);
+      $results[] =[
+          'type'         => 'article',
+          'id'           => gen_uuid(),
+          'title'        => $TheSymbol,
+          'message_text' => "/$TheSymbol $ThePrice",
+          'description'  => $ThePrice,
+      ];
+      $TheSymbol = "WANA";
+      $ThePrice = getPrice($TheSymbol);
       $results[] =[
           'type'         => 'article',
           'id'           => gen_uuid(),
@@ -215,6 +242,8 @@ function processQuery($inline_query)
           'description'  => $ThePrice,
       ];
     }
+
+    
     apiRequest('answerInlineQuery', array('inline_query_id' => $inline_query['id'], 'results' => $results, 'cache_time' => 0));
 }
 
