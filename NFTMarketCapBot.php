@@ -155,7 +155,7 @@ function processMessage($message) {
   curl_close($curl); // Close request
 
   if (strpos($text, "/start") === 0) {
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $price));
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "Los tokens NFT más populares son /PVU /WANA /CCAR /AXS"));
   } else {
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $price));
   }
