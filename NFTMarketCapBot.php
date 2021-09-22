@@ -6,6 +6,16 @@ define('TOKEN_BOT', 'AAH7PDt8WvzpPhbZ-Abh3PbaCfuUBcyGBCY');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.TOKEN_BOT.'/');
 define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/NFTMarketCapBot.php');
 
+function gen_uuid() {
+  return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+      mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
+      mt_rand( 0, 0xffff ),
+      mt_rand( 0, 0x0fff ) | 0x4000,
+      mt_rand( 0, 0x3fff ) | 0x8000,
+      mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
+  );
+}
+
 function apiRequestWebhook($method, $parameters) {
   if (!is_string($method)) {
     error_log("Method name must be a string\n");
