@@ -128,7 +128,7 @@ function processMessage($message) {
 
   $url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest';
   $parameters = [
-    'symbol' => 'WANA'
+    'symbol' => $text
   ];
 
   $headers = [
@@ -155,7 +155,7 @@ function processMessage($message) {
   if (strpos($text, "/start") === 0) {
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $price));
   } else {
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $fecha.'-'.($fecha2)));
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $price));
   }
 }
 
