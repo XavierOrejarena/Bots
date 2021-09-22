@@ -202,7 +202,7 @@ function processQuery($inline_query)
           'type'         => 'article',
           'id'           => gen_uuid(),
           'title'        => $TheSymbol,
-          'message_text' => "/$TheSymbol ".round($ThePrice),
+          'message_text' => "/$TheSymbol $ThePrice",
           'description'  => $ThePrice,
       ];
       $ThePrice = 1.2;
@@ -211,7 +211,7 @@ function processQuery($inline_query)
           'type'         => 'article',
           'id'           => gen_uuid(),
           'title'        => $TheSymbol,
-          'message_text' => "/$TheSymbol ".round($ThePrice),
+          'message_text' => "/$TheSymbol $ThePrice",
           'description'  => $ThePrice,
       ];
     }
