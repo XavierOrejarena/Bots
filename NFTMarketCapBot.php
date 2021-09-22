@@ -149,7 +149,7 @@ function processMessage($message) {
 
   $response = curl_exec($curl); // Send the request, save the response
   $data = json_decode($response);
-  $price = (round($data->data->$text->quote->USD->price,2)); // print json decoded response
+  $price = (round($data->data->WANA->quote->USD->price,2)); // print json decoded response
   curl_close($curl); // Close request
 
   if (strpos($text, "/start") === 0) {
