@@ -209,6 +209,7 @@ function processQuery($inline_query)
       ];
 
 }
+}
 
 if (isset($update['inline_query'])) {
   processQuery($update['inline_query']);
