@@ -125,10 +125,12 @@ function processMessage($message) {
   $message_id = $message['message_id'];
   $chat_id = $message['chat']['id'];
   $text = $message['text'];
+  $text = str_word_count($text, 1, "0123456789.");
+  $TOKEN = strtoupper($text[1]);
 
   $url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest';
   $parameters = [
-    'symbol' => $text
+    'symbol' => $TOKEN
   ];
 
   $headers = [
@@ -149,7 +151,7 @@ function processMessage($message) {
 
   $response = curl_exec($curl); // Send the request, save the response
   $data = json_decode($response);
-  $price = (round($data->data->$text->quote->USD->price,2)); // print json decoded response
+  $price = (round($data->data->$TOKEN->quote->USD->price,2)); // print json decoded response
   curl_close($curl); // Close request
 
   if (strpos($text, "/start") === 0) {
