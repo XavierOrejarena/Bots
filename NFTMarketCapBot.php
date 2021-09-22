@@ -195,7 +195,7 @@ if (!$update) {
 function processQuery($inline_query)
 { 
   $results = [];
-  $ThePrice = 1.1;
+  $ThePrice = getPrice("WANA");
   $TheSymbol = "WANA";
   if (empty($inline_query['query'])) {
       $results[] = [
@@ -205,7 +205,7 @@ function processQuery($inline_query)
           'message_text' => "/$TheSymbol $ThePrice",
           'description'  => $ThePrice,
       ];
-      $ThePrice = 1.2;
+      $ThePrice = getPrice("PVU");
       $TheSymbol = "PVU";
       $results[] =[
           'type'         => 'article',
