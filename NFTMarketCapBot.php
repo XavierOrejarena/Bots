@@ -126,7 +126,7 @@ function processMessage($message) {
   $chat_id = $message['chat']['id'];
   $text = $message['text'];
   $text = str_word_count($text, 1, "0123456789.");
-  $TOKEN = strtoupper($text[1]);
+  $TOKEN = strtoupper($text[0]);
 
   $url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest';
   $parameters = [
