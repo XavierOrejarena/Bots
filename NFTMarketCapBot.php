@@ -204,7 +204,7 @@ function processQuery($inline_query)
           'type'         => 'article',
           'id'           => gen_uuid(),
           'title'        => $TheSymbol,
-          'message_text' => "$TheSymbol ".$ThePrice,
+          'message_text' => "/$TheSymbol ".round($ThePrice),
           'description'  => $ThePrice,
       ];
     }
