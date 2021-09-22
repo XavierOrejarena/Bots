@@ -128,7 +128,11 @@ function processMessage($message) {
   
 
   if (strpos($text, "/start") === 0) {
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "Los tokens NFT más populares son /PVU /WANA /CCAR /AXS"));
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "Los tokens NFT más populares son 
+    /PVU 
+    /WANA 
+    /CCAR 
+    /AXS"));
   } else {
     $text = str_word_count($text, 1, "0123456789.");
     $TOKEN = strtoupper($text[0]);
