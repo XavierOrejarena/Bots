@@ -153,7 +153,7 @@ function processMessage($message) {
   curl_close($curl); // Close request
 
   if (strpos($text, "/start") === 0) {
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Go!'));
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $price));
   } else {
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $fecha.'-'.($fecha2)));
   }
