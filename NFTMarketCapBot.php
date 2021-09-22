@@ -226,7 +226,7 @@ if (isset($update["message"])) {
   processMessage($update["message"]);
 }
 
-function getPrice($Token) {
+function getPrice($TOKEN) {
   $url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest';
   $parameters = [
     'symbol' => $TOKEN
