@@ -162,7 +162,7 @@ function processMessage($message) {
     $data = json_decode($response);
     $price = (round($data->data->$TOKEN->quote->USD->price,2)); // print json decoded response
     curl_close($curl); // Close request
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $price));
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "/".$TOKEN." ".$price));
   }
 }
 
