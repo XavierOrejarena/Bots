@@ -207,8 +207,8 @@ function processQuery($inline_query)
           'message_text' => "$TheSymbol ".$ThePrice,
           'description'  => $ThePrice,
       ];
-
-}
+    }
+    apiRequest('answerInlineQuery', array('inline_query_id' => $inline_query['id'], 'results' => $results, 'cache_time' => 0));
 }
 
 if (isset($update['inline_query'])) {
