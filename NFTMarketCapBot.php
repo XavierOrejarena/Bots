@@ -143,7 +143,8 @@ function processMessage($message) {
 /PVU 
 /WANA 
 /CCAR"));
-  } else {
+  } else if(strpos(strtoupper($text), "/WANA") === 0){
+
     $text = str_word_count($text, 1, "0123456789.");
     $TOKEN = strtoupper($text[0]);
 
