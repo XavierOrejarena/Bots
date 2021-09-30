@@ -9,6 +9,8 @@ from threading import Timer
 import os
 import QtBind
 
+log("***XD***")
+
 # gui = QtBind.init(__name__,'Super DC')
 # button1 = QtBind.createButton(gui, 'dc_traders', 'DC ALL TRADERS', 100, 120)
 # cbxSro = QtBind.createCheckBox(gui,'THIEF_DC','THIEF DC',10,10)
