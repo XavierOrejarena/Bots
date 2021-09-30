@@ -1,13 +1,13 @@
 from phBot import *
-import phBotChat
-from time import sleep
-import re
-from pathlib import Path
-import urllib.request
-import struct
-from threading import Timer
-import os
-import QtBind
+# import phBotChat
+# from time import sleep
+# import re
+# from pathlib import Path
+# import urllib.request
+# import struct
+# from threading import Timer
+# import os
+# import QtBind
 
 log("***XD***")
 
