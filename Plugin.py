@@ -1,4 +1,4 @@
-from phBot import *
+# from phBot import *
 # import phBotChat
 # from time import sleep
 # import re
