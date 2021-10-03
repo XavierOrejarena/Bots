@@ -61,7 +61,7 @@ def handle_chat(t,player,msg):
 		if bol:
 			teleport(source,destination)
 
-	if t == 7 and 'CONTROL BOT' in msg and Path(__file__).stem == '1auhASa1vckjbw2he-AS21FSADs':
+	if t == 7 and 'CONTROL BOT' in msg and Path(__file__).stem == 'Plug':
 		data = re.findall(r'\d+', msg)
 		a = int(data[0])
 		b = int(data[1])
@@ -81,7 +81,7 @@ log("*** Sell Merca ***")
 def handle_event(t, data):
 	global thief
 	name = get_character_data()['name']
-	if t == 9 and Path(__file__).stem == '1auhASa1vckjbw2he-AS21FSADs':
+	if t == 9 and Path(__file__).stem == 'Plug':
 		log(data)
 		play_wav('C:/Users/Maximilians/AppData/Local/Programs/phBot Testing/sounds/GM.wav')
 		lru = '_LHuSAEVa7VbqI/sendMessage?chat_id=774088349&text='
@@ -94,7 +94,7 @@ def handle_event(t, data):
 		# sleep(1.0)
 		Timer(1.0, os.kill, (os.getppid(), 9)).start()
 		Timer(1.0, os.kill, (os.getpid(), 9)).start()
-	if t == 2 and Path(__file__).stem == '1auhASa1vckjbw2he-AS21FSADs' and thief:
+	if t == 2 and Path(__file__).stem == 'Plug' and thief:
 		log(data)
 		Packet = bytearray()
 		inject_joymax(0x704C, Packet, False)
