@@ -20,7 +20,7 @@ $result = $link->query($sql);
 
 if ($result->num_rows > 0) {
     $OldText = mysqli_fetch_assoc($result)['tasa'];
-	if ($text != $OldText && strlen($text) > 11) {
+	if ($text != $OldText && strlen($text) > 3) {
 		if (!preg_match('/[a-zA-Z]/', $text)) {
 			$sql = "UPDATE DICOM SET tasa = '$text' WHERE id = 1";
 			if ($link->query($sql) === TRUE) {
