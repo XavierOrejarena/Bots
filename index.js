@@ -1,5 +1,6 @@
 
-const puppeteer = require('puppeteer');
+// const puppeteer = require('../sample_puppeteer/puppeteer');
+const puppeteer = require('../sample_puppeteer/node_modules/puppeteer');
 
 (async () => {
   const browser = await puppeteer.launch({ headless: true,args: ['--no-sandbox'] });
