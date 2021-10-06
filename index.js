@@ -14,7 +14,7 @@ const puppeteer = require('../sample_puppeteer/node_modules/puppeteer');
   const fs = require('fs');
   fs.unlinkSync('file.json')
   fs.appendFileSync('file.json', "[");
-  for (var i = 1; i < 15001; i++) {
+  for (var i = 13423; i < 13445; i++) {
     await page.goto('https://marketplace.wanakafarm.com/#/lands/'+i.toString());
     await page.waitFor(3000);
     let data = await page.evaluate(() => {
@@ -65,7 +65,7 @@ const puppeteer = require('../sample_puppeteer/node_modules/puppeteer');
     
     // lands.push(data);
     
-    if (i < 15000) {
+    if (i < 13444) {
       fs.appendFileSync('file.json', JSON.stringify(data)+",");
     } else {
       fs.appendFileSync('file.json', JSON.stringify(data));
