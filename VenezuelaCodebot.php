@@ -132,8 +132,8 @@ function processMessage($message) {
       apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Go!'));
     } else {
       include "connect.php";
-      $SYMBOL = preg_replace("/[^a-zA-Z0-9]+/", "", $text);
-      $COD = $text[1];
+      $SYMBOL = preg_replace("/[^a-zA-Z]+/", "", $text);
+      $COD = preg_replace("/[^0-9]+/", "", $text);
       $sql = "SELECT $SYMBOL FROM venezuela WHERE id = $COD";
       $result = $link->query($sql);
       $value = $result->fetch_row()[0];
