@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php
-//@VenezuelaCodebot
+//@Venezuela2Codebot
 define('BOT_TOKEN', '1954716913:');
 define('TOKEN_BOT', 'AAHB7KoPyC7vbRev3hdYp2-ckMwDPCub0Is');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.TOKEN_BOT.'/');
