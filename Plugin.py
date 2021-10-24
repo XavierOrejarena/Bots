@@ -13,9 +13,10 @@ log("***XD***")
 
 gui = QtBind.init(__name__,'Super DC')
 button1 = QtBind.createButton(gui, 'dc_traders', 'DC ALL TRADERS', 100, 120)
-cbxSro = QtBind.createCheckBox(gui,'THIEF_DC','THIEF DC',10,10)
-cbxSro = QtBind.createCheckBox(gui,'HUNTER_DC','HUNTER DC',10,40)
-QtBind.setChecked(gui, cbxSro, False)
+cbxSro0 = QtBind.createCheckBox(gui,'THIEF_DC','THIEF DC',10,10)
+cbxSro1 = QtBind.createCheckBox(gui,'HUNTER_DC','HUNTER DC',10,40)
+QtBind.setChecked(gui, cbxSro0, True)
+QtBind.setChecked(gui, cbxSro1, True)
 thief = True
 hunter = True
 def THIEF_DC(checked):
