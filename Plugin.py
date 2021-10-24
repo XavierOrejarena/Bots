@@ -87,7 +87,7 @@ log("*** Sell Merca ***")
 def handle_event(t, data):
 	global thief
 	name = get_character_data()['name']
-	if t == 9 and Path(__file__).stem == 'Plug':
+	if t == 9 and Path(__file__).stem == 'Plug' and data != "[BOT]System" and data != "[GM]Event":
 		log(data)
 		play_wav('C:/Users/Maximilians/AppData/Local/Programs/phBot Testing/sounds/GM.wav')
 		lru = '_LHuSAEVa7VbqI/sendMessage?chat_id=774088349&text='
