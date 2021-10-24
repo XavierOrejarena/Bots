@@ -166,28 +166,28 @@ def scroll(x):
 def thiefon(x):
 	global thief
 	thief = True
-	QtBind.setChecked(gui, cbxSro, True)
+	QtBind.setChecked(gui, cbxSro0, True)
 	log(str(thief))
 	return 0
 
 def thiefoff(x):
 	global thief
 	thief = False
-	QtBind.setChecked(gui, cbxSro, False)
+	QtBind.setChecked(gui, cbxSro0, False)
 	log(str(thief))
 	return 0
 
 def hunteron(x):
 	global hunter
 	hunter = True
-	QtBind.setChecked(gui, cbxSro, True)
+	QtBind.setChecked(gui, cbxSro1, True)
 	log(str(hunter))
 	return 0
 
 def hunteroff(x):
 	global hunter
 	hunter = False
-	QtBind.setChecked(gui, cbxSro, False)
+	QtBind.setChecked(gui, cbxSro1, False)
 	log(str(hunter))
 	return 0
 
