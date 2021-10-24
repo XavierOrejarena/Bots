@@ -24,8 +24,8 @@ def THIEF_DC(checked):
 	thief = checked
 
 def HUNTER_DC(checked):
-	global thief
-	thief = checked
+	global hunter
+	hunter = checked
 
 
 def dc_traders():
@@ -175,6 +175,20 @@ def thiefoff(x):
 	thief = False
 	QtBind.setChecked(gui, cbxSro, False)
 	log(str(thief))
+	return 0
+
+def hunteron(x):
+	global hunter
+	hunter = True
+	QtBind.setChecked(gui, cbxSro, True)
+	log(str(hunter))
+	return 0
+
+def hunteroff(x):
+	global hunter
+	hunter = False
+	QtBind.setChecked(gui, cbxSro, False)
+	log(str(hunter))
 	return 0
 
 log("*** Teleport Chat Command ***")
