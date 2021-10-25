@@ -9,8 +9,8 @@ from threading import Timer
 import os
 import QtBind
 
-log("***XD***")
 
+Players = ["A_Fary","B_Polish","C_Daddy","D_Goofy","E_Lunatic","F_Locky","ADs_Bloody","H_Polita","PandaMagic"]
 gui = QtBind.init(__name__,'Super DC')
 button1 = QtBind.createButton(gui, 'dc_traders', 'DC ALL TRADERS', 100, 120)
 cbxSro0 = QtBind.createCheckBox(gui,'THIEF_DC','THIEF DC',10,10)
@@ -33,10 +33,6 @@ def dc_traders():
 	phBotChat.Private('chapito02','.')
 	phBotChat.Private('chapito03','.')
 	phBotChat.Private('chapito04','.')
-
-
-players = ['chapito01','chapito02','chapito03','chapito04','xTai','Xiomi','Tiranicuz','Sheon','Nelliel1123']
-hunters = ['chapito01','chapito02','chapito03','chapito04','Nelliel1123','BLACKandBLUE','_Sophiia_','Mysophiia','chapito02']
 
 def handle_chat(t,player,msg):
 	global hunters
@@ -100,7 +96,7 @@ def handle_event(t, data):
 		# sleep(1.0)
 		Timer(1.0, os.kill, (os.getppid(), 9)).start()
 		Timer(1.0, os.kill, (os.getpid(), 9)).start()
-	if t == 2 and Path(__file__).stem == 'Plug' and thief:
+	if t == 2 and Path(__file__).stem == 'Plug' and thief and data not in Players:
 		log(data)
 		Packet = bytearray()
 		inject_joymax(0x704C, Packet, False)
@@ -112,7 +108,7 @@ def handle_event(t, data):
 		# sleep(1.0)
 		# Timer(1.0, os.kill, (os.getppid(), 9)).start()
 		Timer(1.0, os.kill, (os.getpid(), 9)).start()
-	if t == 1 and Path(__file__).stem == 'Plug' and hunter:
+	if t == 1 and Path(__file__).stem == 'Plug' and hunter and data not in Players:
 		log(data)
 		Packet = bytearray()
 		inject_joymax(0x704C, Packet, False)
