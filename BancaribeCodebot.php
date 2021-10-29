@@ -124,9 +124,9 @@ function processMessage($message) {
   // process incoming message
   $message_id = $message['message_id'];
   $chat_id = $message['chat']['id'];
-  if ($chat_id == 149273661) {
+  $text = $message['text'];
+  if ($chat_id == 149273661 && strlen($text) == 2) {
     // incoming text message
-    $text = $message['text'];
 
     if (strpos($text, "/start") === 0) {
       apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Go!'));
