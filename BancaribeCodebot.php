@@ -125,7 +125,7 @@ function processMessage($message) {
   $message_id = $message['message_id'];
   $chat_id = $message['chat']['id'];
   $text = $message['text'];
-  if ($chat_id == 149273661 && strlen($text) == 2) {
+  if ($chat_id == 149273661 && strlen($text) < 3) {
     // incoming text message
 
     if (strpos($text, "/start") === 0) {
