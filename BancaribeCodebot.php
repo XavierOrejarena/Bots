@@ -1,10 +1,10 @@
 #!/usr/bin/env php
 <?php
-//@BancaribeCodebot
-define('BOT_TOKEN', '1885983802:');
-define('TOKEN_BOT', 'AAE_JEmdahaM1fCEuGRVESKeUHDpHrmBDtk');
+//@MercantilCodebot
+define('BOT_TOKEN', '1914340845:');
+define('TOKEN_BOT', 'AAFQ_FOao5_3cmZ8-MjJ-A2PDS9Y8o79Pxs');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.TOKEN_BOT.'/');
-define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/BancaribeCodebot.php');
+define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/MercantilCodebot.php');
 
 function apiRequestWebhook($method, $parameters) {
   if (!is_string($method)) {
