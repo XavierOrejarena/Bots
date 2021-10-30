@@ -127,19 +127,19 @@ function processMessage($message) {
   apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $chat_id));
   if ($chat_id == 149273661) {
     // incoming text message
-    $text = $message['text'];
+    // $text = $message['text'];
 
-    if (strpos($text, "/start") === 0) {
-      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Go!'));
-    } else {
-      include "connect.php";
-      $SYMBOL = preg_replace("/[^a-zA-Z]+/", "", $text);
-      $COD = preg_replace("/[^0-9]+/", "", $text);
-      $sql = "SELECT $SYMBOL FROM bancaribe WHERE id = $COD";
-      $result = $link->query($sql);
-      $value = $result->fetch_row()[0];
-      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $value));
-    }
+    // if (strpos($text, "/start") === 0) {
+    //   apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Go!'));
+    // } else {
+    //   include "connect.php";
+    //   $SYMBOL = preg_replace("/[^a-zA-Z]+/", "", $text);
+    //   $COD = preg_replace("/[^0-9]+/", "", $text);
+    //   $sql = "SELECT $SYMBOL FROM bancaribe WHERE id = $COD";
+    //   $result = $link->query($sql);
+    //   $value = $result->fetch_row()[0];
+    //   apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $value));
+    // }
   } else {
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'I understand only text messages'));
   }
