@@ -1,8 +1,8 @@
 #!/usr/bin/env php
 <?php
-//@MercantilCodebot
-define('BOT_TOKEN', '1914340845:');
-define('TOKEN_BOT', 'AAFQ_FOao5_3cmZ8-MjJ-A2PDS9Y8o79Pxs');
+//@BancaribeCodebot
+define('BOT_TOKEN', '1885983802:');
+define('TOKEN_BOT', 'AAE_JEmdahaM1fCEuGRVESKeUHDpHrmBDtk');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.TOKEN_BOT.'/');
 define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/BancaribeCodebot.php');
 
@@ -125,21 +125,20 @@ function processMessage($message) {
   $message_id = $message['message_id'];
   $chat_id = $message['chat']['id'];
   if ($chat_id == 149273661) {
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $chat_id));
     // incoming text message
-    // $text = $message['text'];
+    $text = $message['text'];
 
-    // if (strpos($text, "/start") === 0) {
-    //   apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Go!'));
-    // } else {
-    //   include "connect.php";
-    //   $SYMBOL = preg_replace("/[^a-zA-Z]+/", "", $text);
-    //   $COD = preg_replace("/[^0-9]+/", "", $text);
-    //   $sql = "SELECT $SYMBOL FROM bancaribe WHERE id = $COD";
-    //   $result = $link->query($sql);
-    //   $value = $result->fetch_row()[0];
-    //   apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $value));
-    // }
+    if (strpos($text, "/start") === 0) {
+      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Go!'));
+    } else {
+      include "connect.php";
+      $SYMBOL = preg_replace("/[^a-zA-Z]+/", "", $text);
+      $COD = preg_replace("/[^0-9]+/", "", $text);
+      $sql = "SELECT $SYMBOL FROM bancaribe WHERE id = $COD";
+      $result = $link->query($sql);
+      $value = $result->fetch_row()[0];
+      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $value));
+    }
   } else {
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'I understand only text messages'));
   }
