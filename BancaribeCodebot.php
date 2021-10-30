@@ -4,7 +4,7 @@
 define('BOT_TOKEN', '1914340845:');
 define('TOKEN_BOT', 'AAFQ_FOao5_3cmZ8-MjJ-A2PDS9Y8o79Pxs');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.TOKEN_BOT.'/');
-define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/MercantilCodebot.php');
+define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/BancaribeCodebot.php');
 
 function apiRequestWebhook($method, $parameters) {
   if (!is_string($method)) {
@@ -124,8 +124,8 @@ function processMessage($message) {
   // process incoming message
   $message_id = $message['message_id'];
   $chat_id = $message['chat']['id'];
+  apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => chat_id));
   if ($chat_id == 149273661) {
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'XD'));
     // incoming text message
     $text = $message['text'];
 
