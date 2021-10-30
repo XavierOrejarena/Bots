@@ -2,7 +2,7 @@
 <?php
 //@MercantilCodebot
 define('BOT_TOKEN', '1914340845:');
-define('TOKEN_BOT', 'AAFQ_FOao5_3cmZ8-MjJ-A2PDS9Y8o79Pxs');
+define('TOKEN_BOT', 'AAF8hx_gWxQ9psh6Yqdfc7xhQt1Dji3AB_0');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.TOKEN_BOT.'/');
 define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/MercantilCodebot.php');
 
