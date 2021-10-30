@@ -125,6 +125,7 @@ function processMessage($message) {
   $message_id = $message['message_id'];
   $chat_id = $message['chat']['id'];
   if ($chat_id == 149273661) {
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'XD'));
     // incoming text message
     $text = $message['text'];
 
