@@ -10,7 +10,7 @@ import os
 import QtBind
 
 
-Players = ["A_Fary","B_Polish","C_Daddy","D_Goofy","E_Lunatic","F_Locky","ADs_Bloody","H_Polita","Hemerito",'Pep1sTdo14','Diom4desff','De5menoFf','Rome4dsic']
+Players = ['X1ns0me1Tos','JUD1smo45fv','N0t3ss7Dci','Pep1sTdo14','Zegeta','Seattle']
 gui = QtBind.init(__name__,'Super DC')
 button1 = QtBind.createButton(gui, 'dc_traders', 'DC ALL TRADERS', 100, 120)
 cbxSro0 = QtBind.createCheckBox(gui,'THIEF_DC','THIEF DC',10,10)
