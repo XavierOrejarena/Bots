@@ -10,7 +10,7 @@ import os
 import QtBind
 
 
-Players = ['X1ns0me1Tos','JUD1smo45fv','N0t3ss7Dci','Pep1sTdo14','Zegeta','Seattle']
+Players = ['X1ns0me1Tos','JUD1smo45fv','N0t3ss7Dci','Pep1sTdo14','FreeDelivery']
 gui = QtBind.init(__name__,'Super DC')
 button1 = QtBind.createButton(gui, 'dc_traders', 'DC ALL TRADERS', 100, 120)
 cbxSro0 = QtBind.createCheckBox(gui,'THIEF_DC','THIEF DC',10,10)
@@ -88,7 +88,8 @@ def handle_event(t, data):
 		play_wav('C:/Users/Maximilians/AppData/Local/Programs/phBot Testing/sounds/GM.wav')
 		lru = '_LHuSAEVa7VbqI/sendMessage?chat_id=774088349&text='
 		url = 'https://api.telegram.org/bot1221990015:AAHlL2X_NInc3xNo9MEnX' + lru
-		url = url + urllib.parse.quote(name + " -> " + data)
+		zona = '| '+str(get_zone_name(get_position()['region']))
+		url = url + urllib.parse.quote(name + " -> " + data + zona)
 		with urllib.request.urlopen(url) as f:
 			print(f.read(300))
 		Packet = bytearray()
@@ -102,7 +103,8 @@ def handle_event(t, data):
 		inject_joymax(0x704C, Packet, False)
 		lru = '_LHuSAEVa7VbqI/sendMessage?chat_id=774088349&text='
 		url = 'https://api.telegram.org/bot1221990015:AAHlL2X_NInc3xNo9MEnX' + lru
-		url = url + urllib.parse.quote(name + " [THIEF] -> " + data)
+		zona = '| '+str(get_zone_name(get_position()['region']))
+		url = url + urllib.parse.quote(name + " [THIEF] -> " + data + zona)
 		with urllib.request.urlopen(url) as f:
 			print(f.read(300))
 		# sleep(1.0)
@@ -114,7 +116,8 @@ def handle_event(t, data):
 		inject_joymax(0x704C, Packet, False)
 		lru = '_LHuSAEVa7VbqI/sendMessage?chat_id=774088349&text='
 		url = 'https://api.telegram.org/bot1221990015:AAHlL2X_NInc3xNo9MEnX' + lru
-		url = url + urllib.parse.quote(name + " [TRADER/HUNTER] -> " + data)
+		zona = '| '+str(get_zone_name(get_position()['region']))
+		url = url + urllib.parse.quote(name + " [TRADER/HUNTER] -> " + data + zona)
 		with urllib.request.urlopen(url) as f:
 			print(f.read(300))
 		# sleep(1.0)
