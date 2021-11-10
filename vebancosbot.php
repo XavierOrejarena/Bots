@@ -229,9 +229,7 @@ function processMessage($message) {
     if (strpos($text, "/start") === 0) {
       apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Go!'));
     } else {
-        $pattern = "/[^@\s]*@[^@\s]*\.[^@\s]*/";
-        $replacement = "[removed]";
-        $text = preg_replace($pattern, $replacement, $text);
+        $text = preg_replace("/[^@\s]*@[^@\s]*\.[^@\s]*/", '', $text);
         $text = ucwords($text);
         $text = str_replace("-", "", $text);
         $text = str_replace(".", "", $text);
