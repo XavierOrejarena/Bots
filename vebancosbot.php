@@ -231,7 +231,7 @@ function processMessage($message) {
     } else {
         $pattern = "/[^@\s]*@[^@\s]*\.[^@\s]*/";
         $replacement = "[removed]";
-        preg_replace($pattern, $replacement, $text);
+        $text = preg_replace($pattern, $replacement, $text);
         $text = ucwords($text);
         $text = str_replace("-", "", $text);
         $text = str_replace(".", "", $text);
