@@ -241,6 +241,7 @@ function processMessage($message) {
         $text = str_replace("Bbva", "", $text);
         $text = str_replace("Nro", "", $text);
         $text = str_replace("Datos", "", $text);
+        $text = str_replace("Personales", "", $text);
         $text = str_replace("-", "", $text);
         $text = str_replace(".", "", $text);
         $text = str_replace("/", "", $text);
