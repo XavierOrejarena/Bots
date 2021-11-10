@@ -236,7 +236,7 @@ function processMessage($message) {
         $text = str_replace(".", "", $text);
         $text = str_replace("/", "", $text);
         $text = str_replace("\\", "", $text);
-        $text = str_ireplace("Banesco", "", $text);
+        // $text = str_ireplace("Banesco", "", $text);
         $text = str_ireplace("Mercantil", "", $text);
         $text = str_ireplace("Venezuela", "", $text);
         $text = str_ireplace("Provincial", "", $text);
