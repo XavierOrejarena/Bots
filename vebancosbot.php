@@ -145,75 +145,78 @@ $bancos = array(
 '0177' => 'Banfanb',
 '0191' => 'BNC Nacional de Crédito',);
 
-$text = 'Feliciano tapia
-23.768.489\
-0134-0404-62-4041043346/
-Cta corriente
-0414-189 25 15';
+$text = '
+Banesco
+Cta. Corriente.
+Nro. 0134-0375-90-3753020235.
 
-// $text = ucwords($text);
-// $text = str_replace("-", "", $text);
-// $text = str_replace(".", "", $text);
-// $text = str_replace("/", "", $text);
-// $text = str_replace("\\", "", $text);
-// $text = str_replace("Corriente", "", $text);
-// $text = str_replace("Ahorro", "", $text);
-// $text = str_replace("Cuenta", "", $text);
-// $text = str_replace("Cta", "", $text);
-// $text = str_replace("Ci", "", $text);
-// // print_r($text);
-// // preg_match_all('/[a-zA-Z]/', $text, $matches);
-// $nombre = preg_replace("/[^a-zA-Z ]+/", "", $text);
-// $nombre = str_replace("\n", "", $nombre);
 
-// $text = str_replace(" ", "", $text);
-// preg_match_all('!\d+!', $text, $matches);
+Datos personales:
+Mayly Gibbs
+CI 12501465
+maylygibbs807@gmail.com';
 
-// // // echo $bancos['0134']. "\n";
-// foreach ($matches[0] as $code){
-//     if (strlen($code) == 7 or strlen($code) == 8){
-//         $cedula = $code;
-//     }
-//     // print_r($code);
-//     if(strpos($code, '01') !== false){
-//         if (is_numeric(substr($code, $cuenta, 20))){
-//             $cuenta = substr($code, $cuenta, 20);
-//         }else {
-//             $cuenta = '';
-//         }
-//     }
-//     if(strpos($code, '0414') !== false){
-//         $PagoMovil = substr($code, strpos($code, '0414'), 10);
-//         if (!is_numeric($PagoMovil)){
-//             $PagoMovil = '';
-//         }
-//     }else if(strpos($code, '0424') !== false){
-//         $PagoMovil = substr($code, strpos($code, '0424'), 10);
-//         if (!is_numeric($PagoMovil)){
-//             $PagoMovil = '';
-//         }
-//     }else if(strpos($code, '0416') !== false){
-//         $PagoMovil = substr($code, strpos($code, '0416'), 10);
-//         if (!is_numeric($PagoMovil)){
-//             $PagoMovil = '';
-//         }
-//     }else if(strpos($code, '0426') !== false){
-//         $PagoMovil = substr($code, strpos($code, '0426'), 10);
-//         if (!is_numeric($PagoMovil)){
-//             $PagoMovil = '';
-//         }
-//     }else if(strpos($code, '0412') !== false){
-//         $PagoMovil = substr($code, strpos($code, '0412'), 10);
-//         if (!is_numeric($PagoMovil)){
-//             $PagoMovil = '';
-//         }
-//     }
-// }
+$text = ucwords($text);
+$text = str_replace("-", "", $text);
+$text = str_replace(".", "", $text);
+$text = str_replace("/", "", $text);
+$text = str_replace("\\", "", $text);
+$text = str_replace("Corriente", "", $text);
+$text = str_replace("Ahorro", "", $text);
+$text = str_replace("Cuenta", "", $text);
+$text = str_replace("Cta", "", $text);
+$text = str_replace("Ci", "", $text);
+// print_r($text);
+// preg_match_all('/[a-zA-Z]/', $text, $matches);
+$nombre = preg_replace("/[^a-zA-Z ]+/", "", $text);
+$nombre = str_replace("\n", "", $nombre);
 
-// echo $cuenta . "\n";
-// echo $nombre . "\n";
-// echo $cedula . "\n";
-// echo $PagoMovil . "\n";
+$text = str_replace(" ", "", $text);
+preg_match_all('!\d+!', $text, $matches);
+// print_r($matches);
+// exit;
+$cuenta = '';
+// // echo $bancos['0134']. "\n";
+foreach ($matches[0] as $code){
+    if (strlen($code) == 7 || strlen($code) == 8){
+        $cedula = $code;
+    }
+    // print_r($code);
+    if(strpos($code, '01') !== false && strlen($code) == 20 && is_numeric($code)){
+        $cuenta = $code;
+    }
+    if(strpos($code, '0414') !== false){
+        $PagoMovil = substr($code, strpos($code, '0414'), 10);
+        if (!is_numeric($PagoMovil)){
+            $PagoMovil = '';
+        }
+    }else if(strpos($code, '0424') !== false){
+        $PagoMovil = substr($code, strpos($code, '0424'), 10);
+        if (!is_numeric($PagoMovil)){
+            $PagoMovil = '';
+        }
+    }else if(strpos($code, '0416') !== false){
+        $PagoMovil = substr($code, strpos($code, '0416'), 10);
+        if (!is_numeric($PagoMovil)){
+            $PagoMovil = '';
+        }
+    }else if(strpos($code, '0426') !== false){
+        $PagoMovil = substr($code, strpos($code, '0426'), 10);
+        if (!is_numeric($PagoMovil)){
+            $PagoMovil = '';
+        }
+    }else if(strpos($code, '0412') !== false){
+        $PagoMovil = substr($code, strpos($code, '0412'), 10);
+        if (!is_numeric($PagoMovil)){
+            $PagoMovil = '';
+        }
+    }
+}
+
+echo $cuenta . "\n";
+echo $nombre . "\n";
+echo $cedula . "\n";
+echo $PagoMovil . "\n";
 
 function processMessage($message) {
   // process incoming message
@@ -246,16 +249,12 @@ function processMessage($message) {
 
         // // echo $bancos['0134']. "\n";
         foreach ($matches[0] as $code){
-            if (strlen($code) == 7 or strlen($code) == 8){
+            if (strlen($code) == 7 || strlen($code) == 8){
                 $cedula = $code;
             }
             // print_r($code);
-            if(strpos($code, '01') !== false){
-                if (is_numeric(substr($code, $cuenta, 20))){
-                    $cuenta = substr($code, $cuenta, 20);
-                }else {
-                    $cuenta = '';
-                }
+            if(strpos($code, '01') !== false && strlen($code) == 20 && is_numeric($code)){
+                $cuenta = $code;
             }
             if(strpos($code, '0414') !== false){
                 $PagoMovil = substr($code, strpos($code, '0414'), 10);
