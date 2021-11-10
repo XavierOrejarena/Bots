@@ -232,6 +232,7 @@ function processMessage($message) {
         $text = preg_replace("/[^@\s]*@[^@\s]*\.[^@\s]*/", '', $text);
         $text = strtolower($text);
         $text = ucwords($text);
+        $text = str_ireplace("ñ", "n", $text);
         $text = str_ireplace("Banesco", "", $text);
         $text = str_ireplace("Mercantil", "", $text);
         $text = str_ireplace("Venezuela", "", $text);
