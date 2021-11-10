@@ -229,7 +229,7 @@ function processMessage($message) {
         $text = str_replace("Cta", "", $text);
         $text = str_replace("Ci", "", $text);
         $nombre = preg_replace("/[^a-zA-Z ]+/", "", $text);
-        $nombre = str_replace("\n", "", $matches);
+        // $nombre = str_replace("\n", "", $matches);
         
         $text = str_replace(" ", "", $text);
         preg_match_all('!\d+!', $text, $matches);
