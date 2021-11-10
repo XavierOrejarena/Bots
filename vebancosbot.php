@@ -231,6 +231,14 @@ function processMessage($message) {
     } else {
         $text = preg_replace("/[^@\s]*@[^@\s]*\.[^@\s]*/", '', $text);
         $text = ucwords($text);
+        $text = str_replace("Banesco", "", $text);
+        $text = str_replace("Mercantil", "", $text);
+        $text = str_replace("Venezuela", "", $text);
+        $text = str_replace("Provincial", "", $text);
+        $text = str_replace("Bbva", "", $text);
+        $text = str_replace("Bod", "", $text);
+        $text = str_replace("Bnc", "", $text);
+        $text = str_replace("Bbva", "", $text);
         $text = str_replace("-", "", $text);
         $text = str_replace(".", "", $text);
         $text = str_replace("/", "", $text);
