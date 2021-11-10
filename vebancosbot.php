@@ -145,11 +145,67 @@ $bancos = array(
 '0177' => 'Banfanb',
 '0191' => 'BNC Nacional de Crédito',);
 
-$text = '01340946340001440220';
+// $text = 'Feliciano tapia
+// 23.768.489\
+// 0134-0404-62-4041043346/
+// Cta corriente
+// 0414-189 25 15';
 
-foreach ($text as $book){
-    print $book;
-} 
+// $text = ucwords($text);
+// $text = str_replace("-", "", $text);
+// $text = str_replace(".", "", $text);
+// $text = str_replace("/", "", $text);
+// $text = str_replace("\\", "", $text);
+// $text = str_replace("Corriente", "", $text);
+// $text = str_replace("Ahorro", "", $text);
+// $text = str_replace("Cuenta", "", $text);
+// $text = str_replace("Cta", "", $text);
+// $text = str_replace("Ci", "", $text);
+// // print_r($text);
+// // preg_match_all('/[a-zA-Z]/', $text, $matches);
+// $nombre = preg_replace("/[^a-zA-Z ]+/", "", $text);
+// $nombre = str_replace("\n", "", $matches);
+
+// $text = str_replace(" ", "", $text);
+// preg_match_all('!\d+!', $text, $matches);
+
+// // // echo $bancos['0134']. "\n";
+// foreach ($matches[0] as $code){
+//     // print_r($code);
+//     $Banco = strpos($code, '01');
+//     if($Banco !== false){
+//         $Banco = substr($code, $Banco, 20);
+//         if (!is_numeric($Banco)){
+//             $Banco = '';
+//         }
+//     }
+//     if(strpos($code, '0414') !== false){
+//         $PagoMovil = substr($code, strpos($code, '0414'), 10);
+//         if (!is_numeric($PagoMovil)){
+//             $PagoMovil = '';
+//         }
+//     }else if(strpos($code, '0424') !== false){
+//         $PagoMovil = substr($code, strpos($code, '0424'), 10);
+//         if (!is_numeric($PagoMovil)){
+//             $PagoMovil = '';
+//         }
+//     }else if(strpos($code, '0416') !== false){
+//         $PagoMovil = substr($code, strpos($code, '0416'), 10);
+//         if (!is_numeric($PagoMovil)){
+//             $PagoMovil = '';
+//         }
+//     }else if(strpos($code, '0426') !== false){
+//         $PagoMovil = substr($code, strpos($code, '0426'), 10);
+//         if (!is_numeric($PagoMovil)){
+//             $PagoMovil = '';
+//         }
+//     }else if(strpos($code, '0412') !== false){
+//         $PagoMovil = substr($code, strpos($code, '0412'), 10);
+//         if (!is_numeric($PagoMovil)){
+//             $PagoMovil = '';
+//         }
+//     }
+// }
 
 function processMessage($message) {
   // process incoming message
@@ -162,13 +218,63 @@ function processMessage($message) {
     if (strpos($text, "/start") === 0) {
       apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Go!'));
     } else {
-      include "connect.php";
-      $SYMBOL = preg_replace("/[^a-zA-Z]+/", "", $text);
-      $COD = preg_replace("/[^0-9]+/", "", $text);
-      $sql = "SELECT $SYMBOL FROM venezuela_ledis WHERE id = $COD";
-      $result = $link->query($sql);
-      $value = $result->fetch_row()[0];
-      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $value));
+        $text = ucwords($text);
+        $text = str_replace("-", "", $text);
+        $text = str_replace(".", "", $text);
+        $text = str_replace("/", "", $text);
+        $text = str_replace("\\", "", $text);
+        $text = str_replace("Corriente", "", $text);
+        $text = str_replace("Ahorro", "", $text);
+        $text = str_replace("Cuenta", "", $text);
+        $text = str_replace("Cta", "", $text);
+        $text = str_replace("Ci", "", $text);
+        $nombre = preg_replace("/[^a-zA-Z ]+/", "", $text);
+        $nombre = str_replace("\n", "", $matches);
+        
+        $text = str_replace(" ", "", $text);
+        preg_match_all('!\d+!', $text, $matches);
+        foreach ($matches[0] as $code){
+            if (strlen($code) == 7 or strlen($code) == 8){
+                $cedula = $code;
+            }
+            $cuenta = strpos($code, '01');
+            if($cuenta !== false){
+                $cuenta = substr($code, $cuenta, 20);
+                if (!is_numeric($cuenta)){
+                    $cuenta = '';
+                }
+            }
+            if(strpos($code, '0414') !== false){
+                $PagoMovil = substr($code, strpos($code, '0414'), 10);
+                if (!is_numeric($PagoMovil)){
+                    $PagoMovil = '';
+                }
+            }else if(strpos($code, '0424') !== false){
+                $PagoMovil = substr($code, strpos($code, '0424'), 10);
+                if (!is_numeric($PagoMovil)){
+                    $PagoMovil = '';
+                }
+            }else if(strpos($code, '0416') !== false){
+                $PagoMovil = substr($code, strpos($code, '0416'), 10);
+                if (!is_numeric($PagoMovil)){
+                    $PagoMovil = '';
+                }
+            }else if(strpos($code, '0426') !== false){
+                $PagoMovil = substr($code, strpos($code, '0426'), 10);
+                if (!is_numeric($PagoMovil)){
+                    $PagoMovil = '';
+                }
+            }else if(strpos($code, '0412') !== false){
+                $PagoMovil = substr($code, strpos($code, '0412'), 10);
+                if (!is_numeric($PagoMovil)){
+                    $PagoMovil = '';
+                }
+            }
+        }
+        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $nombre));
+        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $cuenta));
+        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $cedula));
+        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $PagoMovil));
     }
   } else {
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'I understand only text messages'));
