@@ -231,7 +231,7 @@ function processMessage($message) {
         $nombre = preg_replace("/[^a-zA-Z ]+/", "", $text);
         // $nombre = str_replace("\n", "", $matches);
         
-        $text = str_replace(" ", "", $text);
+        // $text = str_replace(" ", "", $text);
         preg_match_all('!\d+!', $text, $matches);
         foreach ($matches[0] as $code){
             if (strlen($code) == 7 or strlen($code) == 8){
