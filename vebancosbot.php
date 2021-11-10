@@ -284,10 +284,18 @@ function processMessage($message) {
                 }
             }
         }
-        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $nombre));
-        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $cuenta));
-        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $cedula));
-        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $PagoMovil));
+        if ($nombre != null or $nombre != ''){
+            apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $nombre));
+        }
+        if ($cuenta != null or $cuenta != ''){
+            apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $cuenta));
+        }
+        if ($cedula != null or $cedula != ''){
+            apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $cedula));
+        }
+        if ($PagoMovil != null or $PagoMovil != ''){
+            apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $PagoMovil));
+        }
     }
   } else {
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'I understand only text messages'));
