@@ -145,11 +145,11 @@ $bancos = array(
 '0177' => 'Banfanb',
 '0191' => 'BNC Nacional de Crédito',);
 
-// $text = 'Feliciano tapia
-// 23.768.489\
-// 0134-0404-62-4041043346/
-// Cta corriente
-// 0414-189 25 15';
+$text = 'Feliciano tapia
+23.768.489\
+0134-0404-62-4041043346/
+Cta corriente
+0414-189 25 15';
 
 // $text = ucwords($text);
 // $text = str_replace("-", "", $text);
@@ -164,19 +164,22 @@ $bancos = array(
 // // print_r($text);
 // // preg_match_all('/[a-zA-Z]/', $text, $matches);
 // $nombre = preg_replace("/[^a-zA-Z ]+/", "", $text);
-// $nombre = str_replace("\n", "", $matches);
+// $nombre = str_replace("\n", "", $nombre);
 
 // $text = str_replace(" ", "", $text);
 // preg_match_all('!\d+!', $text, $matches);
 
 // // // echo $bancos['0134']. "\n";
 // foreach ($matches[0] as $code){
+//     if (strlen($code) == 7 or strlen($code) == 8){
+//         $cedula = $code;
+//     }
 //     // print_r($code);
-//     $Banco = strpos($code, '01');
-//     if($Banco !== false){
-//         $Banco = substr($code, $Banco, 20);
-//         if (!is_numeric($Banco)){
-//             $Banco = '';
+//     if(strpos($code, '01') !== false){
+//         if (is_numeric(substr($code, $cuenta, 20))){
+//             $cuenta = substr($code, $cuenta, 20);
+//         }else {
+//             $cuenta = '';
 //         }
 //     }
 //     if(strpos($code, '0414') !== false){
@@ -207,6 +210,11 @@ $bancos = array(
 //     }
 // }
 
+// echo $cuenta . "\n";
+// echo $nombre . "\n";
+// echo $cedula . "\n";
+// echo $PagoMovil . "\n";
+
 function processMessage($message) {
   // process incoming message
   $message_id = $message['message_id'];
@@ -228,19 +236,24 @@ function processMessage($message) {
         $text = str_replace("Cuenta", "", $text);
         $text = str_replace("Cta", "", $text);
         $text = str_replace("Ci", "", $text);
+        // print_r($text);
+        // preg_match_all('/[a-zA-Z]/', $text, $matches);
         $nombre = preg_replace("/[^a-zA-Z ]+/", "", $text);
-        // $nombre = str_replace("\n", "", $matches);
-        
-        // $text = str_replace(" ", "", $text);
+        $nombre = str_replace("\n", "", $nombre);
+
+        $text = str_replace(" ", "", $text);
         preg_match_all('!\d+!', $text, $matches);
+
+        // // echo $bancos['0134']. "\n";
         foreach ($matches[0] as $code){
             if (strlen($code) == 7 or strlen($code) == 8){
                 $cedula = $code;
             }
-            $cuenta = strpos($code, '01');
-            if($cuenta !== false){
-                $cuenta = substr($code, $cuenta, 20);
-                if (!is_numeric($cuenta)){
+            // print_r($code);
+            if(strpos($code, '01') !== false){
+                if (is_numeric(substr($code, $cuenta, 20))){
+                    $cuenta = substr($code, $cuenta, 20);
+                }else {
                     $cuenta = '';
                 }
             }
@@ -283,11 +296,11 @@ function processMessage($message) {
 
 
 
-if (php_sapi_name() == 'cli') {
-  // if run from console, set or delete webhook
-  apiRequest('setWebhook', array('url' => isset($argv[1]) && $argv[1] == 'delete' ? '' : WEBHOOK_URL));
-  exit;
-}
+// if (php_sapi_name() == 'cli') {
+//   // if run from console, set or delete webhook
+//   apiRequest('setWebhook', array('url' => isset($argv[1]) && $argv[1] == 'delete' ? '' : WEBHOOK_URL));
+//   exit;
+// }
 
 
 $content = file_get_contents("php://input");
