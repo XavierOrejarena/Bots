@@ -257,9 +257,9 @@ function processMessage($message) {
         // print_r($text);
         // preg_match_all('/[a-zA-Z]/', $text, $matches);
         $nombre = preg_replace("/[^a-zA-Z ]+/", "", $text);
-        $nombre = str_ireplace("\n", "", $nombre);
+        $nombre = str_replace("\n", "", $nombre);
 
-        $text = str_ireplace(" ", "", $text);
+        $text = str_replace(" ", "", $text);
         preg_match_all('!\d+!', $text, $matches);
 
         // // echo $bancos['0134']. "\n";
