@@ -230,6 +230,7 @@ function processMessage($message) {
       apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Go!'));
     } else {
         $text = preg_replace("/[^@\s]*@[^@\s]*\.[^@\s]*/", '', $text);
+        $text = strtolower($text);
         $text = ucwords($text);
         $text = str_replace("Banesco", "", $text);
         $text = str_replace("Mercantil", "", $text);
