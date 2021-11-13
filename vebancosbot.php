@@ -222,96 +222,92 @@ function processMessage($message) {
   // process incoming message
   $message_id = $message['message_id'];
   $chat_id = $message['chat']['id'];
-  if ($chat_id == 149273661) {
     // incoming text message
-    $text = $message['text'];
+  $text = $message['text'];
 
-    if (strpos($text, "/start") === 0) {
-      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Go!'));
-    } else {
-        $text = preg_replace("/[^@\s]*@[^@\s]*\.[^@\s]*/", '', $text);
-        $text = strtolower($text);
-        $text = ucwords($text);
-        $text = str_replace("-", "", $text);
-        $text = str_replace(".", "", $text);
-        $text = str_replace("/", "", $text);
-        $text = str_replace("\\", "", $text);
-        // $text = str_ireplace("Banesco", "", $text);
-        $text = str_ireplace("Mercantil", "", $text);
-        $text = str_ireplace("Venezuela", "", $text);
-        $text = str_ireplace("Provincial", "", $text);
-        $text = str_ireplace("Bbva", "", $text);
-        $text = str_ireplace("Bod", "", $text);
-        $text = str_ireplace("Bnc", "", $text);
-        $text = str_ireplace("Bbva", "", $text);
-        $text = str_ireplace("Nro", "", $text);
-        $text = str_ireplace("No", "", $text);
-        $text = str_ireplace("Datos", "", $text);
-        $text = str_ireplace("Personales", "", $text);
-        $text = str_ireplace("Corriente", "", $text);
-        $text = str_ireplace("Ahorro", "", $text);
-        $text = str_ireplace("Cuenta", "", $text);
-        $text = str_ireplace("Cta", "", $text);
-        $text = str_ireplace("Ci", "", $text);
-        // print_r($text);
-        // preg_match_all('/[a-zA-Z]/', $text, $matches);
-        $nombre = preg_replace("/[^a-zA-Z ]+/", "", $text);
-        $nombre = str_replace("\n", "", $nombre);
+  if (strpos($text, "/start") === 0) {
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Go!'));
+  } else {
+    $text = str_ireplace("Banesco", "", $text);
+    $text = str_ireplace("Mercantil", "", $text);
+    $text = str_ireplace("Venezuela", "", $text);
+    $text = str_ireplace("Provincial", "", $text);
+    $text = preg_replace("/[^@\s]*@[^@\s]*\.[^@\s]*/", '', $text);
+    $text = strtolower($text);
+    $text = ucwords($text);
+    $text = str_replace("-", "", $text);
+    $text = str_replace(".", "", $text);
+    $text = str_replace("/", "", $text);
+    $text = str_replace("\\", "", $text);
+    $text = str_ireplace("Bbva", "", $text);
+    $text = str_ireplace("Bod", "", $text);
+    $text = str_ireplace("Bnc", "", $text);
+    $text = str_ireplace("Bbva", "", $text);
+    $text = str_ireplace("Nro", "", $text);
+    $text = str_ireplace("No", "", $text);
+    $text = str_ireplace("Datos", "", $text);
+    $text = str_ireplace("Personales", "", $text);
+    $text = str_ireplace("Corriente", "", $text);
+    $text = str_ireplace("Ahorro", "", $text);
+    $text = str_ireplace("Cuenta", "", $text);
+    $text = str_ireplace("Cta", "", $text);
+    $text = str_ireplace("Ci", "", $text);
+    // print_r($text);
+    // preg_match_all('/[a-zA-Z]/', $text, $matches);
+    $nombre = preg_replace("/[^a-zA-Z ]+/", "", $text);
+    $nombre = str_replace("\n", "", $nombre);
 
-        $text = str_replace(" ", "", $text);
-        preg_match_all('!\d+!', $text, $matches);
+    $text = str_replace(" ", "", $text);
+    preg_match_all('!\d+!', $text, $matches);
 
-        // // echo $bancos['0134']. "\n";
-        foreach ($matches[0] as $code){
-            if (strlen($code) == 7 || strlen($code) == 8){
-                $cedula = $code;
+    // // echo $bancos['0134']. "\n";
+    foreach ($matches[0] as $code){
+        if (strlen($code) == 7 || strlen($code) == 8){
+            $cedula = $code;
+        }
+        // print_r($code);
+        if(strpos($code, '01') !== false && strlen($code) == 20 && is_numeric($code)){
+            $cuenta = $code;
+        }
+        if(strpos($code, '0414') !== false){
+            $PagoMovil = substr($code, strpos($code, '0414'), 10);
+            if (!is_numeric($PagoMovil)){
+                $PagoMovil = '';
             }
-            // print_r($code);
-            if(strpos($code, '01') !== false && strlen($code) == 20 && is_numeric($code)){
-                $cuenta = $code;
+        }else if(strpos($code, '0424') !== false){
+            $PagoMovil = substr($code, strpos($code, '0424'), 10);
+            if (!is_numeric($PagoMovil)){
+                $PagoMovil = '';
             }
-            if(strpos($code, '0414') !== false){
-                $PagoMovil = substr($code, strpos($code, '0414'), 10);
-                if (!is_numeric($PagoMovil)){
-                    $PagoMovil = '';
-                }
-            }else if(strpos($code, '0424') !== false){
-                $PagoMovil = substr($code, strpos($code, '0424'), 10);
-                if (!is_numeric($PagoMovil)){
-                    $PagoMovil = '';
-                }
-            }else if(strpos($code, '0416') !== false){
-                $PagoMovil = substr($code, strpos($code, '0416'), 10);
-                if (!is_numeric($PagoMovil)){
-                    $PagoMovil = '';
-                }
-            }else if(strpos($code, '0426') !== false){
-                $PagoMovil = substr($code, strpos($code, '0426'), 10);
-                if (!is_numeric($PagoMovil)){
-                    $PagoMovil = '';
-                }
-            }else if(strpos($code, '0412') !== false){
-                $PagoMovil = substr($code, strpos($code, '0412'), 10);
-                if (!is_numeric($PagoMovil)){
-                    $PagoMovil = '';
-                }
+        }else if(strpos($code, '0416') !== false){
+            $PagoMovil = substr($code, strpos($code, '0416'), 10);
+            if (!is_numeric($PagoMovil)){
+                $PagoMovil = '';
             }
-        }
-        if ($nombre != null or $nombre != ''){
-            apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $nombre));
-        }
-        if ($cuenta != null or $cuenta != ''){
-            apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $cuenta));
-        }
-        if ($cedula != null or $cedula != ''){
-            apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $cedula));
-        }
-        if ($PagoMovil != null or $PagoMovil != ''){
-            apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $PagoMovil));
+        }else if(strpos($code, '0426') !== false){
+            $PagoMovil = substr($code, strpos($code, '0426'), 10);
+            if (!is_numeric($PagoMovil)){
+                $PagoMovil = '';
+            }
+        }else if(strpos($code, '0412') !== false){
+            $PagoMovil = substr($code, strpos($code, '0412'), 10);
+            if (!is_numeric($PagoMovil)){
+                $PagoMovil = '';
+            }
         }
     }
-  } else {
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'I understand only text messages'));
+    if ($nombre != null or $nombre != ''){
+        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $nombre));
+    }
+    if ($cuenta != null or $cuenta != ''){
+        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $cuenta));
+    }
+    if ($cedula != null or $cedula != ''){
+        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $cedula));
+    }
+    if ($PagoMovil != null or $PagoMovil != ''){
+        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $PagoMovil));
+    }
   }
 }
 
