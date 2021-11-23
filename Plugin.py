@@ -191,3 +191,21 @@ def hunteroff(x):
 	return 0
 
 log("*** Teleport Chat Command ***")
+
+drop = False
+
+def event_loop():
+	global drop
+	if drop:
+		gold = 100000000
+		# gold = 93000000
+		Packet = b'\x0A'
+		Packet += struct.pack('<I', gold)
+		Packet += b'\x00\x00\x00\x00'
+		inject_joymax(0x7034, Packet, False)
+
+def handle_chat(t,player,msg):
+	if msg == 'drop':
+			stop_bot()
+			global drop
+			drop = ~drop
