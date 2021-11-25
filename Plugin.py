@@ -35,6 +35,10 @@ def dc_traders():
 	phBotChat.Private('chapito04','.')
 
 def handle_chat(t,player,msg):
+	if msg == 'drop':
+		stop_bot()
+		global drop
+		drop = ~drop
 	global hunters
 	name = get_character_data()['name']
 	if msg == '.' and player in hunters and t == 2:
@@ -203,9 +207,3 @@ def event_loop():
 		Packet += struct.pack('<I', gold)
 		Packet += b'\x00\x00\x00\x00'
 		inject_joymax(0x7034, Packet, False)
-
-def handle_chat(t,player,msg):
-	if msg == 'drop':
-			stop_bot()
-			global drop
-			drop = ~drop
