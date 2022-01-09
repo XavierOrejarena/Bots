@@ -274,7 +274,7 @@ Total: ".$Total." Bs.";
                         }
                         $msg2 = "Envían: $$sent
 Llegarán: $USD $
-\xE2\x98\x95: $BS Bs.
+\xE2\x98\x95: ".number_format($BS, 2, ',', '')." Bs.
 Total: ".$Total." Bs.";
                     } else {
                         $msg1 = "Envían: $$USD
