@@ -170,7 +170,7 @@ function processQuery($inline_query)
         if ($BS) {
             $message_text1 = "Envían: $$USD
 Llegarán: $$receive
-\xE2\x98\x95: $BS Bs.
+\xE2\x98\x95: ".number_format($BS, 2, ',', '')." Bs.
 Total: ".$Total." Bs.";
             if ((fmod($USD*$BS,    1) !== 0.00) ) {
                 $Total = number_format($USD*$BS, 2, ',', '');
@@ -179,7 +179,7 @@ Total: ".$Total." Bs.";
             }
             $message_text2 = "Envían: $$sent
 Llegarán: $$USD
-\xE2\x98\x95: $BS Bs.
+\xE2\x98\x95: ".number_format($BS, 2, ',', '')." Bs.
 Total: ".$Total." Bs.";
         } else {
             $message_text1 = "Envían: $$USD
@@ -216,7 +216,7 @@ Llegarán: $$USD";
     'title'        => "Para pagar $USD Bs.",
     'message_text' => "Envían: $$sent
 Llegarán: $$receive
-\xE2\x98\x95: $BS Bs.
+\xE2\x98\x95: ".number_format($BS, 2, ',', '')." Bs.
 Total: ".$Total." Bs.",
     'description'  => "Deben enviar $sent",
     ];
@@ -293,7 +293,7 @@ Llegarán: $$USD";
                     }
                     $msg1 = "Envían: $$sent
 Llegarán: $$receive
-    \xE2\x98\x95: $BS Bs.
+    \xE2\x98\x95: ".number_format($BS, 2, ',', '')." Bs.
 Total: ".$Total." Bs.";
                 }
     
