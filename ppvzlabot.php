@@ -293,7 +293,7 @@ Llegarán: $$USD";
                     }
                     $msg1 = "Envían: $$sent
 Llegarán: $$receive
-    \xE2\x98\x95: ".number_format($BS, 2, ',', '')." Bs.
+\xE2\x98\x95: ".number_format($BS, 2, ',', '')." Bs.
 Total: ".$Total." Bs.";
                 }
     
