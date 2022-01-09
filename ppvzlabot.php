@@ -169,7 +169,7 @@ function processQuery($inline_query)
         }
         if ($BS) {
             $message_text1 = "Envían: $$USD
-Llegarán: $receive $
+Llegarán: $$receive
 \xE2\x98\x95: $BS Bs.
 Total: ".$Total." Bs.";
             if ((fmod($USD*$BS,    1) !== 0.00) ) {
@@ -178,21 +178,21 @@ Total: ".$Total." Bs.";
                 $Total = number_format($USD*$BS, 2, ',', '');
             }
             $message_text2 = "Envían: $$sent
-Llegarán: $USD $
+Llegarán: $$USD
 \xE2\x98\x95: $BS Bs.
 Total: ".$Total." Bs.";
         } else {
             $message_text1 = "Envían: $$USD
 Llegarán: $receive $";
             $message_text2 = "Envían: $$sent
-Llegarán: $USD $";
+Llegarán: $$USD";
         }
         $results[] = [
         'type'         => 'article',
         'id'           => gen_uuid(),
         'title'        => "Si envían: $$USD",
         'message_text' => $message_text1,
-        'description'  => "Llegaran: $$receive",
+        'description'  => "Llegarán: $$receive",
         ];
         $results[] = [
         'type'         => 'article',
@@ -215,7 +215,7 @@ Llegarán: $USD $";
     'id'           => gen_uuid(),
     'title'        => "Para pagar $USD Bs.",
     'message_text' => "Envían: $$sent
-Llegarán: $receive $
+Llegarán: $$receive
 \xE2\x98\x95: $BS Bs.
 Total: ".$Total." Bs.",
     'description'  => "Deben enviar $sent",
@@ -264,7 +264,7 @@ function processMessage($message) {
                     $sent = round((100*($USD+0.3)/94.6),2);
                     if ($BS) {
                         $msg1 = "Envían: $$USD
-Llegarán: $receive $
+Llegarán: $$receive
 \xE2\x98\x95: $BS Bs.
 Total: ".$Total." Bs.";
                         if ((fmod($USD*$BS,    1) !== 0.00) ) {
@@ -278,9 +278,9 @@ Llegarán: $USD $
 Total: ".$Total." Bs.";
                     } else {
                         $msg1 = "Envían: $$USD
-Llegarán: $receive $";
+Llegarán: $$receive";
                         $msg2 = "Envían: $$sent
-Llegarán: $USD $";
+Llegarán: $$USD";
                     }
                 }
                 else if ($signal == "/" || $signal == '\\') {
@@ -292,7 +292,7 @@ Llegarán: $USD $";
                         $Total = number_format($USD, 2, ',', '');
                     }
                     $msg1 = "Envían: $$sent
-Llegarán: $receive $
+Llegarán: $$receive
     \xE2\x98\x95: $BS Bs.
 Total: ".$Total." Bs.";
                 }
