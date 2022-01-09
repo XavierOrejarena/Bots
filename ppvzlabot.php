@@ -192,7 +192,7 @@ Llegarán: $USD $";
         'id'           => gen_uuid(),
         'title'        => "Si envían: $$USD",
         'message_text' => $message_text1,
-        'description'  => "Llegaran: $receive",
+        'description'  => "Llegaran: $$receive",
         ];
         $results[] = [
         'type'         => 'article',
