@@ -168,7 +168,7 @@ function processQuery($inline_query)
             $Total = number_format($receive*$BS, 2, ',', '');
         }
         if ($BS) {
-            $message_text1 = "Envían: $USD
+            $message_text1 = "Envían: $$USD
 Llegarán: $receive $
 \xE2\x98\x95: $BS Bs.
 Total: ".$Total." Bs.";
@@ -177,27 +177,27 @@ Total: ".$Total." Bs.";
             }else {
                 $Total = number_format($USD*$BS, 2, ',', '');
             }
-            $message_text2 = "Envían: $sent
+            $message_text2 = "Envían: $$sent
 Llegarán: $USD $
 \xE2\x98\x95: $BS Bs.
 Total: ".$Total." Bs.";
         } else {
-            $message_text1 = "Envían: $USD
+            $message_text1 = "Envían: $$USD
 Llegarán: $receive $";
-            $message_text2 = "Envían: $sent
+            $message_text2 = "Envían: $$sent
 Llegarán: $USD $";
         }
         $results[] = [
         'type'         => 'article',
         'id'           => gen_uuid(),
-        'title'        => "Si envían: $USD $",
+        'title'        => "Si envían: $$USD",
         'message_text' => $message_text1,
         'description'  => "Llegaran: $receive",
         ];
         $results[] = [
         'type'         => 'article',
         'id'           => gen_uuid(),
-        'title'        => "Para que lleguen: $USD $",
+        'title'        => "Para que lleguen: $$USD",
         'message_text' => $message_text2,
         'description'  => "Deben enviar: $sent",
         ];
@@ -214,7 +214,7 @@ Llegarán: $USD $";
     'type'         => 'article',
     'id'           => gen_uuid(),
     'title'        => "Para pagar $USD Bs.",
-    'message_text' => "Envían: $sent $
+    'message_text' => "Envían: $$sent
 Llegarán: $receive $
 \xE2\x98\x95: $BS Bs.
 Total: ".$Total." Bs.",
@@ -263,7 +263,7 @@ function processMessage($message) {
                     }
                     $sent = round((100*($USD+0.3)/94.6),2);
                     if ($BS) {
-                        $msg1 = "Envían: $USD $
+                        $msg1 = "Envían: $$USD
 Llegarán: $receive $
 \xE2\x98\x95: $BS Bs.
 Total: ".$Total." Bs.";
@@ -272,14 +272,14 @@ Total: ".$Total." Bs.";
                         }else {
                             $Total = number_format($USD*$BS, 2, ',', '');
                         }
-                        $msg2 = "Envían: $sent $
+                        $msg2 = "Envían: $$sent
 Llegarán: $USD $
 \xE2\x98\x95: $BS Bs.
 Total: ".$Total." Bs.";
                     } else {
-                        $msg1 = "Envían: $USD $
+                        $msg1 = "Envían: $$USD
 Llegarán: $receive $";
-                        $msg2 = "Envían: $sent $
+                        $msg2 = "Envían: $$sent
 Llegarán: $USD $";
                     }
                 }
@@ -291,7 +291,7 @@ Llegarán: $USD $";
                     }else {
                         $Total = number_format($USD, 2, ',', '');
                     }
-                    $msg1 = "Envían: $sent $
+                    $msg1 = "Envían: $$sent
 Llegarán: $receive $
     \xE2\x98\x95: $BS Bs.
 Total: ".$Total." Bs.";
