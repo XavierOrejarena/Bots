@@ -124,7 +124,7 @@ function processMessage($message) {
   // process incoming message
   $message_id = $message['message_id'];
   $chat_id = $message['chat']['id'];
-  if ($chat_id == 149273661 && strlen($message['text']) == 2) {
+  if (($chat_id == 149273661 || $chat_id == 414891211)&& strlen($message['text']) == 2) {
     // incoming text message
     $text = $message['text'];
 
