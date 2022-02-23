@@ -1,6 +1,1 @@
-<table>
-<?php 
-file_put_contents('test.txt', file_get_contents('php://input'));
-
-?>
-</table>
+<?php file_put_contents('Silkroad.json', file_get_contents('php://input'));?>
