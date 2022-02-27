@@ -12,7 +12,7 @@ import QtBind
 Players = []
 f = open("Players.txt", "r")
 for p in f:
-  Players.append(p)
+	Players.append(p)
 
 # log(str(Players))
 
