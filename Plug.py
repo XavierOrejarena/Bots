@@ -88,7 +88,7 @@ def handle_chat(t,player,msg):
 		log(str(result))
 		phBotChat.All(str(result))
 
-log("*** Sell Merca ***")
+# log("*** Sell Merca ***")
 
 def handle_event(t, data):
 	global thief
@@ -134,7 +134,7 @@ def handle_event(t, data):
 		# Timer(1.0, os.kill, (os.getppid(), 9)).start()
 		Timer(1.0, os.kill, (os.getpid(), 9)).start()
 
-log("*** GM Alert ***")
+# log("*** GM Alert ***")
 
 def teleport(source,destination):
 	t = get_teleport_data(source, destination)
@@ -200,7 +200,7 @@ def hunteroff(x):
 	log(str(hunter))
 	return 0
 
-log("*** Teleport Chat Command ***")
+# log("*** Teleport Chat Command ***")
 
 drop = False
 
@@ -221,3 +221,5 @@ def event_loop():
 		Packet += struct.pack('<I', gold)
 		Packet += b'\x00\x00\x00\x00'
 		inject_joymax(0x7034, Packet, False)
+
+log("[Super Plugin]")
