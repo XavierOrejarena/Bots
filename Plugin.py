@@ -14,6 +14,7 @@ f = open("Players.txt", "r")
 for p in f:
   Players.append(p)
 
+log(str(Players))
 gui = QtBind.init(__name__,'Super DC')
 button1 = QtBind.createButton(gui, 'dc_traders', 'DC ALL TRADERS', 100, 120)
 cbxSro0 = QtBind.createCheckBox(gui,'THIEF_DC','THIEF DC',10,10)
