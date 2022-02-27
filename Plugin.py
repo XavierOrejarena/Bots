@@ -9,10 +9,10 @@ from threading import Timer
 import os
 import QtBind
 
-Players = []
-f = open("Players.txt", "r")
-for p in f:
-  Players.append(p)
+# Players = []
+# f = open("Players.txt", "r")
+# for p in f:
+#   Players.append(p)
 
 log('XD')
 
