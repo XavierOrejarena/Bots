@@ -9,12 +9,12 @@ from threading import Timer
 import os
 import QtBind
 
-# Players = []
-# f = open("Players.txt", "r")
-# for p in f:
-#   Players.append(p)
+Players = []
+f = open("Players.txt", "r")
+for p in f:
+  Players.append(p)
 
-log('XD')
+log(str(Players))
 
 gui = QtBind.init(__name__,'Super DC')
 button1 = QtBind.createButton(gui, 'dc_traders', 'DC ALL TRADERS', 100, 120)
