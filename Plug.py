@@ -14,7 +14,7 @@ f = open("Players.txt", "r")
 for p in f:
   Players.append(p)
 
-log(str(Players))
+# log(str(Players))
 
 gui = QtBind.init(__name__,'Super DC')
 button1 = QtBind.createButton(gui, 'dc_traders', 'DC ALL TRADERS', 100, 120)
@@ -24,6 +24,15 @@ QtBind.setChecked(gui, cbxSro0, True)
 QtBind.setChecked(gui, cbxSro1, True)
 thief = True
 hunter = True
+
+def event_loop():
+	if get_character_data()['dead']:
+		log('muerto')
+		global thief
+		global hunter
+		thief = False
+		hunter = False
+
 def THIEF_DC(checked):
 	global thief
 	thief = checked
