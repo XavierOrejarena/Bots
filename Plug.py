@@ -25,14 +25,6 @@ QtBind.setChecked(gui, cbxSro1, True)
 thief = True
 hunter = True
 
-def event_loop():
-	if get_character_data()['dead']:
-		global thief
-		global hunter
-		log('muerto')
-		thief = False
-		hunter = False
-
 def THIEF_DC(checked):
 	global thief
 	thief = checked
@@ -213,6 +205,14 @@ log("*** Teleport Chat Command ***")
 drop = False
 
 def event_loop():
+	if get_character_data()['dead']:
+		global thief
+		global hunter
+		thief = False
+		hunter = False
+		QtBind.setChecked(gui, cbxSro0, False)
+		QtBind.setChecked(gui, cbxSro1, False)
+
 	global drop
 	if drop:
 		gold = 100000000
