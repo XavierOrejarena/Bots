@@ -15,7 +15,7 @@ for p in f:
 	p = p[:-1]
 	Players.append(p)
 
-# log(str(Players))
+log(str(Players))
 
 gui = QtBind.init(__name__,'Super DC')
 button1 = QtBind.createButton(gui, 'dc_traders', 'DC ALL TRADERS', 100, 120)
