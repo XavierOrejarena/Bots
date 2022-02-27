@@ -27,9 +27,9 @@ hunter = True
 
 def event_loop():
 	if get_character_data()['dead']:
-		log('muerto')
 		global thief
 		global hunter
+		log('muerto')
 		thief = False
 		hunter = False
 
