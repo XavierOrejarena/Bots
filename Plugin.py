@@ -9,8 +9,11 @@ from threading import Timer
 import os
 import QtBind
 
+Players = []
+f = open("Players.txt", "r")
+for p in f:
+  Players.append(p)
 
-Players = ['X1ns0me1Tos','JUD1smo45fv','N0t3ss7Dci','Pep1sTdo14','FreeDelivery']
 gui = QtBind.init(__name__,'Super DC')
 button1 = QtBind.createButton(gui, 'dc_traders', 'DC ALL TRADERS', 100, 120)
 cbxSro0 = QtBind.createCheckBox(gui,'THIEF_DC','THIEF DC',10,10)
