@@ -122,7 +122,7 @@ def handle_event(t, data):
 		with urllib.request.urlopen(url) as f:
 			print(f.read(300))
 		# Timer(1.0, os.kill, (os.getppid(), 9)).start()
-		# Timer(1.0, os.kill, (os.getpid(), 9)).start()
+		Timer(1.0, os.kill, (os.getpid(), 9)).start()
 	if t == 1 and Path(__file__).stem == 'Plug' and thief and data not in Players:
 		log(data)
 		Packet = bytearray()
@@ -134,7 +134,7 @@ def handle_event(t, data):
 		with urllib.request.urlopen(url) as f:
 			print(f.read(300))
 		# Timer(1.0, os.kill, (os.getppid(), 9)).start()
-		# Timer(1.0, os.kill, (os.getpid(), 9)).start()
+		Timer(1.0, os.kill, (os.getpid(), 9)).start()
 
 # log("*** GM Alert ***")
 
