@@ -9,8 +9,7 @@ from threading import Timer
 import os
 import QtBind
 
-Players = ['N0ctino0s','Torm3ntAs2','Hip0nistico4','Cop0deNiecs']
-log(str(Players))
+# log(str(Players))
 
 Players = ['Elcapito','Alcapito']
 f = open("Players.txt", "r")
@@ -18,7 +17,8 @@ for p in f:
 	p = p[:-1]
 	Players.append(p)
 
-log(str(Players))
+Players = ['N0ctino0s','Torm3ntAs2','Hip0nistico4','Cop0deNiecs']
+# log(str(Players))
 
 gui = QtBind.init(__name__,'Super DC')
 button1 = QtBind.createButton(gui, 'dc_traders', 'DC ALL TRADERS', 100, 120)
