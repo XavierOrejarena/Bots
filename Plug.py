@@ -218,8 +218,8 @@ def event_loop():
 	global drop
 	if drop:
 		gold = 100000000
-		if get_character_data()['gold'] < 100000000:
-			gold = get_character_data()['gold']
+		if get_character_data()['gold'] <= 100000000:
+			gold = get_character_data()['gold']-10000000
 			drop = False
 		Packet = b'\x0A'
 		Packet += struct.pack('<I', gold)

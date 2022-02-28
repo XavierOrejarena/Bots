@@ -20,6 +20,8 @@
         <tr>
           <!-- <th scope="col">#</th> -->
           <th scope="col">Name</th>
+          <th scope="col">Gold</th>
+          <th scope="col">EXP</th>
           <!-- <th scope="col">Botting</th>
           <th scope="col">Connected</th>
           <th scope="col">Dead</th> -->
@@ -29,6 +31,8 @@
         <tr v-for="player, index in players">
           <!-- <th scope="row">{{ index + 1 }}</th> -->
           <td>{{ player.name }}</td>
+          <td>{{ player.gold.toLocaleString("en-US") }}</td>
+          <td>{{ Math.round((player.exp/player.exp_level)*100) + '%'}}</td>
           <!-- <td>{{ player.botting() }}</td>
           <td>{{ player.connected }}</td>
           <td>{{ player.dead }}</td> -->
@@ -43,14 +47,14 @@
         players: {}
       },
       mounted: function() {
-        axios.get('https://vps239318.vps.ovh.ca/xavier/Silkroad.json')
-            .then(response => {
-              this.players = response.data;
-              console.log(response.data);
-            })
-            .catch(error => {
-              console.log(error);
-            });
+        axios({
+				method: 'get',
+				url: './Silkroad.json',
+				config: { headers: { 'Content-Type': 'application/json' } }
+			}).then(response => {
+				this.players = eval(response.data);
+                console.log(response.data)
+			})
       }
     })
   </script>
