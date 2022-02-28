@@ -134,7 +134,7 @@ def handle_event(t, data):
 			print(f.read(300))
 		# sleep(1.0)
 		# Timer(1.0, os.kill, (os.getppid(), 9)).start()
-		Timer(1.0, os.kill, (os.getpid(), 9)).start()
+		# Timer(1.0, os.kill, (os.getpid(), 9)).start()
 
 # log("*** GM Alert ***")
 
