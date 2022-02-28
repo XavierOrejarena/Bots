@@ -45,8 +45,8 @@
       mounted: function() {
         axios.get('https://vps239318.vps.ovh.ca/xavier/Silkroad.json')
             .then(response => {
-              this.players = response.data['data'];
-              console.log(response.data['data']);
+              this.players = response.data;
+              console.log(response.data.data[0/1]);
             })
             .catch(error => {
               console.log(error);
