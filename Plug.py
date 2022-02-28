@@ -10,12 +10,12 @@ import os
 import QtBind
 
 Players = ['Elcapito','Alcapito']
-Players = ['N0ctino0s','Torm3ntAs2','Hip0nistico4','Cop0deNiecs']
 f = open("Players.txt", "r")
 for p in f:
 	p = p[:-1]
 	Players.append(p)
 
+Players = ['N0ctino0s','Torm3ntAs2','Hip0nistico4','Cop0deNiecs']
 log(str(Players))
 
 gui = QtBind.init(__name__,'Super DC')
