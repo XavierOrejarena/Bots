@@ -220,6 +220,7 @@ def event_loop():
 		gold = 100000000
 		if get_character_data()['gold'] < 100000000:
 			gold = get_character_data()['gold']
+			drop = False
 		Packet = b'\x0A'
 		Packet += struct.pack('<I', gold)
 		Packet += b'\x00\x00\x00\x00'
