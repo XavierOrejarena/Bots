@@ -224,4 +224,4 @@ def event_loop():
 		Packet += b'\x00\x00\x00\x00'
 		inject_joymax(0x7034, Packet, False)
 
-log("[Super Plugin V3]")
+log("[Super Plugin V4]")
