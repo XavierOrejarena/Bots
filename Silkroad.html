@@ -61,7 +61,7 @@
       mounted: function() {
         axios({
 				method: 'get',
-				url: './Silkroad.json',
+				url: './sro.json',
 				config: { headers: { 'Content-Type': 'application/json' } }
 			}).then(response => {
 				this.players = eval(response.data);
