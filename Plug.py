@@ -11,11 +11,11 @@ import QtBind
 
 # log(str(Players))
 
-Players = ['Elcapito','Alcapito']
-f = open("Players.txt", "r")
-for p in f:
-	p = p[:-1]
-	Players.append(str(p))
+# Players = ['Elcapito','Alcapito']
+# f = open("Players.txt", "r")
+# for p in f:
+# 	p = p[:-1]
+# 	Players.append(str(p))
 
 Players = ['N0ctino0s','Torm3ntAs2','Hip0nistico4','Cop0deNiecs']
 log(str(Players))
