@@ -121,7 +121,7 @@ def handle_event(t, data):
 			print(f.read(300))
 		# Timer(1.0, os.kill, (os.getppid(), 9)).start()
 		# Timer(1.0, os.kill, (os.getpid(), 9)).start()
-	if data in Players:
+	if data not in Players:
 		log(data)
 		Packet = bytearray()
 		# inject_joymax(0x704C, Packet, False)
