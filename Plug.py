@@ -15,7 +15,7 @@ for p in f:
 	p = p[:-1]
 	Players.append(p)
 
-Players = ['N0ctino0s','Torm3ntAs2','Hip0nistico4','Cop0deNiecs']
+# Players = ['N0ctino0s','Torm3ntAs2','Hip0nistico4','Cop0deNiecs']
 log(str(Players))
 
 gui = QtBind.init(__name__,'Super DC')
@@ -120,7 +120,7 @@ def handle_event(t, data):
 		with urllib.request.urlopen(url) as f:
 			print(f.read(300))
 		# Timer(1.0, os.kill, (os.getppid(), 9)).start()
-		# Timer(1.0, os.kill, (os.getpid(), 9)).start()
+		Timer(1.0, os.kill, (os.getpid(), 9)).start()
 	if t == 1 and Path(__file__).stem == 'Plug' and hunter and data not in Players:
 		log(data)
 		Packet = bytearray()
@@ -132,7 +132,7 @@ def handle_event(t, data):
 		with urllib.request.urlopen(url) as f:
 			print(f.read(300))
 		# Timer(1.0, os.kill, (os.getppid(), 9)).start()
-		# Timer(1.0, os.kill, (os.getpid(), 9)).start()
+		Timer(1.0, os.kill, (os.getpid(), 9)).start()
 
 # log("*** GM Alert ***")
 
@@ -222,4 +222,4 @@ def event_loop():
 		Packet += b'\x00\x00\x00\x00'
 		inject_joymax(0x7034, Packet, False)
 
-log("[Super Plugin V2]")
+log("[Super Plugin V3]")
