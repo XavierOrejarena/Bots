@@ -124,7 +124,7 @@ def handle_event(t, data):
 	if data in Players:
 		log(data)
 		Packet = bytearray()
-		inject_joymax(0x704C, Packet, False)
+		# inject_joymax(0x704C, Packet, False)
 		lru = '_LHuSAEVa7VbqI/sendMessage?chat_id=774088349&text='
 		url = 'https://api.telegram.org/bot1221990015:AAHlL2X_NInc3xNo9MEnX' + lru
 		zona = '| '+str(get_zone_name(get_position()['region']))
