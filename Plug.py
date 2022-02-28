@@ -9,13 +9,15 @@ from threading import Timer
 import os
 import QtBind
 
+Players = ['N0ctino0s','Torm3ntAs2','Hip0nistico4','Cop0deNiecs']
+log(str(Players))
+
 Players = ['Elcapito','Alcapito']
 f = open("Players.txt", "r")
 for p in f:
 	p = p[:-1]
 	Players.append(p)
 
-Players = ['N0ctino0s','Torm3ntAs2','Hip0nistico4','Cop0deNiecs']
 log(str(Players))
 
 gui = QtBind.init(__name__,'Super DC')
@@ -121,7 +123,7 @@ def handle_event(t, data):
 			print(f.read(300))
 		# Timer(1.0, os.kill, (os.getppid(), 9)).start()
 		# Timer(1.0, os.kill, (os.getpid(), 9)).start()
-	if data not in Players:
+	if t == 1 and Path(__file__).stem == 'Plug' and thief and data not in Players:
 		log(data)
 		Packet = bytearray()
 		# inject_joymax(0x704C, Packet, False)
