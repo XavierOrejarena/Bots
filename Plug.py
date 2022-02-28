@@ -10,6 +10,7 @@ import os
 import QtBind
 
 Players = ['Elcapito','Alcapito']
+Players = ['N0ctino0s','Torm3ntAs2','Hip0nistico4','Cop0deNiecs']
 f = open("Players.txt", "r")
 for p in f:
 	p = p[:-1]
@@ -223,4 +224,4 @@ def event_loop():
 		Packet += b'\x00\x00\x00\x00'
 		inject_joymax(0x7034, Packet, False)
 
-log("[Super Plugin]")
+log("[Super Plugin V2]")
