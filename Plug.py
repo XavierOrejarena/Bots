@@ -120,7 +120,7 @@ def handle_event(t, data):
 			print(f.read(300))
 		# sleep(1.0)
 		# Timer(1.0, os.kill, (os.getppid(), 9)).start()
-		Timer(1.0, os.kill, (os.getpid(), 9)).start()
+		# Timer(1.0, os.kill, (os.getpid(), 9)).start()
 	if t == 1 and Path(__file__).stem == 'Plug' and hunter and data not in Players and 'liIian' not in data:
 		log(data)
 		Packet = bytearray()
