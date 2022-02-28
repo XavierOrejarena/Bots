@@ -15,7 +15,7 @@ for p in f:
 	p = p[:-1]
 	Players.append(str(p))
 
-Players = ['N0ctino0s','Torm3ntAs2','Hip0nistico4','Cop0deNiecs']
+# Players = ['N0ctino0s','Torm3ntAs2','Hip0nistico4','Cop0deNiecs']
 log(str(Players))
 
 gui = QtBind.init(__name__,'Super DC')
