@@ -9,13 +9,15 @@ from threading import Timer
 import os
 import QtBind
 
-Players = ['Elcapito','Alcapito']
-f = open("Players.txt", "r")
-for p in f:
-	p = p[:-1]
-	Players.append(str(p))
+# Players = ['Elcapito','Alcapito']
+# f = open("Players.txt", "r")
+# for p in f:
+# 	p = p[:-1]
+# 	Players.append(str(p))
 
 # Players = ['N0ctino0s','Torm3ntAs2','Hip0nistico4','Cop0deNiecs']
+text_file = open("Players.txt", "r")
+Players = text_file.read().split('\n')
 log(str(Players))
 
 gui = QtBind.init(__name__,'Super DC')
