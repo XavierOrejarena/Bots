@@ -9,7 +9,7 @@ from threading import Timer
 import os
 import QtBind
 
-Players = []
+Players = ['Elcapito','Alcapito']
 f = open("Players.txt", "r")
 for p in f:
 	p = p[:-1]
