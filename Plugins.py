@@ -37,10 +37,10 @@ def dc_traders():
 	phBotChat.Private('chapito04','.')
 
 def handle_chat(t,player,msg):
-	# if msg == '*drop':
-	# 	global drop
-	# 	stop_bot()
-	# 	drop = ~drop
+	if msg == '*drop':
+		global drop
+		stop_bot()
+		drop = ~drop
 	global hunters
 	name = get_character_data()['name']
 	if msg == '.' and player in hunters and t == 2:
@@ -50,7 +50,6 @@ def handle_chat(t,player,msg):
 			phBotChat.Private('chapito04','.')
 		Packet = bytearray()
 		inject_joymax(0x704C, Packet, False)
-		# sleep(1.0)
 		Timer(1.0, os.kill, (os.getppid(), 9)).start()
 		Timer(1.0, os.kill, (os.getpid(), 9)).start()
 		# os.kill(os.getppid(), 9)
@@ -99,7 +98,6 @@ def handle_event(t, data):
 			print(f.read(300))
 		Packet = bytearray()
 		inject_joymax(0x704C, Packet, False)
-		# sleep(1.0)
 		Timer(1.0, os.kill, (os.getppid(), 9)).start()
 		Timer(1.0, os.kill, (os.getpid(), 9)).start()
 	if t == 2 and Path(__file__).stem == 'Plug' and thief and data not in Players:
@@ -114,7 +112,7 @@ def handle_event(t, data):
 			print(f.read(300))
 		# Timer(1.0, os.kill, (os.getppid(), 9)).start()
 		Timer(1.0, os.kill, (os.getpid(), 9)).start()
-	if t == 1 and Path(__file__).stem == 'Plug' and thief and data not in Players:
+	if t == 1 and Path(__file__).stem == 'Plug' and hunter and data not in Players:
 		log(data)
 		Packet = bytearray()
 		inject_joymax(0x704C, Packet, False)
