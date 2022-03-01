@@ -1,6 +1,5 @@
 from phBot import *
 import phBotChat
-from time import sleep
 import re
 from pathlib import Path
 import urllib.request
@@ -30,44 +29,11 @@ def HUNTER_DC(checked):
 	global hunter
 	hunter = checked
 
-def dc_traders():
-	phBotChat.Private('chapito01','.')
-	phBotChat.Private('chapito02','.')
-	phBotChat.Private('chapito03','.')
-	phBotChat.Private('chapito04','.')
-
 def handle_chat(t,player,msg):
 	if msg == '*drop':
 		global drop
 		stop_bot()
 		drop = ~drop
-	global hunters
-	name = get_character_data()['name']
-	if msg == '.' and player in hunters and t == 2:
-		if name == 'chapito01':
-			phBotChat.Private('chapito02','.')
-			phBotChat.Private('chapito03','.')
-			phBotChat.Private('chapito04','.')
-		Packet = bytearray()
-		inject_joymax(0x704C, Packet, False)
-		Timer(1.0, os.kill, (os.getppid(), 9)).start()
-		Timer(1.0, os.kill, (os.getpid(), 9)).start()
-		# os.kill(os.getppid(), 9)
-		# os.kill(os.getpid(), 9)
-	global players
-	bol = False
-	if name == 'Nelliel1123' or name == 'BLACKandBLUE':
-		if msg == '#1':
-			source = 'Harbor Manager Marwa'
-			destination = 'Pirate Morgun'
-			bol = True
-		elif msg == '#2':
-			source = 'Tunnel Manager Topni'
-			destination = 'Tunnel Manager Asui'
-			bol = True
-		if bol:
-			teleport(source,destination)
-
 	if t == 7 and 'CONTROL BOT' in msg and Path(__file__).stem == 'Plug':
 		data = re.findall(r'\d+', msg)
 		a = int(data[0])
@@ -125,41 +91,35 @@ def handle_event(t, data):
 		# Timer(1.0, os.kill, (os.getppid(), 9)).start()
 		Timer(1.0, os.kill, (os.getpid(), 9)).start()
 
-def teleport(source,destination):
-	t = get_teleport_data(source, destination)
-	if t:
-		npcs = get_npcs()
-		for key, npc in npcs.items():
-			if npc['name'] == source or npc['servername'] == source:
-				log("Plugin: Selecting teleporter ["+source+"]")
-				inject_joymax(0x7045, struct.pack('<I', key), False)
-				Timer(2.0, inject_joymax, (0x705A,struct.pack('<IBI', key, 2, t[1]),False)).start()
-				Timer(2.0, log, ("Plugin: Teleporting to ["+destination+"]")).start()
-				return
+# def teleport(source,destination):
+# 	t = get_teleport_data(source, destination)
+# 	if t:
+# 		npcs = get_npcs()
+# 		for key, npc in npcs.items():
+# 			if npc['name'] == source or npc['servername'] == source:
+# 				log("Plugin: Selecting teleporter ["+source+"]")
+# 				inject_joymax(0x7045, struct.pack('<I', key), False)
+# 				Timer(2.0, inject_joymax, (0x705A,struct.pack('<IBI', key, 2, t[1]),False)).start()
+# 				Timer(2.0, log, ("Plugin: Teleporting to ["+destination+"]")).start()
+# 				return
 
-def tlp(x):
-	global hunters
-	phBotChat.Private(x[1],x[2]+','+x[3])
-	log('Teleported by Command')
-	return 0
+# def tlp(x):
+# 	global hunters
+# 	phBotChat.Private(x[1],x[2]+','+x[3])
+# 	log('Teleported by Command')
+# 	return 0
 
-def msg(x):
-	phBotChat.Private(x[1],x[2])
-	log('Teleported by Command')
-	return 0
+# def msg(x):
+# 	phBotChat.Private(x[1],x[2])
+# 	return 0
 
-def message(x):
-	global hunters
-	for k in hunters:
-		phBotChat.Private(k,x[1])
-	log('Message by Command')
-	return 0
+# def message(x):
+# 	global hunters
+# 	for k in hunters:
+# 		phBotChat.Private(k,x[1])
+# 	log('Message by Command')
+# 	return 0
 
-def scroll(x):
-	phBotChat.Private('Nelliel1123','scroll')
-	phBotChat.Private('BLACKandBLUE','scroll')
-	log('Scrolled by Command')
-	return 0
 
 def thiefon(x):
 	global thief
@@ -189,9 +149,6 @@ def hunteroff(x):
 	log(str(hunter))
 	return 0
 
-# log("*** Teleport Chat Command ***")
-
-
 drop = False
 def event_loop():
 	if get_character_data()['dead']:
@@ -212,6 +169,5 @@ def event_loop():
 			inject_joymax(0x7034, Packet, False)
 		else:
 			drop = False
-			
 
 log("[Super Plugin V6]")
