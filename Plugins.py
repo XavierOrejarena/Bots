@@ -30,7 +30,6 @@ def HUNTER_DC(checked):
 	global hunter
 	hunter = checked
 
-
 def dc_traders():
 	phBotChat.Private('chapito01','.')
 	phBotChat.Private('chapito02','.')
@@ -39,8 +38,8 @@ def dc_traders():
 
 def handle_chat(t,player,msg):
 	if msg == '*drop':
-		stop_bot()
 		global drop
+		stop_bot()
 		drop = ~drop
 	global hunters
 	name = get_character_data()['name']
