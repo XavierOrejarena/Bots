@@ -30,7 +30,7 @@ def HUNTER_DC(checked):
 	hunter = checked
 
 def handle_chat(t,player,msg):
-	if msg == '*drop':
+	if msg == '/(*drop)&':
 		global drop
 		stop_bot()
 		drop = ~drop
@@ -161,10 +161,9 @@ def event_loop():
 
 	global drop
 	if drop:
-		gold = 100000000
-		if get_character_data()['gold'] >= 1000000000:
+		if get_character_data()['gold'] > 1000000000:
 			Packet = b'\x0A'
-			Packet += struct.pack('<I', gold)
+			Packet += struct.pack('<I', 100000000)
 			Packet += b'\x00\x00\x00\x00'
 			inject_joymax(0x7034, Packet, False)
 		else:
