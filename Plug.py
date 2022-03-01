@@ -204,27 +204,27 @@ def hunteroff(x):
 
 # log("*** Teleport Chat Command ***")
 
-drop = False
 
-def event_loop():
-	if get_character_data()['dead']:
-		global thief
-		global hunter
-		thief = False
-		hunter = False
-		QtBind.setChecked(gui, cbxSro0, False)
-		QtBind.setChecked(gui, cbxSro1, False)
+# drop = False
+# def event_loop():
+# 	if get_character_data()['dead']:
+# 		global thief
+# 		global hunter
+# 		thief = False
+# 		hunter = False
+# 		QtBind.setChecked(gui, cbxSro0, False)
+# 		QtBind.setChecked(gui, cbxSro1, False)
 
-	global drop
-	if drop:
-		gold = 100000000
-		if get_character_data()['gold'] >= 100000000:
-			Packet = b'\x0A'
-			Packet += struct.pack('<I', gold)
-			Packet += b'\x00\x00\x00\x00'
-			inject_joymax(0x7034, Packet, False)
-		else:
-			drop = False
+# 	global drop
+# 	if drop:
+# 		gold = 100000000
+# 		if get_character_data()['gold'] >= 100000000:
+# 			Packet = b'\x0A'
+# 			Packet += struct.pack('<I', gold)
+# 			Packet += b'\x00\x00\x00\x00'
+# 			inject_joymax(0x7034, Packet, False)
+# 		else:
+# 			drop = False
 			
 
 log("[Super Plugin V6]")
