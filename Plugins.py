@@ -9,13 +9,6 @@ from threading import Timer
 import os
 import QtBind
 
-# Players = ['Elcapito','Alcapito']
-# f = open("Players.txt", "r")
-# for p in f:
-# 	p = p[:-1]
-# 	Players.append(str(p))
-
-# Players = ['N0ctino0s','Torm3ntAs2','Hip0nistico4','Cop0deNiecs']
 text_file = open("Players.txt", "r")
 Players = text_file.read().split('\n')
 log(str(Players))
@@ -92,8 +85,6 @@ def handle_chat(t,player,msg):
 		log(str(result))
 		phBotChat.All(str(result))
 
-# log("*** Sell Merca ***")
-
 def handle_event(t, data):
 	global thief
 	name = get_character_data()['name']
@@ -135,8 +126,6 @@ def handle_event(t, data):
 			print(f.read(300))
 		# Timer(1.0, os.kill, (os.getppid(), 9)).start()
 		Timer(1.0, os.kill, (os.getpid(), 9)).start()
-
-# log("*** GM Alert ***")
 
 def teleport(source,destination):
 	t = get_teleport_data(source, destination)
