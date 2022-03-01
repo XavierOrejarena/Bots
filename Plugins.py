@@ -86,6 +86,7 @@ def handle_chat(t,player,msg):
 
 def handle_event(t, data):
 	global thief
+	global hunter
 	name = get_character_data()['name']
 	if t == 9 and Path(__file__).stem == 'Plug' and data != "[BOT]System" and data != "[GM]Event":
 		log(data)
