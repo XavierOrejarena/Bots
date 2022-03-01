@@ -109,9 +109,9 @@ def handle_event(t, data):
 # 	log('Teleported by Command')
 # 	return 0
 
-# def msg(x):
-# 	phBotChat.Private(x[1],x[2])
-# 	return 0
+def msg(x):
+	phBotChat.Private(x[1],x[2])
+	return 0
 
 # def message(x):
 # 	global hunters
