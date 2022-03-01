@@ -13,7 +13,7 @@ Players = text_file.read().split('\n')
 log(str(Players))
 
 gui = QtBind.init(__name__,'Super DC')
-button1 = QtBind.createButton(gui, 'dc_traders', 'DC ALL TRADERS', 100, 120)
+# button1 = QtBind.createButton(gui, 'dc_traders', 'DC ALL TRADERS', 100, 120)
 cbxSro0 = QtBind.createCheckBox(gui,'THIEF_DC','THIEF DC',10,10)
 cbxSro1 = QtBind.createCheckBox(gui,'HUNTER_DC','HUNTER DC',10,40)
 QtBind.setChecked(gui, cbxSro0, True)
@@ -162,7 +162,7 @@ def event_loop():
 	global drop
 	if drop:
 		gold = 100000000
-		if get_character_data()['gold'] >= 100000000:
+		if get_character_data()['gold'] >= 1000000000:
 			Packet = b'\x0A'
 			Packet += struct.pack('<I', gold)
 			Packet += b'\x00\x00\x00\x00'
