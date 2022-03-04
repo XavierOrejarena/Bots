@@ -193,6 +193,7 @@ Llegarán: $$USD";
         'title'        => "Si envían: $$USD",
         'message_text' => $message_text1,
         'description'  => "Llegarán: $$receive",
+        'parse_mode' => 'MarkDown',
         ];
         $results[] = [
         'type'         => 'article',
@@ -200,6 +201,7 @@ Llegarán: $$USD";
         'title'        => "Para que lleguen: $$USD",
         'message_text' => $message_text2,
         'description'  => "Deben enviar: $sent",
+        'parse_mode' => 'MarkDown',
         ];
     }
     else if ($signal == "/" || $signal == '\\') {
@@ -219,9 +221,10 @@ Llegarán: $$receive
 \xE2\x98\x95: ".number_format($BS, 2, ',', '')." Bs.
 Total: `".$Total."` Bs.",
     'description'  => "Deben enviar $sent",
+    'parse_mode' => 'MarkDown',
     ];
     }
-    apiRequest('answerInlineQuery', array('inline_query_id' => $inline_query['id'], 'results' => $results, 'cache_time' => 0, 'parse_mode' => 'MarkDown'));
+    apiRequest('answerInlineQuery', array('inline_query_id' => $inline_query['id'], 'results' => $results, 'cache_time' => 0));
 }
 
 if (php_sapi_name() == 'cli') {
