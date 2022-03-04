@@ -171,7 +171,7 @@ function processQuery($inline_query)
             $message_text1 = "Envían: $$USD
 Llegarán: $$receive
 \xE2\x98\x95: ".number_format($BS, 2, ',', '')." Bs.
-Total: ".$Total." Bs.";
+Total: `".$Total."` Bs.";
             if ((fmod($USD*$BS,    1) !== 0.00) ) {
                 $Total = number_format($USD*$BS, 2, ',', '');
             }else {
@@ -180,7 +180,7 @@ Total: ".$Total." Bs.";
             $message_text2 = "Envían: $$sent
 Llegarán: $$USD
 \xE2\x98\x95: ".number_format($BS, 2, ',', '')." Bs.
-Total: ".$Total." Bs.";
+Total: `".$Total."` Bs.";
         } else {
             $message_text1 = "Envían: $$USD
 Llegarán: $receive $";
@@ -217,7 +217,7 @@ Llegarán: $$USD";
     'message_text' => "Envían: $$sent
 Llegarán: $$receive
 \xE2\x98\x95: ".number_format($BS, 2, ',', '')." Bs.
-Total: ".$Total." Bs.",
+Total: `".$Total."` Bs.",
     'description'  => "Deben enviar $sent",
     ];
     }
@@ -268,7 +268,7 @@ function processMessage($message) {
                         $msg1 = "Envían: $$USD
 Llegarán: $$receive
 \xE2\x98\x95: ".number_format($BS, 2, ',', '')." Bs.
-Total: ".$Total." Bs.";
+Total: `".$Total."` Bs.";
                         if ((fmod($USD*$BS,    1) !== 0.00) ) {
                             $Total = number_format($USD*$BS, 2, ',', '');
                         }else {
@@ -277,7 +277,7 @@ Total: ".$Total." Bs.";
                         $msg2 = "Envían: $$sent
 Llegarán: $USD $
 \xE2\x98\x95: ".number_format($BS, 2, ',', '')." Bs.
-Total: ".$Total." Bs.";
+Total: `".$Total."` Bs.";
                     } else {
                         $msg1 = "Envían: $$USD
 Llegarán: $$receive";
