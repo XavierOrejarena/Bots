@@ -17,7 +17,8 @@ function gen_uuid() {
 }
 
 function sendMessage($chat_id, $text) {
-    apiRequest('sendMessage', ['chat_id' => $chat_id, 'text' => "'".$text."'", 'parse_mode' => 'MarkDown']);
+    $MarkDown = 'MarkDown';
+    apiRequest('sendMessage', ['chat_id' => $chat_id, 'text' => $text, 'parse_mode' => $MarkDown]);
 }
 
 function saveUser($user) {
