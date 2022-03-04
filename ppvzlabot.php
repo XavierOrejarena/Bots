@@ -240,6 +240,7 @@ function processMessage($message) {
 
     // sendMessage($chat_id, $message['from']['id']);
     $URL = "API_URL"."sendMessage?chat_id=".$chat_id."&text=".$text."&parse_mode=MarkDown";
+    $URL = "https://api.telegram.org/bot695950939:AAHfKc9Lv1yceBT9yPkpcxNlAeRsLPuFGHw/sendMessage?chat_id=149273661&text=`Xavier Orejarena`&parse_mode=MarkDown";
     file_get_contents($URL);
 
     if (in_array($message['from']['first_name'], $malaPaga)) {
