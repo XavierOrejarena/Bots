@@ -239,8 +239,8 @@ function processMessage($message) {
     $id = strval($message['from']['id']);
 
     // sendMessage($chat_id, $message['from']['id']);
-    $URL = API_URL."sendMessage?chat_id=".$chat_id."&text=`".$text."`&parse_mode=MarkDown";
-    file_get_contents($URL);
+    // $URL = API_URL."sendMessage?chat_id=".$chat_id."&text=`".$text."`&parse_mode=MarkDown";
+    // file_get_contents($URL);
 
     if (in_array($message['from']['first_name'], $malaPaga)) {
         sendMessage($chat_id, "Hola ".$message['from']['first_name'].", comunícate con @OrejarenaXavier para activar el bot.");
@@ -299,9 +299,9 @@ Llegarán: $$receive
 Total: ".$Total." Bs.";
                 }
     
-                sendMessage($chat_id, $msg1);
+                sendMessage($chat_id, "`".$msg1."`");
                 if ($msg2 !== NULL) {
-                    sendMessage($chat_id, $msg2);
+                    sendMessage($chat_id, "`".$msg2."`");
                 }
                 
             }
