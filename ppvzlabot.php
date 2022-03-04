@@ -221,7 +221,7 @@ Total: `".$Total."` Bs.",
     'description'  => "Deben enviar $sent",
     ];
     }
-    apiRequest('answerInlineQuery', array('inline_query_id' => $inline_query['id'], 'results' => $results, 'cache_time' => 0));
+    apiRequest('answerInlineQuery', array('inline_query_id' => $inline_query['id'], 'results' => $results, 'cache_time' => 0, 'parse_mode' => 'MarkDown'));
 }
 
 if (php_sapi_name() == 'cli') {
