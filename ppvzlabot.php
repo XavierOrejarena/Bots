@@ -17,8 +17,7 @@ function gen_uuid() {
 }
 
 function sendMessage($chat_id, $text) {
-    $MarkDown = 'MarkDown';
-    apiRequest('sendMessage', ['chat_id' => $chat_id, 'text' => $text, 'parse_mode' => $MarkDown]);
+    apiRequest('sendMessage', ['chat_id' => $chat_id, 'text' => $text, 'parse_mode' => 'MarkDown']);
 }
 
 function saveUser($user) {
@@ -240,6 +239,7 @@ function processMessage($message) {
     $id = strval($message['from']['id']);
 
     // sendMessage($chat_id, $message['from']['id']);
+    file_get_contents("API_URL"."sendMessage?chat_id=".$chat_id."&text=".$text."&parse_mode=MarkDown");
 
     if (in_array($message['from']['first_name'], $malaPaga)) {
         sendMessage($chat_id, "Hola ".$message['from']['first_name'].", comunícate con @OrejarenaXavier para activar el bot.");
