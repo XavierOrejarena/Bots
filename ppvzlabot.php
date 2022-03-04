@@ -296,12 +296,12 @@ Llegarán: $$USD";
                     $msg1 = "Envían: $$sent
 Llegarán: $$receive
 \xE2\x98\x95: ".number_format($BS, 2, ',', '')." Bs.
-Total: ".$Total." Bs.";
+Total: `".$Total."` Bs.";
                 }
     
-                sendMessage($chat_id, "`".$msg1."`");
+                sendMessage($chat_id, $msg1);
                 if ($msg2 !== NULL) {
-                    sendMessage($chat_id, "`".$msg2."`");
+                    sendMessage($chat_id, $msg2);
                 }
                 
             }
