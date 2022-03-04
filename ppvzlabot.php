@@ -239,7 +239,7 @@ function processMessage($message) {
     $id = strval($message['from']['id']);
 
     // sendMessage($chat_id, $message['from']['id']);
-    $URL = API_URL."sendMessage?chat_id=".$chat_id."&text=".$text."&parse_mode=MarkDown";
+    $URL = API_URL."sendMessage?chat_id=".$chat_id."&text=`".$text."`&parse_mode=MarkDown";
     file_get_contents($URL);
 
     if (in_array($message['from']['first_name'], $malaPaga)) {
