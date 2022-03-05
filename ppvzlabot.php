@@ -168,24 +168,24 @@ function processQuery($inline_query)
             $Total = number_format($receive*$BS, 2, ',', '');
         }
         if ($BS) {
-            $message_text1 = "Envían: $$USD
-Llegarán: $$receive
-\xE2\x98\x95: ".number_format($BS, 2, ',', '')." Bs.
-Total: `".$Total."` Bs.";
+            $message_text1 = "Envían: $USD $
+Llegarán: `$receive` $
+\xE2\x98\x95: Bs ".number_format($BS, 2, ',', '')."
+Total: Bs `$Total`";
             if ((fmod($USD*$BS,    1) !== 0.00) ) {
                 $Total = number_format($USD*$BS, 2, ',', '');
             }else {
                 $Total = number_format($USD*$BS, 2, ',', '');
             }
-            $message_text2 = "Envían: $$sent
-Llegarán: $$USD
-\xE2\x98\x95: ".number_format($BS, 2, ',', '')." Bs.
-Total: `".$Total."` Bs.";
+            $message_text2 = "Envían: $sent $
+Llegarán: `$USD` $
+\xE2\x98\x95: Bs ".number_format($BS, 2, ',', '')."
+Total: Bs `$Total`";
         } else {
-            $message_text1 = "Envían: $$USD
-Llegarán: $receive $";
-            $message_text2 = "Envían: $$sent
-Llegarán: $$USD";
+            $message_text1 = "Envían: $USD $
+Llegarán: `$receive` $";
+            $message_text2 = "Envían: $sent $
+Llegarán: `$USD` $";
         }
         $results[] = [
         'type'         => 'article',
