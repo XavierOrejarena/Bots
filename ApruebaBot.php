@@ -222,7 +222,7 @@ function processMessage($message) {
     sendMessage($chat_id, "Hola ".$message['from']['first_name'].", solo escribe Monto*Tasa y espera el resultado.");
 
     } else {
-        $text = "echo (string)number_format($text, 2, ',', '');";
+        $text = "(string)number_format($text, 2, ',', '');";
         $text = (string) eval($text);
         sendMessage($chat_id, $text);
     }
