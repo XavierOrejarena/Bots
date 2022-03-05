@@ -216,7 +216,7 @@ Llegarán: `$USD` $";
     'type'         => 'article',
     'id'           => gen_uuid(),
     'title'        => "Para pagar $USD Bs.",
-    'message_text' => "Envían: $$sent
+    'message_text' => "Envían: $sent $
 Llegarán: `$receive` $
 \xE2\x98\x95: Bs ".number_format($BS, 2, ',', '')."
 Total: Bs `$Total`",
