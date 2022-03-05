@@ -285,7 +285,7 @@ Total: `".$Total."` Bs.";
                         $msg1 = "Envían: $$USD
 Llegarán: $`$receive`";
                         $msg2 = "Envían: $$sent
-Llegarán: $$USD";
+Llegarán: $`$USD`";
                     }
                 }
                 else if ($signal == "/" || $signal == '\\') {
