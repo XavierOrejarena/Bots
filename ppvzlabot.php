@@ -269,7 +269,7 @@ function processMessage($message) {
                     $sent = round((100*($USD+0.3)/94.6),2);
                     if ($BS) {
                         $msg1 = "Envían: $$USD
-Llegarán: `$$receive`
+Llegarán: $`$receive`
 \xE2\x98\x95: ".number_format($BS, 2, ',', '')." Bs.
 Total: `".$Total."` Bs.";
                         if ((fmod($USD*$BS,    1) !== 0.00) ) {
@@ -297,7 +297,7 @@ Llegarán: $$USD";
                         $Total = number_format($USD, 2, ',', '');
                     }
                     $msg1 = "Envían: $$sent
-Llegarán: `$$receive`
+Llegarán: $`$receive`
 \xE2\x98\x95: ".number_format($BS, 2, ',', '')." Bs.
 Total: `".$Total."` Bs.";
                 }
