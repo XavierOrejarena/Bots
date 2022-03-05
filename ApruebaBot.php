@@ -223,7 +223,7 @@ function processMessage($message) {
 
     } else {
         $text = "echo (string)number_format($text, 2, ',', '');";
-        $text = eval($text);
+        $text = (string) eval($text);
         sendMessage($chat_id, $text);
     }
 }
