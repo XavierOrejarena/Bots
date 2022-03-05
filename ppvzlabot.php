@@ -268,24 +268,24 @@ function processMessage($message) {
                     }
                     $sent = round((100*($USD+0.3)/94.6),2);
                     if ($BS) {
-                        $msg1 = "Envían: $$USD
-Llegarán: $`$receive`
-\xE2\x98\x95: ".number_format($BS, 2, ',', '')." Bs.
-Total: `".$Total."` Bs.";
+                        $msg1 = "Envían: $USD $
+Llegarán: `$receive` $
+\xE2\x98\x95: Bs".number_format($BS, 2, ',', '')."
+Total: Bs `$Total`";
                         if ((fmod($USD*$BS,    1) !== 0.00) ) {
                             $Total = number_format($USD*$BS, 2, ',', '');
                         }else {
                             $Total = number_format($USD*$BS, 2, ',', '');
                         }
-                        $msg2 = "Envían: $$sent
+                        $msg2 = "Envían: $sent $
 Llegarán: `$USD` $
 \xE2\x98\x95: ".number_format($BS, 2, ',', '')." Bs.
 Total: `".$Total."` Bs.";
                     } else {
-                        $msg1 = "Envían: $$USD
-Llegarán: $`$receive`";
-                        $msg2 = "Envían: $$sent
-Llegarán: $`$USD`";
+                        $msg1 = "Envían: $USD $
+Llegarán: `$receive` $";
+                        $msg2 = "Envían: $sent $
+Llegarán: `$USD` $";
                     }
                 }
                 else if ($signal == "/" || $signal == '\\') {
@@ -297,9 +297,9 @@ Llegarán: $`$USD`";
                         $Total = number_format($USD, 2, ',', '');
                     }
                     $msg1 = "Envían: $$sent
-Llegarán: $`$receive`
-\xE2\x98\x95: ".number_format($BS, 2, ',', '')." Bs.
-Total: `".$Total."` Bs.";
+Llegarán: `$receive` $
+\xE2\x98\x95: Bs ".number_format($BS, 2, ',', '')."
+Total: Bs `$Total`";
                 }
     
                 sendMessage($chat_id, $msg1);
