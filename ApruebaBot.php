@@ -146,8 +146,8 @@ function processQuery($inline_query)
         $results[] = [
             'type'         => 'article',
             'id'           => '0',
-            'title'        => $OriginalText." = $text",
-            'message_text' => $OriginalText." = "."`$text`",
+            'title'        => $OriginalText.' = $text',
+            'message_text' => '`$text`',
             'parse_mode'   => 'MarkDown',
         ];
     }
@@ -157,7 +157,7 @@ function processQuery($inline_query)
             'type'         => 'article',
             'id'           => '0',
             'title'        => 'Esperando una consulta...',
-            'message_text' => '5*7+50-4'.'`81`',
+            'message_text' => '`81`',
             'description'  => 'Ejemplo: 5*7+50-4',
             'parse_mode'   => 'MarkDown',
         ];
