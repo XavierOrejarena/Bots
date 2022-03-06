@@ -142,7 +142,7 @@ function processQuery($inline_query)
         $text = $inline_query['query'];
         $OriginalText = $text;
         eval('$text = '.$text.';');
-        $text = '`'.number_format($text, 2, ',', '').'`';
+        $text = number_format($text, 2, ',', '');
         $results[] = [
             'type'         => 'article',
             'id'           => '0',
