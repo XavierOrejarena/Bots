@@ -140,11 +140,17 @@ function processQuery($inline_query)
     $results = [];
     if (!empty($inline_query['query'])) {
         $text = $inline_query['query'];
-        $text   = str_replace('x','*',$text);
-        $USD = str_word_count($text, 1, '0123456789.')[0];
-        $BS = str_word_count($text, 1, '0123456789.')[1];
-        $signal = str_word_count($text, 1, '*xX/\def')[0];
-        $BS = pow(1000,strlen(stristr($BS, 'k')))*(real)$BS;
+        $OriginalText = $text;
+        eval('$text = '.$text.';');
+        $text = '`'.number_format($text, 2, ',', '').'`';
+        $results[] = [
+            'type'         => 'article',
+            'id'           => '0',
+            'title'        => $text,
+            'message_text' => $OriginalText,
+            'description'  => "`".$text."`",
+            'parse_mode' => 'MarkDown',
+        ];
     }
 
     if (empty($inline_query['query'])) {
@@ -152,57 +158,10 @@ function processQuery($inline_query)
             'type'         => 'article',
             'id'           => '0',
             'title'        => 'Esperando una consulta...',
-            'message_text' => 'Tienes que escribir el monto*tasa.
-            Ejemplo: 50*7500',
-            'description'  => 'Ejemplo: 50*7500',
+            'message_text' => 'Indica cualquier operacion aritmetica lineal.
+            Ejemplo: 5*7+50-4',
+            'description'  => 'Ejemplo: 5*7+50-4',
         ];
-    }
-    else if ($signal == 'x' || $signal == '*' || is_null($signal) || $signal == 'X') {
-        $receive = round(($USD-$USD*(0.054)-0.3), 2);
-        $sent = round((100*($USD+0.3)/94.6),2);
-        if ($BS) {
-            $message_text1 = "Envían: $USD
-Llegarán: $receive $
-\xE2\x98\x95: $BS Bs.
-Total: ".number_format($receive*$BS, 2, ',', '')." Bs.";
-            $message_text2 = "Envían: $sent
-Llegarán: $USD $
-\xE2\x98\x95: $BS Bs.
-Total: ".number_format($USD*$BS, 2, ',', '')." Bs.";
-        } else {
-            $message_text1 = "Envían: $USD
-Llegarán: $receive $";
-            $message_text2 = "Envían: $sent
-Llegarán: $USD $";
-        }
-        $results[] = [
-        'type'         => 'article',
-        'id'           => gen_uuid(),
-        'title'        => "Si envían: $USD $",
-        'message_text' => $message_text1,
-        'description'  => "Llegaran: $receive",
-        ];
-        $results[] = [
-        'type'         => 'article',
-        'id'           => gen_uuid(),
-        'title'        => "Para que lleguen: $USD $",
-        'message_text' => $message_text2,
-        'description'  => "Deben enviar: $sent",
-        ];
-    }
-    else if ($signal == "/" || $signal == '\\') {
-        $sent = round((100*(($USD/$BS)+0.3)/94.6),2);
-        $receive = round($USD/$BS,2);
-        $results[] = [
-    'type'         => 'article',
-    'id'           => gen_uuid(),
-    'title'        => "Para pagar $USD Bs.",
-    'message_text' => "Envían: $sent $
-Llegarán: $receive $
-\xE2\x98\x95: $BS Bs.
-Total: ".number_format($USD, 2, ',', '')." Bs.",
-    'description'  => "Deben enviar $sent",
-    ];
     }
     apiRequest('answerInlineQuery', array('inline_query_id' => $inline_query['id'], 'results' => $results, 'cache_time' => 0));
 }
