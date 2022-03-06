@@ -148,7 +148,7 @@ function processQuery($inline_query)
             'id'           => '0',
             'title'        => $text,
             'message_text' => $OriginalText,
-            'description'  => "`".$text."`",
+            'description'  => $text,
             'parse_mode' => 'MarkDown',
         ];
     }
