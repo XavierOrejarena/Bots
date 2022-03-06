@@ -182,7 +182,7 @@ function processMessage($message) {
     } else {
         eval('$text = '.$text.';');
         $text = '`'.number_format($text, 2, ',', '').'`';
-        sendMessage($chat_id, $text);
+        sendMessage($chat_id, 'Hi');
     }
 }
 
@@ -191,7 +191,7 @@ $update = json_decode($content, true);
 
 if (isset($update['message'])) {
     processMessage($update['message']);
-    saveUser($update['message']['from']);
+    // saveUser($update['message']['from']);
 }
 
 if (isset($update['inline_query'])) {
@@ -200,7 +200,7 @@ if (isset($update['inline_query'])) {
     // }else {
         // sendMessage($update['inline_query']['from']['id'], "Este bot es privado, para usarlo escribir a @XavierOrejarena");
     // }
-    saveUser($update['inline_query']['from']);
+    // saveUser($update['inline_query']['from']);
 }
 
 ?>
