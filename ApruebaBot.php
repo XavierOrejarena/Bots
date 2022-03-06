@@ -146,7 +146,7 @@ function processQuery($inline_query)
         $results[] = [
             'type'         => 'article',
             'id'           => '0',
-            'title'        => "hello",
+            'title'        => $OriginalText,
             'message_text' => "hola",
             'description'  => "hi",
             'parse_mode'   => 'MarkDown',
