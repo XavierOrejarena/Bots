@@ -146,10 +146,10 @@ function processQuery($inline_query)
         $results[] = [
             'type'         => 'article',
             'id'           => '0',
-            'title'        => $text,
-            'message_text' => $OriginalText,
-            'description'  => $text,
-            'parse_mode' => 'MarkDown',
+            'title'        => "hello",
+            'message_text' => "hola",
+            'description'  => "hi",
+            'parse_mode'   => 'MarkDown',
         ];
     }
 
@@ -160,7 +160,7 @@ function processQuery($inline_query)
             'title'        => 'Esperando una consulta...',
             'message_text' => "`81`",
             'description'  => 'Ejemplo: 5*7+50-4',
-            'parse_mode' => 'MarkDown',
+            'parse_mode'   => 'MarkDown',
         ];
     }
     apiRequest('answerInlineQuery', array('inline_query_id' => $inline_query['id'], 'results' => $results, 'cache_time' => 0));
