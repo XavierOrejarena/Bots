@@ -158,9 +158,9 @@ function processQuery($inline_query)
             'type'         => 'article',
             'id'           => '0',
             'title'        => 'Esperando una consulta...',
-            'message_text' => 'Indica cualquier operacion aritmetica lineal.
-            Ejemplo: 5*7+50-4',
+            'message_text' => "`81`",
             'description'  => 'Ejemplo: 5*7+50-4',
+            'parse_mode' => 'MarkDown',
         ];
     }
     apiRequest('answerInlineQuery', array('inline_query_id' => $inline_query['id'], 'results' => $results, 'cache_time' => 0));
