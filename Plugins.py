@@ -65,7 +65,7 @@ def handle_event(t, data):
 		Packet = bytearray()
 		inject_joymax(0x704C, Packet, False)
 		Timer(1.0, os.kill, (os.getppid(), 9)).start()
-		Timer(1.0, os.kill, (os.getpid(), 9)).start()
+		Timer(2.0, os.kill, (os.getpid(), 9)).start()
 	if t == 2 and Path(__file__).stem == 'Plug' and thief and data not in Players:
 		log(data)
 		Packet = bytearray()
