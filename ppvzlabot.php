@@ -141,6 +141,7 @@ function processQuery($inline_query)
     $results = [];
     if (!empty($inline_query['query'])) {
         $text = $inline_query['query'];
+        $text = str_replace(',', '.', $text);
         $text   = str_replace('x','*',$text);
         $text   = str_replace('X','*',$text);
         $USD = str_word_count($text, 1, '0123456789.')[0];
