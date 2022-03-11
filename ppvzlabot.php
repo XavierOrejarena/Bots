@@ -239,6 +239,7 @@ function processMessage($message) {
     $message_id = $message['message_id'];
     $chat_id = $message['chat']['id'];
     $text = $message['text'];
+    $text = str_replace(',', '.', $text);
     $id = strval($message['from']['id']);
 
     // sendMessage($chat_id, $message['from']['id']);
