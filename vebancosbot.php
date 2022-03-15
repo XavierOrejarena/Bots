@@ -270,27 +270,27 @@ function processMessage($message) {
             $cuenta = $code;
         }
         if(strpos($code, '0414') !== false){
-            $PagoMovil = substr($code, strpos($code, '0414'), 10);
+            $PagoMovil = substr($code, strpos($code, '0414'), 11);
             if (!is_numeric($PagoMovil)){
                 $PagoMovil = '';
             }
         }else if(strpos($code, '0424') !== false){
-            $PagoMovil = substr($code, strpos($code, '0424'), 10);
+            $PagoMovil = substr($code, strpos($code, '0424'), 11);
             if (!is_numeric($PagoMovil)){
                 $PagoMovil = '';
             }
         }else if(strpos($code, '0416') !== false){
-            $PagoMovil = substr($code, strpos($code, '0416'), 10);
+            $PagoMovil = substr($code, strpos($code, '0416'), 11);
             if (!is_numeric($PagoMovil)){
                 $PagoMovil = '';
             }
         }else if(strpos($code, '0426') !== false){
-            $PagoMovil = substr($code, strpos($code, '0426'), 10);
+            $PagoMovil = substr($code, strpos($code, '0426'), 11);
             if (!is_numeric($PagoMovil)){
                 $PagoMovil = '';
             }
         }else if(strpos($code, '0412') !== false){
-            $PagoMovil = substr($code, strpos($code, '0412'), 10);
+            $PagoMovil = substr($code, strpos($code, '0412'), 11);
             if (!is_numeric($PagoMovil)){
                 $PagoMovil = '';
             }
