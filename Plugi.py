@@ -66,58 +66,30 @@ def handle_event(t, data):
 		inject_joymax(0x704C, Packet, False)
 		Timer(1.0, os.kill, (os.getppid(), 9)).start()
 		Timer(2.0, os.kill, (os.getpid(), 9)).start()
-	if t == 2 and Path(__file__).stem == 'Plug' and thief and data not in Players:
-		Packet = bytearray()
-		inject_joymax(0x704C, Packet, False)
-		log(data)
+	elif t == 2 and Path(__file__).stem == 'Plug' and thief and data not in Players:
 		lru = '_LHuSAEVa7VbqI/sendMessage?chat_id=774088349&text='
 		url = 'https://api.telegram.org/bot1221990015:AAHlL2X_NInc3xNo9MEnX' + lru
 		zona = '| '+str(get_zone_name(get_position()['region']))
 		url = url + urllib.parse.quote(name + " [THIEF] -> " + data + zona)
 		with urllib.request.urlopen(url) as f:
 			print(f.read(300))
-		Timer(1.0, os.kill, (os.getpid(), 9)).start()
-	if t == 1 and Path(__file__).stem == 'Plug' and hunter and data not in Players:
-		Packet = bytearray()
-		inject_joymax(0x704C, Packet, False)
+		inject_joymax(0x704C, bytearray(), False)
 		log(data)
+		Timer(1.0, os.kill, (os.getpid(), 9)).start()
+	elif t == 1 and Path(__file__).stem == 'Plug' and hunter and data not in Players:
 		lru = '_LHuSAEVa7VbqI/sendMessage?chat_id=774088349&text='
 		url = 'https://api.telegram.org/bot1221990015:AAHlL2X_NInc3xNo9MEnX' + lru
 		zona = '| '+str(get_zone_name(get_position()['region']))
 		url = url + urllib.parse.quote(name + " [TRADER/HUNTER] -> " + data + zona)
 		with urllib.request.urlopen(url) as f:
 			print(f.read(300))
+		inject_joymax(0x704C, bytearray(), False)
+		log(data)
 		Timer(1.0, os.kill, (os.getpid(), 9)).start()
-
-# def teleport(source,destination):
-# 	t = get_teleport_data(source, destination)
-# 	if t:
-# 		npcs = get_npcs()
-# 		for key, npc in npcs.items():
-# 			if npc['name'] == source or npc['servername'] == source:
-# 				log("Plugin: Selecting teleporter ["+source+"]")
-# 				inject_joymax(0x7045, struct.pack('<I', key), False)
-# 				Timer(2.0, inject_joymax, (0x705A,struct.pack('<IBI', key, 2, t[1]),False)).start()
-# 				Timer(2.0, log, ("Plugin: Teleporting to ["+destination+"]")).start()
-# 				return
-
-# def tlp(x):
-# 	global hunters
-# 	phBotChat.Private(x[1],x[2]+','+x[3])
-# 	log('Teleported by Command')
-# 	return 0
 
 def msg(x):
 	phBotChat.Private(x[1],x[2])
 	return 0
-
-# def message(x):
-# 	global hunters
-# 	for k in hunters:
-# 		phBotChat.Private(k,x[1])
-# 	log('Message by Command')
-# 	return 0
-
 
 def thiefon(x):
 	global thief
