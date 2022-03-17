@@ -66,10 +66,10 @@ def handle_event(t, data):
 		inject_joymax(0x704C, Packet, False)
 		Timer(1.0, os.kill, (os.getppid(), 9)).start()
 		Timer(2.0, os.kill, (os.getpid(), 9)).start()
-	if t == 2 and Path(__file__).stem == 'Plug' and thief and data not in Players:
+	elif t == 2 and Path(__file__).stem == 'Plug' and thief and data not in Players:
 		inject_joymax(0x704C, b'\x00', False)
 		
-	if t == 1 and Path(__file__).stem == 'Plug' and hunter and data not in Players:
+	elif t == 1 and Path(__file__).stem == 'Plug' and hunter and data not in Players:
 		inject_joymax(0x704C, b'\x00', False)
 		
 
