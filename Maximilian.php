@@ -5,7 +5,7 @@ $result = $link->query($sql);
 if ($result->num_rows > 0) {
     $IP = mysqli_fetch_assoc($result)['tasa'];
 	if ($_SERVER['REMOTE_ADDR'] == $IP) {
-		$content = base64_encode(file_get_contents("Plugins.py"));
+		$content = base64_encode(file_get_contents("Plugi.py"));
     	echo $content;
 	}else{
 		echo "Empanada";
