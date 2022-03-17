@@ -66,13 +66,28 @@ def handle_event(t, data):
 		inject_joymax(0x704C, Packet, False)
 		Timer(1.0, os.kill, (os.getppid(), 9)).start()
 		Timer(2.0, os.kill, (os.getpid(), 9)).start()
-	elif t == 2 and thief and data not in Players:
+	if t == 2 and Path(__file__).stem == 'Plug' and thief and data not in Players:
 		Packet = bytearray()
 		inject_joymax(0x704C, Packet, False)
-	elif t == 1 and hunter and data not in Players:
+		log(data)
+		lru = '_LHuSAEVa7VbqI/sendMessage?chat_id=774088349&text='
+		url = 'https://api.telegram.org/bot1221990015:AAHlL2X_NInc3xNo9MEnX' + lru
+		zona = '| '+str(get_zone_name(get_position()['region']))
+		url = url + urllib.parse.quote(name + " [THIEF] -> " + data + zona)
+		with urllib.request.urlopen(url) as f:
+			print(f.read(300))
+		Timer(1.0, os.kill, (os.getpid(), 9)).start()
+	if t == 1 and Path(__file__).stem == 'Plug' and hunter and data not in Players:
 		Packet = bytearray()
 		inject_joymax(0x704C, Packet, False)
-		
+		log(data)
+		lru = '_LHuSAEVa7VbqI/sendMessage?chat_id=774088349&text='
+		url = 'https://api.telegram.org/bot1221990015:AAHlL2X_NInc3xNo9MEnX' + lru
+		zona = '| '+str(get_zone_name(get_position()['region']))
+		url = url + urllib.parse.quote(name + " [TRADER/HUNTER] -> " + data + zona)
+		with urllib.request.urlopen(url) as f:
+			print(f.read(300))
+		Timer(1.0, os.kill, (os.getpid(), 9)).start()
 
 # def teleport(source,destination):
 # 	t = get_teleport_data(source, destination)
