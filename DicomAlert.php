@@ -24,8 +24,9 @@ if ($result->num_rows > 0) {
 		if (!preg_match('/[a-zA-Z]/', $text)) {
 			$sql = "UPDATE DICOM SET tasa = '$text' WHERE id = 1";
 			if ($link->query($sql) === TRUE) {
-				file_get_contents("https://api.telegram.org/bot7$token/sendMessage?chat_id=$chat_id&text=$text");
+				// file_get_contents("https://api.telegram.org/bot7$token/sendMessage?chat_id=$chat_id&text=$text");
 				// file_get_contents("https://api.telegram.org/bot7$token/sendMessage?chat_id=$chat_id&text=old: $OldText");
+				file_get_contents("https://api.telegram.org/bot7$token/sendMessage?chat_id=149273661&text=$OldText $text"); 
 			} else {
 				file_get_contents("https://api.telegram.org/bot7$token/sendMessage?chat_id=149273661&text=error".$conn->error); 
 			}
