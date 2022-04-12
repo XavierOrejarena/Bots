@@ -18,7 +18,7 @@ $result = $link->query($sql);
 
 // echo strlen($text); 
 
-if ($result->num_rows > 0) {
+if ($result->num_rows > 0 & $text != "") {
     $OldText = mysqli_fetch_assoc($result)['tasa'];
 	if ($text !== $OldText) {
 		if (!preg_match('/[a-zA-Z]/', $text)) {
