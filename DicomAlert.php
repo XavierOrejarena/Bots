@@ -26,7 +26,7 @@ if ($result->num_rows > 0) {
 			if ($link->query($sql) === TRUE) {
 				// file_get_contents("https://api.telegram.org/bot7$token/sendMessage?chat_id=$chat_id&text=$text");
 				// file_get_contents("https://api.telegram.org/bot7$token/sendMessage?chat_id=$chat_id&text=old: $OldText");
-				file_get_contents("https://api.telegram.org/bot7$token/sendMessage?chat_id=149273661&text=$OldText $text"); 
+				file_get_contents("https://api.telegram.org/bot7$token/sendMessage?chat_id=149273661&text=OLD:$OldText NEW:$text"); 
 			} else {
 				file_get_contents("https://api.telegram.org/bot7$token/sendMessage?chat_id=149273661&text=error".$conn->error); 
 			}
