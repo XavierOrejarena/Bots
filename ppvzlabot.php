@@ -169,7 +169,7 @@ function processQuery($inline_query)
             $Total = number_format($receive*$BS, 2, ',', '');
         }
         if ($BS) {
-            $message_text1 = "Envían: $USD $
+            $message_text1 = "Envían: `$USD` $
 Llegarán: `$receive` $
 \xE2\x98\x95: Bs ".number_format($BS, 2, ',', '')."
 Total: Bs `$Total`";
@@ -178,14 +178,14 @@ Total: Bs `$Total`";
             }else {
                 $Total = number_format($USD*$BS, 2, ',', '');
             }
-            $message_text2 = "Envían: $sent $
+            $message_text2 = "Envían: `$sent` $
 Llegarán: `$USD` $
 \xE2\x98\x95: Bs ".number_format($BS, 2, ',', '')."
 Total: Bs `$Total`";
         } else {
-            $message_text1 = "Envían: $USD $
+            $message_text1 = "Envían: `$USD` $
 Llegarán: `$receive` $";
-            $message_text2 = "Envían: $sent $
+            $message_text2 = "Envían: `$sent` $
 Llegarán: `$USD` $";
         }
         $results[] = [
@@ -217,7 +217,7 @@ Llegarán: `$USD` $";
     'type'         => 'article',
     'id'           => gen_uuid(),
     'title'        => "Para pagar $USD Bs.",
-    'message_text' => "Envían: $sent $
+    'message_text' => "Envían: `$sent` $
 Llegarán: `$receive` $
 \xE2\x98\x95: Bs ".number_format($BS, 2, ',', '')."
 Total: Bs `$Total`",
