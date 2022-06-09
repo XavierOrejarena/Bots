@@ -299,16 +299,16 @@ function processMessage($message) {
         }
     }
     if ($nombre != null or $nombre != ''){
-        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $nombre));
+        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => '`'.$nombre.'`'));
     }
     if ($cuenta != null or $cuenta != ''){
-        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $cuenta));
+        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => '`'.$cuenta.'`'));
     }
     if ($cedula != null or $cedula != ''){
-        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $cedula));
+        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => '`'.$cedula.'`'));
     }
     if ($PagoMovil != null or $PagoMovil != ''){
-        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $PagoMovil));
+        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => '`'.$PagoMovil.'`'));
     }
   }
 }
