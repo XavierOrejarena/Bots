@@ -254,6 +254,7 @@ function processMessage($message) {
     $text = str_ireplace("Ci", "", $text);
     $text = str_ireplace("cel", "", $text);
     $text = str_ireplace(" v ", "", $text);
+    $text = str_ireplace("cte", "", $text);
     // print_r($text);
     // preg_match_all('/[a-zA-Z]/', $text, $matches);
     $nombre = preg_replace("/[^a-zA-Z ]+/", "", $text);
