@@ -298,6 +298,9 @@ function processMessage($message) {
             }
         }
     }
+    if (($cuenta != null or $cuenta != '') && ($cedula != null or $cedula != '')){
+      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => '`'.$cuenta."\r\n".$cedula.'`', 'parse_mode' => 'Markdown'));
+    }
     if ($nombre != null or $nombre != ''){
         apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => '`'.$nombre.'`', 'parse_mode' => 'Markdown'));
     }
@@ -309,9 +312,6 @@ function processMessage($message) {
     }
     if ($PagoMovil != null or $PagoMovil != ''){
         apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => '`'.$PagoMovil.'`', 'parse_mode' => 'Markdown'));
-    }
-    if (($cuenta != null or $cuenta != '') && ($cedula != null or $cedula != '')){
-      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => '`'.$cuenta."\r\n".$cedula.'`', 'parse_mode' => 'Markdown'));
     }
   }
 }
