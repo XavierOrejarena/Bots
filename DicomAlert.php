@@ -9,7 +9,7 @@ preg_match_all('/<strong>/', $data, $matches, PREG_OFFSET_CAPTURE);
 $text = substr($data, $matches[0][6][1]+9, 10);
 $text = (string)$text;
 $token = '16396100:AAG_6y_pnkgYCKNRMyFVHow2eefR719DfCk';
-$chat_id = '@dicomalert';
+$chat_id = '@AlertaBCV';
 // $chat_id = 149273661;
 
 $sql = "SELECT tasa FROM DICOM WHERE id = 1";
