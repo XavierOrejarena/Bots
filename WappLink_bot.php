@@ -177,6 +177,7 @@ function processQuery($inline_query) {
         'title'        => $inline_query['query'],
         'message_text' => 'https://api.whatsapp.com/send?phone='.$text,
         'description'  => $text,
+        'disable_web_page_preview' => true,
     ];
   }
   apiRequest('answerInlineQuery', array('inline_query_id' => $query_id, 'results' => $results, 'cache_time' => 0, 'disable_web_page_preview' => true));
