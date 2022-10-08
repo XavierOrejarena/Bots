@@ -179,7 +179,7 @@ function processQuery($inline_query) {
         'description'  => $text,
     ];
   }
-  apiRequest('answerInlineQuery', array('inline_query_id' => $query_id, 'results' => $results, 'cache_time' => 0));
+  apiRequest('answerInlineQuery', array('inline_query_id' => $query_id, 'results' => $results, 'cache_time' => 0, 'disable_web_page_preview' => true));
 }
 
 
