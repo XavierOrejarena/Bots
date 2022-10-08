@@ -174,9 +174,9 @@ function processQuery($inline_query) {
       $results[] = [
         'type'         => 'article',
         'id'           => '0',
-        'title'        => 'Click para enviar link',
+        'title'        => $inline_query['query'],
         'message_text' => 'https://api.whatsapp.com/send?phone='.$text,
-        'description'  => $inline_query['query'],
+        'description'  => $text,
     ];
   }
   apiRequest('answerInlineQuery', array('inline_query_id' => $query_id, 'results' => $results, 'cache_time' => 0));
