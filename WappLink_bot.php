@@ -133,7 +133,7 @@ function processMessage($message) {
       
       Si eres de Venezuela el bot reemplaza el 0 por 58'));
     } else {
-      $text = preg_replace("/[^0-9]/", "", $text );
+      $text = preg_replace("/[^0-9]/", "", $text);
       $text = str_replace("(", "", $text);
       $text = str_replace(")", "", $text);
       $text = str_replace("-", "", $text);
@@ -167,14 +167,18 @@ function processQuery($inline_query) {
         'description'  => 'Ejemplo: 04121432059',
     ];
   } else {
-      $text = str_replace("(", "", $text);
-      $text = str_replace(")", "", $text);
-      $text = str_replace("-", "", $text);
-      $text = str_replace(" ", "", $text);
-      $text = str_replace("+", "", $text);
-      if ($text[0] == '0') {
-        $text = '58'.substr($text, 1);
-      }
+    $text = preg_replace("/[^0-9]/", "", $text);
+    $text = str_replace("(", "", $text);
+    $text = str_replace(")", "", $text);
+    $text = str_replace("-", "", $text);
+    $text = str_replace(" ", "", $text);
+    $text = str_replace("+", "", $text);
+    $text = str_replace(".", "", $text);
+    $text = str_replace("_", "", $text);
+    $text = str_replace(",", "", $text);
+    if ($text[0] == '0') {
+      $text = '58'.substr($text, 1);
+    }
 
       $results[] = [
         'type'         => 'article',
