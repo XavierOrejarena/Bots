@@ -149,6 +149,22 @@ function processMessage($message) {
   }
 }
 
+function processQuery($inline_query) {
+  $results = [];
+  $query_id = $inline_query['id'];
+  $msg = $inline_query['query'];
+  if (empty($msg)) {
+    $results[] = [
+        'type'         => 'article',
+        'id'           => '0',
+        'title'        => 'Esperando una consulta...',
+        'message_text' => 'Tienes que escribir el monto*tasa.
+        Ejemplo: 50*7500',
+        'description'  => 'Ejemplo: 50*7500',
+    ];
+  }
+  apiRequest('answerInlineQuery', array('inline_query_id' => $query_id, 'results' => $results, 'cache_time' => 0));
+}
 
 
 if (php_sapi_name() == 'cli') {
@@ -168,4 +184,8 @@ if (!$update) {
 
 if (isset($update["message"])) {
   processMessage($update["message"]);
+}
+
+if (isset($update['inline_query'])) {
+  processQuery($update['inline_query']);
 }
