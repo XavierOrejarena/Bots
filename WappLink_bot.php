@@ -152,15 +152,31 @@ function processMessage($message) {
 function processQuery($inline_query) {
   $results = [];
   $query_id = $inline_query['id'];
-  $msg = $inline_query['query'];
-  if (empty($msg)) {
+  $text = $inline_query['query'];
+  if (empty($text)) {
     $results[] = [
         'type'         => 'article',
         'id'           => '0',
         'title'        => 'Esperando una consulta...',
-        'message_text' => 'indique el nro de tlf de venezuela.
-        Ejemplo: 50*7500',
+        'message_text' => 'indique el nro de tlf de venezuela.',
         'description'  => 'Ejemplo: 04121432059',
+    ];
+  } else {
+      $text = str_replace("(", "", $text);
+      $text = str_replace(")", "", $text);
+      $text = str_replace("-", "", $text);
+      $text = str_replace(" ", "", $text);
+      $text = str_replace("+", "", $text);
+      if ($text[0] == '0') {
+        $text = '58'.substr($text, 1);
+      }
+
+      $results[] = [
+        'type'         => 'article',
+        'id'           => '0',
+        'title'        => 'Click para enviar link',
+        'message_text' => 'https://api.whatsapp.com/send?phone='.$text,
+        'description'  => $inline_query['query'],
     ];
   }
   apiRequest('answerInlineQuery', array('inline_query_id' => $query_id, 'results' => $results, 'cache_time' => 0));
