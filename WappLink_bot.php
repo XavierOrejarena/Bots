@@ -158,9 +158,9 @@ function processQuery($inline_query) {
         'type'         => 'article',
         'id'           => '0',
         'title'        => 'Esperando una consulta...',
-        'message_text' => 'Tienes que escribir el monto*tasa.
+        'message_text' => 'indique el nro de tlf de venezuela.
         Ejemplo: 50*7500',
-        'description'  => 'Ejemplo: 50*7500',
+        'description'  => 'Ejemplo: 04121432059',
     ];
   }
   apiRequest('answerInlineQuery', array('inline_query_id' => $query_id, 'results' => $results, 'cache_time' => 0));
