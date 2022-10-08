@@ -175,7 +175,8 @@ function processQuery($inline_query) {
         'type'         => 'article',
         'id'           => '0',
         'title'        => $inline_query['query'],
-        'message_text' => 'https://api.whatsapp.com/send?phone='.$text,
+        // 'message_text' => 'https://api.whatsapp.com/send?phone='.$text,
+        'message_text' => 'https://wa.me/'.$text,
         'description'  => $text,
         'disable_web_page_preview' => true,
     ];
