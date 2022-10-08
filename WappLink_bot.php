@@ -138,6 +138,7 @@ function processMessage($message) {
       $text = str_replace("-", "", $text);
       $text = str_replace(" ", "", $text);
       $text = str_replace("+", "", $text);
+      $text = str_replace(".", "", $text);
       if ($text[0] == '0') {
         $text = '58'.substr($text, 1);
       }
