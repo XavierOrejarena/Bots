@@ -26,7 +26,7 @@ $text = substr($data, $matches[0][6][1], 100);
 // $result = $link->query($sql);
 
 
-echo strlen($text); 
+echo strlen($data); 
 
 // if ($result->num_rows > 0 && $text != "") {
 //     $OldText = mysqli_fetch_assoc($result)['tasa'];
