@@ -3,7 +3,7 @@
 // @DicomAlert
 // /usr/local/bin/php /home/xavier/public_html/DicomAlert.php
 include "connect.php";
-$data = file_get_contents("http://www.bcv.org.ve");
+// $data = file_get_contents("http://www.bcv.org.ve");
 $data = file_get_contents("https://bcv.org.ve");
 preg_match_all('/<strong>/', $data, $matches, PREG_OFFSET_CAPTURE);
 $text = substr($data, $matches[0][6][1]+9, 10);
