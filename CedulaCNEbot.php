@@ -166,7 +166,7 @@ function processMessage($message) {
       $persona['Direccion'] = substr($text, strpos($text,'F">')+3,strpos($text,"</font>")-strlen($text));
       $flattened = $persona;
       array_walk($flattened, function(&$value, $key) {
-          $value = "*{$key}*:{$value}";
+          $value = "*{$key}* :{$value}";
       });
       
       apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => implode("\n", $flattened), 'parse_mode' => 'markdown'));
