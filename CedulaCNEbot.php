@@ -136,35 +136,35 @@ function processMessage($message) {
       // stop now
     } else {
       $cedula = $text;
-      // $result = file_get_contents("http://www.cne.gob.ve/web/registro_electoral/ce.php/web/registro_electoral/imprimir_datos_elector.php?nacionalidad=V&cedula=$cedula", false);
+      $result = file_get_contents("http://www.cne.gob.ve/web/registro_electoral/ce.php/web/registro_electoral/imprimir_datos_elector.php?nacionalidad=V&cedula=$cedula", false);
 
-      // $persona = array();
+      $persona = array();
 
-      // preg_match_all('/<td align="left"><b>/', $result, $matches, PREG_OFFSET_CAPTURE);
-      // $text = substr($result, $matches[0][2][1], 100);
-      // $persona['Nombre'] = substr($text, strpos($text,"<b>")+3,strpos($text,"</b>")-strlen($text));
+      preg_match_all('/<td align="left"><b>/', $result, $matches, PREG_OFFSET_CAPTURE);
+      $text = substr($result, $matches[0][2][1], 100);
+      $persona['Nombre'] = substr($text, strpos($text,"<b>")+3,strpos($text,"</b>")-strlen($text));
 
-      // preg_match_all('/<td align="left">/', $result, $matches, PREG_OFFSET_CAPTURE);
-      // $text = substr($result, $matches[0][5][1], 100);
-      // $persona['Estado'] = substr($text, strpos($text,'">')+2,strpos($text,"</td>")-strlen($text));
+      preg_match_all('/<td align="left">/', $result, $matches, PREG_OFFSET_CAPTURE);
+      $text = substr($result, $matches[0][5][1], 100);
+      $persona['Estado'] = substr($text, strpos($text,'">')+2,strpos($text,"</td>")-strlen($text));
 
-      // preg_match_all('/<td align="left">/', $result, $matches, PREG_OFFSET_CAPTURE);
-      // $text = substr($result, $matches[0][7][1], 100);
-      // $persona['Municipio'] = substr($text, strpos($text,'">')+2,strpos($text,"</td>")-strlen($text));
+      preg_match_all('/<td align="left">/', $result, $matches, PREG_OFFSET_CAPTURE);
+      $text = substr($result, $matches[0][7][1], 100);
+      $persona['Municipio'] = substr($text, strpos($text,'">')+2,strpos($text,"</td>")-strlen($text));
 
 
-      // preg_match_all('/<td align="left">/', $result, $matches, PREG_OFFSET_CAPTURE);
-      // $text = substr($result, $matches[0][9][1], 100);
-      // $persona['Parroquia'] = substr($text, strpos($text,'">')+2,strpos($text,"</td>")-strlen($text));
+      preg_match_all('/<td align="left">/', $result, $matches, PREG_OFFSET_CAPTURE);
+      $text = substr($result, $matches[0][9][1], 100);
+      $persona['Parroquia'] = substr($text, strpos($text,'">')+2,strpos($text,"</td>")-strlen($text));
 
-      // preg_match_all('/<td align="left">/', $result, $matches, PREG_OFFSET_CAPTURE);
-      // $text = substr($result, $matches[0][11][1], 100);
-      // $persona['Centro'] = substr($text, strpos($text,'F">')+3,strpos($text,"</font>")-strlen($text));
+      preg_match_all('/<td align="left">/', $result, $matches, PREG_OFFSET_CAPTURE);
+      $text = substr($result, $matches[0][11][1], 100);
+      $persona['Centro'] = substr($text, strpos($text,'F">')+3,strpos($text,"</font>")-strlen($text));
 
-      // preg_match_all('/<td align="left">/', $result, $matches, PREG_OFFSET_CAPTURE);
-      // $text = substr($result, $matches[0][13][1], 300);
-      // $persona['Direccion'] = substr($text, strpos($text,'F">')+3,strpos($text,"</font>")-strlen($text));
-      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $text));
+      preg_match_all('/<td align="left">/', $result, $matches, PREG_OFFSET_CAPTURE);
+      $text = substr($result, $matches[0][13][1], 300);
+      $persona['Direccion'] = substr($text, strpos($text,'F">')+3,strpos($text,"</font>")-strlen($text));
+      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $persona));
     }
   } else {
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'I understand only text messages'));
