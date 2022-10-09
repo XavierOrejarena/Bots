@@ -37,6 +37,7 @@ if ($result->num_rows > 0 && $text != "") {
 
 	}
 } else {
+	file_get_contents("https://api.telegram.org/bot7$token/sendMessage?chat_id=149273661&text=$text"); 
     file_get_contents("https://api.telegram.org/bot7$token/sendMessage?chat_id=149273661&text=0 Results");
 }
 ?>
