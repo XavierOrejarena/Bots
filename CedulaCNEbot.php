@@ -136,7 +136,12 @@ function processMessage($message) {
       // stop now
     } else {
       $cedula = $text;
-      $result = file_get_contents("http://www.cne.gob.ve/web/registro_electoral/ce.php/web/registro_electoral/imprimir_datos_elector.php?nacionalidad=V&cedula=$cedula", false);
+      if ($cedula[0] == 'E') {
+        $cedula = substr($cedula, 1);
+        $result = file_get_contents("http://www.cne.gob.ve/web/registro_electoral/ce.php/web/registro_electoral/imprimir_datos_elector.php?nacionalidad=E&cedula=$cedula", false);
+      } else {
+        $result = file_get_contents("http://www.cne.gob.ve/web/registro_electoral/ce.php/web/registro_electoral/imprimir_datos_elector.php?nacionalidad=V&cedula=$cedula", false);
+      }
 
       $persona = array();
 
