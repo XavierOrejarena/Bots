@@ -15,7 +15,8 @@ $arrContextOptions=array(
 $data = file_get_contents("http://bcv.org.ve", false, stream_context_create($arrContextOptions));
 
 preg_match_all('/<strong>/', $data, $matches, PREG_OFFSET_CAPTURE);
-$text = substr($data, $matches[0][6][1]+9, 10);
+// $text = substr($data, $matches[0][6][1]+9, 10);
+$text = substr($data, $matches[0][6][1], 100);
 // $text = (string)$text;
 // $token = '16396100:AAG_6y_pnkgYCKNRMyFVHow2eefR719DfCk';
 // $chat_id = '@AlertaBCV';
