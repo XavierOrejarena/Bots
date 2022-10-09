@@ -261,8 +261,8 @@ function processQuery($inline_query) {
         'type'         => 'article',
         'id'           => '0',
         'title'        => $inline_query['query'],
-        'message_text' => $persona['Nombre'],
-        'description'  => implode("\n", $flattened),
+        'message_text' => implode("\n", $flattened),
+        'description'  => $persona['Nombre'],
         'parse_mode' => 'markdown',
     ];
   }
