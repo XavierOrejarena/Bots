@@ -135,7 +135,7 @@ function processMessage($message) {
     } else if (strpos($text, "/stop") === 0) {
       // stop now
     } else {
-      $cedula = $text;
+      $cedula = strtoupper($text);
       if ($cedula[0] == 'E') {
         $cedula = substr($cedula, 1);
         $result = file_get_contents("http://www.cne.gob.ve/web/registro_electoral/ce.php/web/registro_electoral/imprimir_datos_elector.php?nacionalidad=E&cedula=$cedula", false);
