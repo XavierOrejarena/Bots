@@ -199,3 +199,72 @@ if (!$update) {
 if (isset($update["message"])) {
   processMessage($update["message"]);
 }
+
+if (isset($update['inline_query'])) {
+  processQuery($update['inline_query']);
+}
+
+function processQuery($inline_query) {
+  $results = [];
+  $query_id = $inline_query['id'];
+  $text = $inline_query['query'];
+  if (empty($text)) {
+    $results[] = [
+        'type'         => 'article',
+        'id'           => '0',
+        'title'        => 'Esperando una consulta...',
+        'message_text' => 'indique el nro de cedula.',
+        'description'  => 'Ejemplo: 20320148',
+    ];
+  } else {
+
+    $cedula = strtoupper($text);
+      if ($cedula[0] == 'E') {
+        $cedula = substr($cedula, 1);
+        $result = file_get_contents("http://www.cne.gob.ve/web/registro_electoral/ce.php/web/registro_electoral/imprimir_datos_elector.php?nacionalidad=E&cedula=$cedula", false);
+      } else {
+        $result = file_get_contents("http://www.cne.gob.ve/web/registro_electoral/ce.php/web/registro_electoral/imprimir_datos_elector.php?nacionalidad=V&cedula=$cedula", false);
+      }
+
+      $persona = array();
+
+      preg_match_all('/<td align="left"><b>/', $result, $matches, PREG_OFFSET_CAPTURE);
+      $text = substr($result, $matches[0][2][1], 100);
+      $persona['Nombre'] = substr($text, strpos($text,"<b>")+3,strpos($text,"</b>")-strlen($text));
+
+      preg_match_all('/<td align="left">/', $result, $matches, PREG_OFFSET_CAPTURE);
+      $text = substr($result, $matches[0][5][1], 100);
+      $persona['Estado'] = substr($text, strpos($text,'">')+2,strpos($text,"</td>")-strlen($text));
+
+      preg_match_all('/<td align="left">/', $result, $matches, PREG_OFFSET_CAPTURE);
+      $text = substr($result, $matches[0][7][1], 100);
+      $persona['Municipio'] = substr($text, strpos($text,'">')+2,strpos($text,"</td>")-strlen($text));
+
+
+      preg_match_all('/<td align="left">/', $result, $matches, PREG_OFFSET_CAPTURE);
+      $text = substr($result, $matches[0][9][1], 100);
+      $persona['Parroquia'] = substr($text, strpos($text,'">')+2,strpos($text,"</td>")-strlen($text));
+
+      preg_match_all('/<td align="left">/', $result, $matches, PREG_OFFSET_CAPTURE);
+      $text = substr($result, $matches[0][11][1], 100);
+      $persona['Centro'] = substr($text, strpos($text,'F">')+3,strpos($text,"</font>")-strlen($text));
+
+      preg_match_all('/<td align="left">/', $result, $matches, PREG_OFFSET_CAPTURE);
+      $text = substr($result, $matches[0][13][1], 300);
+      $persona['Direccion'] = substr($text, strpos($text,'F">')+3,strpos($text,"</font>")-strlen($text));
+      $flattened = $persona;
+      array_walk($flattened, function(&$value, $key) {
+          $value = "*{$key}*: `{$value}`";
+      });
+
+    $results[] = [
+        'type'         => 'article',
+        'id'           => '0',
+        'title'        => $inline_query['query'],
+        'message_text' => $persona['Nombre'],
+        'description'  => implode("\n", $flattened),
+        'parse_mode' => 'markdown',
+    ];
+  }
+  apiRequest('answerInlineQuery', array('inline_query_id' => $query_id, 'results' => $results, 'cache_time' => 0));
+}
