@@ -9,8 +9,8 @@ preg_match_all('/<strong>/', $data, $matches, PREG_OFFSET_CAPTURE);
 $text = substr($data, $matches[0][6][1]+9, 10);
 $text = (string)$text;
 $token = '16396100:AAG_6y_pnkgYCKNRMyFVHow2eefR719DfCk';
-$chat_id = '@AlertaBCV';
-// $chat_id = 149273661;
+// $chat_id = '@AlertaBCV';
+$chat_id = 149273661;
 
 $sql = "SELECT tasa FROM DICOM WHERE id = 1";
 $result = $link->query($sql);
@@ -18,7 +18,7 @@ $result = $link->query($sql);
 
 // echo strlen($text); 
 
-if ($result->num_rows > 0 && $text != "") {
+if ($result->num_rows > 0) {
     $OldText = mysqli_fetch_assoc($result)['tasa'];
 	if ($text !== $OldText) {
 		if (!preg_match('/[a-zA-Z]/', $text)) {
