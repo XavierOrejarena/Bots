@@ -5,18 +5,18 @@
 include "connect.php";
 // $data = file_get_contents("http://www.bcv.org.ve");
 $data = file_get_contents("https://bcv.org.ve");
-preg_match_all('/<strong>/', $data, $matches, PREG_OFFSET_CAPTURE);
-$text = substr($data, $matches[0][6][1]+9, 10);
-$text = (string)$text;
-$token = '16396100:AAG_6y_pnkgYCKNRMyFVHow2eefR719DfCk';
-$chat_id = '@AlertaBCV';
-$chat_id = 149273661;
+// preg_match_all('/<strong>/', $data, $matches, PREG_OFFSET_CAPTURE);
+// $text = substr($data, $matches[0][6][1]+9, 10);
+// $text = (string)$text;
+// $token = '16396100:AAG_6y_pnkgYCKNRMyFVHow2eefR719DfCk';
+// $chat_id = '@AlertaBCV';
+// $chat_id = 149273661;
 
-$sql = "SELECT tasa FROM DICOM WHERE id = 1";
-$result = $link->query($sql);
+// $sql = "SELECT tasa FROM DICOM WHERE id = 1";
+// $result = $link->query($sql);
 
 
-echo strlen($text); 
+// echo strlen($text); 
 
 // if ($result->num_rows > 0 && $text != "") {
 //     $OldText = mysqli_fetch_assoc($result)['tasa'];
