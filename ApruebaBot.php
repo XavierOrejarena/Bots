@@ -216,14 +216,14 @@ function processQuery($inline_query)
             'id'           => gen_uuid(),
             'title'        => $ESresult,
             'message_text' => "`".$ESresult."`",
-            // 'parse_mode'   => 'markdown',
+            'parse_mode'   => 'markdown',
         ];
         $results[] = [
             'type'         => 'article',
             'id'           => gen_uuid(),
             'title'        => (string)$text." = ".$ESresult,
             'message_text' => (string)$text." = `".$ESresult."`",
-            // 'parse_mode'   => 'markdown',
+            'parse_mode'   => 'markdown',
         ];
     }
 
