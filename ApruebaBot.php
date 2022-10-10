@@ -225,7 +225,7 @@ function processQuery($inline_query)
             'title'        => "$text = $ESresult",
             'message_text' => "$text = `$ESresult`
 ```",
-            'parse_mode'   => 'markdownv2',
+            // 'parse_mode'   => 'markdownv2',
         ];
     }
 
