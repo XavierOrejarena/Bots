@@ -210,14 +210,14 @@ function processQuery($inline_query)
         
         $Cal = new Field_calculate();
         
-        $result = "`".$Cal->calculate($text)."`";
+        $result = $Cal->calculate($text);
         $ESresult = str_replace('.', ',', $result);
         $results[] = [
             'type'         => 'article',
             'id'           => '0',
             'title'        => $text,
-            'message_text' => "`".$ESresult."`",
-            'description'  => $ESresult,
+            'message_text' => $ESresult,
+            'description'  => "`".$ESresult."`",
             'parse_mode'   => 'markdown',
         ];
     }
