@@ -211,16 +211,17 @@ function processQuery($inline_query)
         $Cal = new Field_calculate();
         
         $result = "`".$Cal->calculate($text)."`";
-        $ESresult = "`".str_replace('.', ',', $result)."`";
+        $ESresult = str_replace('.', ',', $result);
         $results[] = [
             'type'         => 'article',
             'id'           => '0',
             'title'        => $text,
             'message_text' => $ESresult,
-            'description'  => $ESresult,
-            'parse_mode'   => 'MarkDown',
+            'description'  => "`".$ESresult."`",
+            'parse_mode'   => 'markdown',
         ];
     }
+
     apiRequest('answerInlineQuery', array('inline_query_id' => $inline_query['id'], 'results' => $results, 'cache_time' => 0));
 }
 
