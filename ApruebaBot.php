@@ -245,7 +245,8 @@ function processMessage($message) {
     $text = $message['text'];    
     $Cal = new Field_calculate();
     $result = $Cal->calculate($text);
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $result));
+    $ESresult = str_replace('.', ',', $result);
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $ESresult, "parse_mode" => "markdown"));
 }
 
 $content = file_get_contents('php://input');
