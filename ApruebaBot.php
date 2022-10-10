@@ -214,7 +214,7 @@ function processQuery($inline_query)
         $ESresult = str_replace('.', ',', $result);
         $results[] = [
             'type'         => 'article',
-            'id'           => $text,
+            'id'           => gen_uuid(),
             'title'        => $text,
             'message_text' => "`".$ESresult."`",
             'description'  => $ESresult,
@@ -222,7 +222,7 @@ function processQuery($inline_query)
         ];
         $results[] = [
             'type'         => 'article',
-            'id'           => $text,
+            'id'           => gen_uuid(),
             'title'        => $text,
             'message_text' => $text." = `".$ESresult."`",
             'description'  => $text." = ".$ESresult,
