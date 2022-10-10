@@ -218,7 +218,7 @@ function processQuery($inline_query)
             'message_text' => "`$ESresult`",
             'parse_mode'   => 'markdown',
         ];
-        $RES = str_replace("*","x", $text);
+        $RES = str_replace("*","\*", $text);
         $results[] = [
             'type'         => 'article',
             'id'           => gen_uuid(),
