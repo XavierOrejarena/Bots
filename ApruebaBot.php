@@ -216,8 +216,8 @@ function processQuery($inline_query)
             'type'         => 'article',
             'id'           => $text,
             'title'        => $text,
-            'message_text' => $ESresult,
-            'description'  => "`".$ESresult."`",
+            'message_text' => "`".$ESresult."`",
+            'description'  => $ESresult,
             'parse_mode'   => 'markdown',
         ];
     }
