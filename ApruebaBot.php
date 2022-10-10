@@ -218,12 +218,12 @@ function processQuery($inline_query)
             'message_text' => "`$ESresult`",
             'parse_mode'   => 'markdown',
         ];
-        $RES = "$text = `$ESresult`";
+        $RES = str_replace("*","\*");
         $results[] = [
             'type'         => 'article',
             'id'           => gen_uuid(),
             'title'        => "$text = $ESresult",
-            'message_text' => "*bold \*text*",
+            'message_text' => "$text = $ESresult",
             'parse_mode'   => 'MarkdownV2',
         ];
     }
