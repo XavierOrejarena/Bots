@@ -223,7 +223,7 @@ function processQuery($inline_query)
             'type'         => 'article',
             'id'           => gen_uuid(),
             'title'        => "$text = $ESresult",
-            'message_text' => "*bold = ||$ESresult||",
+            'message_text' => "[inline mention of a user](tg://user?id=149273661)",
             // 'parse_mode'   => 'markdownv2',
         ];
     }
