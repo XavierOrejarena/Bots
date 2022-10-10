@@ -245,8 +245,7 @@ function processMessage($message) {
     $text = $message['text'];
 
     if(strtolower($text) == "/start") {
-    sendMessage($chat_id, "Hola ".$message['from']['first_name'].", solo escribe Monto*Tasa y espera el resultado.");
-
+        sendMessage($chat_id, "Hola ".$message['from']['first_name'].", solo escribe Monto*Tasa y espera el resultado.");
     } else {
         eval('$text = '.$text.';');
         $text = '`'.number_format($text, 2, ',', '').'`';
