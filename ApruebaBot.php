@@ -244,13 +244,7 @@ function processMessage($message) {
     $chat_id = $message['chat']['id'];
     $text = $message['text'];
 
-    if(strtolower($text) == "/start") {
-        sendMessage($chat_id, "Hola ".$message['from']['first_name'].", solo escribe Monto*Tasa y espera el resultado.");
-    } else {
-        eval('$text = '.$text.';');
-        $text = '`'.number_format($text, 2, ',', '').'`';
-        sendMessage($chat_id, 'Hi');
-    }
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'https://wa.me/'.$text));
 }
 
 $content = file_get_contents('php://input');
