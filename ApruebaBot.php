@@ -242,9 +242,10 @@ if (php_sapi_name() == 'cli') {
 function processMessage($message) {
     $message_id = $message['message_id'];
     $chat_id = $message['chat']['id'];
-    $text = $message['text'];
-
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'https://wa.me/'.$text));
+    $text = $message['text'];    
+    $Cal = new Field_calculate();
+    $result = $Cal->calculate($text);
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $result));
 }
 
 $content = file_get_contents('php://input');
