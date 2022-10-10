@@ -224,7 +224,7 @@ function processQuery($inline_query)
             'id'           => gen_uuid(),
             'title'        => "$text = $ESresult",
             'message_text' => "$text = $ESresult",
-            'parse_mode'   => 'MarkdownV2',
+            'parse_mode'   => 'markdown',
         ];
     }
 
