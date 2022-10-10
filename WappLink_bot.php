@@ -147,7 +147,7 @@ function processMessage($message) {
       }
 
       // apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'https://api.whatsapp.com/send?phone='.$text));
-      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'https://wa.me/'.$text));
+      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => '`https://wa.me/'.$text."`", "parse_mode" => 'markdown'));
     }
   } else {
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'I understand only text messages'));
