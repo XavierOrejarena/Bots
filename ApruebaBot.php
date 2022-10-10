@@ -193,7 +193,6 @@ class Field_calculate {
 
 function processQuery($inline_query)
 {
-    $query_id = $inline_query['id'];
     $results = [];
 
     if (empty($inline_query['query'])) {
@@ -201,7 +200,7 @@ function processQuery($inline_query)
             'type'         => 'article',
             'id'           => '0',
             'title'        => 'Esperando una consulta...',
-            'message_text' => '`81`',
+            'message_text' => '5*7+50-4 = `81`',
             'description'  => 'Ejemplo: 5*7+50-4',
             'parse_mode'   => 'MarkDown',
         ];
@@ -217,7 +216,6 @@ function processQuery($inline_query)
             'id'           => gen_uuid(),
             'title'        => $ESresult,
             'message_text' => "`".$ESresult."`",
-            // 'description'  => $ESresult,
             'parse_mode'   => 'markdown',
         ];
         $results[] = [
@@ -225,7 +223,6 @@ function processQuery($inline_query)
             'id'           => gen_uuid(),
             'title'        => $text." = ".$ESresult,
             'message_text' => $text." = `".$ESresult."`",
-            // 'description'  => $text." = ".$ESresult,
             'parse_mode'   => 'markdown',
         ];
     }
