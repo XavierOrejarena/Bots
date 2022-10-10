@@ -220,6 +220,14 @@ function processQuery($inline_query)
             'description'  => $ESresult,
             'parse_mode'   => 'markdown',
         ];
+        $results[] = [
+            'type'         => 'article',
+            'id'           => $text,
+            'title'        => $text,
+            'message_text' => $text." = `".$ESresult."`",
+            'description'  => $text." = ".$ESresult,
+            'parse_mode'   => 'markdown',
+        ];
     }
 
     apiRequest('answerInlineQuery', array('inline_query_id' => $inline_query['id'], 'results' => $results, 'cache_time' => 0));
