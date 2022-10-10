@@ -201,8 +201,8 @@ function processQuery($inline_query)
             'id'           => '0',
             'title'        => 'Esperando una consulta...',
             'message_text' => "5*7+50-4 = `81`",
-            'description'  => 'Ejemplo: 5*7+50-4',
-            'parse_mode'   => 'MarkDown',
+            'description'  => "Ejemplo: 5*7+50-4",
+            // 'parse_mode'   => 'MarkDown',
         ];
     } else {
         $text = $inline_query['query'];
