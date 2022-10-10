@@ -219,6 +219,7 @@ function processQuery($inline_query)
             'parse_mode'   => 'markdown',
         ];
         $RES = str_replace("*","x", $text);
+        $RES = "Texto";
         $results[] = [
             'type'         => 'article',
             'id'           => gen_uuid(),
