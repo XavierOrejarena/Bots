@@ -214,7 +214,7 @@ function processQuery($inline_query)
         $ESresult = str_replace('.', ',', $result);
         $results[] = [
             'type'         => 'article',
-            'id'           => '0',
+            'id'           => $text,
             'title'        => $text,
             'message_text' => $ESresult,
             'description'  => "`".$ESresult."`",
