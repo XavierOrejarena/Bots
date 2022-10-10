@@ -202,7 +202,7 @@ function processQuery($inline_query)
             'title'        => 'Esperando una consulta...',
             'message_text' => '5/7+50-4 = `81`',
             'description'  => 'Ejemplo: 5/7+50-4',
-            'parse_mode'   => 'MarkDown',
+            'parse_mode'   => 'markdown',
         ];
     } else {
         $text = $inline_query['query'];
@@ -221,8 +221,8 @@ function processQuery($inline_query)
         $results[] = [
             'type'         => 'article',
             'id'           => gen_uuid(),
-            'title'        => $text." = ".$ESresult,
-            'message_text' => $text." = `".$ESresult."`",
+            'title'        => String($text." = ".$ESresult),
+            'message_text' => String($text." = `".$ESresult."`"),
             'parse_mode'   => 'markdown',
         ];
     }
