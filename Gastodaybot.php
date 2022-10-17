@@ -137,7 +137,7 @@ function processMessage($message) {
     apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => $fecha.'-'.($fecha2), 'reply_markup' => array(
       'keyboard' => array(array('Consultar')),
       'one_time_keyboard' => false,
-      'resize_keyboard' => false)));
+      'resize_keyboard' => true)));
 }
 
 
