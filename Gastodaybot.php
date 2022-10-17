@@ -134,14 +134,10 @@ function processMessage($message) {
       $fecha2 = $fecha+1;
     }
 
-  if (strpos($text, "/start") === 0) {
-    apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => $fecha.'-'.($fecha2), 'reply_markup' => array(
-      'keyboard' => array(array('/start')),
-      'one_time_keyboard' => false,
-      'resize_keyboard' => true)));
-  } else {
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $fecha.'-'.($fecha2)));
-  }
+  iapiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => $fecha.'-'.($fecha2), 'reply_markup' => array(
+    'keyboard' => array(array('/start')),
+    'one_time_keyboard' => false,
+    'resize_keyboard' => true)));
 }
 
 
