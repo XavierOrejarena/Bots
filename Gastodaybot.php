@@ -137,7 +137,7 @@ function processMessage($message) {
   if (strpos($text, "/start") === 0) {
     apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => $fecha.'-'.($fecha2), 'reply_markup' => array(
       'keyboard' => array(array('/start')),
-      'one_time_keyboard' => true,
+      'one_time_keyboard' => false,
       'resize_keyboard' => true)));
   } else {
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $fecha.'-'.($fecha2)));
