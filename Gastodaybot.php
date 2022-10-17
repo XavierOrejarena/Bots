@@ -126,19 +126,20 @@ function processMessage($message) {
   $chat_id = $message['chat']['id'];
   $text = $message['text'];
 
-  if (strpos($text, "/start") === 0) {
-    apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'Hello', 'reply_markup' => array(
-      'keyboard' => array(array('Hello', 'Hi')),
-      'one_time_keyboard' => true,
-      'resize_keyboard' => true)));
-  } else {
-    $fecha = date('z');
+  $fecha = date('z');
     $fecha = ($fecha*2+7)%10;
     if ($fecha == 9) {
       $fecha2 = 0;
     } else {
       $fecha2 = $fecha+1;
     }
+
+  if (strpos($text, "/start") === 0) {
+    apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => $fecha.'-'.($fecha2), 'reply_markup' => array(
+      'keyboard' => array(array('/start')),
+      'one_time_keyboard' => true,
+      'resize_keyboard' => true)));
+  } else {
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $fecha.'-'.($fecha2)));
   }
 }
