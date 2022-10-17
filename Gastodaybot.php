@@ -127,7 +127,10 @@ function processMessage($message) {
   $text = $message['text'];
 
   if (strpos($text, "/start") === 0) {
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'Go!'));
+    apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => 'Hello', 'reply_markup' => array(
+      'keyboard' => array(array('Hello', 'Hi')),
+      'one_time_keyboard' => true,
+      'resize_keyboard' => true)));
   } else {
     $fecha = date('z');
     $fecha = ($fecha*2+7)%10;
