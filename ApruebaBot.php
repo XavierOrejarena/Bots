@@ -210,7 +210,7 @@ function processQuery($inline_query)
         $Cal = new Field_calculate();
         
         $result = $Cal->calculate($text);
-        $ESresult = str_replace('.', ',', $result);
+        $ESresult = str_replace(',', '.', $result);
         $results[] = [
             'type'         => 'article',
             'id'           => gen_uuid(),

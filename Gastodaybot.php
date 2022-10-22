@@ -127,17 +127,17 @@ function processMessage($message) {
   $text = $message['text'];
 
   $fecha = date('z');
-    $fecha = ($fecha*2+7)%10;
-    if ($fecha == 9) {
-      $fecha2 = 0;
-    } else {
-      $fecha2 = $fecha+1;
-    }
+  $fecha = ($fecha*2+7)%10;
+  if ($fecha == 9) {
+    $fecha2 = 0;
+  } else {
+    $fecha2 = $fecha+1;
+  }
 
-    apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => $fecha.'-'.($fecha2), 'reply_markup' => array(
-      'keyboard' => array(array('Consultar')),
-      'one_time_keyboard' => false,
-      'resize_keyboard' => true)));
+  apiRequestJson("sendMessage", array('chat_id' => $chat_id, "text" => $fecha.'-'.($fecha2), 'reply_markup' => array(
+    'keyboard' => array(array('Consultar')),
+    'one_time_keyboard' => false,
+    'resize_keyboard' => true)));
 }
 
 
