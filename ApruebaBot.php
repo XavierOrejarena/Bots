@@ -219,7 +219,7 @@ function processQuery($inline_query)
             'parse_mode'   => 'markdown',
         ];
         // $text2 = str_replace("*","\*", $text);
-        // $text2 = str_replace("+","\+", $text);
+        $text2 = str_replace("+","\+", $text);
         // $text2 = str_replace("-","\-", $text);
         // $text2 = str_replace("/","\/", $text);
 
