@@ -144,6 +144,7 @@ function processMessage($message) {
       }
 
       $persona = array();
+      $persona['Cedula'] = $cedula;
 
       preg_match_all('/<td align="left"><b>/', $result, $matches, PREG_OFFSET_CAPTURE);
       $text = substr($result, $matches[0][2][1], 100);
@@ -227,6 +228,7 @@ function processQuery($inline_query) {
       }
 
       $persona = array();
+      $persona['Cedula'] = $cedula;
 
       preg_match_all('/<td align="left"><b>/', $result, $matches, PREG_OFFSET_CAPTURE);
       $text = substr($result, $matches[0][2][1], 100);
