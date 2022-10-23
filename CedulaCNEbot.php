@@ -169,7 +169,7 @@ function processMessage($message) {
 
       preg_match_all('/<td align="left">/', $result, $matches, PREG_OFFSET_CAPTURE);
       $text = substr($result, $matches[0][13][1], 300);
-      $persona['Direccion'] = substr($text, strpos($text,'F">')+3,strpos($text,"</font>")-strlen($text));
+      $persona['Dirección'] = substr($text, strpos($text,'F">')+3,strpos($text,"</font>")-strlen($text));
       $flattened = $persona;
       array_walk($flattened, function(&$value, $key) {
           $value = "*{$key}*: `{$value}`";
@@ -228,11 +228,11 @@ function processQuery($inline_query) {
       }
 
       $persona = array();
-      $persona['Cedula'] = $cedula;
+      $persona['Cédula'] = $cedula;
 
       preg_match_all('/<td align="left"><b>/', $result, $matches, PREG_OFFSET_CAPTURE);
       $text = substr($result, $matches[0][2][1], 100);
-      $persona['Nombre'] = substr($text, strpos($text,"<b>")+3,strpos($text,"</b>")-strlen($text));
+      $persona['Nómbre'] = substr($text, strpos($text,"<b>")+3,strpos($text,"</b>")-strlen($text));
 
       preg_match_all('/<td align="left">/', $result, $matches, PREG_OFFSET_CAPTURE);
       $text = substr($result, $matches[0][5][1], 100);
@@ -253,7 +253,7 @@ function processQuery($inline_query) {
 
       preg_match_all('/<td align="left">/', $result, $matches, PREG_OFFSET_CAPTURE);
       $text = substr($result, $matches[0][13][1], 300);
-      $persona['Direccion'] = substr($text, strpos($text,'F">')+3,strpos($text,"</font>")-strlen($text));
+      $persona['Dirección'] = substr($text, strpos($text,'F">')+3,strpos($text,"</font>")-strlen($text));
       $flattened = $persona;
       array_walk($flattened, function(&$value, $key) {
           $value = "*{$key}*: `{$value}`";
