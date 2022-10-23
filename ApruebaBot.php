@@ -220,6 +220,7 @@ function processQuery($inline_query)
         ];
         $text2 = str_replace("*","\*", $text);
         $text2 = str_replace("+","\+", $text);
+        $text2 = str_replace("-","\-", $text);
         $results[] = [
             'type'         => 'article',
             'id'           => gen_uuid(),
