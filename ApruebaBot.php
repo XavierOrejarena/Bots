@@ -218,10 +218,10 @@ function processQuery($inline_query)
             'message_text' => "`$ESresult`",
             'parse_mode'   => 'markdown',
         ];
-        $text2 = str_replace("*","\*", "$text ");
-        $text2 = str_replace("+","\+", "$text ");
-        $text2 = str_replace("-","\-", "$text ");
-        $text2 = str_replace("/","\/", "$text ");
+        $text2 = str_replace("*","\*", $text);
+        $text2 = str_replace("+","\+", $text2);
+        $text2 = str_replace("-","\-", $text2);
+        $text2 = str_replace("/","\/", $text2);
 
         $results[] = [
             'type'         => 'article',
