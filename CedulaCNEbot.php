@@ -144,11 +144,11 @@ function processMessage($message) {
       }
 
       $persona = array();
-      $persona['Cedula'] = $cedula;
+      $persona['Cédula'] = $cedula;
 
       preg_match_all('/<td align="left"><b>/', $result, $matches, PREG_OFFSET_CAPTURE);
       $text = substr($result, $matches[0][2][1], 100);
-      $persona['Nombre'] = substr($text, strpos($text,"<b>")+3,strpos($text,"</b>")-strlen($text));
+      $persona['Nómbre'] = substr($text, strpos($text,"<b>")+3,strpos($text,"</b>")-strlen($text));
 
       preg_match_all('/<td align="left">/', $result, $matches, PREG_OFFSET_CAPTURE);
       $text = substr($result, $matches[0][5][1], 100);
