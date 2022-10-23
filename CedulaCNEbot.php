@@ -168,7 +168,7 @@ function processMessage($message) {
       $persona['Centro'] = substr($text, strpos($text,'F">')+3,strpos($text,"</font>")-strlen($text));
 
       preg_match_all('/<td align="left">/', $result, $matches, PREG_OFFSET_CAPTURE);
-      $text = substr($result, $matches[0][13][1], 400);
+      $text = substr($result, $matches[0][13][1], 300);
       $persona['Dirección'] = substr($text, strpos($text,'F">')+3,strpos($text,"</font>")-strlen($text));
       $flattened = $persona;
       array_walk($flattened, function(&$value, $key) {
@@ -252,7 +252,7 @@ function processQuery($inline_query) {
       $persona['Centro'] = substr($text, strpos($text,'F">')+3,strpos($text,"</font>")-strlen($text));
 
       preg_match_all('/<td align="left">/', $result, $matches, PREG_OFFSET_CAPTURE);
-      $text = substr($result, $matches[0][13][1], 400);
+      $text = substr($result, $matches[0][13][1], 300);
       $persona['Dirección'] = substr($text, strpos($text,'F">')+3,strpos($text,"</font>")-strlen($text));
       $flattened = $persona;
       array_walk($flattened, function(&$value, $key) {
