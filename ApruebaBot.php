@@ -222,6 +222,7 @@ function processQuery($inline_query)
         $text2 = str_replace("+","\+", $text2);
         $text2 = str_replace("-","\-", $text2);
         $text2 = str_replace("/","\/", $text2);
+        $text2 = str_replace(".","\,", $text2);
 
         $results[] = [
             'type'         => 'article',
