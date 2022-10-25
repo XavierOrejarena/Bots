@@ -215,8 +215,8 @@ function processQuery($inline_query)
         $results[] = [
             'type'         => 'article',
             'id'           => gen_uuid(),
-            'title'        => "$ESresult ",
-            'message_text' => "`$ESresult`",
+            'title'        => "$result ",
+            'message_text' => "`$result`",
             'parse_mode'   => 'markdown',
         ];
         $text2 = str_replace("*","\*", $text);
@@ -228,9 +228,9 @@ function processQuery($inline_query)
         $results[] = [
             'type'         => 'article',
             'id'           => gen_uuid(),
-            'title'        => "$text = $ESresult",
+            'title'        => "$text = $result",
             // 'message_text' => "$text2 \= `$ESresult`",
-            'message_text' => "`$text2` \= `$ESresult`",
+            'message_text' => "`$text2` \= `$result`",
             'parse_mode'   => 'MarkdownV2',
         ];
     }
