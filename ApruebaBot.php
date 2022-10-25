@@ -210,7 +210,8 @@ function processQuery($inline_query)
         $Cal = new Field_calculate();
         
         $result = $Cal->calculate($text);
-        $ESresult = str_replace('.', ',', $result);
+        $result = number_format((float)$result, 2, ',', '');
+        // $ESresult = str_replace('.', ',', $result);
         $results[] = [
             'type'         => 'article',
             'id'           => gen_uuid(),
@@ -249,8 +250,9 @@ function processMessage($message) {
     $text = $message['text'];    
     $Cal = new Field_calculate();
     $result = $Cal->calculate($text);
-    $ESresult = "`".str_replace('.', ',', $result)."`";
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $ESresult, "parse_mode" => "markdown"));
+    $result = number_format((float)$result, 2, ',', '');
+    // $ESresult = "`".str_replace('.', ',', $result)."`";
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`".$result."`", "parse_mode" => "markdown"));
 }
 
 $content = file_get_contents('php://input');
