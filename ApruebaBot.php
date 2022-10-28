@@ -205,7 +205,7 @@ function processQuery($inline_query)
             'parse_mode'   => 'markdown',
         ];
     } else {
-        $text = $inline_query['query'];
+        $text = str_replace("x","*",$inline_query['query']);
         
         $Cal = new Field_calculate();
         
@@ -245,7 +245,7 @@ if (php_sapi_name() == 'cli') {
 }
 
 function processMessage($message) {
-    $message_id = $message['message_id'];
+    $message_id = str_replace("x","*",$message['message_id']);
     $chat_id = $message['chat']['id'];
     $text = $message['text'];    
     $Cal = new Field_calculate();
