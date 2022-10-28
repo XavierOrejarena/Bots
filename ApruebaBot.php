@@ -205,7 +205,7 @@ function processQuery($inline_query)
             'parse_mode'   => 'markdown',
         ];
     } else {
-        $text = str_replace("x","*",$inline_query['query']);
+        $text = str_replace(" ","",str_replace("x","*",$inline_query['query']));
         
         $Cal = new Field_calculate();
         
@@ -247,7 +247,7 @@ if (php_sapi_name() == 'cli') {
 function processMessage($message) {
     $message_id = $message['message_id'];
     $chat_id = $message['chat']['id'];
-    $text = str_replace("x","*",$message['text']);
+    $text = str_replace(" ","",str_replace("x","*",$message['text']));
     $Cal = new Field_calculate();
     $result = $Cal->calculate($text);
     $result = number_format((float)$result, 2, ',', '');
