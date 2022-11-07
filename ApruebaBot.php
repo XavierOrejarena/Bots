@@ -206,12 +206,11 @@ function processQuery($inline_query)
         ];
     } else {
         $text = str_replace(" ","",str_replace("x","*",$inline_query['query']));
-        $original = $inline_query['query'];
+        $original = str_replace(",",".",$inline_query['query']);
         $Cal = new Field_calculate();
         
         $result = $Cal->calculate($text);
         $result = number_format((float)$result, 2, ',', '');
-        // $ESresult = str_replace('.', ',', $result);
         $results[] = [
             'type'         => 'article',
             'id'           => gen_uuid(),
