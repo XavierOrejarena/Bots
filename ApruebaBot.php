@@ -211,6 +211,7 @@ function processQuery($inline_query)
         
         $result0 = $Cal->calculate($text);
         $result = number_format((float)$result0, 2, ',', '');
+        $result0 = number_format((float)$result0, 2, '.', '');
         $results[] = [
             'type'         => 'article',
             'id'           => gen_uuid(),
