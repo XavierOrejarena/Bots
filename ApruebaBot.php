@@ -209,8 +209,8 @@ function processQuery($inline_query)
         $original = str_replace(",",".",$inline_query['query']);
         $Cal = new Field_calculate();
         
-        $result = $Cal->calculate($text);
-        $result = number_format((float)$result, 2, ',', '');
+        $result0 = $Cal->calculate($text);
+        $result = number_format((float)$result0, 2, ',', '');
         $results[] = [
             'type'         => 'article',
             'id'           => gen_uuid(),
@@ -226,8 +226,8 @@ function processQuery($inline_query)
         $results[] = [
             'type'         => 'article',
             'id'           => gen_uuid(),
-            'title'        => "$original = $result",
-            'message_text' => "`$text2` \= `$result`",
+            'title'        => "$original = $result0",
+            'message_text' => "`$text2` \= `$result0`",
             'parse_mode'   => 'MarkdownV2',
         ];
         
