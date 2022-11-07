@@ -206,7 +206,7 @@ function processQuery($inline_query)
         ];
     } else {
         $text = str_replace(" ","",str_replace("x","*",$inline_query['query']));
-        
+        $original = $inline_query['query'];
         $Cal = new Field_calculate();
         
         $result = $Cal->calculate($text);
@@ -223,10 +223,11 @@ function processQuery($inline_query)
         $text2 = str_replace("+","\+", $text2);
         $text2 = str_replace("-","\-", $text2);
         $text2 = str_replace("/","\/", $text2);
+
         $results[] = [
             'type'         => 'article',
             'id'           => gen_uuid(),
-            'title'        => "$text = $result",
+            'title'        => "$original = $result",
             'message_text' => "`$text2` \= `$result`",
             'parse_mode'   => 'MarkdownV2',
         ];
