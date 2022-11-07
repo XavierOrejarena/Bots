@@ -209,8 +209,8 @@ function processQuery($inline_query)
         
         $Cal = new Field_calculate();
         
-        $results = $Cal->calculate($text);
-        $result = number_format((float)$results, 2, ',', '');
+        $result = $Cal->calculate($text);
+        $result = number_format((float)$result, 2, ',', '');
         // $ESresult = str_replace('.', ',', $result);
         $results[] = [
             'type'         => 'article',
@@ -223,16 +223,8 @@ function processQuery($inline_query)
         $text2 = str_replace("+","\+", $text2);
         $text2 = str_replace("-","\-", $text2);
         $text2 = str_replace("/","\/", $text2);
-        
-        $results[] = [
-            'type'         => 'article',
-            'id'           => gen_uuid(),
-            'title'        => "$text = $results",
-            'message_text' => "`$text2` \= `$results`",
-            'parse_mode'   => 'MarkdownV2',
-        ];
-        
         $text2 = str_replace(".","\,", $text2);
+
         $results[] = [
             'type'         => 'article',
             'id'           => gen_uuid(),
