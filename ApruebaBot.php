@@ -223,8 +223,15 @@ function processQuery($inline_query)
         $text2 = str_replace("+","\+", $text2);
         $text2 = str_replace("-","\-", $text2);
         $text2 = str_replace("/","\/", $text2);
+        $results[] = [
+            'type'         => 'article',
+            'id'           => gen_uuid(),
+            'title'        => "$text = $result",
+            'message_text' => "`$text2` \= `$result`",
+            'parse_mode'   => 'MarkdownV2',
+        ];
+        
         $text2 = str_replace(".","\,", $text2);
-
         $results[] = [
             'type'         => 'article',
             'id'           => gen_uuid(),
