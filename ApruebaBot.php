@@ -206,12 +206,11 @@ function processQuery($inline_query)
         ];
     } else {
         $text = str_replace(" ","",str_replace("x","*",$inline_query['query']));
-        $text2 = str_replace(" ","",str_replace("x","*",$inline_query['query']));
         
         $Cal = new Field_calculate();
         
-        $results = $Cal->calculate($text);
-        $result = number_format((float)$results, 2, ',', '');
+        $result = $Cal->calculate($text);
+        $result = number_format((float)$result, 2, ',', '');
         // $ESresult = str_replace('.', ',', $result);
         $results[] = [
             'type'         => 'article',
@@ -220,25 +219,17 @@ function processQuery($inline_query)
             'message_text' => "`$result`",
             'parse_mode'   => 'markdown',
         ];
-
         $text2 = str_replace("*","\*", $text);
         $text2 = str_replace("+","\+", $text2);
         $text2 = str_replace("-","\-", $text2);
         $text2 = str_replace("/","\/", $text2);
-
-        $results[] = [
-            'type'         => 'article',
-            'id'           => gen_uuid(),
-            'title'        => "$text2 = $results",
-            'message_text' => "`$text2` \= `$results`",
-            'parse_mode'   => 'MarkdownV2',
-        ];
         $text2 = str_replace(".","\,", $text2);
 
         $results[] = [
             'type'         => 'article',
             'id'           => gen_uuid(),
             'title'        => "$text = $result",
+            // 'message_text' => "$text2 \= `$ESresult`",
             'message_text' => "`$text2` \= `$result`",
             'parse_mode'   => 'MarkdownV2',
         ];
