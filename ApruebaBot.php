@@ -218,19 +218,23 @@ function processQuery($inline_query)
             'message_text' => "`$result`",
             'parse_mode'   => 'markdown',
         ];
-        $text2 = str_replace("*","\*", $text);
-        $text2 = str_replace("+","\+", $text2);
-        $text2 = str_replace("-","\-", $text2);
-        $text2 = str_replace("/","\/", $text2);
+        $original = str_replace("*","\*", $original);
+        $original = str_replace("+","\+", $original);
+        $original = str_replace("-","\-", $original);
+        $original = str_replace("/","\/", $original);
 
         $results[] = [
             'type'         => 'article',
             'id'           => gen_uuid(),
             'title'        => "$original = $result0",
-            'message_text' => "`$text2` \= `$result0`",
+            'message_text' => "`$original` \= `$result0`",
             'parse_mode'   => 'MarkdownV2',
         ];
-        
+
+        $text2 = str_replace("*","\*", $text);
+        $text2 = str_replace("+","\+", $text2);
+        $text2 = str_replace("-","\-", $text2);
+        $text2 = str_replace("/","\/", $text2);
         $text2 = str_replace(".","\,", $text2);
         $results[] = [
             'type'         => 'article',
