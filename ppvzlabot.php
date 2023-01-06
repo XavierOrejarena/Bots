@@ -163,7 +163,7 @@ function processQuery($inline_query)
     else if ($signal == 'x' || $signal == '*' || is_null($signal) || $signal == 'X') {
         $receive = round(($USD-$USD*(0.054)-0.3), 2);
         $sent = round((100*($USD+0.3)/94.6),2);
-        if ($BS < 1 ) {
+        if ($BS < 2 ) {
             $Total = number_format($receive*$BS, 2, '.', '');
         }else {
             $Total = number_format($receive*$BS, 2, ',', '');
@@ -173,7 +173,7 @@ function processQuery($inline_query)
 Llegarán: `$receive` $
 \xE2\x98\x95: Bs ".number_format($BS, 2, ',', '')."
 Total: Bs `$Total`";
-            if ($BS < 1 ) {
+            if ($BS < 2 ) {
                 $Total = number_format($USD*$BS, 2, '.', '');
             }else {
                 $Total = number_format($USD*$BS, 2, ',', '');
@@ -263,8 +263,8 @@ function processMessage($message) {
     
                 if ($signal == 'x' || $signal == '*' || is_null($signal) || $signal == 'X') {
                     $receive = round(($USD-$USD*(0.054)-0.3), 2);
-                    if ((fmod($receive*$BS,    1) !== 0.00) ) {
-                        $Total = number_format($receive*$BS, 2, ',', '');
+                    if ($BS < 2 ) {
+                        $Total = number_format($receive*$BS, 2, '.', '');
                     }else {
                         $Total = number_format($receive*$BS, 2, ',', '');
                     }
