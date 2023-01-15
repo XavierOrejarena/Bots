@@ -274,7 +274,7 @@ function processMessage($message) {
 Llegarán: `$receive` $
 \xE2\x98\x95: Bs ".number_format($BS, 2, ',', '')."
 Total: Bs `$Total`";
-                        if ((fmod($USD*$BS,    1) !== 0.00) ) {
+                        if ($BS < 2) {
                             $Total = number_format($USD*$BS, 2, ',', '');
                         }else {
                             $Total = number_format($USD*$BS, 2, ',', '');
@@ -293,10 +293,10 @@ Llegarán: `$USD` $";
                 else if ($signal == "/" || $signal == '\\') {
                     $sent = round((100*(($USD/$BS)+0.3)/94.6),2);
                     $receive = round($USD/$BS,2);
-                    if ((fmod($USD,    1) !== 0.00) ) {
-                        $Total = number_format($USD, 2, ',', '');
+                    if ($BS < 2 ) {
+                        $Total = number_format($USD, 2, '.', '');
                     }else {
-                        $Total = number_format($USD, 2, ',', '');
+                        $Total = number_format($USD, 2, '.', '');
                     }
                     $msg1 = "Envían: `$sent` $
 Llegarán: `$receive` $
