@@ -267,6 +267,7 @@ function processMessage($message) {
                     if ($BS < 2 ) {
                         $Total = number_format($receive*$BS, 2, '.', '');
                         $emoji = "% -> ";
+                        $BS = str_replace(',','.',$BS);
                     }
                     $sent = round((100*($USD+0.3)/94.6),2);
                     if ($BS) {
@@ -277,6 +278,7 @@ Total: Bs `$Total`";
                         if ($BS < 2) {
                             $Total = number_format($USD*$BS, 2, '.', '');
                             $emoji = "% -> ";
+                            $BS = str_replace(',','.',$BS);
                         }
                         $msg2 = "Envían: `$sent` $
 Llegarán: `$USD` $
@@ -295,6 +297,7 @@ Llegarán: `$USD` $";
                     if ($BS < 2 ) {
                         $Total = number_format($USD, 2, '.', '');
                         $emoji = "% -> ";
+                        $BS = str_replace(',','.',$BS);
                     }
                     $msg1 = "Envían: `$sent` $
 Llegarán: `$receive` $
