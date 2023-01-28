@@ -242,7 +242,6 @@ function processMessage($message) {
     $text = $message['text'];
     $text = str_replace(',', '.', $text);
     $id = strval($message['from']['id']);
-    $emoji = "\xE2\x98\x95: Bs ";
 
     // sendMessage($chat_id, $message['from']['id']);
     // $URL = API_URL."sendMessage?chat_id=".$chat_id."&text=`".$text."`&parse_mode=MarkDown";
@@ -261,28 +260,27 @@ function processMessage($message) {
                 $BS = str_word_count($text, 1, '0123456789.')[1];
                 $signal = str_word_count($text, 1, '*xX/\def')[0];
                 $BS = pow(1000,strlen(stristr($BS, 'k')))*(real)$BS;
+                $emoji = "\xE2\x98\x95: Bs ".number_format($BS, 2, ',', '');
     
                 if ($signal == 'x' || $signal == '*' || is_null($signal) || $signal == 'X') {
                     $receive = round(($USD-$USD*(0.054)-0.3), 2);
                     if ($BS < 2 ) {
                         $Total = number_format($receive*$BS, 2, '.', '');
-                        $emoji = "% -> ";
-                        $BS = str_replace(',','.',$BS);
+                        $emoji = "% -> ".number_format($BS, 2, '.', '');;
                     }
                     $sent = round((100*($USD+0.3)/94.6),2);
                     if ($BS) {
                         $msg1 = "Envían: `$USD` $
 Llegarán: `$receive` $
-$emoji".number_format($BS, 2, ',', '')."
+$emoji
 Total: Bs `$Total`";
                         if ($BS < 2) {
                             $Total = number_format($USD*$BS, 2, '.', '');
-                            $emoji = "% -> ";
-                            $BS = str_replace(',','.',$BS);
+                            $emoji = "% -> ".number_format($BS, 2, '.', '');;
                         }
                         $msg2 = "Envían: `$sent` $
 Llegarán: `$USD` $
-$emoji".number_format($BS, 2, ',', '')."
+$emoji
 Total: Bs `$Total`";
                     } else {
                         $msg1 = "Envían: `$USD` $
@@ -296,12 +294,11 @@ Llegarán: `$USD` $";
                     $receive = round($USD/$BS,2);
                     if ($BS < 2 ) {
                         $Total = number_format($USD, 2, '.', '');
-                        $emoji = "% -> ";
-                        $BS = str_replace(',','.',$BS);
+                        $emoji = "% -> ".number_format($BS, 2, '.', '');;
                     }
                     $msg1 = "Envían: `$sent` $
 Llegarán: `$receive` $
-$emoji".number_format($BS, 2, ',', '')."
+$emoji
 Total: Bs `$Total`";
                 }
     
