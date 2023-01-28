@@ -242,6 +242,7 @@ function processMessage($message) {
     $text = $message['text'];
     $text = str_replace(',', '.', $text);
     $id = strval($message['from']['id']);
+    $emoji = "\xE2\x98\x95: Bs ";
 
     // sendMessage($chat_id, $message['from']['id']);
     // $URL = API_URL."sendMessage?chat_id=".$chat_id."&text=`".$text."`&parse_mode=MarkDown";
@@ -265,25 +266,21 @@ function processMessage($message) {
                     $receive = round(($USD-$USD*(0.054)-0.3), 2);
                     if ($BS < 2 ) {
                         $Total = number_format($receive*$BS, 2, '.', '');
-                    } else{
-                        $Total = number_format($receive*$BS, 2, ',', '');
-
+                        $emoji = "% -> ";
                     }
                     $sent = round((100*($USD+0.3)/94.6),2);
                     if ($BS) {
                         $msg1 = "Envían: `$USD` $
 Llegarán: `$receive` $
-\xE2\x98\x95: Bs ".number_format($BS, 2, ',', '')."
+$emoji".number_format($BS, 2, ',', '')."
 Total: Bs `$Total`";
                         if ($BS < 2) {
                             $Total = number_format($USD*$BS, 2, '.', '');
-                        } else{
-                            $Total = number_format($USD*$BS, 2, ',', '');
-
+                            $emoji = "% -> ";
                         }
                         $msg2 = "Envían: `$sent` $
 Llegarán: `$USD` $
-\xE2\x98\x95: Bs ".number_format($BS, 2, ',', '')."
+$emoji".number_format($BS, 2, ',', '')."
 Total: Bs `$Total`";
                     } else {
                         $msg1 = "Envían: `$USD` $
@@ -297,12 +294,11 @@ Llegarán: `$USD` $";
                     $receive = round($USD/$BS,2);
                     if ($BS < 2 ) {
                         $Total = number_format($USD, 2, '.', '');
-                    }else {
-                        $Total = number_format($USD, 2, '.', '');
+                        $emoji = "% -> ";
                     }
                     $msg1 = "Envían: `$sent` $
 Llegarán: `$receive` $
-\xE2\x98\x95: Bs ".number_format($BS, 2, ',', '')."
+$emoji".number_format($BS, 2, ',', '')."
 Total: Bs `$Total`";
                 }
     
