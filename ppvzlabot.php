@@ -213,7 +213,6 @@ Llegarán: `$USD` $";
         $receive = round($USD/$BS,2);
         if ((fmod($USD,    1) !== 0.00) ) {
             $Total = number_format($USD, 2, ',', '');
-            // $emoji = "％: ".number_format($BS, 2, '.', '');
         }else {
             $Total = number_format($USD, 2, ',', '');
         }

