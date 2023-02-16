@@ -269,7 +269,7 @@ function processMessage($message) {
                     $receive = round(($USD-$USD*(0.054)-0.3), 2);
                     $Total = number_format($receive*$BS, 2, ',', '');
                     if ($BS < 2 ) {
-                        $Total = "Bs `".number_format($receive*$BS, 2, '.', '')."`";
+                        $Total = "`".number_format($receive*$BS, 2, '.', '')."`";
                         $emoji = "％: ".number_format($BS, 2, '.', '');
                     }
                     $sent = round((100*($USD+0.3)/94.6),2);
