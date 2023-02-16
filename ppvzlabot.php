@@ -267,7 +267,7 @@ function processMessage($message) {
     
                 if ($signal == 'x' || $signal == '*' || is_null($signal) || $signal == 'X') {
                     $receive = round(($USD-$USD*(0.054)-0.3), 2);
-                    $Total = number_format($receive*$BS, 2, ',', '');
+                    $Total = "Bs `".number_format($receive*$BS, 2, ',', '')."`";
                     if ($BS < 2 ) {
                         $Total = "`".number_format($receive*$BS, 2, '.', '')."`";
                         $emoji = "％: ".number_format($BS, 2, '.', '');
