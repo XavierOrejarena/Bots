@@ -283,13 +283,16 @@ $emoji
 Total: $Total";
                         $Total = number_format($USD*$BS, 2, ',', '');
                         if ($BS < 2) {
-                            $Total = number_format($USD*$BS, 2, '.', '');
+                            // $Total = number_format($USD*$BS, 2, '.', '');
+                            $Total = "`".number_format($receive*$BS, 2, '.', '')."`";
                             $emoji = "％: ".number_format($BS, 2, '.', '');
+                        } else {
+                            $Total = "Bs `".number_format($receive*$BS, 2, ',', '')."`";
                         }
                         $msg2 = "Envían: `$sent` $
 Llegarán: `$USD` $
 $emoji
-Total: Bs `$Total`";
+Total: `$Total`";
                     } else {
                         $msg1 = "Envían: `$USD` $
 Llegarán: `$receive` $";
