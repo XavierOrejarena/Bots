@@ -292,7 +292,7 @@ Total: $Total";
                         $msg2 = "Envían: `$sent` $
 Llegarán: `$USD` $
 $emoji
-Total: `$Total`";
+Total: $Total";
                     } else {
                         $msg1 = "Envían: `$USD` $
 Llegarán: `$receive` $";
