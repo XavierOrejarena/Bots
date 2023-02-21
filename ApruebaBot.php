@@ -219,10 +219,6 @@ function processQuery($inline_query)
             'message_text' => "`$result`",
             'parse_mode'   => 'markdown',
         ];
-        // $original = str_replace("*","\*", $original);
-        // $original = str_replace("+","\+", $original);
-        // $original = str_replace("-","\-", $original);
-        // $original = str_replace("/","\/", $original);
 
         $results[] = [
             'type'         => 'article',
@@ -262,7 +258,6 @@ function processMessage($message) {
     $Cal = new Field_calculate();
     $result = $Cal->calculate($text);
     $result = number_format((float)$result, 2, ',', '');
-    // $ESresult = "`".str_replace('.', ',', $result)."`";
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`".$result."`", "parse_mode" => "markdown"));
 }
 

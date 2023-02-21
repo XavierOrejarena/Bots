@@ -179,7 +179,7 @@ Total: $Total";
                 $Total = "`".number_format($USD*$BS, 2, '.', '')."` $";
                 $emoji = "％: ".number_format($BS, 2, '.', '');
             }else {
-                $Total = "Bs`".number_format($USD*$BS, 2, ',', '')."`";
+                $Total = "Bs `".number_format($USD*$BS, 2, ',', '')."`";
             }
             $message_text2 = "Envían: `$sent` $
 Llegarán: `$USD` $
