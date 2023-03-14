@@ -39,10 +39,10 @@
           <!-- <th scope="row">{{ index + 1 }}</th> -->
           <td :class="player.botting ? 'text-success' : 'text-danger'">{{ index }}</td>
           <td>{{ player.name }}</td>
-          <td>{{ player.gold.toLocaleString("en-US") }}</td>
+          <!-- <td>{{ player.gold.toLocaleString("en-US") }}</td> -->
           <td>{{ ((player.exp/player.exp_level)*100).toFixed(2)}}</td>
           <td>{{ player.exp_hour.toFixed(2)}}</td>
-          <td>{{ player.sp.toLocaleString("en-US")}}</td>
+          <!-- <td>{{ player.sp.toLocaleString("en-US")}}</td> -->
           <td>{{ player.death_count }}</td>
           <td>{{ player.level }}</td>
           <td>{{ player.zone_name }}</td>
