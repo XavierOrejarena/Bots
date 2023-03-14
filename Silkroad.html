@@ -29,26 +29,22 @@
           <th scope="col">#Death</th>
           <th scope="col">Level</th>
           <th scope="col">Zone</th>
-          <!-- <th scope="col">Botting</th>
-          <th scope="col">Connected</th>
           <th scope="col">Dead</th> -->
         </tr>
       </thead>
       <tbody>
         <tr v-for="(player, index) in players" :key="index" :class="player.connected ? 'alert alert-success' : 'alert alert-warning'">
           <!-- <th scope="row">{{ index + 1 }}</th> -->
-          <!-- <td :class="player.botting ? 'text-success' : 'text-danger'">{{ index }}</td> -->
+          <td :class="player.botting ? 'text-success' : 'text-danger'">{{ index }}</td>
           <td>{{ player.name }}</td>
-          <!-- <td>{{ player.gold.toLocaleString("en-US") }}</td> -->
-          <!-- <td>{{ ((player.exp/player.exp_level)*100).toFixed(2)}}</td> -->
-          <!-- <td>{{ player.exp_hour.toFixed(2)}}</td> -->
-          <!-- <td>{{ player.sp.toLocaleString("en-US")}}</td> -->
-          <!-- <td>{{ player.death_count }}</td> -->
-          <!-- <td>{{ player.level }}</td> -->
-          <!-- <td>{{ player.zone_name }}</td> -->
-          <!-- <td>{{ player.botting() }}</td>
-          <td>{{ player.connected }}</td>
-          <td>{{ player.dead }}</td> -->
+          <td>{{ player.gold.toLocaleString("en-US") }}</td>
+          <td>{{ ((player.exp/player.exp_level)*100).toFixed(2)}}</td>
+          <td>{{ player.exp_hour.toFixed(2)}}</td>
+          <td>{{ player.sp.toLocaleString("en-US")}}</td>
+          <td>{{ player.death_count }}</td>
+          <td>{{ player.level }}</td>
+          <td>{{ player.zone_name }}</td>
+          <td>{{ player.dead }}</td>
         </tr>
       </tbody>
     </table>
@@ -65,8 +61,8 @@
 				url: './sro.json',
 				config: { headers: { 'Content-Type': 'application/json' } }
 			}).then(response => {
-        this.players = response.data[0];
-        console.log(response.data.data)
+				this.players = eval(response.data.replaceAll(".#INF",""));
+        // console.log(response.data)
 			})
       }
     })
