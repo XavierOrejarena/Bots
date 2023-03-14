@@ -37,7 +37,7 @@
       <tbody>
         <tr v-for="(player, index) in players" :key="index" :class="player.connected ? 'alert alert-success' : 'alert alert-warning'">
           <!-- <th scope="row">{{ index + 1 }}</th> -->
-          <td :class="player.botting ? 'text-success' : 'text-danger'">{{ index }}</td>
+          <!-- <td :class="player.botting ? 'text-success' : 'text-danger'">{{ index }}</td> -->
           <td>{{ player.name }}</td>
           <!-- <td>{{ player.gold.toLocaleString("en-US") }}</td> -->
           <!-- <td>{{ ((player.exp/player.exp_level)*100).toFixed(2)}}</td> -->
