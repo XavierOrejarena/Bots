@@ -65,8 +65,8 @@
 				url: './sro.json',
 				config: { headers: { 'Content-Type': 'application/json' } }
 			}).then(response => {
-				this.players = eval(response.data);
-                console.log(response.data)
+        this.players = eval(response.data);
+        console.log(response.data)
 			})
       }
     })
