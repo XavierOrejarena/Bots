@@ -189,7 +189,7 @@ function processQuery($inline_query) {
         // 'message_text' => 'https://api.whatsapp.com/send?phone='.$text,
         'message_text' => 'https://wa.me/'."$text
 
-$text,
+$text",
         'description'  => $text,
         'disable_web_page_preview' => true,
     ];
