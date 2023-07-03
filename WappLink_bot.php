@@ -148,6 +148,7 @@ function processMessage($message) {
 
       // apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'https://api.whatsapp.com/send?phone='.$text));
       apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'https://wa.me/'.$text."
+
 $text"));
     }
   } else {
@@ -186,7 +187,9 @@ function processQuery($inline_query) {
         'id'           => '0',
         'title'        => $inline_query['query'],
         // 'message_text' => 'https://api.whatsapp.com/send?phone='.$text,
-        'message_text' => 'https://wa.me/'.$text,
+        'message_text' => 'https://wa.me/'."$text
+
+$text,
         'description'  => $text,
         'disable_web_page_preview' => true,
     ];
