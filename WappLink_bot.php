@@ -147,7 +147,7 @@ function processMessage($message) {
       }
 
       // apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'https://api.whatsapp.com/send?phone='.$text));
-      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'https://wa.me/'.$text."
+      apiRequest("sendMessage", array('disable_web_page_preview','chat_id' => $chat_id, "text" => 'https://wa.me/'.$text."
 
 ".str_replace("58","0",$text)));
     }
