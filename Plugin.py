@@ -191,12 +191,10 @@ def useBanditScroll():
 				inject_joymax(0x704C, Packet, True)
 				log('Bandit Den Return Scroll')
 		i+=1
+
 def handle_silkroad(opcode,data):
 	if opcode == 0x3091 and data ==  b'\x01':
 		loop()
 	return True
-
-
-
 
 log("[Super Plugin v1.0 by Rahim]")
