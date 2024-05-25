@@ -62,11 +62,15 @@ def handle_event(t, data):
 			Timer(1,goUnique).start()
 			Timer(2,goUnique).start()
 		if startBotUnique:
-			mobs = get_monsters()
-			for mobID in mobs:
-				if mobs[mobID]['type'] == 24:
-					set_training_position(0, mobs[mobID]['x'],mobs[mobID]['y'],0)
-					start_bot()
+			Timer(2,startUnique).start()
+
+def startUnique():
+	log('el bot iniciara en 1 segundo')
+	mobs = get_monsters()
+	for mobID in mobs:
+		if mobs[mobID]['type'] == 24:
+			set_training_position(0, mobs[mobID]['x'],mobs[mobID]['y'],0)
+			start_bot()
 
 def DismountHorse():
 	pets = get_pets()
