@@ -9,11 +9,11 @@ alarma = False
 DesmontarPet = False
 goToUnique = False
 startBotUnique  = False
-partyCheck = QtBind.createCheckBox(gui,'checkParty','Party chat notify',10,30)
-alarmCheck = QtBind.createCheckBox(gui,'checkAlarm','Alarm when unique is near by',10,50)
-dismountCheck = QtBind.createCheckBox(gui,'checkDismount','Dismount',10,70)
-gotoCheck = QtBind.createCheckBox(gui,'checkGoTo','Go To Unique',10,90)
-startbotCheck = QtBind.createCheckBox(gui,'checkStartBot','Start Bot',10,110)
+partyCheck = QtBind.createCheckBox(gui,'checkParty','Party chat notify',10,10)
+alarmCheck = QtBind.createCheckBox(gui,'checkAlarm','Alarm when unique is near by',10,30)
+dismountCheck = QtBind.createCheckBox(gui,'checkDismount','Dismount Pet',10,50)
+gotoCheck = QtBind.createCheckBox(gui,'checkGoTo','Go To Unique',10,70)
+startbotCheck = QtBind.createCheckBox(gui,'checkStartBot','Start Bot',10,90)
 QtBind.setChecked(gui, partyCheck, partyAlert)
 QtBind.setChecked(gui, alarmCheck, alarma)
 QtBind.setChecked(gui, dismountCheck, goToUnique)
