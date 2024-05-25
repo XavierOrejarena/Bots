@@ -21,14 +21,13 @@ def handle_event(t, data):
 def DismountHorse():
 	pets = get_pets()
 	if pets:
-		for k, v in pets.items():
-			if v['type'] == 'horse' or v['type'] == 'wolf':
+		for slot, pet in pets.items():
+			if pet['type'] == 'horse' or pet['type'] == 'wolf':
 				log('yes')
 				p = b'\x00'
-				p += struct.pack('I', k)
+				p += struct.pack('I', slot)
 				inject_joymax(0x70CB, p, False)
 				log('dismounted')
 				return True
-	return False
 
 log("[Super Plugin v1.0 by Rahim]")
