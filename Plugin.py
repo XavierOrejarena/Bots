@@ -22,8 +22,8 @@ def DismountHorse():
 	pets = get_pets()
 	if pets:
 		for k, v in pets.items():
-			log(v['type'])
 			if v['type'] == 'horse' or v['type'] == 'wolf':
+				log('yes')
 				p = b'\x00'
 				p += struct.pack('I', k)
 				inject_joymax(0x70CB, p, False)
