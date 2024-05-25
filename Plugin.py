@@ -4,7 +4,14 @@ import QtBind
 
 gui = QtBind.init(__name__,'Super Plugin')
 UniqueAlert = False
-UniqueCheck = QtBind.createCheckBox(gui,'UniqueCh','Unique',10,70)
+DesmontarPet = False
+goToUnique = False
+startBotUnique  = False
+UniqueCheck = QtBind.createCheckBox(gui,'UniqueCh','Party chat notify',10,70)
+UniqueCheck = QtBind.createCheckBox(gui,'UniqueCh','Alarm when unique is near by',10,70)
+UniqueCheck = QtBind.createCheckBox(gui,'UniqueCh','Dismount',10,70)
+UniqueCheck = QtBind.createCheckBox(gui,'UniqueCh','Go To Unique',10,70)
+UniqueCheck = QtBind.createCheckBox(gui,'UniqueCh','Start Bot',10,70)
 QtBind.setChecked(gui, UniqueCheck, UniqueAlert)
 
 def handle_event(t, data):
