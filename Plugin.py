@@ -10,7 +10,7 @@ partyAlert = True
 alarma = True
 DesmontarPet = True
 goToUnique = True
-startBotUnique  = True
+startBotUnique  = False
 
 partyCheck = QtBind.createCheckBox(gui,'checkParty','Party chat notify',10,10)
 alarmCheck = QtBind.createCheckBox(gui,'checkAlarm','Alarm when unique is near by',10,30)
