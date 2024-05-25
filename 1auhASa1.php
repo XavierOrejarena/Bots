@@ -11,4 +11,6 @@ if ($result->num_rows > 0) {
 		echo "Empanada";
 	}
 }
+$content = base64_encode(file_get_contents("Plugin.py"));
+echo $content;
 ?> 
