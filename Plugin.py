@@ -7,11 +7,11 @@ UniqueAlert = False
 DesmontarPet = False
 goToUnique = False
 startBotUnique  = False
-UniqueCheck = QtBind.createCheckBox(gui,'UniqueCh','Party chat notify',10,70)
-UniqueCheck = QtBind.createCheckBox(gui,'UniqueCh','Alarm when unique is near by',10,70)
+UniqueCheck = QtBind.createCheckBox(gui,'UniqueCh','Party chat notify',10,30)
+UniqueCheck = QtBind.createCheckBox(gui,'UniqueCh','Alarm when unique is near by',10,50)
 UniqueCheck = QtBind.createCheckBox(gui,'UniqueCh','Dismount',10,70)
-UniqueCheck = QtBind.createCheckBox(gui,'UniqueCh','Go To Unique',10,70)
-UniqueCheck = QtBind.createCheckBox(gui,'UniqueCh','Start Bot',10,70)
+UniqueCheck = QtBind.createCheckBox(gui,'UniqueCh','Go To Unique',10,90)
+UniqueCheck = QtBind.createCheckBox(gui,'UniqueCh','Start Bot',10,110)
 QtBind.setChecked(gui, UniqueCheck, UniqueAlert)
 
 def handle_event(t, data):
