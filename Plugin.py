@@ -1,29 +1,67 @@
 from phBot import *
 import phBotChat
 import QtBind
+from threading import Timer
 
 gui = QtBind.init(__name__,'Super Plugin')
-UniqueAlert = False
+partyAlert = False
+alarma = False
 DesmontarPet = False
 goToUnique = False
 startBotUnique  = False
-UniqueCheck = QtBind.createCheckBox(gui,'UniqueCh','Party chat notify',10,30)
-UniqueCheck = QtBind.createCheckBox(gui,'UniqueCh','Alarm when unique is near by',10,50)
-UniqueCheck = QtBind.createCheckBox(gui,'UniqueCh','Dismount',10,70)
-UniqueCheck = QtBind.createCheckBox(gui,'UniqueCh','Go To Unique',10,90)
-UniqueCheck = QtBind.createCheckBox(gui,'UniqueCh','Start Bot',10,110)
-QtBind.setChecked(gui, UniqueCheck, UniqueAlert)
+partyCheck = QtBind.createCheckBox(gui,'checkParty','Party chat notify',10,30)
+alarmCheck = QtBind.createCheckBox(gui,'checkAlarm','Alarm when unique is near by',10,50)
+dismountCheck = QtBind.createCheckBox(gui,'checkDismount','Dismount',10,70)
+gotoCheck = QtBind.createCheckBox(gui,'checkGoTo','Go To Unique',10,90)
+startbotCheck = QtBind.createCheckBox(gui,'checkStartBot','Start Bot',10,110)
+QtBind.setChecked(gui, partyCheck, partyAlert)
+QtBind.setChecked(gui, alarmCheck, alarma)
+QtBind.setChecked(gui, dismountCheck, goToUnique)
+QtBind.setChecked(gui, startbotCheck, startBotUnique)
+
+def checkParty(checked):
+	global partyAlert
+	partyAlert = checked
+
+def checkAlarm(checked):
+	global alarma
+	alarma = checked
+
+def checkDismount(checked):
+	global DesmontarPet
+	DesmontarPet = checked
+
+def checkGoTo(checked):
+	global goToUnique
+	goToUnique = checked
+
+def checkStartBot(checked):
+	global startBotUnique
+	startBotUnique = checked
 
 def handle_event(t, data):
 	global partyAlert
-	if t == 0 and UniqueAlert and '(INT)' not in data:
-		DismountHorse()
-		play_wav('Sounds/Unique In Range.wav')
-		goUnique()
-		Timer(1,goUnique).start()
-		Timer(2,goUnique).start()
+	global alarma
+	global DesmontarPet
+	global goToUnique
+	global startBotUnique
+	if t == 0:
 		if partyAlert:
 			phBotChat.Party('Here ---> ['+ data + ']')
+		if alarma:
+			play_wav('Sounds/Unique In Range.wav')
+		if DesmontarPet:
+			DismountHorse()
+		if goToUnique:
+			goUnique()
+			Timer(1,goUnique).start()
+			Timer(2,goUnique).start()
+		if startBotUnique:
+			mobs = get_monsters()
+			for mobID in mobs:
+				if mobs[mobID]['type'] == 24:
+					set_training_position(0, mobs[mobID]['x'],mobs[mobID]['y'],0)
+				start_bot()
 
 def DismountHorse():
 	pets = get_pets()
