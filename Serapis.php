@@ -1,10 +1,9 @@
 #!/usr/bin/env php
 <?php
 // 6863881576:AAFjOYMaXdH_K_OBUnuDGaKNfJFkOQfoMgc
-define('KKBA00123JJSJJALLLKKSJJA001', 'OBUnuDGaKNfJFkOQ');
-define('BOT_TOKEN', 'AAFjOYMaXdH_K_');
-define('API_URL', 'https://api.telegram.org/bot6863881576:'.BOT_TOKEN.KKBA00123JJSJJALLLKKSJJA001.'foMgc/');
-// define('API_URL', 'https://api.telegram.org/bot6863881576:AAFjOYMaXdH_K_OBUnuDGaKNfJFkOQfoMgc');
+define('KKBA00123JJSJJALLLKKSJJA001', 'K_OBUnuDGaKNfJFkOQ');
+define('BOT_TOKEN', 'AAFjOYMaXdH_');
+define('API_URL', 'https://api.telegram.org/bot6863881576:'.BOT_TOKEN.KKBA00123JJSJJALLLKKSJJA001.'fo');
 define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/Serapis.php');
 
 function apiRequestWebhook($method, $parameters) {
@@ -85,7 +84,7 @@ function apiRequest($method, $parameters) {
       $val = json_encode($val);
     }
   }
-  $url = API_URL.'foMgc/'.$method.'?'.http_build_query($parameters);
+  $url = API_URL.'Mgc/'.$method.'?'.http_build_query($parameters);
 
   $handle = curl_init($url);
   curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
@@ -110,7 +109,7 @@ function apiRequestJson($method, $parameters) {
 
   $parameters["method"] = $method;
 
-  $handle = curl_init(API_URL.'foMgc/');
+  $handle = curl_init(API_URL.'Mgc/');
   curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
   curl_setopt($handle, CURLOPT_TIMEOUT, 60);
@@ -129,7 +128,7 @@ function processMessage($message) {
     // incoming text message
     $text = $message['text'];
     if ($text == '/start'){
-      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'hello'));
+      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $chat_id));
     }
   } else {
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'I understand only text messages'));

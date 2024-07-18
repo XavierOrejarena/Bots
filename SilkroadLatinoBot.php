@@ -6,6 +6,7 @@ define('BOT_TOKEN', 'AAHlL2X_');
 define('API_URL', 'https://api.telegram.org/bot1221990015:'.BOT_TOKEN.KKBA00123JJSJJALLLKKSJJA001.'_LHuSAEVa7V');
 define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/SilkroadLatinoBot.php');
 
+
 function apiRequestWebhook($method, $parameters) {
   if (!is_string($method)) {
     error_log("Method name must be a string\n");
