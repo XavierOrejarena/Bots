@@ -128,7 +128,7 @@ function processMessage($message) {
     // incoming text message
     $text = $message['text'];
     if ($text == '/start'){
-      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $chat_id));
+      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "Telegram ID: `$chat_id`"));
     }
   } else {
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'I understand only text messages'));
