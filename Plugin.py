@@ -358,4 +358,4 @@ def notice(message):
 	p += message.encode('ascii')
 	inject_silkroad(0x3026,p,False)
 
-log("[Super Plugin v2.0 by Rahim]")
+log("[Super Plugin v3.0 by Rahim]")
