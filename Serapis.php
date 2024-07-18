@@ -3,7 +3,7 @@
 // 6863881576:AAFjOYMaXdH_K_OBUnuDGaKNfJFkOQfoMgc
 define('KKBA00123JJSJJALLLKKSJJA001', 'OBUnuDGaKNfJFkOQ');
 define('BOT_TOKEN', 'AAFjOYMaXdH_K_');
-define('API_URL', 'https://api.telegram.org/bot6863881576:'.BOT_TOKEN.KKBA00123JJSJJALLLKKSJJA001.'foMgc');
+define('API_URL', 'https://api.telegram.org/bot6863881576:'.BOT_TOKEN.KKBA00123JJSJJALLLKKSJJA001.'foMgc/');
 // define('API_URL', 'https://api.telegram.org/bot6863881576:AAFjOYMaXdH_K_OBUnuDGaKNfJFkOQfoMgc');
 define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/Serapis.php');
 
