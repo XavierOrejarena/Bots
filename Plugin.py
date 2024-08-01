@@ -36,13 +36,10 @@ dc_thief = False
 tlg_thief = False
 start_thief = False
 
-ignoreZones = ['Samarkand','Jangan','Königreich Hotan','Western-China-Donwhang','Constantinople','Alexandria']
+ignoreZones = ['Samarkand','Jangan','Königreich Hotan','Western-China-Donwhang','Constantinople','Alexandria','Tempel']
 pm_hunter = False
 bol = True
-DC_trader = False
-Players = ["Sefir"]
-Siempre_Alerta = ['Seven','Avo','Cut','Meto','Mete','Pew','Phiore','Elba']
-ignore = ['BTE_Str0nG','BTE_StronG','BTE__StronG']
+ignore = ['Rahim']
 
 if get_character_data()['name'] in WhiteList:
 	cbxSro3 = QtBind.createCheckBox(gui2,'cbxSro_clicked3','Thief Activate',10,150)
@@ -302,8 +299,8 @@ def handle_event(t, data):
 				stop_bot()
 				start_trace(data)
 			if pm_hunter and get_zone_name(get_position()['region']) not in ignoreZones:
-				phBotChat.Private('Cbum', '['+data + '] -> ' + get_zone_name(get_position()['region']))
-		elif t == 2 and data not in QtBind.getItems(gui2,lstOpcodes) and data not in Players:
+				phBotChat.Private('Seven', '['+data + '] -> ' + get_zone_name(get_position()['region']))
+		elif t == 2 and data not in QtBind.getItems(gui2,lstOpcodes) and:
 			log('[THIEF] '+data)
 			if alertar_thief:
 				play_wav('Sounds/Ladrones.wav')
