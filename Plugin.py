@@ -10,6 +10,7 @@ import threading
 gui = QtBind.init(__name__,'Super Plugin')
 gui2 = QtBind.init(__name__,'Job Expert')
 
+WhiteList = ['Cbum']
 uniqueList = []
 partyAlert = True
 alarma = True
@@ -263,68 +264,69 @@ def handle_event(t, data):
 			Timer(2,goUnique).start()
 		if startBotUnique:
 			Timer(2,startUnique).start()
-	elif t == 1 and data not in QtBind.getItems(gui2,lstOpcodes) and data not in ignore:
-		log('[HUNTER] '+data)
-		if alertar_hunter:
-			play_wav('Sounds/Hunter.wav')
-			checkThief(0)
-			notice(data)
-		if dc_hunter:
-			Desconectar()
-		if party_hunter and get_inventory()['items'][8]:
-			phBotChat.Party("HUNTER: [" + data  + "]")
-		if tlg_hunter:
+	if get_character_data()['name'] in WhiteList:
+		if t == 1 and data not in QtBind.getItems(gui2,lstOpcodes) and data not in ignore:
+			log('[HUNTER] '+data)
+			if alertar_hunter:
+				play_wav('Sounds/Hunter.wav')
+				checkThief(0)
+				notice(data)
+			if dc_hunter:
+				Desconectar()
+			if party_hunter and get_inventory()['items'][8]:
+				phBotChat.Party("HUNTER: [" + data  + "]")
+			if tlg_hunter:
+				name = get_character_data()['name']
+				# url = 'https://api.telegram.org/bot6863881576:AAFjOYMaXdH_K_OBUnuDGaKNfJFkOQfoMgc/sendMessage?chat_id=149273661&text='
+				# url = url + urllib.parse.quote(name+" [HUNTER] "+ data)
+				# threading.Thread(target=telegram, args=[url]).start()
+			if start_hunter:
+				start_bot()
+			if follow_hunter and get_zone_name(get_position()['region']) not in ignoreZones and get_inventory()['items'][8]:
+				mobs = get_monsters()
+				stop_bot()
+				stop_trace()
+				follow_hunter = False
+				QtBind.setChecked(gui2, cbxSro10, False)
+				start_trace(data)
+				Timer(5,stop_trace).start()
+			if perma_trace and get_zone_name(get_position()['region']) not in ignoreZones and get_inventory()['items'][8]:
+				inject_joymax(0x7150,b'\x01',True)
+				Timer(1, inject_joymax,[0x7150, b'\x01', True]).start()
+				Timer(2, inject_joymax,[0x7150, b'\x01', True]).start()
+				Timer(3, inject_joymax,[0x7150, b'\x01', True]).start()
+				Timer(4, inject_joymax,[0x7150, b'\x01', True]).start()
+				Timer(5, inject_joymax,[0x7150, b'\x01', True]).start()
+				Timer(6, inject_joymax,[0x7150, b'\x01', True]).start()
+				Timer(7, inject_joymax,[0x7150, b'\x01', True]).start()
+				perma_trace = False
+				QtBind.setChecked(gui2, cbxSro11, perma_trace)
+				stop_bot()
+				start_trace(data)
+			if pm_hunter and get_zone_name(get_position()['region']) not in ignoreZones:
+				phBotChat.Private('Cbum', '['+data + '] -> ' + get_zone_name(get_position()['region']))
+		elif t == 2 and data not in QtBind.getItems(gui2,lstOpcodes) and data not in Players:
+			log('[THIEF] '+data)
+			if alertar_thief:
+				play_wav('Sounds/Ladrones.wav')
+			if dc_thief:
+				Desconectar()
+				Timer(1.0, os.kill, (os.getpid(), 9)).start()
+			if party_thief:
+				phBotChat.Party("THIEF: [" + data  + "]")
+			if tlg_thief:
+				name = get_character_data()['name']
+				url = 'https://api.telegram.org/bot1221990015:AAHlL2X_NInc3xNo9MEnX_LHuSAEVa7VbqI/sendMessage?chat_id=149273661&text='
+				url = url + urllib.parse.quote(name+" [THIEF] "+ data)
+				threading.Thread(target=telegram, args=[url]).start()
+			if start_thief:
+				start_bot()
+		if t == 2 and DC_trader:
 			name = get_character_data()['name']
-			# url = 'https://api.telegram.org/bot6863881576:AAFjOYMaXdH_K_OBUnuDGaKNfJFkOQfoMgc/sendMessage?chat_id=149273661&text='
-			# url = url + urllib.parse.quote(name+" [HUNTER] "+ data)
-			# threading.Thread(target=telegram, args=[url]).start()
-		if start_hunter:
-			start_bot()
-		if follow_hunter and get_zone_name(get_position()['region']) not in ignoreZones and get_inventory()['items'][8]:
-			mobs = get_monsters()
-			stop_bot()
-			stop_trace()
-			follow_hunter = False
-			QtBind.setChecked(gui2, cbxSro10, False)
-			start_trace(data)
-			Timer(5,stop_trace).start()
-		if perma_trace and get_zone_name(get_position()['region']) not in ignoreZones and get_inventory()['items'][8]:
-			inject_joymax(0x7150,b'\x01',True)
-			Timer(1, inject_joymax,[0x7150, b'\x01', True]).start()
-			Timer(2, inject_joymax,[0x7150, b'\x01', True]).start()
-			Timer(3, inject_joymax,[0x7150, b'\x01', True]).start()
-			Timer(4, inject_joymax,[0x7150, b'\x01', True]).start()
-			Timer(5, inject_joymax,[0x7150, b'\x01', True]).start()
-			Timer(6, inject_joymax,[0x7150, b'\x01', True]).start()
-			Timer(7, inject_joymax,[0x7150, b'\x01', True]).start()
-			perma_trace = False
-			QtBind.setChecked(gui2, cbxSro11, perma_trace)
-			stop_bot()
-			start_trace(data)
-		if pm_hunter and get_zone_name(get_position()['region']) not in ignoreZones:
-			phBotChat.Private('Cbum', '['+data + '] -> ' + get_zone_name(get_position()['region']))
-	elif t == 2 and data not in QtBind.getItems(gui2,lstOpcodes) and data not in Players:
-		log('[THIEF] '+data)
-		if alertar_thief:
-			play_wav('Sounds/Ladrones.wav')
-		if dc_thief:
-			Desconectar()
-			Timer(1.0, os.kill, (os.getpid(), 9)).start()
-		if party_thief:
-			phBotChat.Party("THIEF: [" + data  + "]")
-		if tlg_thief:
-			name = get_character_data()['name']
-			url = 'https://api.telegram.org/bot1221990015:AAHlL2X_NInc3xNo9MEnX_LHuSAEVa7VbqI/sendMessage?chat_id=149273661&text='
-			url = url + urllib.parse.quote(name+" [THIEF] "+ data)
-			threading.Thread(target=telegram, args=[url]).start()
-		if start_thief:
-			start_bot()
-	if t == 2 and DC_trader:
-		name = get_character_data()['name']
-		if name != "Gari":
-			Desconectar()
-			while True:
-				os.kill(os.getpid(), 9)
+			if name != "Gari":
+				Desconectar()
+				while True:
+					os.kill(os.getpid(), 9)
 
 def startUnique():
 	log('el bot iniciara en 1 segundo')
