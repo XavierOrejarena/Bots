@@ -300,7 +300,7 @@ def handle_event(t, data):
 				start_trace(data)
 			if pm_hunter and get_zone_name(get_position()['region']) not in ignoreZones:
 				phBotChat.Private('Seven', '['+data + '] -> ' + get_zone_name(get_position()['region']))
-		elif t == 2 and data not in QtBind.getItems(gui2,lstOpcodes) and:
+		elif t == 2 and data not in QtBind.getItems(gui2,lstOpcodes):
 			log('[THIEF] '+data)
 			if alertar_thief:
 				play_wav('Sounds/Ladrones.wav')
