@@ -8,6 +8,7 @@ import ssl
 import threading
 
 gui = QtBind.init(__name__,'Super Plugin')
+gui2 = QtBind.init(__name__,'Job Expert')
 
 uniqueList = []
 partyAlert = True
@@ -20,6 +21,49 @@ UniqueTelegram = False
 partyNumber = ''
 comandos = False
 spawn = False
+
+perma_trace = False
+follow_hunter = False
+alertar_hunter = False
+party_hunter = False
+dc_hunter = False
+tlg_hunter = False
+start_hunter = False
+alertar_thief = False
+party_thief = False
+dc_thief = False
+tlg_thief = False
+start_thief = False
+
+
+cbxSro3 = QtBind.createCheckBox(gui2,'cbxSro_clicked3','Thief Activate',10,150)
+cbxSro4 = QtBind.createCheckBox(gui2,'cbxSro_clicked4','Party Thief',30,170)
+cbxSro5 = QtBind.createCheckBox(gui2,'cbxSro_clicked5','DC Thief',30,190)
+cbxSro7 = QtBind.createCheckBox(gui2,'cbxSro_clicked7','Telegram Thief',30,210)
+
+
+
+lblOpcodes = QtBind.createLabel(gui2,"Ignore list ( Filter )",321,110)
+tbxOpcodes = QtBind.createLineEdit(gui2,"",321,129,100,20)
+lstOpcodes = QtBind.createList(gui2,321,151,176,109)
+btnAddOpcode = QtBind.createButton(gui2,'addIgnore',"      Add      ",423,129)
+btnRemOpcode = QtBind.createButton(gui2,'removeIgnore',"     Remove     ",370,259)
+
+ignoreZones = ['Samarkand','Jangan','Königreich Hotan','Western-China-Donwhang','Constantinople','Alexandria']
+pm_hunter = False
+bol = True
+DC_trader = False
+Players = ["Sefir"]
+Siempre_Alerta = ['Seven','Avo','Cut','Meto','Mete','Pew','Phiore','Elba']
+ignore = ['BTE_Str0nG','BTE_StronG','BTE__StronG']
+
+cbxSro0 = QtBind.createCheckBox(gui2,'cbxSro_clicked0','Hunter Activate',10,10)
+cbxSro1 = QtBind.createCheckBox(gui2,'cbxSro_clicked1','Party Hunter',30,30)
+cbxSro11 = QtBind.createCheckBox(gui2,'cbxSro_clicked11','Perma Trace',30,50)
+cbxSro6 = QtBind.createCheckBox(gui2,'cbxSro_clicked6','Telegram Hunter',30,70)
+cbxSro10 = QtBind.createCheckBox(gui2,'cbxSro_clicked10','Follow Hunter',30,90)
+cbxSro8 = QtBind.createCheckBox(gui2,'cbxSro_clicked8','PM Hunter',30,110)
+QtBind.setChecked(gui2, cbxSro0, alertar_hunter)
 
 partyCheck = QtBind.createCheckBox(gui,'checkParty','Party chat notify',10,10)
 alarmCheck = QtBind.createCheckBox(gui,'checkAlarm','Alarm when unique is near by',10,30)
@@ -44,6 +88,26 @@ lstOpcodes = QtBind.createList(gui,321,151,176,109)
 btnAddOpcode = QtBind.createButton(gui,'addUnique',"      Add      ",423,129)
 btnRemOpcode = QtBind.createButton(gui,'removeUnique',"     Remove     ",370,259)
 
+def telegram(url):
+	urllib.request.urlopen(url,context=ssl._create_unverified_context())
+		
+def Desconectar():
+	inject_joymax(0x704C, bytearray(), False)
+	while True:
+		os.kill(os.getpid(), 9)
+
+def teleported():
+	pass
+
+def addIgnore():
+	ignored = QtBind.text(gui2,tbxOpcodes)
+	ignore.append(ignored)
+	QtBind.append(gui2,lstOpcodes,ignored)
+
+def removeIgnore():
+	selectedItem = QtBind.text(gui2,lstOpcodes)
+	if selectedItem:
+		QtBind.remove(gui2,lstOpcodes,selectedItem)
 def addUnique():
 	ignored = QtBind.text(gui,tbxOpcodes).lower()
 	if ignored not in uniqueList:
@@ -66,6 +130,56 @@ QtBind.setChecked(gui, startbotCheck, startBotUnique)
 QtBind.setChecked(gui, telegramCheck, TelegramBol)
 QtBind.setChecked(gui, comandosCheck, comandos)
 QtBind.setChecked(gui, spawnCheck, spawn)
+
+def cbxSro_clicked10(checked):
+	global follow_hunter
+	follow_hunter = checked
+	stop_trace()
+
+def cbxSro_clicked11(checked):
+	global perma_trace
+	perma_trace = checked
+	stop_trace()
+
+def cbxSro_clicked8(checked):
+	global pm_hunter
+	pm_hunter = checked
+
+def cbxSro_clicked9(checked):
+	global start_thief
+	start_thief = checked
+
+def cbxSro_clicked0(checked):
+	global alertar_hunter
+	alertar_hunter = checked
+
+def cbxSro_clicked1(checked):
+	global party_hunter
+	party_hunter = checked
+
+def cbxSro_clicked2(checked):
+	global dc_hunter
+	dc_hunter = checked
+
+def cbxSro_clicked3(checked):
+	global alertar_thief
+	alertar_thief = checked
+
+def cbxSro_clicked4(checked):
+	global party_thief
+	party_thief = checked
+
+def cbxSro_clicked5(checked):
+	global dc_thief
+	dc_thief = checked
+
+def cbxSro_clicked6(checked):
+	global tlg_hunter
+	tlg_hunter = checked
+
+def cbxSro_clicked7(checked):
+	global tlg_thief
+	tlg_thief = checked
 
 def checkParty(checked):
 	global partyAlert
@@ -127,7 +241,16 @@ def handle_event(t, data):
 	global DesmontarPet
 	global goToUnique
 	global startBotUnique
+	global party_hunter
+	global party_thief
+	global dc_hunter
+	global dc_thief
+	global start_hunter
+	global start_thief
+	global follow_hunter
+	global perma_trace
 	if t == 0:
+		notice(data)
 		if partyAlert:
 			phBotChat.Party('Here ---> ['+ data + ']')
 		if spawn:
@@ -140,6 +263,68 @@ def handle_event(t, data):
 			Timer(2,goUnique).start()
 		if startBotUnique:
 			Timer(2,startUnique).start()
+	elif t == 1 and data not in QtBind.getItems(gui2,lstOpcodes) and data not in ignore:
+		log('[HUNTER] '+data)
+		if alertar_hunter:
+			play_wav('Sounds/Hunter.wav')
+			checkThief(0)
+			notice(data)
+		if dc_hunter:
+			Desconectar()
+		if party_hunter and get_inventory()['items'][8]:
+			phBotChat.Party("HUNTER: [" + data  + "]")
+		if tlg_hunter:
+			name = get_character_data()['name']
+			# url = 'https://api.telegram.org/bot6863881576:AAFjOYMaXdH_K_OBUnuDGaKNfJFkOQfoMgc/sendMessage?chat_id=149273661&text='
+			# url = url + urllib.parse.quote(name+" [HUNTER] "+ data)
+			# threading.Thread(target=telegram, args=[url]).start()
+		if start_hunter:
+			start_bot()
+		if follow_hunter and get_zone_name(get_position()['region']) not in ignoreZones and get_inventory()['items'][8]:
+			mobs = get_monsters()
+			stop_bot()
+			stop_trace()
+			follow_hunter = False
+			QtBind.setChecked(gui2, cbxSro10, False)
+			start_trace(data)
+			Timer(5,stop_trace).start()
+		if perma_trace and get_zone_name(get_position()['region']) not in ignoreZones and get_inventory()['items'][8]:
+			inject_joymax(0x7150,b'\x01',True)
+			Timer(1, inject_joymax,[0x7150, b'\x01', True]).start()
+			Timer(2, inject_joymax,[0x7150, b'\x01', True]).start()
+			Timer(3, inject_joymax,[0x7150, b'\x01', True]).start()
+			Timer(4, inject_joymax,[0x7150, b'\x01', True]).start()
+			Timer(5, inject_joymax,[0x7150, b'\x01', True]).start()
+			Timer(6, inject_joymax,[0x7150, b'\x01', True]).start()
+			Timer(7, inject_joymax,[0x7150, b'\x01', True]).start()
+			perma_trace = False
+			QtBind.setChecked(gui2, cbxSro11, perma_trace)
+			stop_bot()
+			start_trace(data)
+		if pm_hunter and get_zone_name(get_position()['region']) not in ignoreZones:
+			phBotChat.Private('Cbum', '['+data + '] -> ' + get_zone_name(get_position()['region']))
+	elif t == 2 and data not in QtBind.getItems(gui2,lstOpcodes) and data not in Players:
+		log('[THIEF] '+data)
+		if alertar_thief:
+			play_wav('Sounds/Ladrones.wav')
+		if dc_thief:
+			Desconectar()
+			Timer(1.0, os.kill, (os.getpid(), 9)).start()
+		if party_thief:
+			phBotChat.Party("THIEF: [" + data  + "]")
+		if tlg_thief:
+			name = get_character_data()['name']
+			url = 'https://api.telegram.org/bot1221990015:AAHlL2X_NInc3xNo9MEnX_LHuSAEVa7VbqI/sendMessage?chat_id=149273661&text='
+			url = url + urllib.parse.quote(name+" [THIEF] "+ data)
+			threading.Thread(target=telegram, args=[url]).start()
+		if start_thief:
+			start_bot()
+	if t == 2 and DC_trader:
+		name = get_character_data()['name']
+		if name != "Gari":
+			Desconectar()
+			while True:
+				os.kill(os.getpid(), 9)
 
 def startUnique():
 	log('el bot iniciara en 1 segundo')
@@ -358,4 +543,16 @@ def notice(message):
 	p += message.encode('ascii')
 	inject_silkroad(0x3026,p,False)
 
-log("[Super Plugin v3.0 by Rahim]")
+def joined_game():
+	pass
+
+def checkThief(time):
+	mobs = get_monsters()
+	for mobID in mobs:
+		if mobs[mobID]['name'] == 'Thief':
+			notice('Thief NPC')
+			return
+	if time < 3:
+		Timer(time,checkThief,[time+1]).start()
+	
+log("[Super Plugin v2.0 by Rahim]")
