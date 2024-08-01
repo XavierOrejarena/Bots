@@ -10,7 +10,7 @@ import threading
 gui = QtBind.init(__name__,'Super Plugin')
 gui2 = QtBind.init(__name__,'Job Expert')
 
-WhiteList = ['Cbum']
+WhiteList = ['Cbum','Kurumi','Moshi']
 uniqueList = []
 partyAlert = True
 alarma = True
@@ -36,20 +36,6 @@ dc_thief = False
 tlg_thief = False
 start_thief = False
 
-
-cbxSro3 = QtBind.createCheckBox(gui2,'cbxSro_clicked3','Thief Activate',10,150)
-cbxSro4 = QtBind.createCheckBox(gui2,'cbxSro_clicked4','Party Thief',30,170)
-cbxSro5 = QtBind.createCheckBox(gui2,'cbxSro_clicked5','DC Thief',30,190)
-cbxSro7 = QtBind.createCheckBox(gui2,'cbxSro_clicked7','Telegram Thief',30,210)
-
-
-
-lblOpcodes = QtBind.createLabel(gui2,"Ignore list ( Filter )",321,110)
-tbxOpcodes = QtBind.createLineEdit(gui2,"",321,129,100,20)
-lstOpcodes = QtBind.createList(gui2,321,151,176,109)
-btnAddOpcode = QtBind.createButton(gui2,'addIgnore',"      Add      ",423,129)
-btnRemOpcode = QtBind.createButton(gui2,'removeIgnore',"     Remove     ",370,259)
-
 ignoreZones = ['Samarkand','Jangan','Königreich Hotan','Western-China-Donwhang','Constantinople','Alexandria']
 pm_hunter = False
 bol = True
@@ -58,13 +44,25 @@ Players = ["Sefir"]
 Siempre_Alerta = ['Seven','Avo','Cut','Meto','Mete','Pew','Phiore','Elba']
 ignore = ['BTE_Str0nG','BTE_StronG','BTE__StronG']
 
-cbxSro0 = QtBind.createCheckBox(gui2,'cbxSro_clicked0','Hunter Activate',10,10)
-cbxSro1 = QtBind.createCheckBox(gui2,'cbxSro_clicked1','Party Hunter',30,30)
-cbxSro11 = QtBind.createCheckBox(gui2,'cbxSro_clicked11','Perma Trace',30,50)
-cbxSro6 = QtBind.createCheckBox(gui2,'cbxSro_clicked6','Telegram Hunter',30,70)
-cbxSro10 = QtBind.createCheckBox(gui2,'cbxSro_clicked10','Follow Hunter',30,90)
-cbxSro8 = QtBind.createCheckBox(gui2,'cbxSro_clicked8','PM Hunter',30,110)
-QtBind.setChecked(gui2, cbxSro0, alertar_hunter)
+if get_character_data()['name'] in WhiteList:
+	cbxSro3 = QtBind.createCheckBox(gui2,'cbxSro_clicked3','Thief Activate',10,150)
+	cbxSro4 = QtBind.createCheckBox(gui2,'cbxSro_clicked4','Party Thief',30,170)
+	cbxSro5 = QtBind.createCheckBox(gui2,'cbxSro_clicked5','DC Thief',30,190)
+	cbxSro7 = QtBind.createCheckBox(gui2,'cbxSro_clicked7','Telegram Thief',30,210)
+
+	lblOpcodes = QtBind.createLabel(gui2,"Ignore list ( Filter )",321,110)
+	tbxOpcodes = QtBind.createLineEdit(gui2,"",321,129,100,20)
+	lstOpcodes = QtBind.createList(gui2,321,151,176,109)
+	btnAddOpcode = QtBind.createButton(gui2,'addIgnore',"      Add      ",423,129)
+	btnRemOpcode = QtBind.createButton(gui2,'removeIgnore',"     Remove     ",370,259)
+
+	cbxSro0 = QtBind.createCheckBox(gui2,'cbxSro_clicked0','Hunter Activate',10,10)
+	cbxSro1 = QtBind.createCheckBox(gui2,'cbxSro_clicked1','Party Hunter',30,30)
+	cbxSro11 = QtBind.createCheckBox(gui2,'cbxSro_clicked11','Perma Trace',30,50)
+	cbxSro6 = QtBind.createCheckBox(gui2,'cbxSro_clicked6','Telegram Hunter',30,70)
+	cbxSro10 = QtBind.createCheckBox(gui2,'cbxSro_clicked10','Follow Hunter',30,90)
+	cbxSro8 = QtBind.createCheckBox(gui2,'cbxSro_clicked8','PM Hunter',30,110)
+	QtBind.setChecked(gui2, cbxSro0, alertar_hunter)
 
 partyCheck = QtBind.createCheckBox(gui,'checkParty','Party chat notify',10,10)
 alarmCheck = QtBind.createCheckBox(gui,'checkAlarm','Alarm when unique is near by',10,30)
