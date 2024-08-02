@@ -36,7 +36,7 @@ dc_thief = False
 tlg_thief = False
 start_thief = False
 
-ignoreZones = ['Samarkand','Jangan','Königreich Hotan','Western-China-Donwhang','Constantinople','Alexandria','Tempel']
+ignoreZones = ['Samarkand','Jangan','Königreich Hotan','Western-China-Donwhang','Constantinople','Alexandria','Tempel','Flammenberg']
 pm_hunter = False
 bol = True
 ignore = ['Rahim']
@@ -520,6 +520,14 @@ def handle_joymax(opcode, data):
 					if UniqueTelegram:
 						threading.Thread(target=sendTelegram, args=[uniqueName],).start()
 					return True
+	elif opcode == 0x30CF: #Mensajes de eventos
+		if data == b'\x15\x02\x55\x00\x59\x6F\x75\x20\x6D\x75\x73\x74\x20\x63\x6F\x6D\x70\x6C\x65\x74\x65\x20\x74\x68\x65\x20\x63\x61\x70\x74\x63\x68\x61\x20\x76\x65\x72\x69\x66\x63\x61\x74\x69\x6F\x6E\x20\x74\x6F\x20\x70\x72\x6F\x63\x65\x65\x64\x20\x77\x69\x74\x68\x20\x62\x75\x79\x69\x6E\x67\x2F\x73\x65\x6C\x6C\x69\x6E\x67\x20\x74\x72\x61\x64\x65\x20\x67\x6F\x6F\x64\x73\x2E': # Trader Sell
+			for i,x in enumerate(get_inventory()['items']):
+				if x and i > 13:
+					if x['name'] == 'Bandit Den Return Scroll':
+						if x['quantity'] <= 10:
+							notice('BANDIT SCROLLS!')
+							break
 	return True
 
 def sendTelegram(data):
