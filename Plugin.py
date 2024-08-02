@@ -92,9 +92,6 @@ def Desconectar():
 	while True:
 		os.kill(os.getpid(), 9)
 
-def teleported():
-	pass
-
 def addIgnore():
 	ignored = QtBind.text(gui2,tbxOpcodes)
 	ignore.append(ignored)
@@ -551,5 +548,12 @@ def checkThief(time):
 			return
 	if time < 3:
 		Timer(time,checkThief,[time+1]).start()
-	
-log("[Super Plugin v2.0 by Rahim]")
+
+def teleported():
+	quests = get_quests()
+	for questID in quests:
+		if quests[questID]['completed']:
+			notice('Pendint Quest!')
+			break
+
+log("[Super Plugin v2.5 by Rahim]")
