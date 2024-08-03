@@ -288,7 +288,7 @@ def handle_event(t, data):
 				notice(data)
 			if dc_hunter:
 				Desconectar()
-			if party_hunter and get_inventory()['items'][8]:
+			if party_hunter and get_inventory()['items'][8] and get_zone_name(get_position()['region']) not in ignoreZones:
 				phBotChat.Party("HUNTER: [" + data  + "]")
 			if tlg_hunter:
 				name = get_character_data()['name']
