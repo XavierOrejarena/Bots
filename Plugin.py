@@ -8,7 +8,6 @@ import ssl
 import threading
 
 gui = QtBind.init(__name__,'Super Plugin')
-gui2 = QtBind.init(__name__,'Job Expert')
 
 WhiteList = ['Cbum','Kurumi','Moshi','Zoser']
 uniqueList = []
@@ -43,6 +42,7 @@ bol = True
 ignore = ['Rahim']
 
 if get_character_data()['name'] in WhiteList:
+	gui2 = QtBind.init(__name__,'Job Expert')
 	buscarMercabtn = QtBind.createButton(gui2,'buscarMerca','buscarMerca',150,10)
 	cbxSro3 = QtBind.createCheckBox(gui2,'cbxSro_clicked3','Thief Activate',10,150)
 	cbxSro4 = QtBind.createCheckBox(gui2,'cbxSro_clicked4','Party Thief',30,170)
@@ -62,6 +62,7 @@ if get_character_data()['name'] in WhiteList:
 	cbxSro10 = QtBind.createCheckBox(gui2,'cbxSro_clicked10','Follow Hunter',30,90)
 	cbxSro8 = QtBind.createCheckBox(gui2,'cbxSro_clicked8','PM Hunter',30,110)
 	QtBind.setChecked(gui2, cbxSro0, alertar_hunter)
+	log('xd')
 
 partyCheck = QtBind.createCheckBox(gui,'checkParty','Party chat notify',10,10)
 alarmCheck = QtBind.createCheckBox(gui,'checkAlarm','Alarm when unique is near by',10,30)
