@@ -35,6 +35,7 @@ party_thief = False
 dc_thief = False
 tlg_thief = False
 start_thief = False
+merca = False
 
 ignoreZones = ['Samarkand','Jangan','Königreich Hotan','Western-China-Donwhang','Constantinople','Alexandria','Tempel','Flammenberg']
 pm_hunter = False
@@ -42,6 +43,7 @@ bol = True
 ignore = ['Rahim']
 
 if get_character_data()['name'] in WhiteList:
+	buscarMercabtn = QtBind.createButton(gui2,'buscarMerca','buscarMerca',150,10)
 	cbxSro3 = QtBind.createCheckBox(gui2,'cbxSro_clicked3','Thief Activate',10,150)
 	cbxSro4 = QtBind.createCheckBox(gui2,'cbxSro_clicked4','Party Thief',30,170)
 	cbxSro5 = QtBind.createCheckBox(gui2,'cbxSro_clicked5','DC Thief',30,190)
@@ -84,6 +86,21 @@ lstOpcodes = QtBind.createList(gui,321,151,176,109)
 btnAddOpcode = QtBind.createButton(gui,'addUnique',"      Add      ",423,129)
 btnRemOpcode = QtBind.createButton(gui,'removeUnique',"     Remove     ",370,259)
 
+def soundMerca():
+	log('Buscando...')
+	global merca
+	if merca:
+		drops = get_drops()
+		if drops:
+			for dropID in drops:
+				if 'TRADE' in drops[dropID]['servername']:
+					log(drops[dropID]['servername'])
+					stop_bot()
+					merca = False
+					play_wav('Sounds/MercaEncontrada.wav')
+					break
+		Timer(1,soundMerca).start()
+
 def telegram(url):
 	urllib.request.urlopen(url,context=ssl._create_unverified_context())
 		
@@ -123,6 +140,11 @@ QtBind.setChecked(gui, startbotCheck, startBotUnique)
 QtBind.setChecked(gui, telegramCheck, TelegramBol)
 QtBind.setChecked(gui, comandosCheck, comandos)
 QtBind.setChecked(gui, spawnCheck, spawn)
+
+def buscarMerca():
+	global merca
+	merca = not merca
+	soundMerca()
 
 def cbxSro_clicked10(checked):
 	global follow_hunter
