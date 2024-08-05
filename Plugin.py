@@ -579,7 +579,7 @@ def teleported():
 	quests = get_quests()
 	for questID in quests:
 		if quests[questID]['completed']:
-			notice('Pendint Quest!')
+			notice('Quest Pending!')
 			break
 
 def deleteClean():
