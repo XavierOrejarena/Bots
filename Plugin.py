@@ -579,7 +579,7 @@ def teleported():
 	quests = get_quests()
 	for questID in quests:
 		if quests[questID]['completed']:
-			notice('Quest Pending!')
+			notice('Pendint Quest!')
 			break
 
 def deleteClean():
@@ -597,7 +597,8 @@ def deleteClean():
 	if v['type'] == 'pick' or v['type'] == 'wolf':
 		exitBandit()
 		return
-	inject_joymax(0x70C6, struct.pack('I', k), False)
+	if get_zone_name(get_character_data()['region']) == 'Diebesstadt':
+		inject_joymax(0x70C6, struct.pack('I', k), False)
 	Timer(1,deleteClean).start()
 
 def exitBandit():
