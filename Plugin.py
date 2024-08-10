@@ -9,6 +9,7 @@ import threading
 
 gui = QtBind.init(__name__,'Super Plugin')
 
+pmList = []
 WhiteList = ['Cbum','Kurumi','Moshi','Zoser']
 uniqueList = []
 partyAlert = True
@@ -265,6 +266,7 @@ def handle_event(t, data):
 	global start_thief
 	global follow_hunter
 	global perma_trace
+	global pmList
 	if t == 0:
 		notice(data)
 		if partyAlert:
@@ -318,7 +320,8 @@ def handle_event(t, data):
 				QtBind.setChecked(gui2, cbxSro11, perma_trace)
 				stop_bot()
 				start_trace(data)
-			if pm_hunter and get_zone_name(get_position()['region']) not in ignoreZones:
+			if pm_hunter and get_zone_name(get_position()['region']) not in ignoreZones and data not in pmList:
+				pmList.append(data)
 				phBotChat.Private('Seven', '['+data + '] -> ' + get_zone_name(get_position()['region']))
 		elif t == 2 and data not in QtBind.getItems(gui2,lstOpcodes):
 			log('[THIEF] '+data)
@@ -576,6 +579,7 @@ def checkThief(time):
 		Timer(time,checkThief,[time+1]).start()
 
 def teleported():
+	pmList = []
 	quests = get_quests()
 	for questID in quests:
 		if quests[questID]['completed']:
