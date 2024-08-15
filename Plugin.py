@@ -9,6 +9,7 @@ import threading
 
 gui = QtBind.init(__name__,'Super Plugin')
 
+CountList = ['Cbum']
 energy = False
 pmList = []
 WhiteList = ['Cbum','Kurumi','Moshi','Zoser']
@@ -607,6 +608,8 @@ def teleported():
 	energy = False
 	pmList = []
 	quests = get_quests()
+	if get_character_data()['name'] in CountList:
+		inject_joymax(0xA451, b'\x04', True)
 	for questID in quests:
 		if quests[questID]['completed']:
 			notice('Pendint Quest!')
