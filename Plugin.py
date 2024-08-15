@@ -609,7 +609,7 @@ def teleported():
 	pmList = []
 	quests = get_quests()
 	if get_character_data()['name'] in CountList:
-		inject_joymax(0xA451, b'\x04', True)
+		Timer(1,inject_joymax,[0xA451,b'\x04',True]).start()
 	for questID in quests:
 		if quests[questID]['completed']:
 			notice('Pendint Quest!')
