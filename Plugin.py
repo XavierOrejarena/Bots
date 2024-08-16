@@ -9,7 +9,7 @@ import threading
 
 gui = QtBind.init(__name__,'Super Plugin')
 
-CountList = ['Cbum']
+CountList = ['Cbum','Seven']
 energy = False
 pmList = []
 WhiteList = ['Cbum','Kurumi','Moshi','Zoser']
@@ -561,6 +561,15 @@ def handle_joymax(opcode, data):
 				if mobs[mobID]['type'] == 24:
 					phBotChat.Party(name + ' Here! => ['+mobs[mobID]['name'] +']')
 					break
+	elif opcode == 0x3068: #party item droped distributed
+		itemName = get_item(struct.unpack_from('<I', data, 4)[0])['name']
+		playerName = get_party()[struct.unpack_from('<I', data, 0)[0]]['name']
+		for item in itemList:
+			if item in itemName.lower():
+				phBotChat.Party('item ['+itemName +']is distributed to ['+ playerName+']')
+				break
+		if get_item(struct.unpack_from('<I', data, 4)[0])['rare']:
+			phBotChat.Party('item ['+itemName +']is distributed to ['+ playerName+']')
 	elif opcode == 0x300C and data[0] == 5: # Unique Spawn 
 			uniqueName = get_monster(struct.unpack_from('<I', data, 2)[0])['name']
 			log(uniqueName)
