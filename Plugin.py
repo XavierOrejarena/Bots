@@ -670,10 +670,12 @@ def handle_joymax(opcode, data):
 		playerName = get_party()[struct.unpack_from('<I', data, 0)[0]]['name']
 		for item in itemList:
 			if item in itemName.lower():
-				phBotChat.Party('item ['+itemName +']is distributed to ['+ playerName+']')
+				azulPerma('item ['+itemName +']is distributed to ['+ playerName+']')
+				# phBotChat.Party('item ['+itemName +']is distributed to ['+ playerName+']')
 				break
 		if get_item(struct.unpack_from('<I', data, 4)[0])['rare']:
-			phBotChat.Party('item ['+itemName +']is distributed to ['+ playerName+']')
+			azulPerma('item ['+itemName +']is distributed to ['+ playerName+']')
+			# phBotChat.Party('item ['+itemName +']is distributed to ['+ playerName+']')
 	elif opcode == 0x300C and data[0] == 5: # Unique Spawn 
 			uniqueName = get_monster(struct.unpack_from('<I', data, 2)[0])['name']
 			log(uniqueName)
@@ -703,6 +705,12 @@ def notice(message):
 	p += struct.pack('H', len(message))
 	p += message.encode('ascii')
 	inject_silkroad(0x3026,p,False)
+
+def azulPerma(message):
+	p = b'\x15\x04'
+	p += struct.pack('H', len(message))
+	p += message.encode('ascii')
+	inject_silkroad(0x30CF,p,False)
 
 def joined_game():
 	pass
@@ -755,4 +763,4 @@ def exitBandit():
 					notice('BANDIT SCROLLS!')
 					return
 
-log("[Super Plugin v2.5 by Rahim]")
+log("[Super Plugin v3.5 by Rahim]")
