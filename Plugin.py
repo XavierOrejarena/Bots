@@ -9,6 +9,7 @@ import threading
 
 gui = QtBind.init(__name__,'Super Plugin')
 
+PICK = False
 CountList = ['Cbum','Seven']
 energy = False
 pmList = []
@@ -65,7 +66,6 @@ if get_character_data()['name'] in WhiteList:
 	cbxSro10 = QtBind.createCheckBox(gui2,'cbxSro_clicked10','Follow Hunter',30,90)
 	cbxSro8 = QtBind.createCheckBox(gui2,'cbxSro_clicked8','PM Hunter',30,110)
 	QtBind.setChecked(gui2, cbxSro0, alertar_hunter)
-	log('xd')
 
 partyCheck = QtBind.createCheckBox(gui,'checkParty','Party chat notify',10,10)
 alarmCheck = QtBind.createCheckBox(gui,'checkAlarm','Alarm when unique is near by',10,30)
@@ -424,28 +424,20 @@ def notFull():
 	return response
 
 def thereIsATransport():
-	bol = False
 	pets = get_pets()
 	if pets:
 		for petID in pets:
 			if pets[petID]['type'] == 'transport':
-				bol = True
-			elif pets[petID]['type'] == 'horse':
-				DismountHorse()
-	return bol
+				return True
+	return False
 
 def useBanditScroll():
-	i = 0
-	for x in get_inventory()['items']:
-		if x:
-			if x['name'] == 'Bandit Den Return Scroll':
-				Packet = bytearray()
-				Packet.append(i) # Inventory slot
-				Packet.append(0xEC) # Always constant = 0x0C30
-				Packet.append(0x09)
-				inject_joymax(0x704C, Packet, True)
+	for i,item in enumerate(get_inventory()['items']):
+		if item and i > 12:
+			if item['name'] == 'Bandit Den Return Scroll':
+				inject_joymax(0x704C, struct.pack('b',i)+b'\xEC\x09', True)
 				log('Bandit Den Return Scroll')
-		i+=1
+				return
 
 def joinParty(n):
 	global partyNumber
@@ -472,9 +464,19 @@ def spawnHorse():
 def handle_silkroad(opcode,data):
 	global partyNumber
 	global energy
-	if opcode == 0x3091 and data ==  b'\x00':
-		joinParty(partyNumber)
-		return False
+	global PICK
+	if opcode == 0x3091:
+		if data ==  b'\x00':
+			joinParty(partyNumber)
+			return False
+		elif data ==  b'\x01':
+			PICK = not PICK
+			if PICK:
+				notice('Pick activado')
+			else:
+				notice('Pick desactivado.')
+			threading.Thread(target=pick_loop).start()
+			return False
 	elif opcode == 0x706D:
 		partyNumber = struct.unpack_from('<I', data, 0)[0]
 		notice(str(partyNumber))
@@ -487,6 +489,108 @@ def handle_silkroad(opcode,data):
 		useEnergy()
 	return True
 
+def pick_loop():
+	set_training_position(0,0,0,0)
+	stop_trace()
+	stop_bot()
+	global PICK
+	if PICK:
+		drops = get_drops()
+		pets = get_pets()
+		if drops:
+			for dropID in drops:
+				if 'TRADE' in drops[dropID]['servername']:
+					if pets:
+						for slot, pet in pets.items():
+							if pet['type'] == 'horse':
+								inject_joymax(0x70CB, b'\x00'+struct.pack('I', slot), False) #dismount horse
+							elif  pet['type'] == 'transport':
+								x1 = get_position()['x']
+								y1 = get_position()['y']
+								max_distance = 0
+								for dropID in drops:
+									if 'TRADE' in drops[dropID]['servername']:
+										x2 = drops[dropID]['x']
+										y2 = drops[dropID]['y']
+										dis = ((x2-x1)**2+(y2-y1)**2)**1/2
+										if max_distance == 0:
+											max_distance = dis
+											dropID_MAS_CERCANO = dropID
+										elif dis < max_distance:
+											max_distance = dis
+											dropID_MAS_CERCANO = dropID
+								packet = b'\x01\x02\x01' + struct.pack('I', dropID_MAS_CERCANO)
+								inject_joymax(0x7074, packet, False)
+								log('Agarrando...')
+								for item in pet['items']:
+									if item == None:
+										Timer(0.5, pick_loop).start()
+										return
+								PICK = False
+								useBanditScroll()
+						spawnThiefPet()
+						Timer(0.5, pick_loop).start()
+						return
+					else:
+						spawnThiefPet()
+						Timer(0.5, pick_loop).start()
+						return
+					break
+		else:
+			if pets:
+				for slot, pet in pets.items():
+					if pet['type'] == 'transport':
+						PICK = False
+						useBanditScroll()
+
+def spawnThiefPet():
+	inventory = get_inventory()
+	items = inventory['items']
+	for slot, item in enumerate(items):
+		if item:
+			if 'Goldclad Trade Horse' in item['name'] and len(get_drops()) < 10:
+				log('Summoning: '+ item['name'])
+				Packet = bytearray()
+				Packet.append(slot)
+				Packet.append(0xEC)
+				Packet.append(0x11)
+				inject_joymax(0x704C, Packet, True)
+				Packet = bytearray()
+				Packet.append(slot)
+				Packet.append(0xED)
+				Packet.append(0x11)
+				inject_joymax(0x704C, Packet, True)
+				return
+			elif len(get_drops()) > 9 and (item['name'] == 'Donkey' or 'elephant' in item['name'].lower()):
+				log('Summoning: '+ item['name'])
+				Packet = bytearray()
+				Packet.append(slot)
+				Packet.append(0xEC)
+				Packet.append(0x11)
+				inject_joymax(0x704C, Packet, True)
+				Packet = bytearray()
+				Packet.append(slot)
+				Packet.append(0xED)
+				Packet.append(0x11)
+				inject_joymax(0x704C, Packet, True)
+				return
+	for slot, item in enumerate(items):
+		if item:
+			if 'Goldclad Trade Horse' in item['name']:
+				log('Summoning: '+ item['name'])
+				Packet = bytearray()
+				Packet.append(slot)
+				Packet.append(0xEC)
+				Packet.append(0x11)
+				inject_joymax(0x704C, Packet, True)
+				Packet = bytearray()
+				Packet.append(slot)
+				Packet.append(0xED)
+				Packet.append(0x11)
+				inject_joymax(0x704C, Packet, True)
+				return
+	return False
+					
 def useEnergy():
 	global energy
 	if energy:
@@ -651,4 +755,4 @@ def exitBandit():
 					notice('BANDIT SCROLLS!')
 					return
 
-log("[Super Plugin v3.0 by Rahim]")
+log("[Super Plugin v2.5 by Rahim]")
