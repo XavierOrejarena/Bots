@@ -651,4 +651,4 @@ def exitBandit():
 					notice('BANDIT SCROLLS!')
 					return
 
-log("[Super Plugin v2.5 by Rahim]")
+log("[Super Plugin v3.0 by Rahim]")
