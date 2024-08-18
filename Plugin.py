@@ -477,6 +477,9 @@ def handle_silkroad(opcode,data):
 				notice('Pick desactivado.')
 			threading.Thread(target=pick_loop).start()
 			return False
+		elif data ==  b'\x02':
+			followUnique()
+			return False
 	elif opcode == 0x706D:
 		partyNumber = struct.unpack_from('<I', data, 0)[0]
 		notice(str(partyNumber))
@@ -488,6 +491,14 @@ def handle_silkroad(opcode,data):
 			notice('Energia Desactivada')
 		useEnergy()
 	return True
+
+def followUnique():
+	mobs = get_monsters()
+	for mobID in mobs:
+		if mobs[mobID]['type'] == 24:
+			move_to(mobs[mobID]['x'],mobs[mobID]['y'],0)
+			Timer(1,followUnique).start()
+	return
 
 def pick_loop():
 	set_training_position(0,0,0,0)
@@ -765,4 +776,4 @@ def exitBandit():
 					notice('BANDIT SCROLLS!')
 					return
 
-log("[Super Plugin v3.6 by Rahim]")
+log("[Super Plugin v3.7 by Rahim]")
