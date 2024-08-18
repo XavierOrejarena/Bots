@@ -668,6 +668,8 @@ def handle_joymax(opcode, data):
 	elif opcode == 0x3068: #party item droped distributed
 		itemName = get_item(struct.unpack_from('<I', data, 4)[0])['name']
 		playerName = get_party()[struct.unpack_from('<I', data, 0)[0]]['name']
+		if 'Poro' in itemName:
+			itemName = 'Poro Balloon'
 		for item in itemList:
 			if item in itemName.lower():
 				azulPerma('item ['+itemName +']is distributed to ['+ playerName+']')
@@ -763,4 +765,4 @@ def exitBandit():
 					notice('BANDIT SCROLLS!')
 					return
 
-log("[Super Plugin v3.5 by Rahim]")
+log("[Super Plugin v3.6 by Rahim]")
