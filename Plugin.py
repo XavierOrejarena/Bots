@@ -663,7 +663,33 @@ def handle_chat(t,player,msg):
 		elif msg.lower() == 'leave':
 			inject_joymax(0x7061, bytearray(), False)
 
+def useSpecialReturnScroll():
+	i = 0
+	for x in get_inventory()['items']:
+		if x:
+			if x['name'] == 'Special Return Scroll' or x['name'] == 'Beginner Return Scroll':
+				log(x['name'])
+				Packet = bytearray()
+				Packet.append(i)
+				Packet.append(0xEC)
+				Packet.append(0x09)
+				inject_joymax(0x704C, Packet, True)
+				break
+		i+=1
 
+def cancelReturnScroll():
+	Packet = bytearray()
+	inject_joymax(0x705B, Packet, False)
+	log('Scroll cancelado')
+
+def scrptChat(scriptName):
+	stop_bot()
+	useSpecialReturnScroll()
+	set_training_script(get_config_dir().replace('Config','Scripts')+str(scriptName[1])+'.txt')
+	Timer(3,start_bot).start()
+	Timer(4,cancelReturnScroll).start()
+	return True
+	
 def handle_joymax(opcode, data):
 	global UniqueTelegram
 	global uniqueList
