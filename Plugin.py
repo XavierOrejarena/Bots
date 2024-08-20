@@ -702,6 +702,16 @@ def handle_joymax(opcode, data):
 				if mobs[mobID]['type'] == 24:
 					phBotChat.Party(name + ' Here! => ['+mobs[mobID]['name'] +']')
 					break
+	elif opcode == 0xB034 and struct.unpack_from('<h', data, 0)[0] == 1537:
+		itemName = get_item(struct.unpack_from('<I', data, 7)[0])['name']
+		if 'Poro' in itemName:
+			itemName = 'Poro Balloon'
+		for item in itemListAzul:
+			if item in itemName.lower():
+				azulPerma('item ['+itemName +'] gained.')
+				break
+		if get_item(struct.unpack_from('<I', data, 7)[0])['rare']:
+			azulPerma('item ['+itemName +'] gained.')
 	elif opcode == 0x3068: #party item droped distributed
 		itemName = get_item(struct.unpack_from('<I', data, 4)[0])['name']
 		playerName = get_party()[struct.unpack_from('<I', data, 0)[0]]['name']
@@ -802,4 +812,4 @@ def exitBandit():
 					notice('BANDIT SCROLLS!')
 					return
 
-log("[Super Plugin v3.7 by Rahim]")
+log("[Super Plugin v3.8 by Rahim]")
