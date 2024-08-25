@@ -703,7 +703,9 @@ def handle_joymax(opcode, data):
 					phBotChat.Party(name + ' Here! => ['+mobs[mobID]['name'] +']')
 					break
 	elif opcode == 0xB034 and len(data)>7:
-		if struct.unpack_from('h', data, 0)[0] == 4353:
+		# log((' '.join('{:02X}'.format(x) for x in data)))
+		dropType = struct.unpack_from('h', data, 0)[0]
+		if dropType == 4353 or dropType == 7169:
 			itemID = get_item(struct.unpack_from('I', data, 11)[0])
 			itemName = itemID['name']
 			if 'Poro' in itemID['name']:
@@ -714,7 +716,7 @@ def handle_joymax(opcode, data):
 					break
 			if itemID['rare']:
 				azulPerma('item ['+itemName +'] gained.')
-		if struct.unpack_from('<h', data, 0)[0] == 1537:
+		if dropType == 1537:#1537
 			itemID = get_item(struct.unpack_from('I', data, 7)[0])
 			itemName = itemID['name']
 			if 'Poro' in itemID['name']:
@@ -786,6 +788,20 @@ def checkThief(time):
 	if time < 3:
 		Timer(time,checkThief,[time+1]).start()
 
+def moveToBandit():
+	pets = get_pets()
+	if pets:
+		for k, v in pets.items():
+			if v['type'] == 'transport':
+			x1 = 9113
+			y1 = 876
+			x2 = get_position()['x']
+			y2 = get_position()['y']
+			dis = ((x2-x1)**2+(y2-y1)**2)**1/2
+			if dis > 30:
+				move_to(x1,y1,0)
+				Timer(0.5,moveToBandit).start()
+
 def teleported():
 	global energy
 	energy = False
@@ -797,6 +813,9 @@ def teleported():
 		if quests[questID]['completed']:
 			notice('Pendint Quest!')
 			break
+	if get_zone_name(get_character_data()['region']) == 'Diebesstadt':
+		stop_bot()
+		moveToBandit()
 
 def deleteClean():
 	pets = get_pets()
@@ -825,4 +844,4 @@ def exitBandit():
 					notice('BANDIT SCROLLS!')
 					return
 
-log("[Super Plugin v3.8 by Rahim]")
+log("[Super Plugin v3.9 by Rahim]")
