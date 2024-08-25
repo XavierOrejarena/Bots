@@ -794,14 +794,14 @@ def moveToBandit():
 	if pets:
 		for k, v in pets.items():
 			if v['type'] == 'transport':
-			x1 = 9113
-			y1 = 876
-			x2 = get_position()['x']
-			y2 = get_position()['y']
-			dis = ((x2-x1)**2+(y2-y1)**2)**1/2
-			if dis > 30:
-				move_to(x1,y1,0)
-				Timer(0.5,moveToBandit).start()
+				x1 = 9113
+				y1 = 876
+				x2 = get_position()['x']
+				y2 = get_position()['y']
+				dis = ((x2-x1)**2+(y2-y1)**2)**1/2
+				if dis > 30:
+					move_to(x1,y1,0)
+					Timer(0.5,moveToBandit).start()
 
 def teleported():
 	global energy
