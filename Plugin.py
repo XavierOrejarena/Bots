@@ -791,7 +791,7 @@ def handle_joymax(opcode, data):
 					phBotChat.Party(name + ' Here! => ['+mobs[mobID]['name'] +']')
 					break
 	elif opcode == 0xB034 and len(data)>7:
-		# log((' '.join('{:02X}'.format(x) for x in data)))
+		log((' '.join('{:02X}'.format(x) for x in data)))
 		dropType = struct.unpack_from('h', data, 0)[0]
 		if dropType == 4353 or dropType == 7169:
 			itemID = get_item(struct.unpack_from('I', data, 11)[0])
@@ -820,7 +820,7 @@ def handle_joymax(opcode, data):
 		playerName = get_party()[struct.unpack_from('<I', data, 0)[0]]['name']
 		if 'Poro' in itemName:
 			itemName = 'Poro Balloon'
-		for item in itemList:
+		for item in itemListAzul:
 			if item in itemName.lower():
 				azulPerma('item ['+itemName +']is distributed to ['+ playerName+']')
 				# phBotChat.Party('item ['+itemName +']is distributed to ['+ playerName+']')
@@ -932,4 +932,4 @@ def exitBandit():
 					notice('BANDIT SCROLLS!')
 					return
 
-log("[Super Plugin v4.0 by Rahim]")
+log("[Super Plugin v4.1 by Rahim]")
