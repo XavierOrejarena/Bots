@@ -9,6 +9,7 @@ import threading
 
 gui = QtBind.init(__name__,'Super Plugin')
 
+itemListAzul = ['advanced','sharpness','lottery','silk','immortal','lucky','poro','sabakun','coin','blue stone','serapis']
 PICK = False
 CountList = ['Cbum','Seven']
 energy = False
