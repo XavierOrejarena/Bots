@@ -6,16 +6,10 @@ from threading import Timer
 import urllib.request
 import ssl
 import threading
-
+import json
+import os.path
+ 
 gui = QtBind.init(__name__,'Super Plugin')
-
-itemListAzul = ['advanced','sharpness','lottery','silk','immortal','lucky','poro','sabakun','coin','blue stone','serapis']
-PICK = False
-CountList = ['Cbum','Seven']
-energy = False
-pmList = []
-WhiteList = ['Cbum','Kurumi','Moshi','Zoser','Fami', 'Pomi', 'Lestrange']
-uniqueList = []
 partyAlert = True
 alarma = True
 DesmontarPet = True
@@ -23,13 +17,90 @@ goToUnique = True
 startBotUnique  = False
 TelegramBol = False
 UniqueTelegram = False
-partyNumber = ''
 comandos = False
 spawn = False
+uniqueList = ['str','int']
+idTelegram = ''
 
+def loadConfig():
+	global partyAlert
+	global alarma
+	global DesmontarPet
+	global goToUnique
+	global startBotUnique 
+	global TelegramBol
+	global UniqueTelegram
+	global comandos
+	global spawn
+	global uniqueList
+	global idTelegram
+	if os.path.isfile('sample.json'):
+		with open('sample.json', 'r') as openfile:
+			json_object = json.load(openfile)
+			partyAlert = json_object['partyAlert']
+			alarma = json_object['alarma']
+			DesmontarPet = json_object['DesmontarPet']
+			goToUnique = json_object['goToUnique']
+			startBotUnique = json_object['startBotUnique'] 
+			TelegramBol = json_object['TelegramBol']
+			UniqueTelegram = json_object['UniqueTelegram']
+			comandos = json_object['comandos']
+			spawn = json_object['spawn']
+			uniqueList = json_object['uniqueList']
+			idTelegram = json_object['idTelegram']
+			QtBind.createLineEdit(gui,idTelegram,650,276,70,20)
+
+loadConfig()
+
+def saveConfig():
+	global partyAlert
+	global alarma
+	global DesmontarPet
+	global goToUnique
+	global startBotUnique 
+	global TelegramBol
+	global UniqueTelegram
+	global comandos
+	global spawn
+	global uniqueList
+	global idTelegram
+	global gui
+
+	# Data to be written
+	dictionary = {
+	    'partyAlert': partyAlert,
+		'alarma': alarma,
+		'DesmontarPet': DesmontarPet,
+		'goToUnique': goToUnique,
+		'startBotUnique': startBotUnique,
+		'TelegramBol': TelegramBol,
+		'UniqueTelegram': UniqueTelegram,
+		'comandos': comandos,
+		'spawn': spawn,
+		'uniqueList': uniqueList,
+		'idTelegram': QtBind.text(gui,TelegramID),
+	}
+
+	# Serializing json
+	json_object = json.dumps(dictionary, indent=4)
+	 
+	# Writing to sample.json
+	with open("sample.json", "w") as outfile:
+	    outfile.write(json_object)
+
+
+itemListAzul = ['advanced','sharpness','lottery','silk','immortal','lucky','poro','sabakun','coin','blue stone','serapis']
+PICK = False
+CountList = ['Cbum','Seven']
+energy = False
+pmList = []
+WhiteList = ['Cbum','Kurumi','Moshi','Zoser','Fami', 'Pomi', 'Lestrange']
+
+
+partyNumber = ''
 perma_trace = False
 follow_hunter = False
-alertar_hunter = False
+alertar_hunter = True
 party_hunter = False
 dc_hunter = False
 tlg_hunter = False
@@ -77,7 +148,7 @@ telegramCheck = QtBind.createCheckBox(gui,'checkTelegram','Telegram PM',10,110)
 uniqueCheck = QtBind.createCheckBox(gui,'checkUnique','Telegram Unique',10,130)
 comandosCheck = QtBind.createCheckBox(gui,'checkComandos','Chat Commands',10,150)
 spawnCheck = QtBind.createCheckBox(gui,'checkSpawn','Spawn Alarm',10,170)
-TelegramID = QtBind.createLineEdit(gui,"",650,276,70,20)
+TelegramID = QtBind.createLineEdit(gui,idTelegram,650,276,70,20)
 TelegramBot = QtBind.createLineEdit(gui,"https://t.me/The_Silkroad_bot",20,276,160,20)
 TelegramLabel = QtBind.createLabel(gui,'Telegram ID:',587,280)
 
@@ -86,10 +157,13 @@ btnRemOpcode = QtBind.createButton(gui,'removeIgnore',"     GO & BOT     ",635,1
 btnAddOpcode = QtBind.createButton(gui,'llenarLista',"      REFRESH      ",630,10)
 
 lblOpcodes = QtBind.createLabel(gui,"Unique List",321,110)
-tbxOpcodes = QtBind.createLineEdit(gui,"",321,129,100,20)
-lstOpcodes = QtBind.createList(gui,321,151,176,109)
+qtUniqueAdd = QtBind.createLineEdit(gui,"",321,129,100,20)
+qtUniqueList = QtBind.createList(gui,321,151,176,109)
 btnAddOpcode = QtBind.createButton(gui,'addUnique',"      Add      ",423,129)
 btnRemOpcode = QtBind.createButton(gui,'removeUnique',"     Remove     ",370,259)
+
+for unique in uniqueList:
+	QtBind.append(gui,qtUniqueList,unique)
 
 def soundMerca():
 	log('Buscando...')
@@ -123,19 +197,22 @@ def removeIgnore():
 	selectedItem = QtBind.text(gui2,lstOpcodes)
 	if selectedItem:
 		QtBind.remove(gui2,lstOpcodes,selectedItem)
+
 def addUnique():
-	ignored = QtBind.text(gui,tbxOpcodes).lower()
-	if ignored not in uniqueList:
+	ignored = QtBind.text(gui,qtUniqueAdd).lower()
+	if ignore != '' and ignored not in uniqueList:
 		uniqueList.append(ignored)
-		QtBind.append(gui,lstOpcodes,ignored)
+		QtBind.append(gui,qtUniqueList,ignored)
 	else:
 		log('repetidoooo!!!')
+	saveConfig()
 
 def removeUnique():
-	selectedItem = QtBind.text(gui,lstOpcodes)
+	selectedItem = QtBind.text(gui,qtUniqueList)
 	if selectedItem:
-		QtBind.remove(gui,lstOpcodes,selectedItem)
+		QtBind.remove(gui,qtUniqueList,selectedItem)
 		uniqueList.remove(selectedItem)
+	saveConfig()
 
 QtBind.setChecked(gui, partyCheck, partyAlert)
 QtBind.setChecked(gui, alarmCheck, alarma)
@@ -143,6 +220,7 @@ QtBind.setChecked(gui, dismountCheck, DesmontarPet)
 QtBind.setChecked(gui, gotoCheck, goToUnique)
 QtBind.setChecked(gui, startbotCheck, startBotUnique)
 QtBind.setChecked(gui, telegramCheck, TelegramBol)
+QtBind.setChecked(gui, uniqueCheck, UniqueTelegram)
 QtBind.setChecked(gui, comandosCheck, comandos)
 QtBind.setChecked(gui, spawnCheck, spawn)
 
@@ -204,38 +282,47 @@ def cbxSro_clicked7(checked):
 def checkParty(checked):
 	global partyAlert
 	partyAlert = checked
+	saveConfig()
 
 def checkAlarm(checked):
 	global alarma
 	alarma = checked
+	saveConfig()
 
 def checkDismount(checked):
 	global DesmontarPet
 	DesmontarPet = checked
+	saveConfig()
 
 def checkGoTo(checked):
 	global goToUnique
 	goToUnique = checked
+	saveConfig()
 
 def checkStartBot(checked):
 	global startBotUnique
 	startBotUnique = checked
+	saveConfig()
 
 def checkTelegram(checked):
 	global TelegramBol
 	TelegramBol = checked
+	saveConfig()
 
 def checkUnique(checked):
 	global UniqueTelegram
 	UniqueTelegram = checked
+	saveConfig()
 
 def checkComandos(checked):
 	global comandos
 	comandos = checked
+	saveConfig()
 
 def checkSpawn(checked):
 	global spawn
 	spawn = checked
+	saveConfig()
 
 def llenarLista():
 	QtBind.clear(gui,lstOpcodes)
@@ -757,13 +844,13 @@ def handle_joymax(opcode, data):
 	return True
 
 def sendTelegram(data):
-	log(data)
-	id = QtBind.text(gui,TelegramID)
-	url = 'https://api.telegram.org/bot6863881576:AAFjOYMaXdH_K_OBUnuDGaKNfJFkOQfoMgc/sendMessage?chat_id='+id+'&parse_mode=Markdown&text='
+	global idTelegram
+	url = 'https://api.telegram.org/bot6863881576:AAFjOYMaXdH_K_OBUnuDGaKNfJFkOQfoMgc/sendMessage?chat_id='+idTelegram+'&parse_mode=Markdown&text='
 	if '_' in data:
-		url = 'https://api.telegram.org/bot6863881576:AAFjOYMaXdH_K_OBUnuDGaKNfJFkOQfoMgc/sendMessage?chat_id='+id+'&text='
+		url = 'https://api.telegram.org/bot6863881576:AAFjOYMaXdH_K_OBUnuDGaKNfJFkOQfoMgc/sendMessage?chat_id='+idTelegram+'&text='
 	url = url + urllib.parse.quote(data)
 	urllib.request.urlopen(url,context=ssl._create_unverified_context())
+	saveConfig()
 
 def notice(message):
 	p = struct.pack('B',7)
@@ -845,4 +932,4 @@ def exitBandit():
 					notice('BANDIT SCROLLS!')
 					return
 
-log("[Super Plugin v3.9 by Rahim]")
+log("[Super Plugin v4.0 by Rahim]")
