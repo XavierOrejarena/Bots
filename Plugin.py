@@ -777,12 +777,19 @@ def scrptChat(scriptName):
 	Timer(3,start_bot).start()
 	Timer(4,cancelReturnScroll).start()
 	return True
+
+def verdemini(message):
+	p = b'\x15\x06'+struct.pack('H', len(message))+message.encode('ascii') + b'\x00\xFF\x27\x00\x00'
+	inject_silkroad(0x30CF,p,False)
 	
 def handle_joymax(opcode, data):
 	global UniqueTelegram
 	global uniqueList
 	global alarma
-	if opcode == 0x3864 and data:
+	if opcode == 0x3040:
+		verdemini(get_item(struct.unpack_from('h', data, 7)[0])['name']+' By Rahim.')
+		return True
+	elif opcode == 0x3864 and data:
 		if struct.unpack_from('<s', data, 0)[0] == b'\x02':
 			name = struct.unpack_from('<' + str(data[6]) + 's',data,8)[0].decode('cp1252')
 			mobs = get_monsters()
@@ -932,4 +939,4 @@ def exitBandit():
 					notice('BANDIT SCROLLS!')
 					return
 
-log("[Super Plugin v4.1 by Rahim]")
+log("[Super Plugin v4.2 by Rahim]")
