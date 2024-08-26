@@ -111,6 +111,7 @@ dc_thief = False
 tlg_thief = False
 start_thief = False
 merca = False
+ScrollAfterZerk = False
 
 ignoreZones = ['Samarkand','Jangan','Königreich Hotan','Western-China-Donwhang','Constantinople','Alexandria','Tempel','Flammenberg']
 pm_hunter = False
@@ -148,6 +149,7 @@ telegramCheck = QtBind.createCheckBox(gui,'checkTelegram','Telegram PM',10,110)
 uniqueCheck = QtBind.createCheckBox(gui,'checkUnique','Telegram Unique',10,130)
 comandosCheck = QtBind.createCheckBox(gui,'checkComandos','Chat Commands',10,150)
 spawnCheck = QtBind.createCheckBox(gui,'checkSpawn','Spawn Alarm',10,170)
+scrollCheck = QtBind.createCheckBox(gui,'checkScroll','Scroll After Zerk',10,190)
 TelegramID = QtBind.createLineEdit(gui,idTelegram,650,276,70,20)
 TelegramBot = QtBind.createLineEdit(gui,"https://t.me/The_Silkroad_bot",20,276,160,20)
 TelegramLabel = QtBind.createLabel(gui,'Telegram ID:',587,280)
@@ -323,6 +325,10 @@ def checkSpawn(checked):
 	global spawn
 	spawn = checked
 	saveConfig()
+
+def checkScroll(checked):
+	global ScrollAfterZerk
+	ScrollAfterZerk = checked
 
 def llenarLista():
 	QtBind.clear(gui,lstOpcodes)
@@ -781,7 +787,7 @@ def scrptChat(scriptName):
 def verdemini(message):
 	p = b'\x15\x06'+struct.pack('H', len(message))+message.encode('ascii') + b'\x00\xFF\x27\x00\x00'
 	inject_silkroad(0x30CF,p,False)
-	
+
 def handle_joymax(opcode, data):
 	global UniqueTelegram
 	global uniqueList
@@ -789,6 +795,11 @@ def handle_joymax(opcode, data):
 	if opcode == 0x3040:
 		verdemini(get_item(struct.unpack_from('h', data, 7)[0])['name']+' By Rahim.')
 		return True
+	elif opcode == 0x304E and data[0] == 4:
+		if struct.unpack_from('b', data, 1)[0] == 5 and ScrollAfterZerk:
+			useSpecialReturnScroll()
+			stop_bot()
+			morado('Zerk By Rahim.')
 	elif opcode == 0x3864 and data:
 		if struct.unpack_from('<s', data, 0)[0] == b'\x02':
 			name = struct.unpack_from('<' + str(data[6]) + 's',data,8)[0].decode('cp1252')
@@ -898,7 +909,11 @@ def moveToBandit():
 					Timer(0.5,moveToBandit).start()
 
 def teleported():
+	global ScrollAfterZerk
 	global energy
+	global gui
+	ScrollAfterZerk = False
+	QtBind.setChecked(gui, scrollCheck, ScrollAfterZerk)
 	energy = False
 	pmList = []
 	quests = get_quests()
