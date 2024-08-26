@@ -88,7 +88,7 @@ def saveConfig():
 	with open("sample.json", "w") as outfile:
 	    outfile.write(json_object)
 
-
+attackWolf = False
 itemListAzul = ['advanced','sharpness','lottery','silk','immortal','lucky','poro','sabakun','coin','blue stone','serapis']
 PICK = False
 CountList = ['Cbum','Seven']
@@ -100,7 +100,7 @@ WhiteList = ['Cbum','Kurumi','Moshi','Zoser','Fami', 'Pomi', 'Lestrange']
 partyNumber = ''
 perma_trace = False
 follow_hunter = False
-alertar_hunter = True
+alertar_hunter = False
 party_hunter = False
 dc_hunter = False
 tlg_hunter = False
@@ -756,6 +756,12 @@ def handle_chat(t,player,msg):
 			spawnHorse()
 		elif msg.lower() == 'leave':
 			inject_joymax(0x7061, bytearray(), False)
+		elif msg == '.a' and player == get_character_data()['name']:
+			attackWolf = not attackWolf
+			if attackWolf:
+				morado('Wolf activado')
+			else:
+				morado('Wolf desactivado')
 
 def useSpecialReturnScroll():
 	i = 0
@@ -793,7 +799,7 @@ def handle_joymax(opcode, data):
 	global uniqueList
 	global alarma
 	if opcode == 0x3040:
-		verdemini(get_item(struct.unpack_from('h', data, 7)[0])['name']+' By Rahim.')
+		verdemini(get_item(struct.unpack_from('i', data, 7)[0])['name']+' By Rahim.')
 		return True
 	elif opcode == 0x304E and data[0] == 4:
 		if struct.unpack_from('b', data, 1)[0] == 5 and ScrollAfterZerk:
@@ -859,6 +865,24 @@ def handle_joymax(opcode, data):
 	elif opcode == 0x30CF: #Mensajes de eventos
 		if data == b'\x15\x02\x55\x00\x59\x6F\x75\x20\x6D\x75\x73\x74\x20\x63\x6F\x6D\x70\x6C\x65\x74\x65\x20\x74\x68\x65\x20\x63\x61\x70\x74\x63\x68\x61\x20\x76\x65\x72\x69\x66\x63\x61\x74\x69\x6F\x6E\x20\x74\x6F\x20\x70\x72\x6F\x63\x65\x65\x64\x20\x77\x69\x74\x68\x20\x62\x75\x79\x69\x6E\x67\x2F\x73\x65\x6C\x6C\x69\x6E\x67\x20\x74\x72\x61\x64\x65\x20\x67\x6F\x6F\x64\x73\x2E': # Trader Sell
 			deleteClean()
+	elif opcode == 0xB070: #MOB_ATTACKED
+		if attackWolf and struct.unpack_from('<I', data, 15)[0] == get_character_data()['player_id']:
+			mob = struct.unpack_from('<I', data, 7)[0]
+			if mob not in mobAtacked:
+				mobAtacked.append(mob)
+			tempMob = 0
+			for mob in mobAtacked:
+				if mob in get_monsters():
+					if mob > tempMob:
+						tempMob = mob
+				else:
+					mobAtacked.remove(mob)
+			pets = get_pets()
+			if pets:
+				for pet, v in pets.items():
+					if v['type'] == 'wolf':
+						inject_joymax(0x70C5, struct.pack('i', pet) + b'\x02' + struct.pack('i', tempMob), False)
+						break
 	return True
 
 def sendTelegram(data):
@@ -912,6 +936,8 @@ def teleported():
 	global ScrollAfterZerk
 	global energy
 	global gui
+	global attackWolf
+	attackWolf = False
 	ScrollAfterZerk = False
 	QtBind.setChecked(gui, scrollCheck, ScrollAfterZerk)
 	energy = False
@@ -954,4 +980,4 @@ def exitBandit():
 					notice('BANDIT SCROLLS!')
 					return
 
-log("[Super Plugin v4.2 by Rahim]")
+log("[Super Plugin v4.4 by Rahim]")
