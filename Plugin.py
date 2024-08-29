@@ -964,7 +964,7 @@ def azulPerma(message):
 	inject_silkroad(0x30CF,p,False)
 
 def joined_game():
-	pass
+	morado('SuperPlugin Version 4.5 By Rahim')
 
 def checkThief(time):
 	mobs = get_monsters()
