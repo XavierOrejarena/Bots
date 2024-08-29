@@ -21,6 +21,8 @@ comandos = False
 spawn = False
 uniqueList = ['str','int']
 idTelegram = ''
+unionNotify = False
+alertar_hunter = False
 
 def loadConfig():
 	global partyAlert
@@ -34,6 +36,8 @@ def loadConfig():
 	global spawn
 	global uniqueList
 	global idTelegram
+	global unionNotify
+	global alertar_hunter
 	if os.path.isfile('sample.json'):
 		with open('sample.json', 'r') as openfile:
 			json_object = json.load(openfile)
@@ -48,6 +52,10 @@ def loadConfig():
 			spawn = json_object['spawn']
 			uniqueList = json_object['uniqueList']
 			idTelegram = json_object['idTelegram']
+			if 'unionNotify' in json_object:
+				unionNotify = json_object['unionNotify']
+			if 'alertar_hunter' in json_object:
+				alertar_hunter = json_object['alertar_hunter']
 			QtBind.createLineEdit(gui,idTelegram,650,276,70,20)
 
 loadConfig()
@@ -65,7 +73,8 @@ def saveConfig():
 	global uniqueList
 	global idTelegram
 	global gui
-
+	global unionNotify
+	global alertar_hunter
 	# Data to be written
 	dictionary = {
 	    'partyAlert': partyAlert,
@@ -79,6 +88,8 @@ def saveConfig():
 		'spawn': spawn,
 		'uniqueList': uniqueList,
 		'idTelegram': QtBind.text(gui,TelegramID),
+		'unionNotify': unionNotify,
+		'alertar_hunter': alertar_hunter,
 	}
 
 	# Serializing json
@@ -88,19 +99,21 @@ def saveConfig():
 	with open("sample.json", "w") as outfile:
 	    outfile.write(json_object)
 
+mobAtacked = []
 attackWolf = False
 itemListAzul = ['advanced','sharpness','lottery','silk','immortal','lucky','poro','sabakun','coin','blue stone','serapis']
+otrosItems = ['Reverse Reverse Return Scroll','Global chatting','Magic POP Card']
 PICK = False
 CountList = ['Cbum','Seven']
 energy = False
 pmList = []
-WhiteList = ['Cbum','Kurumi','Moshi','Zoser','Fami', 'Pomi', 'Lestrange']
+WhiteList = ['Seven','Cbum','Kurumi','Moshi','Zoser','Fami', 'Pomi', 'Lestrange']
+bolnotify = False
 
 
 partyNumber = ''
 perma_trace = False
 follow_hunter = False
-alertar_hunter = False
 party_hunter = False
 dc_hunter = False
 tlg_hunter = False
@@ -150,6 +163,7 @@ uniqueCheck = QtBind.createCheckBox(gui,'checkUnique','Telegram Unique',10,130)
 comandosCheck = QtBind.createCheckBox(gui,'checkComandos','Chat Commands',10,150)
 spawnCheck = QtBind.createCheckBox(gui,'checkSpawn','Spawn Alarm',10,170)
 scrollCheck = QtBind.createCheckBox(gui,'checkScroll','Scroll After Zerk',10,190)
+unionCheck = QtBind.createCheckBox(gui,'checkUnion','Union Unique Drop',10,210)
 TelegramID = QtBind.createLineEdit(gui,idTelegram,650,276,70,20)
 TelegramBot = QtBind.createLineEdit(gui,"https://t.me/The_Silkroad_bot",20,276,160,20)
 TelegramLabel = QtBind.createLabel(gui,'Telegram ID:',587,280)
@@ -163,9 +177,6 @@ qtUniqueAdd = QtBind.createLineEdit(gui,"",321,129,100,20)
 qtUniqueList = QtBind.createList(gui,321,151,176,109)
 btnAddOpcode = QtBind.createButton(gui,'addUnique',"      Add      ",423,129)
 btnRemOpcode = QtBind.createButton(gui,'removeUnique',"     Remove     ",370,259)
-
-for unique in uniqueList:
-	QtBind.append(gui,qtUniqueList,unique)
 
 def soundMerca():
 	log('Buscando...')
@@ -201,10 +212,10 @@ def removeIgnore():
 		QtBind.remove(gui2,lstOpcodes,selectedItem)
 
 def addUnique():
-	ignored = QtBind.text(gui,qtUniqueAdd).lower()
-	if ignore != '' and ignored not in uniqueList:
-		uniqueList.append(ignored)
-		QtBind.append(gui,qtUniqueList,ignored)
+	selectedUnique = QtBind.text(gui,qtUniqueAdd).lower()
+	if selectedUnique != '' and selectedUnique not in uniqueList:
+		uniqueList.append(selectedUnique)
+		QtBind.append(gui,qtUniqueList,selectedUnique)
 	else:
 		log('repetidoooo!!!')
 	saveConfig()
@@ -225,6 +236,7 @@ QtBind.setChecked(gui, telegramCheck, TelegramBol)
 QtBind.setChecked(gui, uniqueCheck, UniqueTelegram)
 QtBind.setChecked(gui, comandosCheck, comandos)
 QtBind.setChecked(gui, spawnCheck, spawn)
+QtBind.setChecked(gui, unionCheck, unionNotify)
 
 def buscarMerca():
 	global merca
@@ -252,6 +264,7 @@ def cbxSro_clicked9(checked):
 def cbxSro_clicked0(checked):
 	global alertar_hunter
 	alertar_hunter = checked
+	saveConfig()
 
 def cbxSro_clicked1(checked):
 	global party_hunter
@@ -330,6 +343,11 @@ def checkScroll(checked):
 	global ScrollAfterZerk
 	ScrollAfterZerk = checked
 
+def checkUnion(checked):
+	global unionNotify
+	unionNotify = checked
+	saveConfig()
+
 def llenarLista():
 	QtBind.clear(gui,lstOpcodes)
 	Party = get_party()
@@ -363,7 +381,9 @@ def handle_event(t, data):
 	global follow_hunter
 	global perma_trace
 	global pmList
+	global bolnotify
 	if t == 0:
+		bolnotify = True
 		notice(data)
 		if partyAlert:
 			phBotChat.Party('Here ---> ['+ data + ']')
@@ -455,7 +475,6 @@ def DismountHorse():
 	pets = get_pets()
 	if pets:
 		for k, v in pets.items():
-			log(v['type'])
 			if v['type'] == 'horse' or v['type'] == 'wolf':
 				p = b'\x00'
 				p += struct.pack('I', k)
@@ -715,6 +734,7 @@ def handle_chat(t,player,msg):
 	global TelegramBol
 	global partyNumber
 	global comandos
+	global attackWolf
 	if t == 2:
 		if TelegramBol:
 			threading.Thread(target=sendTelegram, args=[player + " -> " + get_character_data()['name'] + ' -> ' + msg],).start()
@@ -762,6 +782,8 @@ def handle_chat(t,player,msg):
 				morado('Wolf activado')
 			else:
 				morado('Wolf desactivado')
+		elif msg == 'set' and get_character_data()['name'] == player:
+			set_training_position(0, get_character_data()['x'], get_character_data()['y'], 0)
 
 def useSpecialReturnScroll():
 	i = 0
@@ -782,24 +804,43 @@ def cancelReturnScroll():
 	inject_joymax(0x705B, Packet, False)
 	log('Scroll cancelado')
 
-def scrptChat(scriptName):
-	stop_bot()
+def cancelscroll(s):
 	useSpecialReturnScroll()
-	set_training_script(get_config_dir().replace('Config','Scripts')+str(scriptName[1])+'.txt')
-	Timer(3,start_bot).start()
-	Timer(4,cancelReturnScroll).start()
+	Timer(0.5,cancelReturnScroll).start()
 	return True
 
 def verdemini(message):
 	p = b'\x15\x06'+struct.pack('H', len(message))+message.encode('ascii') + b'\x00\xFF\x27\x00\x00'
 	inject_silkroad(0x30CF,p,False)
 
+def Union(message):
+	message = ') '+message
+	p = b'\x0B'
+	p += struct.pack('H', len('Rahim'))
+	p += 'Rahim'.encode('ascii')
+	p += struct.pack('H', len(message))
+	p += message.encode('ascii')
+	inject_silkroad(0x3026,p,False)
+
+def morado(message):
+	p = struct.pack('B',7)
+	p += struct.pack('H', len(message))
+	p += message.encode('ascii')
+	inject_silkroad(0x30CF,b'\x15'+p,False)
+
+def rahim():
+	global bolnotify
+	if bolnotify:
+		bolnotify = False
+		azulPerma('Blue Notify By Rahim')
+
 def handle_joymax(opcode, data):
 	global UniqueTelegram
 	global uniqueList
 	global alarma
-	if opcode == 0x3040:
-		verdemini(get_item(struct.unpack_from('i', data, 7)[0])['name']+' By Rahim.')
+	global unionNotify
+	if opcode == 0x3040 and len(data) == 23:
+		verdemini(get_item(struct.unpack_from('i', data, 7)[0])['name']+' [Rahim]')
 		return True
 	elif opcode == 0x304E and data[0] == 4:
 		if struct.unpack_from('b', data, 1)[0] == 5 and ScrollAfterZerk:
@@ -815,7 +856,6 @@ def handle_joymax(opcode, data):
 					phBotChat.Party(name + ' Here! => ['+mobs[mobID]['name'] +']')
 					break
 	elif opcode == 0xB034 and len(data)>7:
-		log((' '.join('{:02X}'.format(x) for x in data)))
 		dropType = struct.unpack_from('h', data, 0)[0]
 		if dropType == 4353 or dropType == 7169:
 			itemID = get_item(struct.unpack_from('I', data, 11)[0])
@@ -824,10 +864,14 @@ def handle_joymax(opcode, data):
 				itemName = 'Poro Balloon'
 			for item in itemListAzul:
 				if item in itemName.lower():
-					azulPerma('item ['+itemName +'] gained.')
+					azulPerma('['+itemName +'] gained.')
 					break
 			if itemID['rare']:
-				azulPerma('item ['+itemName +'] gained.')
+				azulPerma('['+itemName +'] gained.')
+			if unionNotify:
+				for item in otrosItems:
+					if item == itemName:
+						Union('['+itemName+'] gained')
 		if dropType == 1537:#1537
 			itemID = get_item(struct.unpack_from('I', data, 7)[0])
 			itemName = itemID['name']
@@ -835,10 +879,17 @@ def handle_joymax(opcode, data):
 				itemName = 'Poro Balloon'
 			for item in itemListAzul:
 				if item in itemName.lower():
-					azulPerma('item ['+itemName +'] gained.')
+					azulPerma('['+itemName +'] gained.')
 					break
 			if itemID['rare']:
-				azulPerma('item ['+itemName +'] gained.')
+				azulPerma('['+itemName +'] gained.')
+			if unionNotify:
+				log('union yes')
+				for item in otrosItems:
+					if item == itemName:
+						Union('['+itemName+'] gained')
+		if dropType == 1537 or dropType == 4353 or dropType == 7169:
+			Timer(10,rahim).start()
 	elif opcode == 0x3068: #party item droped distributed
 		itemName = get_item(struct.unpack_from('<I', data, 4)[0])['name']
 		playerName = get_party()[struct.unpack_from('<I', data, 0)[0]]['name']
@@ -846,13 +897,17 @@ def handle_joymax(opcode, data):
 			itemName = 'Poro Balloon'
 		for item in itemListAzul:
 			if item in itemName.lower():
-				azulPerma('item ['+itemName +']is distributed to ['+ playerName+']')
+				azulPerma('['+itemName +']is distributed to ['+ playerName+']')
 				# phBotChat.Party('item ['+itemName +']is distributed to ['+ playerName+']')
 				break
 		if get_item(struct.unpack_from('<I', data, 4)[0])['rare']:
-			azulPerma('item ['+itemName +']is distributed to ['+ playerName+']')
-			# phBotChat.Party('item ['+itemName +']is distributed to ['+ playerName+']')
-	elif opcode == 0x300C and data[0] == 5: # Unique Spawn 
+			azulPerma('['+itemName +']is distributed to ['+ playerName+']')
+		if unionNotify:
+			for item in otrosItems:
+				if item == itemName:
+					Union('['+itemName +']is distributed to ['+ playerName+']')
+		Timer(12,rahim).start()
+	elif opcode == 0x300C and data[0] == 5: # Unique Spawn
 			uniqueName = get_monster(struct.unpack_from('<I', data, 2)[0])['name']
 			log(uniqueName)
 			for unique in uniqueList:
@@ -865,24 +920,26 @@ def handle_joymax(opcode, data):
 	elif opcode == 0x30CF: #Mensajes de eventos
 		if data == b'\x15\x02\x55\x00\x59\x6F\x75\x20\x6D\x75\x73\x74\x20\x63\x6F\x6D\x70\x6C\x65\x74\x65\x20\x74\x68\x65\x20\x63\x61\x70\x74\x63\x68\x61\x20\x76\x65\x72\x69\x66\x63\x61\x74\x69\x6F\x6E\x20\x74\x6F\x20\x70\x72\x6F\x63\x65\x65\x64\x20\x77\x69\x74\x68\x20\x62\x75\x79\x69\x6E\x67\x2F\x73\x65\x6C\x6C\x69\x6E\x67\x20\x74\x72\x61\x64\x65\x20\x67\x6F\x6F\x64\x73\x2E': # Trader Sell
 			deleteClean()
-	elif opcode == 0xB070: #MOB_ATTACKED
-		if attackWolf and struct.unpack_from('<I', data, 15)[0] == get_character_data()['player_id']:
-			mob = struct.unpack_from('<I', data, 7)[0]
-			if mob not in mobAtacked:
-				mobAtacked.append(mob)
-			tempMob = 0
-			for mob in mobAtacked:
-				if mob in get_monsters():
-					if mob > tempMob:
-						tempMob = mob
-				else:
-					mobAtacked.remove(mob)
-			pets = get_pets()
-			if pets:
-				for pet, v in pets.items():
-					if v['type'] == 'wolf':
+	elif opcode == 0xB070 and attackWolf: #MOB_ATTACKED
+		pets = get_pets()
+		if pets:
+			for pet, v in pets.items():
+				if v['type'] == 'wolf':
+					victima = struct.unpack_from('I', data, 15)[0]
+					if victima == get_character_data()['player_id'] or victima == pet:
+						mob = struct.unpack_from('I', data, 7)[0]
+						if mob not in mobAtacked:
+							mobAtacked.append(mob)
+						tempMob = 0
+						for mob in mobAtacked:
+							if mob in get_monsters():
+								morado(str(mob))
+								if mob > tempMob:
+									tempMob = mob
+							else:
+								mobAtacked.remove(mob)
+								break
 						inject_joymax(0x70C5, struct.pack('i', pet) + b'\x02' + struct.pack('i', tempMob), False)
-						break
 	return True
 
 def sendTelegram(data):
@@ -919,24 +976,23 @@ def checkThief(time):
 		Timer(time,checkThief,[time+1]).start()
 
 def moveToBandit():
-	pets = get_pets()
-	if pets:
-		for k, v in pets.items():
-			if v['type'] == 'transport':
-				x1 = 9113
-				y1 = 876
-				x2 = get_position()['x']
-				y2 = get_position()['y']
-				dis = ((x2-x1)**2+(y2-y1)**2)**1/2
-				if dis > 30:
-					move_to(x1,y1,0)
-					Timer(0.5,moveToBandit).start()
+	x1 = 9113
+	y1 = 876
+	x2 = get_position()['x']
+	y2 = get_position()['y']
+	dis = ((x2-x1)**2+(y2-y1)**2)**1/2
+	if dis > 30:	
+		move_to(x1,y1,0)
+		Timer(0.5,moveToBandit).start()
+		return
 
 def teleported():
 	global ScrollAfterZerk
 	global energy
 	global gui
 	global attackWolf
+	global bolnotify
+	bolnotify = False
 	attackWolf = False
 	ScrollAfterZerk = False
 	QtBind.setChecked(gui, scrollCheck, ScrollAfterZerk)
@@ -947,7 +1003,7 @@ def teleported():
 		Timer(1,inject_joymax,[0xA451,b'\x04',True]).start()
 	for questID in quests:
 		if quests[questID]['completed']:
-			notice('Pendint Quest!')
+			notice('Pendint Quest! By Rahim')
 			break
 	if get_zone_name(get_character_data()['region']) == 'Diebesstadt':
 		stop_bot()
@@ -980,4 +1036,7 @@ def exitBandit():
 					notice('BANDIT SCROLLS!')
 					return
 
-log("[Super Plugin v4.4 by Rahim]")
+for unique in uniqueList:
+	QtBind.append(gui,qtUniqueList,unique)
+
+log("[Super Plugin v4.5 by Rahim]")
