@@ -471,6 +471,14 @@ def startUnique():
 			set_training_position(0, mobs[mobID]['x'],mobs[mobID]['y'],0)
 			start_bot()
 
+def Dismount():
+	pets = get_pets()
+	for k, v in pets.items():
+		if v['mounted']:
+			inject_joymax(0x70CB, b'\x00'+struct.pack('I', k), False)
+			return True
+	return True
+
 def DismountHorse():
 	pets = get_pets()
 	if pets:
@@ -578,7 +586,12 @@ def handle_silkroad(opcode,data):
 	global partyNumber
 	global energy
 	global PICK
-	if opcode == 0x3091:
+	if opcode == 0x7034: #put item equip wear
+		if data[0] == 0:
+			if '_THIEF_' in get_inventory()['items'][data[1]]['servername']:
+				inject_joymax(0x7061, bytearray(), False)
+				return Dismount()
+	elif opcode == 0x3091:
 		if data ==  b'\x00':
 			joinParty(partyNumber)
 			return False
@@ -1039,4 +1052,4 @@ def exitBandit():
 for unique in uniqueList:
 	QtBind.append(gui,qtUniqueList,unique)
 
-log("[Super Plugin v4.5 by Rahim]")
+log("[Super Plugin v4.6 by Rahim]")
