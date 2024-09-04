@@ -170,7 +170,7 @@ comandosCheck = QtBind.createCheckBox(gui,'checkComandos','Chat Commands',10,150
 spawnCheck = QtBind.createCheckBox(gui,'checkSpawn','Spawn Alarm',10,170)
 scrollCheck = QtBind.createCheckBox(gui,'checkScroll','Scroll After Zerk',10,190)
 unionCheck = QtBind.createCheckBox(gui,'checkUnion','Union Unique Drop',10,210)
-countCheck = QtBind.createCheckBox(gui,'checKCount','Auto Count',10,230)
+countCheck = QtBind.createCheckBox(gui,'checkCount','Auto Count',10,230)
 TelegramID = QtBind.createLineEdit(gui,idTelegram,650,276,70,20)
 TelegramBot = QtBind.createLineEdit(gui,"https://t.me/The_Silkroad_bot",20,276,160,20)
 TelegramLabel = QtBind.createLabel(gui,'Telegram ID:',587,280)
@@ -356,7 +356,7 @@ def checkUnion(checked):
 	unionNotify = checked
 	saveConfig()
 
-def checKCount(checked):
+def checkCount(checked):
 	global count
 	count = checked
 	saveConfig()
@@ -868,6 +868,9 @@ def handle_joymax(opcode, data):
 	if opcode == 0x3040 and len(data) == 23:
 		verdemini(get_item(struct.unpack_from('i', data, 7)[0])['name']+' [Rahim]')
 		return True
+	elif opcode == 0xB069: #Party Form
+		partyNumber = struct.unpack_from('I', data, 1)[0]
+		notice(str(partyNumber))
 	elif opcode == 0x304E and data[0] == 4:
 		if struct.unpack_from('b', data, 1)[0] == 5 and ScrollAfterZerk:
 			useSpecialReturnScroll()
@@ -1066,4 +1069,4 @@ def exitBandit():
 for unique in uniqueList:
 	QtBind.append(gui,qtUniqueList,unique)
 
-log("[Super Plugin v4.6 by Rahim]")
+log("[Super Plugin v4.7 by Rahim]")
