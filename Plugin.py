@@ -23,6 +23,7 @@ uniqueList = ['str','int']
 idTelegram = ''
 unionNotify = False
 alertar_hunter = False
+count = False
 
 def loadConfig():
 	global partyAlert
@@ -38,6 +39,7 @@ def loadConfig():
 	global idTelegram
 	global unionNotify
 	global alertar_hunter
+	global count
 	if os.path.isfile('sample.json'):
 		with open('sample.json', 'r') as openfile:
 			json_object = json.load(openfile)
@@ -52,6 +54,8 @@ def loadConfig():
 			spawn = json_object['spawn']
 			uniqueList = json_object['uniqueList']
 			idTelegram = json_object['idTelegram']
+			if 'count' in json_object:
+				count = json_object['count']
 			if 'unionNotify' in json_object:
 				unionNotify = json_object['unionNotify']
 			if 'alertar_hunter' in json_object:
@@ -75,6 +79,7 @@ def saveConfig():
 	global gui
 	global unionNotify
 	global alertar_hunter
+	global count
 	# Data to be written
 	dictionary = {
 	    'partyAlert': partyAlert,
@@ -90,6 +95,7 @@ def saveConfig():
 		'idTelegram': QtBind.text(gui,TelegramID),
 		'unionNotify': unionNotify,
 		'alertar_hunter': alertar_hunter,
+		'count': count,
 	}
 
 	# Serializing json
@@ -101,7 +107,7 @@ def saveConfig():
 
 mobAtacked = []
 attackWolf = False
-itemListAzul = ['advanced','sharpness','lottery','silk','immortal','lucky','poro','sabakun','coin','blue stone','serapis']
+itemListAzul = ['advanced','sharpness','lottery','silk scroll','immortal','lucky','poro','sabakun','coin','blue stone','serapis']
 otrosItems = ['Reverse Reverse Return Scroll','Global chatting','Magic POP Card']
 PICK = False
 CountList = ['Cbum','Seven']
@@ -164,6 +170,7 @@ comandosCheck = QtBind.createCheckBox(gui,'checkComandos','Chat Commands',10,150
 spawnCheck = QtBind.createCheckBox(gui,'checkSpawn','Spawn Alarm',10,170)
 scrollCheck = QtBind.createCheckBox(gui,'checkScroll','Scroll After Zerk',10,190)
 unionCheck = QtBind.createCheckBox(gui,'checkUnion','Union Unique Drop',10,210)
+countCheck = QtBind.createCheckBox(gui,'checKCount','Auto Count',10,230)
 TelegramID = QtBind.createLineEdit(gui,idTelegram,650,276,70,20)
 TelegramBot = QtBind.createLineEdit(gui,"https://t.me/The_Silkroad_bot",20,276,160,20)
 TelegramLabel = QtBind.createLabel(gui,'Telegram ID:',587,280)
@@ -237,6 +244,7 @@ QtBind.setChecked(gui, uniqueCheck, UniqueTelegram)
 QtBind.setChecked(gui, comandosCheck, comandos)
 QtBind.setChecked(gui, spawnCheck, spawn)
 QtBind.setChecked(gui, unionCheck, unionNotify)
+QtBind.setChecked(gui, countCheck, count)
 
 def buscarMerca():
 	global merca
@@ -346,6 +354,11 @@ def checkScroll(checked):
 def checkUnion(checked):
 	global unionNotify
 	unionNotify = checked
+	saveConfig()
+
+def checKCount(checked):
+	global count
+	count = checked
 	saveConfig()
 
 def llenarLista():
@@ -1005,6 +1018,7 @@ def teleported():
 	global gui
 	global attackWolf
 	global bolnotify
+	global count
 	bolnotify = False
 	attackWolf = False
 	ScrollAfterZerk = False
@@ -1012,8 +1026,8 @@ def teleported():
 	energy = False
 	pmList = []
 	quests = get_quests()
-	if get_character_data()['name'] in CountList:
-		Timer(1,inject_joymax,[0xA451,b'\x04',True]).start()
+	if count:
+		Timer(2,inject_joymax,[0xA451,b'\x04',True]).start()
 	for questID in quests:
 		if quests[questID]['completed']:
 			notice('Pendint Quest! By Rahim')
