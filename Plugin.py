@@ -110,10 +110,9 @@ attackWolf = False
 itemListAzul = ['advanced','sharpness','lottery','silk scroll','immortal','lucky','poro','sabakun','coin','blue stone','serapis']
 otrosItems = ['Reverse Reverse Return Scroll','Global chatting','Magic POP Card']
 PICK = False
-CountList = ['Cbum','Seven']
 energy = False
 pmList = []
-WhiteList = ['Seven','Cbum','Kurumi','Moshi','Zoser','Fami', 'Pomi', 'Lestrange']
+WhiteList = ['Seven','Cbum','Kurumi','Moshi','Zoser','Fami', 'Pomi', 'Lestrange','OnlyClerid']
 bolnotify = False
 
 
@@ -884,7 +883,7 @@ def handle_joymax(opcode, data):
 				if mobs[mobID]['type'] == 24:
 					phBotChat.Party(name + ' Here! => ['+mobs[mobID]['name'] +']')
 					break
-	elif opcode == 0xB034 and len(data)>7:
+	elif opcode == 0xB034 and len(data)>10:
 		dropType = struct.unpack_from('h', data, 0)[0]
 		if dropType == 4353 or dropType == 7169:
 			itemID = get_item(struct.unpack_from('I', data, 11)[0])
