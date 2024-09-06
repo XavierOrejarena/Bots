@@ -600,7 +600,7 @@ def handle_silkroad(opcode,data):
 	global PICK
 	if opcode == 0x7034: #put item equip wear
 		if data[0] == 0:
-			if '_THIEF_' in get_inventory()['items'][data[1]]['servername']:
+			if '_THIEF' in get_inventory()['items'][data[1]]['servername']:
 				inject_joymax(0x7061, bytearray(), False)
 				return Dismount()
 	elif opcode == 0x3091:
@@ -838,6 +838,10 @@ def verdemini(message):
 	p = b'\x15\x06'+struct.pack('H', len(message))+message.encode('ascii') + b'\x00\xFF\x27\x00\x00'
 	inject_silkroad(0x30CF,p,False)
 
+def purple(message):
+	p = b'\x15\x06'+struct.pack('H', len(message))+message.encode('ascii') + b'\xEE\x88\xA7\x00\x01'
+	inject_silkroad(0x30CF,p,False)
+
 def Union(message):
 	message = ') '+message
 	p = b'\x0B'
@@ -992,7 +996,7 @@ def azulPerma(message):
 	inject_silkroad(0x30CF,p,False)
 
 def joined_game():
-	morado('SuperPlugin Version 4.5 By Rahim')
+	purple('Super Plugin By Rahim. Cualquier sugerencia dar pm ya sabes quien soy xD')
 
 def checkThief(time):
 	mobs = get_monsters()
@@ -1068,4 +1072,4 @@ def exitBandit():
 for unique in uniqueList:
 	QtBind.append(gui,qtUniqueList,unique)
 
-log("[Super Plugin v4.7 by Rahim]")
+log("[Super Plugin v4.8 by Rahim]")
