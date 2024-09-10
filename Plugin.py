@@ -375,6 +375,7 @@ def removeIgnore():
 		if Party:
 			for memberID in Party:
 				if selectedItem == Party[memberID]['name']:
+					set_training_script('')
 					set_training_position(Party[memberID]['region'], Party[memberID]['x'], Party[memberID]['y'], 0.0)
 					start_bot()
 
@@ -1072,4 +1073,4 @@ def exitBandit():
 for unique in uniqueList:
 	QtBind.append(gui,qtUniqueList,unique)
 
-log("[Super Plugin v4.8 by Rahim]")
+log("[Super Plugin v4.8.5 by Rahim]")
