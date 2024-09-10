@@ -112,7 +112,7 @@ otrosItems = ['Reverse Reverse Return Scroll','Global chatting','Magic POP Card'
 PICK = False
 energy = False
 pmList = []
-WhiteList = ['Seven','Cbum','Kurumi','Moshi','Zoser','Fami', 'Pomi', 'Lestrange','OnlyClerid']
+WhiteList = ['Seven','Cbum','Kurumi','Moshi','Zoser','Fami', 'Pomi', 'Lestrange','OnlyClerid','Dooster']
 bolnotify = False
 
 
