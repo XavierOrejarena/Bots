@@ -810,6 +810,18 @@ def handle_chat(t,player,msg):
 				morado('Wolf desactivado')
 		elif msg == 'set' and get_character_data()['name'] == player:
 			set_training_position(0, get_character_data()['x'], get_character_data()['y'], 0)
+		elif t == 4 and ',' in msg and msg.replace(',','').replace('-','').isnumeric():
+			log('Coordenadas')
+			stop_trace()
+			stop_bot()
+			set_training_script('')
+			region = msg.split(',')[0]
+			x = msg.split(',')[1]
+			y = msg.split(',')[2]
+			set_training_position(int(region), int(x), int(y), 0)
+			if get_training_area()['radius'] == 0:
+				set_training_radius(20)
+			start_bot()
 
 def useSpecialReturnScroll():
 	i = 0
@@ -872,7 +884,7 @@ def handle_joymax(opcode, data):
 	if opcode == 0x3040 and len(data) == 23:
 		verdemini(get_item(struct.unpack_from('i', data, 7)[0])['name']+' [Rahim]')
 		return True
-	elif opcode == 0xB069: #Party Form
+	elif opcode == 0xB069 and data != b'\x02\x20\x2C': #Party Form
 		partyNumber = struct.unpack_from('I', data, 1)[0]
 		notice(str(partyNumber))
 	elif opcode == 0x304E and data[0] == 4:
@@ -888,7 +900,7 @@ def handle_joymax(opcode, data):
 				if mobs[mobID]['type'] == 24:
 					phBotChat.Party(name + ' Here! => ['+mobs[mobID]['name'] +']')
 					break
-	elif opcode == 0xB034 and len(data)>10:
+	elif opcode == 0xB034 and len(data)>3:
 		dropType = struct.unpack_from('h', data, 0)[0]
 		if dropType == 4353 or dropType == 7169:
 			itemID = get_item(struct.unpack_from('I', data, 11)[0])
@@ -1073,4 +1085,6 @@ def exitBandit():
 for unique in uniqueList:
 	QtBind.append(gui,qtUniqueList,unique)
 
-log("[Super Plugin v4.8.5 by Rahim]")
+version = '4.8.5'
+ver = QtBind.createLabel(gui,'v'+version,690,300)
+log('[Super Plugin v'+version+' by Rahim]')
