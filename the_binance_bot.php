@@ -1,9 +1,9 @@
 #!/usr/bin/env php
 <?php
 //@the_binance_bot
-define('BOT_TOKEN', '411509742:');
-define('TOKEN_BOT', 'AAFKzBXmOO0fx8e3bXDHBo4tj-QMazfre2E');
-define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.TOKEN_BOT.'/');
+define('PT1', '411509742:');
+define('PT2', 'AAHfvt0ecDUHligg57-Y1TEc5g9d2oHSjvQ');
+define('API_URL', 'https://api.telegram.org/bot'.PT1.PT2.'/');
 define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/the_binance_bot.php');
 
 function gen_uuid() {
