@@ -257,6 +257,20 @@ function processMessage($message) {
     $message_id = $message['message_id'];
     $chat_id = $message['chat']['id'];
     $text = str_replace(" ","",str_replace("x","*",$message['text']));
+
+    $check = preg_split('/[\/*+-]/', $text);
+
+    for ($i=0; $i < sizeof($check); $i++) { 
+        if (strpos($check[$i], ".") < strpos($check[$i], ",")) {
+            $text = str_replace($check[$i],str_replace(".", "", $check[$i]),$text);
+            }
+        elseif (strpos($check[$i], ",") < strpos($check[$i], ".")) {
+            $text = str_replace($check[$i],str_replace(",", "", $check[$i]),$text);
+            }
+        }
+
+
+    
     $Cal = new Field_calculate();
     $result = $Cal->calculate($text);
     $result = number_format((float)$result, 2, ',', '');
