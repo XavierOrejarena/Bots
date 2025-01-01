@@ -24,7 +24,7 @@
 		    "verify_peer_name"=>false,
 		    ),
 		);
-		$data = json_decode(file_get_contents("https://api.binance.com/api/v1/ticker/price?symbol=$coin", false, stream_context_create($arrContextOptions))))['price'];
+		$data = json_decode(file_get_contents("https://api.binance.com/api/v1/ticker/price?symbol=$coin", false, stream_context_create($arrContextOptions)), true)['price']
 		// $price = json_decode(file_get_contents("https://api.binance.com/api/v1/ticker/price?symbol=$coin"), true)['price'];
 		if (is_numeric($price)) {
 			$seted_price = floatval($seted_price);
