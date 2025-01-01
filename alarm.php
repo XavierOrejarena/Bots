@@ -18,8 +18,8 @@
 		$seted_price = $row['seted_price'];
 		$type = $row['type'];
 		$row_num = $row['row_num'];
-		$contenido = file_get_contents("https://api.binance.com/api/v1/ticker/price?symbol=$coin")
-		$price = json_decode($contenido, true)['price'];
+		$contenido = file_get_contents("https://api.binance.com/api/v1/ticker/price?symbol=$coin");
+		$contenido2 = json_decode($contenido, true);
 		if (is_numeric($price)) {
 			$seted_price = floatval($seted_price);
 			$price = floatval($price);
