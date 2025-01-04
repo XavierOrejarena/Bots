@@ -1,9 +1,9 @@
 #!/usr/bin/env php
 <?php
 
-define('KKBA00123JJSJJALLLKKSJJA001', '2UvIzXCFdSgsBX70');
-define('BOT_TOKEN', 'AAEex8gfTnGTnCUvS2F');
-define('API_URL', 'https://api.telegram.org/bot7330372927:'.BOT_TOKEN.KKBA00123JJSJJALLLKKSJJA001.'fo');
+define('PT1', '7330372927:');
+define('PT2', 'AAEex8gfTnGTnCUvS2F2UvIzXCFdSgsBX70');
+define('API_URL', 'https://api.telegram.org/bot'.PT1.PT2.'/');
 define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/donpremiumbot.php');
 
 function apiRequestWebhook($method, $parameters) {
@@ -154,7 +154,7 @@ CUENTA COMPLETA:
 🔴 YouTube 1 mes: $YouTube1Bs Bs
 🔴 YouTube 12 meses: $YouTube12Bs Bs
 🟢 Spotify 1 mes: $Spotify1Bs Bs
-🟢 Spotify 3 meses: $Spotify3Bs Bs"
+🟢 Spotify 3 meses: $Spotify3Bs Bs";
 
 
 
