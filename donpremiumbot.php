@@ -158,7 +158,7 @@ CUENTA COMPLETA:
 
 
 
-      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => $text, 'parse_mode' => 'MarkDown'));
+      apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`".$text."`", 'parse_mode' => 'MarkDown'));
     }
   } else {
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => 'I understand only text messages'));
