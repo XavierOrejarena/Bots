@@ -8,9 +8,9 @@ $arrContextOptions=array(
     ),
 );  
 
-$data = file_get_contents("http://bcv.org.ve", false, stream_context_create($arrContextOptions));
-preg_match_all('/> USD</', $data, $matches, PREG_OFFSET_CAPTURE);
-$text = substr($data, $matches[0][0][1]+122, 11);
-echo "$text";
+$data = file_get_contents("https://static.blockshift.co/ve_rates.json", false, stream_context_create($arrContextOptions));
+
+
+echo "$data";
 
 ?>
