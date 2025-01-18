@@ -42,7 +42,7 @@ if ($result->num_rows > 0 && $text != "") {
     file_get_contents("https://api.telegram.org/bot7$token/sendMessage?chat_id=149273661&text=0 Results");
 }
 
-$text = json_decode(file_get_contents("https://static.blockshift.co/ve_rates.json"), true)['prom_epv'];
+$text = json_decode(file_get_contents("https://exchange.vcoud.com/coins/latest?type=bolivar&base=usd"), true)[0]['price'];
 $chat_id = '@DolarParallel';
 $sql = "SELECT tasa FROM DICOM WHERE id = 5";
 $result = $link->query($sql);
