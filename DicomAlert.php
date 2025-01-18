@@ -8,7 +8,7 @@ $context = stream_context_create(
         )
     )
 );
-
+ini_set('user_agent', 'My-Application/2.5');
 echo file_get_contents("https://static.blockshift.co/ve_rates.json", false, $context);
 
 
