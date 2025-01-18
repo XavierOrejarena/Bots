@@ -57,7 +57,7 @@ if ($result->num_rows > 0 && $text != "") {
 
 $arrContextOptions = array("ssl" => array("verify_peer" => false,"verify_peer_name" => false,));  
 $text = json_decode(file_get_contents("https://static.blockshift.co/ve_rates.json",false,stream_context_create($arrContextOptions)),true)['prom_epv'];
-$chat_id = "@DolarParallel"
+$chat_id = "@DolarParallel";
 $sql = "SELECT tasa FROM DICOM WHERE id = 5";
 $result = $link->query($sql);
 
