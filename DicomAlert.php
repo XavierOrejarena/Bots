@@ -47,9 +47,9 @@ $chat_id = '@DolarParallel';
 $sql = "SELECT tasa FROM DICOM WHERE id = 5";
 $result = $link->query($sql);
 
-if ($result->num_rows > 0 && $text != "") {
+if ($result->num_rows > 0) {
     $OldText = mysqli_fetch_assoc($result)['tasa'];
-	if ($text !== $OldText) {
+	if ($text != $OldText) {
 		$sql = "UPDATE DICOM SET tasa = '$text' WHERE id = 5";
 		if ($link->query($sql) === TRUE) {
 			file_get_contents("https://api.telegram.org/bot7$token/sendMessage?chat_id=$chat_id&text=`$text`&parse_mode=markdown");
