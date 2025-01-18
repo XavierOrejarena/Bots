@@ -3,12 +3,12 @@
 
 $arrContextOptions=array(
     "ssl"=>array(
-        "verify_peer"=>true,
-        "verify_peer_name"=>true,
+        "verify_peer"=>false,
+        "verify_peer_name"=>false,
     ),
 );  
 
-$data = file_get_contents("https://static.blockshift.co/ve_rates.json", false, stream_context_create($arrContextOptions));
+$data = file_get_contents("https://static.blockshift.co/ve_rates.json", true, stream_context_create($arrContextOptions));
 
 
 echo "$data";
