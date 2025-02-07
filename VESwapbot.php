@@ -220,27 +220,6 @@ if (php_sapi_name() == 'cli') {
     exit;
 }
 
-function apiRequestJson($method, $parameters){
-    if (!is_string($method)) {
-        error_log("El nombre del método debe ser una cadena de texto\n");
-        return false;
-    }
-    if (!$parameters) {
-        $parameters = [];
-    } elseif (!is_array($parameters)) {
-        error_log("Los parámetros deben ser un arreglo/matriz\n");
-        return false;
-    }
-    $parameters['method'] = $method;
-    $handle = curl_init(API_URL);
-    curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
-    curl_setopt($handle, CURLOPT_TIMEOUT, 60);
-    curl_setopt($handle, CURLOPT_POSTFIELDS, json_encode($parameters));
-    curl_setopt($handle, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-    return exec_curl_request($handle);
-}
-
 function processMessage($message) {
     $chat_id = $message['chat']['id'];
     include "connect.php";
