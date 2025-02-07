@@ -262,12 +262,12 @@ function processMessage($message) {
                 ['text' => "0%"]];
 
     $array[] =  [['text' => "Promedio"],
-                ['text' => "$result3"],
-                ['text' => "$porcentaje3%"]];
+                ['text' => $result3],
+                ['text' => $porcentaje3]];
 
     $array[] =  [['text' => "Paralelo"],
-                ['text' => "$result2"],
-                ['text' => "$porcentaje2%"]];
+                ['text' => $result2],
+                ['text' => $porcentaje2]];
 
     apiRequestJson('sendMessage', ['chat_id' => $chat_id, 'text' => 'Resultados:', 'reply_markup' => ['inline_keyboard' => $array]]);
 }
