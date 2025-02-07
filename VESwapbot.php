@@ -259,10 +259,10 @@ function processMessage($message) {
 
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "```
 |   Tasa   |      Monto      |  %   |
-|----------|:---------------:|------|
+|----------|:---------------:|----------|
 |   BCV    |     $result1     |     0%  |
-| Promedio |     $result3     | $porcentaje3% |
-| Paralelo |     $result2     | $porcentaje2% |
+| Promedio |     $result3     |  $porcentaje3% |
+| Paralelo |     $result2     |  $porcentaje2% |
 ```", "parse_mode" => "MarkdownV2"));
 }
 
