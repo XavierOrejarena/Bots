@@ -240,9 +240,9 @@ function processMessage($message) {
                 }
             }
 
-        $result = $text*$tasa;
-        $result = number_format((float)$result, 2, ',', '');
-        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`".$result."`", "parse_mode" => "markdown"));
+        // $result = $text*$tasa;
+        // $result = number_format((float)$result, 2, ',', '');
+        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`".$text*$tasa."`", "parse_mode" => "markdown"));
     }
 }
 
