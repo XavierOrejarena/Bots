@@ -223,35 +223,38 @@ if (php_sapi_name() == 'cli') {
 function processMessage($message) {
     $chat_id = $message['chat']['id'];
     include "connect.php";
-    $sql = "SELECT tasa FROM DICOM WHERE id = 1";
     $text = str_replace(" ","",$message['text']);
     $check = preg_split('/[\/*+-]/', $text);
 
     for ($i=0; $i < sizeof($check); $i++) { 
         if (strpos($check[$i], ".") < strpos($check[$i], ",")) {
-            $text = str_replace($check[$i],str_replace(".", "", $check[$i]),$text);
+            $text = (float)str_replace($check[$i],str_replace(".", "", $check[$i]),$text);
             }
         elseif (strpos($check[$i], ",") < strpos($check[$i], ".")) {
-            $text = str_replace($check[$i],str_replace(",", "", $check[$i]),$text);
+            $text = (float)str_replace($check[$i],str_replace(",", "", $check[$i]),$text);
             }
         }
 
+    $sql = "SELECT tasa FROM DICOM WHERE id = 1";
     $result = $link->query($sql);
     if ($result->num_rows > 0) {
-        $tasaBCV = str_replace(",",".",mysqli_fetch_assoc($result)['tasa']);
-        $result = (float)$text*(float)$tasaBCV;
-        $result1 = number_format((float)$result, 2, ',', '');
+        $tasaBCV = (float)str_replace(",",".",mysqli_fetch_assoc($result)['tasa']);
+        $result1 = $text*$tasaBCV;
+        $result1 = number_format($result1, 2, ',', '');
     }
 
     $sql = "SELECT tasa FROM DICOM WHERE id = 5";
     $result = $link->query($sql);
     if ($result->num_rows > 0) {
-        $tasaParallel = str_replace(",",".",mysqli_fetch_assoc($result)['tasa']);
+        $tasaParallel = (float)str_replace(",",".",mysqli_fetch_assoc($result)['tasa']);
         
-        $result = (float)$text*(float)$tasaParallel;
-        $result2 = number_format((float)$result, 2, ',', '');
+        $result2 = $text*$tasaParallel;
+        $result2 = number_format($result2, 2, ',', '');
     }
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "*BCV*:            `".$result1."\n\n`*Parallel*:   `".$result2."`", "parse_mode" => "markdown"));
+
+    $result3 = $text*($tasaBCV+$tasaParallel)/2;
+    $result3 = number_format($result3, 2, ',', '');
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "*BCV*:            `".$result1."`\n\n*Promedio:* `$result3`\n\n*Parallel*:   `".$result2."`", "parse_mode" => "markdown"));
 }
 
 $content = file_get_contents('php://input');
