@@ -270,7 +270,7 @@ function processMessage($message) {
                 ['text' => $porcentaje2]];
 
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "*BCV:*            `".$result1."`\n\n*Promedio:*   `$result3`\n\n*Paralelo:*   `".$result2."`", "parse_mode" => "markdown"));
-    apiRequestJson('sendMessage', ['chat_id' => $chat_id, 'text' => $array]);
+    apiRequestJson('sendMessage', ['chat_id' => $chat_id, 'text' => 'Resultados:', 'reply_markup' => 'inline_keyboard' => $array]);
 }
 
 $content = file_get_contents('php://input');
