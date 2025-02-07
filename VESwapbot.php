@@ -259,7 +259,7 @@ function processMessage($message) {
     $array = []
     $array[] =  [[['text' => "BCV", 'callback_data' => "1"],
                 ['text' => $result1, 'callback_data' => "2"],
-                ['text' => "0%", 'callback_data' => "3"]]
+                ['text' => "0%", 'callback_data' => "3"]],
 
                 [['text' => "Promedio", 'callback_data' => "4"],
                 ['text' => $result3, 'callback_data' => "5"],
