@@ -260,7 +260,7 @@ function processMessage($message) {
 | BCV      |    ```$result1```     |
 | Promedio |    ```$result3```     |
 | Paralelo |    ```$result2```     |
-</pre>", "parse_mode" => "HTML"));
+</pre>", "parse_mode" => "MarkdownV2"));
 }
 
 $content = file_get_contents('php://input');
