@@ -208,7 +208,7 @@ function processQuery($inline_query)
         ];
     } else {
         $text = str_replace(" ","",str_replace("x","*",$inline_query['query']));
-        $original = str_replace(",",".",$inline_query['query']);
+        $original = str_replace(" ","",$inline_query['query']);
         $Cal = new Field_calculate();
 
         $check = preg_split('/[\/*+-]/', $text);
