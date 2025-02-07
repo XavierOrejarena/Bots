@@ -210,6 +210,28 @@ function processQuery($inline_query)
         $text = str_replace(" ","",str_replace("x","*",$inline_query['query']));
         $original = str_replace(",",".",$inline_query['query']);
         $Cal = new Field_calculate();
+
+        $check = preg_split('/[\/*+-]/', $text);
+
+        for ($i=0; $i < sizeof($check); $i++) { 
+            if (strpos($check[$i], ".") < strpos($check[$i], ",")) {
+                $text = str_replace($check[$i],str_replace(".", "", $check[$i]),$text);
+                }
+            elseif (strpos($check[$i], ",") < strpos($check[$i], ".")) {
+                $text = str_replace($check[$i],str_replace(",", "", $check[$i]),$text);
+                }
+            }
+
+        $check = preg_split('/[\/*+-]/', $original);
+
+        for ($i=0; $i < sizeof($check); $i++) { 
+            if (strpos($check[$i], ".") < strpos($check[$i], ",")) {
+                $original = str_replace($check[$i],str_replace(".", "", $check[$i]),$original);
+                }
+            elseif (strpos($check[$i], ",") < strpos($check[$i], ".")) {
+                $original = str_replace($check[$i],str_replace(",", "", $check[$i]),$original);
+                }
+            }
         
         $result0 = $Cal->calculate($text);
         $result = number_format((float)$result0, 2, ',', '');
