@@ -254,13 +254,17 @@ function processMessage($message) {
 
     $result3 = $text*($tasaBCV+$tasaParallel)/2;
     $result3 = number_format($result3, 2, ',', '');
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "<pre>
 | Tasa   |      Monto      |
 |----------|:---------------:|
-| BCV      |    <code>$result1</code>     |
-| Promedio |    <code>$result3</code>     |
-| Paralelo |    <code>$result2</code>     |
-", "parse_mode" => "HTML"));
+| BCV      |    [1]     |
+| Promedio |    [2]     |
+| Paralelo |    [3]     |
+</pre>"
+[1] <code>$result1</code>
+[2] <code>$result3</code>
+[3] <code>$result2</code>
+, "parse_mode" => "HTML"));
 }
 
 $content = file_get_contents('php://input');
