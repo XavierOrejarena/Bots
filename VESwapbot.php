@@ -251,7 +251,7 @@ function processMessage($message) {
         $result = (float)$text*(float)$tasaParallel;
         $result2 = number_format((float)$result, 2, ',', '');
     }
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "BCV:  `".$result1."`
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "BCV:      `".$result1."`
 Parallel:   `".$result2."`", "parse_mode" => "markdown"));
 }
 
