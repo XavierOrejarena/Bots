@@ -260,10 +260,10 @@ function processMessage($message) {
 | BCV      |    [1]     |
 | Promedio |    [2]     |
 | Paralelo |    [3]     |
-</pre>"
+</pre>
 [1] <code>$result1</code>
 [2] <code>$result3</code>
-[3] <code>$result2</code>
+[3] <code>$result2</code>"
 , "parse_mode" => "HTML"));
 }
 
