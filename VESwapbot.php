@@ -6,7 +6,7 @@ define('BOT_TOKEN', '7821624138:');
 define('TOKEN_BOT', 'AAGPguqR4vHP4U7kmj3nz');
 define('API_BOT', '-5DPMRQI0_AbOI');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.TOKEN_BOT.API_BOT.'/');
-define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/VESwap.php');
+define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/VESwapbot.php');
 
 
 function gen_uuid() {
