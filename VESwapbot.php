@@ -261,7 +261,7 @@ function processMessage($message) {
                 ['text' => "<code>$result1</code>", 'callback_data' => "2", "parse_mode" => "HTML"],
                 ['text' => "0%", 'callback_data' => "3"]];
 
-    apiRequestJson('sendMessage', ['chat_id' => $chat_id, 'text' => '       Resultados:', 'reply_markup' => ['inline_keyboard' => $array], "parse_mode" => "HTML"]);
+    apiRequestJson('sendMessage', ['chat_id' => $chat_id, 'text' => '       Resultados:', 'reply_markup' => ['keyboard' => $array], "parse_mode" => "HTML"]);
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "*BCV:*            `".$result1."`\n\n*Promedio:*   `$result3`\n\n*Paralelo:*   `".$result2."`", "parse_mode" => "markdown"));
 }
 
