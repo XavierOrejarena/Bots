@@ -255,11 +255,11 @@ function processMessage($message) {
     $result3 = $text*($tasaBCV+$tasaParallel)/2;
     $result3 = number_format($result3, 2, ',', '');
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "<pre>
-| Tasa   |      Monto      |  Resultado |
-|----------|:-------------:|------:|
-| BCV |  $result1 | $1600 |
-| Promedio |    $result3   |   $12 |
-| Paralelo | $result2 |    $1 |
+|   Tasa   |      Monto      |
+|----------|:---------------:|
+| BCV      |    $result1     |
+| Promedio |    $result3     |
+| Paralelo |    $result2     |
 </pre>", "parse_mode" => "HTML"));
 }
 
