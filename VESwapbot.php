@@ -258,8 +258,8 @@ function processMessage($message) {
     $porcentaje2 = number_format((1-$tasaBCV/$tasaParallel)*100,2,",","");
     $array = [];
     $array[] =  [['text' => "BCV"],
-                ['text' => "$result1"],
-                ['text' => "0%"]];
+                ['text' => "$result1", 'callback_data' => "xd2"],
+                ['text' => "0%", 'callback_data' => "xd3"]];
 
     apiRequestJson('sendMessage', ['chat_id' => $chat_id, 'text' => 'Resultados:', 'reply_markup' => ['inline_keyboard' => $array]]);
     // apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "*BCV:*            `".$result1."`\n\n*Promedio:*   `$result3`\n\n*Paralelo:*   `".$result2."`", "parse_mode" => "markdown"));
