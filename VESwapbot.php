@@ -270,7 +270,7 @@ function processMessage($message) {
                 ['text' => $porcentaje2, 'callback_data' => "3"]];
 
     apiRequestJson('sendMessage', ['chat_id' => $chat_id, 'text' => 'Resultados:', 'reply_markup' => ['inline_keyboard' => $array]]);
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "*BCV:*            `".$result1."`\n\n*Promedio:*   `$result3`\n\n*Paralelo:*   `".$result2."`", "parse_mode" => "markdown"));
+    // apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "*BCV:*            `".$result1."`\n\n*Promedio:*   `$result3`\n\n*Paralelo:*   `".$result2."`", "parse_mode" => "markdown"));
 }
 
 $content = file_get_contents('php://input');
@@ -288,6 +288,13 @@ if (isset($update['inline_query'])) {
         // sendMessage($update['inline_query']['from']['id'], "Este bot es privado, para usarlo escribir a @XavierOrejarena");
     // }
     // saveUser($update['inline_query']['from']);
+}
+if (isset($update['callback_query'])) {
+    $chat_id = $update['callback_query']['from']['id'];
+    $text = $update['callback_query']['data'];
+    
+    sendMessage($chat_id, "`$text`", "parse_mode" => "markdown");
+    
 }
 
 ?>
