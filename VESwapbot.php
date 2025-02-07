@@ -242,13 +242,12 @@ if (php_sapi_name() == 'cli') {
 }
 
 function processMessage($message) {
+    apiRequest("sendMessage", array('chat_id' => $message['chat']['id'], "text" => "`Hola`", "parse_mode" => "markdown"));
     include "connect.php";
     $sql = "SELECT tasa FROM DICOM WHERE id = 1";
     $result = $link->query($sql);
     if ($result->num_rows > 0) {
         $tasa = mysqli_fetch_assoc($result)['tasa'];
-
-        $message_id = $message['message_id'];
         $chat_id = $message['chat']['id'];
         $text = str_replace(" ","",$message['text']);
 
