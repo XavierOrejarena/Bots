@@ -257,14 +257,10 @@ function processMessage($message) {
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "<pre>
 | Tasa   |      Monto      |
 |----------|:---------------:|
-| BCV      |    [1]     |
-| Promedio |    [2]     |
-| Paralelo |    [3]     |
-</pre>
-[1] <code>$result1</code>
-[2] <code>$result3</code>
-[3] <code>$result2</code>"
-, "parse_mode" => "HTML"));
+| BCV      |    ```$result1```     |
+| Promedio |    ```$result3```     |
+| Paralelo |    ```$result2```     |
+</pre>", "parse_mode" => "HTML"));
 }
 
 $content = file_get_contents('php://input');
