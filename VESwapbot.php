@@ -245,7 +245,7 @@ function processMessage($message) {
     include "connect.php";
     $sql = "SELECT tasa FROM DICOM WHERE id = 1";
     $result = $link->query($sql);
-    if ($result->num_rows > 0 && $text != "") {
+    if ($result->num_rows > 0) {
         $tasa = mysqli_fetch_assoc($result)['tasa'];
 
         $message_id = $message['message_id'];
