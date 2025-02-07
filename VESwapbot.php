@@ -221,52 +221,38 @@ if (php_sapi_name() == 'cli') {
 }
 
 function processMessage($message) {
+    $chat_id = $message['chat']['id'];
     include "connect.php";
     $sql = "SELECT tasa FROM DICOM WHERE id = 1";
+    $text = str_replace(" ","",$message['text']);
+    $check = preg_split('/[\/*+-]/', $text);
+
+    for ($i=0; $i < sizeof($check); $i++) { 
+        if (strpos($check[$i], ".") < strpos($check[$i], ",")) {
+            $text = str_replace($check[$i],str_replace(".", "", $check[$i]),$text);
+            }
+        elseif (strpos($check[$i], ",") < strpos($check[$i], ".")) {
+            $text = str_replace($check[$i],str_replace(",", "", $check[$i]),$text);
+            }
+        }
+
     $result = $link->query($sql);
     if ($result->num_rows > 0) {
-        $tasa = str_replace(",",".",mysqli_fetch_assoc($result)['tasa']);
-        $chat_id = $message['chat']['id'];
-        $text = str_replace(" ","",$message['text']);
-
-        $check = preg_split('/[\/*+-]/', $text);
-
-        for ($i=0; $i < sizeof($check); $i++) { 
-            if (strpos($check[$i], ".") < strpos($check[$i], ",")) {
-                $text = str_replace($check[$i],str_replace(".", "", $check[$i]),$text);
-                }
-            elseif (strpos($check[$i], ",") < strpos($check[$i], ".")) {
-                $text = str_replace($check[$i],str_replace(",", "", $check[$i]),$text);
-                }
-            }
-
+        $tasaBCV = str_replace(",",".",mysqli_fetch_assoc($result)['tasa']);
         $result = (float)$text*(float)$tasa;
-        $result = number_format((float)$result, 2, ',', '');
-        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "BCV: `".$result."`", "parse_mode" => "markdown"));
+        $result1 = number_format((float)$result, 2, ',', '');
     }
 
     $sql = "SELECT tasa FROM DICOM WHERE id = 5";
     $result = $link->query($sql);
     if ($result->num_rows > 0) {
-        $tasa = str_replace(",",".",mysqli_fetch_assoc($result)['tasa']);
-        $chat_id = $message['chat']['id'];
-        $text = str_replace(" ","",$message['text']);
-
-        $check = preg_split('/[\/*+-]/', $text);
-
-        for ($i=0; $i < sizeof($check); $i++) { 
-            if (strpos($check[$i], ".") < strpos($check[$i], ",")) {
-                $text = str_replace($check[$i],str_replace(".", "", $check[$i]),$text);
-                }
-            elseif (strpos($check[$i], ",") < strpos($check[$i], ".")) {
-                $text = str_replace($check[$i],str_replace(",", "", $check[$i]),$text);
-                }
-            }
-
+        $tasaParallel = str_replace(",",".",mysqli_fetch_assoc($result)['tasa']);
+        
         $result = (float)$text*(float)$tasa;
-        $result = number_format((float)$result, 2, ',', '');
-        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "Parallel: `".$result."`", "parse_mode" => "markdown"));
+        $result2 = number_format((float)$result, 2, ',', '');
     }
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "BCV: `".$result1."`
+Parallel: `".$result2."`", "parse_mode" => "markdown"));
 }
 
 $content = file_get_contents('php://input');
