@@ -242,9 +242,9 @@ function processMessage($message) {
 
         $result = (float)$text*(float)$tasa;
         $result = number_format((float)$result, 2, ',', '');
-        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`".$result."`", "parse_mode" => "markdown"));
+        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "BCV: `".$result."`", "parse_mode" => "markdown"));
     }
-    
+
     $sql = "SELECT tasa FROM DICOM WHERE id = 5";
     $result = $link->query($sql);
     if ($result->num_rows > 0) {
@@ -265,7 +265,7 @@ function processMessage($message) {
 
         $result = (float)$text*(float)$tasa;
         $result = number_format((float)$result, 2, ',', '');
-        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`".$result."`", "parse_mode" => "markdown"));
+        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "Parallel: `".$result."`", "parse_mode" => "markdown"));
     }
 }
 
