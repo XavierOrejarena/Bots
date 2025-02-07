@@ -261,13 +261,13 @@ function processMessage($message) {
                 ['text' => $result1, 'callback_data' => "2"],
                 ['text' => "0%", 'callback_data' => "3"]];
 
-    $array[] =  [['text' => "BCV", 'callback_data' => "1"],
-                ['text' => $result3, 'callback_data' => "2"],
-                ['text' => $porcentaje3, 'callback_data' => "3"]];
+    // $array[] =  [['text' => "BCV", 'callback_data' => "1"],
+    //             ['text' => $result3, 'callback_data' => "2"],
+    //             ['text' => $porcentaje3, 'callback_data' => "3"]];
 
-    $array[] =  [['text' => "BCV", 'callback_data' => "1"],
-                ['text' => $result2, 'callback_data' => "2"],
-                ['text' => $porcentaje2, 'callback_data' => "3"]];
+    // $array[] =  [['text' => "BCV", 'callback_data' => "1"],
+    //             ['text' => $result2, 'callback_data' => "2"],
+    //             ['text' => $porcentaje2, 'callback_data' => "3"]];
 
     apiRequestJson('sendMessage', ['chat_id' => $chat_id, 'text' => '       Resultados:', 'reply_markup' => ['inline_keyboard' => $array]]);
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "*BCV:*            `".$result1."`\n\n*Promedio:*   `$result3`\n\n*Paralelo:*   `".$result2."`", "parse_mode" => "markdown"));
