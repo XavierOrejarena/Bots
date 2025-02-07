@@ -257,17 +257,17 @@ function processMessage($message) {
     $porcentaje3 = number_format(($tasaBCV/(($tasaBCV+$tasaParallel)/2-1)*100),2,",","");
     $porcentaje2 = number_format((1-$tasaBCV/$tasaParallel)*100,2,",","");
     $array = [];
-    $array[] =  [['text' => "BCV", 'callback_data' => "1"],
-                ['text' => $result1, 'callback_data' => "2"],
-                ['text' => "0%", 'callback_data' => "3"]];
+    $array[] =  [['text' => "BCV", 'callback_data' => $result1],
+                ['text' => $result1, 'callback_data' => $result1],
+                ['text' => "0%", 'callback_data' => $result1]];
 
-    $array[] =  [['text' => "Promedio", 'callback_data' => "1"],
-                ['text' => $result3, 'callback_data' => "2"],
-                ['text' => $porcentaje3, 'callback_data' => "3"]];
+    $array[] =  [['text' => "Promedio", 'callback_data' => $result3],
+                ['text' => $result3, 'callback_data' => $result3],
+                ['text' => $porcentaje3, 'callback_data' => $result3]];
 
-    $array[] =  [['text' => "Paralelo", 'callback_data' => "1"],
-                ['text' => $result2, 'callback_data' => "2"],
-                ['text' => $porcentaje2, 'callback_data' => "3"]];
+    $array[] =  [['text' => "Paralelo", 'callback_data' => $result2],
+                ['text' => $result2, 'callback_data' => $result2],
+                ['text' => $porcentaje2, 'callback_data' => $result2]];
 
     apiRequestJson('sendMessage', ['chat_id' => $chat_id, 'text' => 'Resultados:', 'reply_markup' => ['inline_keyboard' => $array]]);
     // apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "*BCV:*            `".$result1."`\n\n*Promedio:*   `$result3`\n\n*Paralelo:*   `".$result2."`", "parse_mode" => "markdown"));
