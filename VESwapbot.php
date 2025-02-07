@@ -293,8 +293,7 @@ if (isset($update['callback_query'])) {
     $chat_id = $update['callback_query']['from']['id'];
     $text = $update['callback_query']['data'];
     
-    sendMessage($chat_id, "`$text`", "parse_mode" => "markdown");
-    
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`$text`", "parse_mode" => "markdown"));
 }
 
 ?>
