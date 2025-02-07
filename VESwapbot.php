@@ -225,7 +225,7 @@ function processMessage($message) {
     $sql = "SELECT tasa FROM DICOM WHERE id = 1";
     $result = $link->query($sql);
     if ($result->num_rows > 0) {
-        $tasa = mysqli_fetch_assoc($result)['tasa'];
+        $tasa = str_replace(",",".",mysqli_fetch_assoc($result)['tasa']);
         $chat_id = $message['chat']['id'];
         $text = str_replace(" ","",$message['text']);
 
@@ -241,7 +241,7 @@ function processMessage($message) {
             }
 
         $result = (float)$text*(float)$tasa;
-        // $result = number_format((float)$result, 2, ',', '');
+        $result = number_format((float)$result, 2, ',', '');
         apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`".$result."`", "parse_mode" => "markdown"));
     }
 }
