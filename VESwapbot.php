@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php
-//@VESwap
+//@VESwapbot
 
 define('BOT_TOKEN', '7821624138:');
 define('TOKEN_BOT', 'AAGPguqR4vHP4U7kmj3nz');
@@ -263,7 +263,7 @@ function processMessage($message) {
                 }
             }
 
-        $results = $text*$tasa;
+        $result = $text*$tasa;
         $result = number_format((float)$result, 2, ',', '');
         apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`".$result."`", "parse_mode" => "markdown"));
     }
