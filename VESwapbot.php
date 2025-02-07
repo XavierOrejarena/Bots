@@ -244,6 +244,29 @@ function processMessage($message) {
         $result = number_format((float)$result, 2, ',', '');
         apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`".$result."`", "parse_mode" => "markdown"));
     }
+    
+    $sql = "SELECT tasa FROM DICOM WHERE id = 5";
+    $result = $link->query($sql);
+    if ($result->num_rows > 0) {
+        $tasa = str_replace(",",".",mysqli_fetch_assoc($result)['tasa']);
+        $chat_id = $message['chat']['id'];
+        $text = str_replace(" ","",$message['text']);
+
+        $check = preg_split('/[\/*+-]/', $text);
+
+        for ($i=0; $i < sizeof($check); $i++) { 
+            if (strpos($check[$i], ".") < strpos($check[$i], ",")) {
+                $text = str_replace($check[$i],str_replace(".", "", $check[$i]),$text);
+                }
+            elseif (strpos($check[$i], ",") < strpos($check[$i], ".")) {
+                $text = str_replace($check[$i],str_replace(",", "", $check[$i]),$text);
+                }
+            }
+
+        $result = (float)$text*(float)$tasa;
+        $result = number_format((float)$result, 2, ',', '');
+        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`".$result."`", "parse_mode" => "markdown"));
+    }
 }
 
 $content = file_get_contents('php://input');
