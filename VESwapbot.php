@@ -256,8 +256,8 @@ function processMessage($message) {
     $result3 = number_format($result3, 2, ',', '');
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "```
 | Tasa   |      Monto      |
-|----------|:---------------:|
-| BCV      |    $result1     |
+|--------|:---------------:|
+|   BCV    |    $result1     |
 | Promedio |    $result3     |
 | Paralelo |    $result2     |
 ```", "parse_mode" => "MarkdownV2"));
