@@ -257,9 +257,9 @@ function processMessage($message) {
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "```
 |   Tasa   |      Monto      |
 |----------|:---------------:|
-|   BCV    |    $result1     |
-| Promedio |    $result3     |
-| Paralelo |    $result2     |
+|   BCV    |     $result1     |
+| Promedio |     $result3     |
+| Paralelo |     $result2     |
 ```", "parse_mode" => "MarkdownV2"));
 }
 
