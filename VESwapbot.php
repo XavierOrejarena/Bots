@@ -254,7 +254,7 @@ function processMessage($message) {
 
     $result3 = $text*($tasaBCV+$tasaParallel)/2;
     $result3 = number_format($result3, 2, ',', '');
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "*BCV*:            `".$result1."`\n\n*Promedio:* `$result3`\n\n*Parallel*:   `".$result2."`", "parse_mode" => "markdown"));
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "*BCV*:            `".$result1."`\n\n*Promedio:*   `$result3`\n\n*Parallel*:   `".$result2."`", "parse_mode" => "markdown"));
 }
 
 $content = file_get_contents('php://input');
