@@ -258,7 +258,7 @@ function processMessage($message) {
     $porcentaje2 = number_format((1-$tasaBCV/$tasaParallel)*100,2,",","");
     $array = [];
     $array =  [['text' => "BCV", 'callback_data' => "1"],
-                ['text' => $result1, 'callback_data' => "2"],
+                ['text' => "123", 'callback_data' => "2"],
                 ['text' => "0%", 'callback_data' => "3"]];
 
     // $array[] =  [['text' => "BCV", 'callback_data' => "1"],
