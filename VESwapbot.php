@@ -257,9 +257,9 @@ function processMessage($message) {
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "```
 |   Tasa   |      Monto      |  %   |
 |----------|:---------------:|------|
-|   BCV    |     $result1     | 0%
-| Promedio |     $result3     | $tasaBCV/($tasaParallel+$tasaBCV)/2%
-| Paralelo |     $result2     | $tasaBCV/$tasaParallel$%
+|   BCV    |     $result1     | 0%  |
+| Promedio |     $result3     | ($tasaBCV/($tasaParallel+$tasaBCV))/2% |
+| Paralelo |     $result2     | ($tasaBCV/$tasaParallel$)% |
 ```", "parse_mode" => "MarkdownV2"));
 }
 
