@@ -239,7 +239,7 @@ function processMessage($message) {
     $result = $link->query($sql);
     if ($result->num_rows > 0) {
         $tasaBCV = str_replace(",",".",mysqli_fetch_assoc($result)['tasa']);
-        $result = (float)$text*(float)$tasa;
+        $result = (float)$text*(float)$tasaBCV;
         $result1 = number_format((float)$result, 2, ',', '');
     }
 
@@ -248,11 +248,11 @@ function processMessage($message) {
     if ($result->num_rows > 0) {
         $tasaParallel = str_replace(",",".",mysqli_fetch_assoc($result)['tasa']);
         
-        $result = (float)$text*(float)$tasa;
+        $result = (float)$text*(float)$tasaParallel;
         $result2 = number_format((float)$result, 2, ',', '');
     }
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "BCV: `".$result1."`
-Parallel: `".$result2."`", "parse_mode" => "markdown"));
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "BCV:  `".$result1."`
+Parallel:   `".$result2."`", "parse_mode" => "markdown"));
 }
 
 $content = file_get_contents('php://input');
