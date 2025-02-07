@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php
-//@VESwapbot
+//@apruebabot
 
 define('BOT_TOKEN', '7821624138:');
 define('TOKEN_BOT', 'AAGPguqR4vHP4U7kmj3nz');
@@ -54,6 +54,40 @@ function apiRequestWebhook($method, $parameters)
     header('Content-Type: application/json');
     echo json_encode($parameters);
     return true;
+}
+
+function exec_curl_request($handle)
+{
+    $response = curl_exec($handle);
+    if ($response === false) {
+        $errno = curl_errno($handle);
+        $error = curl_error($handle);
+        error_log("Curl retornó un error $errno: $error\n");
+        curl_close($handle);
+        return false;
+    }
+    $http_code = intval(curl_getinfo($handle, CURLINFO_HTTP_CODE));
+    curl_close($handle);
+    if ($http_code >= 500) {
+        // do not wat to DDOS server if something goes wrong
+    sleep(10);
+        return false;
+    } elseif ($http_code != 200) {
+        $response = json_decode($response, true);
+        error_log("La solicitud fallo con el error {$response['error_code']}: {$response['description']}\n");
+        if ($http_code == 401) {
+            throw new Exception('El token provisto es inválido');
+        }
+        return false;
+    } else {
+        $response = json_decode($response, true);
+        if (isset($response['description'])) {
+            error_log("La solicitud fue exitosa: {$response['description']}\n");
+            echo "<h3>seted Webhook</h1>";
+        }
+        $response = $response['result'];
+    }
+    return $response;
 }
 
 function apiRequest($method, $parameters)
@@ -242,30 +276,27 @@ if (php_sapi_name() == 'cli') {
 }
 
 function processMessage($message) {
-    apiRequest("sendMessage", array('chat_id' => $message['chat']['id'], "text" => "`Hola`", "parse_mode" => "markdown"));
-    include "connect.php";
-    $sql = "SELECT tasa FROM DICOM WHERE id = 1";
-    $result = $link->query($sql);
-    if ($result->num_rows > 0) {
-        $tasa = mysqli_fetch_assoc($result)['tasa'];
-        $chat_id = $message['chat']['id'];
-        $text = str_replace(" ","",$message['text']);
+    $message_id = $message['message_id'];
+    $chat_id = $message['chat']['id'];
+    $text = str_replace(" ","",str_replace("x","*",$message['text']));
 
-        $check = preg_split('/[\/*+-]/', $text);
+    $check = preg_split('/[\/*+-]/', $text);
 
-        for ($i=0; $i < sizeof($check); $i++) { 
-            if (strpos($check[$i], ".") < strpos($check[$i], ",")) {
-                $text = str_replace($check[$i],str_replace(".", "", $check[$i]),$text);
-                }
-            elseif (strpos($check[$i], ",") < strpos($check[$i], ".")) {
-                $text = str_replace($check[$i],str_replace(",", "", $check[$i]),$text);
-                }
+    for ($i=0; $i < sizeof($check); $i++) { 
+        if (strpos($check[$i], ".") < strpos($check[$i], ",")) {
+            $text = str_replace($check[$i],str_replace(".", "", $check[$i]),$text);
             }
+        elseif (strpos($check[$i], ",") < strpos($check[$i], ".")) {
+            $text = str_replace($check[$i],str_replace(",", "", $check[$i]),$text);
+            }
+        }
 
-        $result = $text*$tasa;
-        $result = number_format((float)$result, 2, ',', '');
-        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`".$result."`", "parse_mode" => "markdown"));
-    }
+
+    
+    $Cal = new Field_calculate();
+    $result = $Cal->calculate($text);
+    $result = number_format((float)$result, 2, ',', '');
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`".$result."`", "parse_mode" => "markdown"));
 }
 
 $content = file_get_contents('php://input');
