@@ -220,8 +220,7 @@ if (php_sapi_name() == 'cli') {
     exit;
 }
 
-function apiRequestJson($method, $parameters)
-{
+function apiRequestJson($method, $parameters){
     if (!is_string($method)) {
         error_log("El nombre del método debe ser una cadena de texto\n");
         return false;
