@@ -261,11 +261,11 @@ function processMessage($message) {
                 ['text' => $result1, 'callback_data' => "2"],
                 ['text' => "0%", 'callback_data' => "3"]];
 
-    $array[] =  [['text' => "BCV", 'callback_data' => "1"],
+    $array[] =  [['text' => "Promedio", 'callback_data' => "1"],
                 ['text' => $result3, 'callback_data' => "2"],
                 ['text' => $porcentaje3, 'callback_data' => "3"]];
 
-    $array[] =  [['text' => "BCV", 'callback_data' => "1"],
+    $array[] =  [['text' => "Paralelo", 'callback_data' => "1"],
                 ['text' => $result2, 'callback_data' => "2"],
                 ['text' => $porcentaje2, 'callback_data' => "3"]];
 
