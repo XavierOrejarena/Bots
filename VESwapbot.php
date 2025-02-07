@@ -270,6 +270,7 @@ function processMessage($message) {
                 ['text' => "$porcentaje2%"]];
 
     apiRequestJson('sendMessage', ['chat_id' => $chat_id, 'text' => 'Resultados:', 'reply_markup' => ['inline_keyboard' => $array]]);
+}
 
 $content = file_get_contents('php://input');
 $update = json_decode($content, true);
