@@ -254,8 +254,9 @@ function processMessage($message) {
 
     $result3 = $text*($tasaBCV+$tasaParallel)/2;
     $result3 = number_format($result3, 2, ',', '');
-    $porcentaje3 = number_format(1-$tasaBCV/(($tasaBCV+$tasaParallel)/2),2,",","");
-    $porcentaje2 = number_format(1-$tasaBCV/$tasaParallel,2,",","");
+    $porcentaje3 = number_format((1-$tasaBCV/(($tasaBCV+$tasaParallel)/2)*100),2,",","");
+    $porcentaje2 = number_format((1-$tasaBCV/$tasaParallel)*100,2,",","");
+    
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "```
 |   Tasa   |      Monto      |  %   |
 |----------|:---------------:|------|
