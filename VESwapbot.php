@@ -269,7 +269,7 @@ function processMessage($message) {
                 ['text' => "$result2"],
                 ['text' => "$porcentaje2%"]];
 
-    apiRequestJson('sendMessage', ['chat_id' => $chat_id, 'text' => 'Resultados:', 'reply_markup' => ['inline_keyboard' => $array], 'parse_mode' => "MarkdownV2"]);
+    apiRequestJson('sendMessage', ['chat_id' => $chat_id, 'text' => 'Resultados:', 'reply_markup' => ['inline_keyboard' => $array]]);
 
 $content = file_get_contents('php://input');
 $update = json_decode($content, true);
