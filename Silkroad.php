@@ -1,3 +1,3 @@
 <?php
-echo file_get_contents('php://input');
+print_r(file_get_contents('php://input'));
 ?>
