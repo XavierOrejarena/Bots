@@ -1,1 +1,3 @@
-<?php echo $_GET[]; ?>
+<?php
+echo $_GET;
+?>
