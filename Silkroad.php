@@ -1,1 +1,1 @@
-<?php echo $_GET['subject']; ?>
+<?php echo $_GET[]; ?>
