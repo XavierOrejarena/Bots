@@ -1,3 +1,3 @@
 <?php
-echo php://input;
+echo "php://input";
 ?>
