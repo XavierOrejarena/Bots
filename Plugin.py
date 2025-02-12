@@ -822,6 +822,9 @@ def handle_chat(t,player,msg):
 			if get_training_area()['radius'] == 0:
 				set_training_radius(20)
 			start_bot()
+		elif get_character_data()['name'] == player and msg[:2] == ':>':
+				log('Cambiando a perfil -> '+msg[2:])
+				set_profile(msg[2:])
 
 def useSpecialReturnScroll():
 	i = 0
