@@ -770,6 +770,19 @@ def handle_chat(t,player,msg):
 				notice(word)
 				partyNumber = int(word)
 				break
+	elif get_character_data()['name'] == player and msg == 'comandos':
+		notice("tptg")
+		notice("tpcerb")
+		notice("tpuru1")
+		notice("tpuru2")
+		notice("tpivy1")
+		notice("tpisy1")
+		notice("tpisy2")
+		notice("tpisy3")
+		notice("tplord1")
+		notice("tplord2")
+		notice("tproc1")
+		notice("tproc2")
 	if msg == 'stop':
 		partyNumber == 0
 	if comandos:
@@ -784,7 +797,7 @@ def handle_chat(t,player,msg):
 		elif msg == 'start':
 			stop_trace()
 			start_bot()
-		elif (t == 2 or t == 1 or t == 4) and msg[0:2] == '>>' and msg[3] != ' ':
+		elif get_character_data()['name'] == player and msg[0:2] == '>>' and msg[3] != ' ':
 			stop_trace()
 			stop_bot()
 			log(get_config_dir().replace('Config','Scripts')+msg[2:]+'.txt')
@@ -825,6 +838,82 @@ def handle_chat(t,player,msg):
 		elif get_character_data()['name'] == player and msg[:2] == ':>':
 			log('Cambiando a perfil -> '+msg[2:])
 			set_profile(msg[2:])
+		elif player == get_character_data()['name'] and msg == 'tomb':
+			stop_trace()
+			stop_bot()
+			reverse_return(3, "Seenwald")
+		elif player == get_character_data()['name'] and msg == 'tptg':
+			stop_trace()
+			stop_bot()
+			reverse_return(3, "Bandit-Bergfestung")
+		elif player == get_character_data()['name'] and msg == 'tpdemon':
+			stop_trace()
+			stop_bot()
+			reverse_return(3, "Heart Peak")
+		elif player == get_character_data()['name'] and msg == 'tpuru1':
+			stop_trace()
+			stop_bot()
+			reverse_return(3, "Black-Robber-Lager")
+		elif player == get_character_data()['name'] and msg == 'tpuru2':
+			stop_trace()
+			stop_bot()
+			reverse_return(3, "Tarimbecken")
+		elif player == get_character_data()['name'] and msg == 'tplord1':
+			stop_trace()
+			stop_bot()
+			reverse_return(3, "Niya-Ruine")
+		elif player == get_character_data()['name'] and msg == 'tplord2':
+			stop_trace()
+			stop_bot()
+			reverse_return(3, "Fruchtbarkeitstempel")
+		elif player == get_character_data()['name'] and msg == 'tpisy1':
+			stop_trace()
+			stop_bot()
+			for i,x in enumerate(get_inventory()['items']):
+				if x and i > 13:
+					if x['name'] == 'Reverse Reverse Return Scroll':
+						inject_joymax(0x704C, struct.pack('b',i)+b'\xED\x19\x07\x14\x00\x00\x00', False)
+						return
+		elif player == get_character_data()['name'] and msg == 'tpisy2':
+			stop_trace()
+			stop_bot()
+			for i,x in enumerate(get_inventory()['items']):
+				if x and i > 13:
+					if x['name'] == 'Reverse Reverse Return Scroll':
+						inject_joymax(0x704C, struct.pack('b',i)+b'\xED\x19\x07\x15\x00\x00\x00', False)
+						return
+		elif player == get_character_data()['name'] and msg == 'tpisy3':
+			stop_trace()
+			stop_bot()
+			for i,x in enumerate(get_inventory()['items']):
+				if x and i > 13:
+					if x['name'] == 'Reverse Reverse Return Scroll':
+						inject_joymax(0x704C, struct.pack('b',i)+b'\xED\x19\x07\x13\x00\x00\x00', False)
+						return
+		elif player == get_character_data()['name'] and msg == 'tproc':
+			stop_trace()
+			stop_bot()
+			reverse_return(3, "Herzgipfel")
+		elif player == get_character_data()['name'] and msg == 'tproc2':
+			stop_trace()
+			stop_bot()
+			reverse_return(3, "Windstadt")
+		elif player == get_character_data()['name'] and msg == 'tpivy':
+			stop_trace()
+			stop_bot()
+			reverse_return(3, "Cleopatra-Tor")
+		elif player == get_character_data()['name'] and msg == 'tpivy2':#no funciona
+			stop_trace()
+			stop_bot()
+			reverse_return(3, "Teich-Ruinen")
+		elif player == get_character_data()['name'] and msg == 'tphwt':#no funciona
+			stop_trace()
+			stop_bot()
+			reverse_return(3, "Roter Boden")
+		elif player == get_character_data()['name'] and msg == 'tpcerb':
+			stop_trace()
+			stop_bot()
+			reverse_return(3, "Göttergarten")
 
 def useSpecialReturnScroll():
 	i = 0
@@ -1012,7 +1101,8 @@ def azulPerma(message):
 	inject_silkroad(0x30CF,p,False)
 
 def joined_game():
-	purple('Super Plugin By Rahim. Cualquier sugerencia dar pm ya sabes quien soy xD')
+	purple('Nueva version, se corrigio un bug con el comando >> y se agregaron nuevos comandos para reverse teleport')
+	Timer(3,purple,['Si quieres conocer los nuevos comandos escribe la palabra "comandos"']).start()
 
 def checkThief(time):
 	mobs = get_monsters()
@@ -1088,6 +1178,6 @@ def exitBandit():
 for unique in uniqueList:
 	QtBind.append(gui,qtUniqueList,unique)
 
-version = '4.8.5'
+version = '4.9.3'
 ver = QtBind.createLabel(gui,'v'+version,690,300)
 log('[Super Plugin v'+version+' by Rahim]')
