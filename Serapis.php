@@ -1,9 +1,9 @@
 #!/usr/bin/env php
 <?php
-// 6863881576:AAFjOYMaXdH_K_OBUnuDGaKNfJFkOQfoMgc
-define('KKBA00123JJSJJALLLKKSJJA001', 'K_OBUnuDGaKNfJFkOQ');
-define('BOT_TOKEN', 'AAFjOYMaXdH_');
-define('API_URL', 'https://api.telegram.org/bot6863881576:'.BOT_TOKEN.KKBA00123JJSJJALLLKKSJJA001.'fo');
+
+define('KKBA00123JJSJJALLLKKSJJA001', ':AAGne-zey5r0DF');
+define('BOT_TOKEN', '6863881576');
+define('API_URL', 'https://api.telegram.org/bot6863881576:'.BOT_TOKEN.KKBA00123JJSJJALLLKKSJJA001.'-nAQr0XrslGrhb0lSaKFU');
 define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/Serapis.php');
 
 function apiRequestWebhook($method, $parameters) {
