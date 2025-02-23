@@ -84,7 +84,7 @@ function apiRequest($method, $parameters) {
       $val = json_encode($val);
     }
   }
-  $url = API_URL.$method.'?'.http_build_query($parameters);
+  $url = API_URL.''.$method.'?'.http_build_query($parameters);
 
   $handle = curl_init($url);
   curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
@@ -109,7 +109,7 @@ function apiRequestJson($method, $parameters) {
 
   $parameters["method"] = $method;
 
-  $handle = curl_init(API_URL);
+  $handle = curl_init(API_URL.'');
   curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($handle, CURLOPT_CONNECTTIMEOUT, 5);
   curl_setopt($handle, CURLOPT_TIMEOUT, 60);
