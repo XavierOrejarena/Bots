@@ -914,6 +914,13 @@ def handle_chat(t,player,msg):
 			stop_trace()
 			stop_bot()
 			reverse_return(3, "Göttergarten")
+		elif msg == 'r/1231231231515164' and get_character_data()['name'] != player:
+			for slot, item in enumerate(get_inventory()['items']):
+				if slot > 13 and item:
+					if item['name'] == 'Special Reverse Return':
+						data = struct.pack('H', len(player)) + player.encode('ascii') + struct.pack('b', slot)
+						log((' '.join('{:02X}'.format(x) for x in data)))
+						return True
 
 def useSpecialReturnScroll():
 	i = 0
