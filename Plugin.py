@@ -1070,22 +1070,24 @@ def handle_joymax(opcode, data):
 		if pets:
 			for pet, v in pets.items():
 				if v['type'] == 'wolf':
-					victima = struct.unpack_from('I', data, 15)[0]
+					victima = struct.unpack_from('<I', data, 15)[0]
 					if victima == get_character_data()['player_id'] or victima == pet:
-						mob = struct.unpack_from('I', data, 7)[0]
-						if mob not in mobAtacked:
+						mob = struct.unpack_from('<I', data, 7)[0]
+						if mob not in mobAtacked and get_monsters()[mob]['type'] != 24:
 							mobAtacked.append(mob)
 						tempMob = 0
 						for mob in mobAtacked:
-							if mob in get_monsters():
-								morado(str(mob))
-								if mob > tempMob:
+							mobs = get_monsters()
+							for mobID in mobs:
+								if mobID == mob and mob > tempMob:
 									tempMob = mob
-							else:
-								mobAtacked.remove(mob)
-								break
+									break
+							mobAtacked.remove(mob)
 						inject_joymax(0x70C5, struct.pack('i', pet) + b'\x02' + struct.pack('i', tempMob), False)
-	return True
+						log('Atacando a :' +str(tempMob))
+						log(str(mobAtacked))
+						return True
+		return True
 
 def sendTelegram(data):
 	global idTelegram
