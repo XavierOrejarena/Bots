@@ -1088,6 +1088,7 @@ def handle_joymax(opcode, data):
 						log(str(mobAtacked))
 						return True
 		return True
+	return True
 
 def sendTelegram(data):
 	global idTelegram
