@@ -271,12 +271,13 @@ If you want to see all your alarms /MYALARMS");
         }
     } elseif (strtolower($text) == "/timer") {
        $text = str_word_count($text, 1, "0123456789");
-        if (sizeof($text) == 3 ) {
-            $coin = strtoupper($text[1]);
-            $seted_price = $text[2];
-            $minutes = $type-$type %5
-            $type = 1;
-            sendMessage($chat_id, "You will receive a notification every $minutes minutes.
+       if (sizeof($text) == 3 ) {
+        $coin = strtoupper($text[1]);
+        $seted_price = $text[2];
+        $minutes = $type-$type %5;
+        $type = 1;
+        sendMessage($chat_id, "You will receive a notification every $minutes minutes.
+
 
 If you want to see all your alarms /MYALARMS");
             
