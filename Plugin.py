@@ -107,7 +107,7 @@ def saveConfig():
 
 mobAtacked = []
 attackWolf = False
-itemListAzul = ['advanced','sharpness','lottery','silk scroll','immortal','lucky','poro','sabakun','coin','blue stone','serapis']
+itemListAzul = ['advanced','sharpness','lottery','silk scroll','immortal','lucky','poro','sabakun','coin','blue stone','serapis', 'black stone']
 otrosItems = ['Reverse Reverse Return Scroll','Global chatting','Magic POP Card']
 PICK = False
 energy = False
@@ -398,7 +398,7 @@ def handle_event(t, data):
 	if t == 0:
 		bolnotify = True
 		notice(data)
-		if partyAlert:
+		if partyAlert and 'Ballon' not in data:
 			phBotChat.Party('Here ---> ['+ data + ']')
 		if spawn:
 			play_wav('Sounds/Unique In Range.wav')
@@ -997,7 +997,7 @@ def handle_joymax(opcode, data):
 			name = struct.unpack_from('<' + str(data[6]) + 's',data,8)[0].decode('cp1252')
 			mobs = get_monsters()
 			for mobID in mobs:
-				if mobs[mobID]['type'] == 24:
+				if mobs[mobID]['type'] == 24 and 'Ballon' not in mobs[mobID]['name']:
 					phBotChat.Party(name + ' Here! => ['+mobs[mobID]['name'] +']')
 					break
 	elif opcode == 0xB034 and len(data)>3:
