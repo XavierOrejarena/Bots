@@ -286,7 +286,7 @@ If you want to see all your alarms /MYALARMS");
 If you want to see all your alarms /MYALARMS");
             
             include "connect.php";
-            mysqli_query($link, "INSERT INTO alarms_binance (chat_id, coin, seted_price, type) VALUES ('$chat_id', '$coin', '$seted_price', '1')");
+            mysqli_query($link, "INSERT INTO alarms_binance (chat_id, coin, seted_price, type) VALUES ('$chat_id', '$coin', '$seted_price', 1)");
         }
         else{
             sendMessage($chat_id, "Error. Follow the example: /timer BTCUSDT 60"); 
