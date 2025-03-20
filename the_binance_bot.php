@@ -270,20 +270,18 @@ If you want to see all your alarms /MYALARMS");
             sendMessage($chat_id, 'There are no alarms.');
         }
     } elseif (strtolower(substr($text, 0, 6)) == '/timer') {
-        sendMessage($chat_id, "Timer");
        $text = str_word_count($text, 1, "0123456789");
        if (sizeof($text) == 3 ) {
         $coin = strtoupper($text[1]);
         $seted_price = intval($text[2]);
         $minutes = $seted_price-$seted_price%5;
-        $type = "1";
         sendMessage($chat_id, "You will receive a notification every $minutes minutes.
 
 
 If you want to see all your alarms /MYALARMS");
             
             include "connect.php";
-            mysqli_query($link, "INSERT INTO alarms_binance (chat_id, coin, seted_price, type) VALUES ('$chat_id', '$coin', '$seted_price', '$type')");
+            mysqli_query($link, "INSERT INTO alarms_binance (chat_id, coin, seted_price, type) VALUES ('$chat_id', '$coin', '$seted_price', '1')");
         }
         else{
             sendMessage($chat_id, "Error. Follow the example: /timer BTCUSDT 60"); 
