@@ -260,10 +260,10 @@ If you want to see all your alarms /MYALARMS");
             $array = [];
             foreach ($result as $key => $value) {
                 if (is_numeric(value['type'])){
-                    $value['seted_price'] = (int)($value['seted_price']*5)." min";
+                    $seted_price = (int)($value['seted_price']*5)." min";
                 }
                 $array[] =  [['text' => $value['coin'], 'callback_data' => $value['row_num']],
-                            ['text' => $value['seted_price'], 'callback_data' => $value['row_num']],
+                            ['text' => $seted_price, 'callback_data' => $value['row_num']],
                             ['text' => "\xE2\x9D\x8C", 'callback_data' => $value['row_num']]];
             }
             apiRequestJson('sendMessage', ['chat_id' => $chat_id, 'text' => 'Select which you want to delete:', 'reply_markup' => [
