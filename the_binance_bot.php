@@ -221,7 +221,7 @@ Any bug or suggestion @XavierOrejarena');
     }
     elseif (strtolower($text) == "/coins") {
         include "connect.php";
-        mysqli_query($link, "UPDATE alarms_binance SET type='++$type' WHERE row_num=2028");
+        mysqli_query($link, "UPDATE alarms_binance SET type='123' WHERE row_num=2028");
 //         $Binance = json_decode(file_get_contents("https://api.binance.com//api/v1/exchangeInfo"), true);
 //         $coins = "";
 //         // for ($i= 0; $i < sizeof($Binance['symbols']) ; $i++) { 
