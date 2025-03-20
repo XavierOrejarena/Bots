@@ -36,8 +36,7 @@
 		if ($type != 'low' and $type != 'high'){
 			sendMessage($chat_id, "Testing");
 			if ((int)($type%$seted_price)){
-				++$type;
-				mysqli_query($link, "UPDATE alarms_binance SET type='$type' WHERE row_num='$row_num'");
+				mysqli_query($link, "UPDATE alarms_binance SET type=type+1 WHERE row_num='$row_num'");
 
 			}else{
 				sendMessage($chat_id, "/".$coin." timer alarm".$seted_price);
