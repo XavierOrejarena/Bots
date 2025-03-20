@@ -35,12 +35,13 @@
 		}
 		if ($type != 'low' and $type != 'high'){
 			sendMessage($chat_id, "Testing");
-			if ((int)($type%$seted_price)){
-				mysqli_query($link, "UPDATE alarms_binance SET type=type+1 WHERE row_num='$row_num'");
-
-			}else{
-				sendMessage($chat_id, "/".$coin." timer alarm".$seted_price);
+			if (!(int)($type%$seted_price)){
+				$coin = $row['coin'];
+				$price = json_decode(file_get_contents("https://api.binance.com/api/v1/ticker/price?symbol=$coin", false, stream_context_create($arrContextOptions)), true)['price'];
+				$new_time = $seted_price*5
+				sendMessage($chat_id, "Timer: /".$coin." ".$price." See you in $new_time minutes");
 			}
+			mysqli_query($link, "UPDATE alarms_binance SET type=type+1 WHERE row_num='$row_num'");
 		}
 
  	}
