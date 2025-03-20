@@ -24,7 +24,7 @@
 		if ($type != 'low' and $type != 'high'){
 			if (!(int)($type%$seted_price)){
 				$coin = $row['coin'];
-				$price = floatval(json_decode(file_get_contents("https://api.binance.com/api/v1/ticker/price?symbol=$coin", false, stream_context_create($arrContextOptions)), true)['price']);
+				$price = floatval($price);
 				$new_time = $seted_price*5;
 				sendMessage($chat_id, "/".$coin." ".$price."
 See you in $new_time minutes");
