@@ -217,7 +217,7 @@ function processMessage($message) {
 
 Upper case and lower case does not matter.
 
-Any bug or suggestion @XavierOrejarena');
+Any bug or suggestion @XavierOrejarena xdxdxd');
     }
     elseif (strtolower($text) == "/coins") {
 //         $Binance = json_decode(file_get_contents("https://api.binance.com//api/v1/exchangeInfo"), true);
