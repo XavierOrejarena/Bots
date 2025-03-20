@@ -217,7 +217,7 @@ function processMessage($message) {
 
 Upper case and lower case does not matter.
 
-Any bug or suggestion @XavierOrejarena xdxdxd');
+Any bug or suggestion @XavierOrejarena');
     }
     elseif (strtolower($text) == "/coins") {
 //         $Binance = json_decode(file_get_contents("https://api.binance.com//api/v1/exchangeInfo"), true);
@@ -286,7 +286,7 @@ If you want to see all your alarms /MYALARMS");
             mysqli_query($link, "INSERT INTO alarms_binance (chat_id, coin, seted_price, type) VALUES ('$chat_id', '$coin', '$seted_price', '$type')");
         }
         else{
-            sendMessage($chat_id, "Error. Follow the example: /alarm BTCUSDT 9150"); 
+            sendMessage($chat_id, "Error. Follow the example: /timer BTCUSDT 60"); 
         }
     }else if (stripos($text, "/BTCUSDT") !== false) {
         $price = json_decode(file_get_contents("https://api.binance.com/api/v1/ticker/price?symbol=BTCUSDT"), true)['price'];
