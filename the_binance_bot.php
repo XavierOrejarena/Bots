@@ -261,6 +261,8 @@ If you want to see all your alarms /MYALARMS");
             foreach ($result as $key => $value) {
                 if (is_numeric(value['type'])){
                     $seted_price = (int)($value['seted_price']*5);
+                } else{
+                    $seted_price = $value['seted_price'];
                 }
                 $array[] =  [['text' => $value['coin'], 'callback_data' => $value['row_num']],
                             ['text' => $seted_price, 'callback_data' => $value['row_num']],
