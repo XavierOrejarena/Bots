@@ -33,7 +33,7 @@
 				mysqli_query($link, "DELETE FROM alarms_binance WHERE row_num ='$row_num'");
 			}
 		}
-		elseif (is_numeric($type)){
+		elseif ($type != 'low' and $type != 'high'){
 			sendMessage($chat_id, "Testing");
 			if ((int)($type%$seted_price)){
 				++$type;

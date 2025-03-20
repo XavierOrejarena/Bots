@@ -259,7 +259,7 @@ If you want to see all your alarms /MYALARMS");
         if (mysqli_fetch_array($result)) {
             $array = [];
             foreach ($result as $key => $value) {
-                if (is_numeric(value['type'])){
+                if ($value['type'] != 'low' and $value['type'] != 'high'){
                     sendMessage($chat_id,"es numerico");
                     $seted_price = (int)($value['seted_price']*5);
                 } else{
