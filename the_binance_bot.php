@@ -260,8 +260,7 @@ If you want to see all your alarms /MYALARMS");
             $array = [];
             foreach ($result as $key => $value) {
                 if ($value['type'] != 'low' and $value['type'] != 'high'){
-                    sendMessage($chat_id,"es numerico");
-                    $seted_price = (int)($value['seted_price']*5);
+                    $seted_price = (int)($value['seted_price']*5).' min';
                 } else{
                     $seted_price = $value['seted_price'];
                 }
