@@ -273,7 +273,7 @@ If you want to see all your alarms /MYALARMS");
        $text = str_word_count($text, 1, "0123456789");
        if (sizeof($text) == 3 ) {
         $coin = strtoupper($text[1]);
-        $seted_price = $text[2];
+        $seted_price = floatval($text[2]);
         $minutes = $seted_price-$seted_price%5;
         $type = 1;
         sendMessage($chat_id, "You will receive a notification every $minutes minutes.
