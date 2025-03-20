@@ -274,7 +274,7 @@ If you want to see all your alarms /MYALARMS");
        if (sizeof($text) == 3 ) {
         $coin = strtoupper($text[1]);
         $seted_price = $text[2];
-        $minutes = $type-$type %5;
+        $minutes = $seted_price-$seted_price%5;
         $type = 1;
         sendMessage($chat_id, "You will receive a notification every $minutes minutes.
 
