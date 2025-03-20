@@ -33,6 +33,14 @@
 				mysqli_query($link, "DELETE FROM alarms_binance WHERE row_num ='$row_num'");
 			}
 		}
+		elseif (is_numeric($type)){
+			if ($type%$seted_price){
+				mysqli_query($link, "UPDATE alarms_binance SET type=++'$type' WHERE row_num='$row_num'");
+
+			}else{
+				sendMessage($chat_id, "/".$coin." timer alarm".$seted_price);
+			}
+		}
 
  	}
 ?>

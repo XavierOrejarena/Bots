@@ -269,7 +269,24 @@ If you want to see all your alarms /MYALARMS");
         else{
             sendMessage($chat_id, 'There are no alarms.');
         }
-    } else if (stripos($text, "/BTCUSDT") !== false) {
+    } elseif (strtolower($text) == "/timer") {
+       $text = str_word_count($text, 1, "0123456789");
+        if (sizeof($text) == 3 ) {
+            $coin = strtoupper($text[1]);
+            $seted_price = $text[2];
+            $minutes = $type-$type %5
+            $type = 1;
+            sendMessage($chat_id, "You will receive a notification every $minutes minutes.
+
+If you want to see all your alarms /MYALARMS");
+            
+            include "connect.php";
+            mysqli_query($link, "INSERT INTO alarms_binance (chat_id, coin, seted_price, type) VALUES ('$chat_id', '$coin', '$seted_price', '$type')");
+        }
+        else{
+            sendMessage($chat_id, "Error. Follow the example: /alarm BTCUSDT 9150"); 
+        }
+    }else if (stripos($text, "/BTCUSDT") !== false) {
         $price = json_decode(file_get_contents("https://api.binance.com/api/v1/ticker/price?symbol=BTCUSDT"), true)['price'];
         $text = "/BTCUSDT ".round($price);
         if ($price > 0) {
