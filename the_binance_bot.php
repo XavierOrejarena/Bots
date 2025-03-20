@@ -270,6 +270,7 @@ If you want to see all your alarms /MYALARMS");
             sendMessage($chat_id, 'There are no alarms.');
         }
     } elseif (strtolower($text) == "/timer") {
+        sendMessage($chat_id, "Timer");
        $text = str_word_count($text, 1, "0123456789");
        if (sizeof($text) == 3 ) {
         $coin = strtoupper($text[1]);
