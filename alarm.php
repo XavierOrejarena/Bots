@@ -21,7 +21,16 @@
 		$row_num = $row['row_num'];
 		$arrContextOptions=array("ssl"=>array("verify_peer"=>false,"verify_peer_name"=>false,),);
 		$price = json_decode(file_get_contents("https://api.binance.com/api/v1/ticker/price?symbol=$coin", false, stream_context_create($arrContextOptions)), true)['price'];
-		if (is_numeric($price)) {
+		if ($type != 'low' and $type != 'high'){
+			if (!(int)($type%$seted_price)){
+				$coin = $row['coin'];
+				$price = floatval(json_decode(file_get_contents("https://api.binance.com/api/v1/ticker/price?symbol=$coin", false, stream_context_create($arrContextOptions)), true)['price']);
+				$new_time = $seted_price*5;
+				sendMessage($chat_id, "/".$coin." ".$price."
+See you in $new_time minutes");
+			}
+			mysqli_query($link, "UPDATE alarms_binance SET type=type+1 WHERE row_num='$row_num'");
+		}elseif (is_numeric($price)) {
 			$seted_price = floatval($seted_price);
 			$price = floatval($price);
 			if ($price >= $seted_price and $type == "high") {
@@ -32,16 +41,6 @@
 				sendMessage($chat_id, "/".$coin." just reached the price of ".$seted_price);
 				mysqli_query($link, "DELETE FROM alarms_binance WHERE row_num ='$row_num'");
 			}
-		}
-		if ($type != 'low' and $type != 'high'){
-			if (!(int)($type%$seted_price)){
-				$coin = $row['coin'];
-				$price = floatval(json_decode(file_get_contents("https://api.binance.com/api/v1/ticker/price?symbol=$coin", false, stream_context_create($arrContextOptions)), true)['price']);
-				$new_time = $seted_price*5;
-				sendMessage($chat_id, "/".$coin." ".$price."
-See you in $new_time minutes");
-			}
-			mysqli_query($link, "UPDATE alarms_binance SET type=type+1 WHERE row_num='$row_num'");
 		}
 
  	}
