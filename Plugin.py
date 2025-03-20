@@ -783,6 +783,9 @@ def handle_chat(t,player,msg):
 		notice("tplord2")
 		notice("tproc1")
 		notice("tproc2")
+		notice("tpred")
+		notice("tpforest")
+		notice("tpb4")
 	if msg == 'stop':
 		partyNumber == 0
 	if comandos:
@@ -914,6 +917,26 @@ def handle_chat(t,player,msg):
 			stop_trace()
 			stop_bot()
 			reverse_return(3, "Göttergarten")
+		elif player == get_character_data()['name'] and msg == 'tpred':
+			stop_trace()
+			stop_bot()
+			for i,x in enumerate(get_inventory()['items']):
+				if x and i > 13:
+					if x['name'] == 'Reverse Reverse Return Scroll':
+						inject_joymax(0x704C, struct.pack('b',i)+b'\xED\x19\x07\x29\x00\x00\x00', False)
+						return
+		elif player == get_character_data()['name'] and msg == 'tpforest':
+			stop_trace()
+			stop_bot()
+			reverse_return(3, "Kummerwald")
+		elif player == get_character_data()['name'] and msg == 'tpb4':
+			stop_trace()
+			stop_bot()
+			for i,x in enumerate(get_inventory()['items']):
+				if x and i > 13:
+					if x['name'] == 'Reverse Reverse Return Scroll':
+						inject_joymax(0x704C, struct.pack('b',i)+b'\xED\x19\x07\x26\x00\x00\x00', False)
+						return
 		elif msg == 'r/' and get_character_data()['name'] != player:
 			for slot, item in enumerate(get_inventory()['items']):
 				if slot > 13 and item:
@@ -1065,29 +1088,36 @@ def handle_joymax(opcode, data):
 	elif opcode == 0x30CF: #Mensajes de eventos
 		if data == b'\x15\x02\x55\x00\x59\x6F\x75\x20\x6D\x75\x73\x74\x20\x63\x6F\x6D\x70\x6C\x65\x74\x65\x20\x74\x68\x65\x20\x63\x61\x70\x74\x63\x68\x61\x20\x76\x65\x72\x69\x66\x63\x61\x74\x69\x6F\x6E\x20\x74\x6F\x20\x70\x72\x6F\x63\x65\x65\x64\x20\x77\x69\x74\x68\x20\x62\x75\x79\x69\x6E\x67\x2F\x73\x65\x6C\x6C\x69\x6E\x67\x20\x74\x72\x61\x64\x65\x20\x67\x6F\x6F\x64\x73\x2E': # Trader Sell
 			deleteClean()
-	elif opcode == 0xB070 and attackWolf: #MOB_ATTACKED
-		pets = get_pets()
-		if pets:
-			for pet, v in pets.items():
-				if v['type'] == 'wolf':
-					victima = struct.unpack_from('<I', data, 15)[0]
-					if victima == get_character_data()['player_id'] or victima == pet:
-						mob = struct.unpack_from('<I', data, 7)[0]
-						if mob not in mobAtacked and get_monsters()[mob]['type'] != 24:
-							mobAtacked.append(mob)
-						tempMob = 0
-						for mob in mobAtacked:
-							mobs = get_monsters()
-							for mobID in mobs:
-								if mobID == mob and mob > tempMob:
-									tempMob = mob
-									break
-							mobAtacked.remove(mob)
-						inject_joymax(0x70C5, struct.pack('i', pet) + b'\x02' + struct.pack('i', tempMob), False)
-						log('Atacando a :' +str(tempMob))
-						log(str(mobAtacked))
-						return True
-		return True
+	elif opcode == 0xB070
+		if len(data) > 3:
+			mobs = get_monsters()
+			for mobID in mobs:
+				if mobs[mobID]['type'] == 24:
+					if struct.unpack_from('I', data, 3)[0] == 12294:
+						azulPerma("Petrificado xD")
+		if attackWolf: #MOB_ATTACKED
+			pets = get_pets()
+			if pets:
+				for pet, v in pets.items():
+					if v['type'] == 'wolf':
+						victima = struct.unpack_from('<I', data, 15)[0]
+						if victima == get_character_data()['player_id'] or victima == pet:
+							mob = struct.unpack_from('<I', data, 7)[0]
+							if mob not in mobAtacked and get_monsters()[mob]['type'] != 24:
+								mobAtacked.append(mob)
+							tempMob = 0
+							for mob in mobAtacked:
+								mobs = get_monsters()
+								for mobID in mobs:
+									if mobID == mob and mob > tempMob:
+										tempMob = mob
+										break
+								mobAtacked.remove(mob)
+							inject_joymax(0x70C5, struct.pack('i', pet) + b'\x02' + struct.pack('i', tempMob), False)
+							log('Atacando a :' +str(tempMob))
+							log(str(mobAtacked))
+							return True
+			return True
 	return True
 
 def sendTelegram(data):
