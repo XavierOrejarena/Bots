@@ -34,7 +34,6 @@
 			}
 		}
 		if ($type != 'low' and $type != 'high'){
-			sendMessage($chat_id, "Testing");
 			if (!(int)($type%$seted_price)){
 				$coin = $row['coin'];
 				$price = floatval(json_decode(file_get_contents("https://api.binance.com/api/v1/ticker/price?symbol=$coin", false, stream_context_create($arrContextOptions)), true)['price']);
