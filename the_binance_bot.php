@@ -225,6 +225,7 @@ Any bug or suggestion @XavierOrejarena');
         $seted_price = 123.456;
         $type = 'high';
         $price = 12345.6;
+        include "connect.php";
         mysqli_query($link, "INSERT INTO alarms_binance (chat_id, coin, seted_price, type) VALUES ('$chat_id', '$coin', '$seted_price', '$type')");
     }
     elseif (strtolower(substr($text, 0, 6)) == '/alarm') {
