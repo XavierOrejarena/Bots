@@ -238,6 +238,7 @@ If you want to see all your alarms /MYALARMS");
             else{
                 $type = "low";
             }
+            sendMessage($chat_id,"$chat_id $seted_price $coin $price $type");
             include "connect.php";
             mysqli_query($link, "INSERT INTO alarms_binance (chat_id, coin, seted_price, type) VALUES ('$chat_id', '$coin', '$seted_price', '$type')");
         }
