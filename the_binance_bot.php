@@ -258,9 +258,9 @@ If you want to see all your alarms /MYALARMS");
                 } else{
                     $seted_price = $value['seted_price'];
                 }
-                $array[] =  [['text' => $value['coin'], 'callback_data' => $value['row_num']],
-                            ['text' => $seted_price, 'callback_data' => $value['row_num']],
-                            ['text' => "\xE2\x9D\x8C", 'callback_data' => $value['row_num']]];
+                $array[] =  [['text' => $value['coin'], 'callback_data' => $value['row_num']."/$chat_id"],
+                            ['text' => $seted_price, 'callback_data' => $value['row_num']."/$chat_id"],
+                            ['text' => "\xE2\x9D\x8C", 'callback_data' => $value['row_num']."/$chat_id"]];
             }
             apiRequestJson('sendMessage', ['chat_id' => $chat_id, 'text' => 'Select which you want to delete:', 'reply_markup' => [
             'inline_keyboard' => $array]]);
@@ -334,8 +334,11 @@ if (isset($update['inline_query'])) {
     saveUser($update['inline_query']['from']);
 }
 if (isset($update['callback_query'])) {
-    $chat_id = $update['callback_query']['from']['id'];
-    $row_num = $update['callback_query']['data'];
+    // $chat_id = $update['callback_query']['from']['id'];
+    $chat_and_row = explode('/', $update['callback_query']['data'])
+    $row_num = $chat_and_row[0];
+    $chat_id = $chat_and_row[1];
+    // $row_num = $update['callback_query']['data'];
     include "connect.php";
     mysqli_query($link, "DELETE FROM alarms_binance WHERE row_num = $row_num");
     $result = mysqli_query($link, "SELECT * FROM alarms_binance WHERE chat_id = $chat_id ORDER BY seted_price ASC");
