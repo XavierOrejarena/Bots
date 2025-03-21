@@ -348,6 +348,11 @@ if (isset($update['callback_query'])) {
     if (mysqli_fetch_array($result)) {
         $array = [];
         foreach ($result as $key => $value) {
+            if ($value['type'] != 'low' and $value['type'] != 'high'){
+                $seted_price = (int)($value['seted_price']*5).' min';
+            } else{
+                $seted_price = $value['seted_price'];
+            }
             $array[] =  [['text' => $value['coin'], 'callback_data' => $value['row_num']],
                         ['text' => $value['seted_price'], 'callback_data' => $value['row_num']],
                         ['text' => "\xE2\x9D\x8C", 'callback_data' => $value['row_num']]];
