@@ -201,8 +201,7 @@ function processQuery($inline_query)
 function processMessage($message) {
     $message_id = $message['message_id'];
     $chat_id = $message['chat']['id'];
-    $text = $message['text'];
-    $text = str_replace("@the_binance_bot", "", $text);
+    $text = str_replace("@the_binance_bot", "", $message['text']);
 
     if(strtolower($text) == "/start") {
     sendMessage($chat_id, "Hello ".$message['from']['first_name'].", to use the bot just type the token you want to know the price, for example: /BTCUSDT");
