@@ -243,7 +243,6 @@ If you want to see all your alarms /MYALARMS");
                 $type = "low";
             }
             include "connect.php";
-            sendMessage($chat_id,"$chat_id $seted_price $coin $price $type");
             mysqli_query($link, "INSERT INTO alarms_binance (chat_id, coin, seted_price, type) VALUES ('$chat_id', '$coin', '$seted_price', '$type')");
         }
         else{
@@ -252,7 +251,6 @@ If you want to see all your alarms /MYALARMS");
 
     }
     elseif (strtolower($text) == "/myalarms") {
-        sendMessage($chat_id,$chat_id);
         include "connect.php";
         $result = mysqli_query($link, "SELECT * FROM alarms_binance WHERE chat_id = $chat_id ORDER BY seted_price ASC");
         if (mysqli_fetch_array($result)) {
