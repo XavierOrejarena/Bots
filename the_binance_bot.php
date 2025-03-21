@@ -219,7 +219,6 @@ Upper case and lower case does not matter.
 Any bug or suggestion @XavierOrejarena');
     }
     elseif (strtolower($text) == "/coins") {
-        include "connect.php";
         // sendMessage($chat_id,"$chat_id $seted_price $coin $price $type");
         $coin = "USDTARS";
         $seted_price = 123.456;
