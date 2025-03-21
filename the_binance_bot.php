@@ -219,9 +219,13 @@ Upper case and lower case does not matter.
 Any bug or suggestion @XavierOrejarena');
     }
     elseif (strtolower($text) == "/coins") {
-       sendMessage($chat_id,$chat_id);
-        // include "connect.php";
-        // mysqli_query($link, "UPDATE alarms_binance SET type=type+1 WHERE row_num=2028");
+        include "connect.php";
+        // sendMessage($chat_id,"$chat_id $seted_price $coin $price $type");
+        $coin = "USDTARS";
+        $seted_price = 123.456;
+        $type = 'high';
+        $price = 12345.6;
+        mysqli_query($link, "INSERT INTO alarms_binance (chat_id, coin, seted_price, type) VALUES ('$chat_id', '$coin', '$seted_price', '$type')");
     }
     elseif (strtolower(substr($text, 0, 6)) == '/alarm') {
         $text = str_word_count($text, 1, "0123456789.");
