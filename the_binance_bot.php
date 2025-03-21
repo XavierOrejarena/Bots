@@ -344,6 +344,7 @@ if (isset($update['inline_query'])) {
 if (isset($update['callback_query'])) {
     // $chat_id = $update['callback_query']['from']['id'];
     $chat_id = $update['callback_query']['chat_instance'];
+    sendMessage($chat_id,'Testinger here');
     $row_num = $update['callback_query']['data'];
     include "connect.php";
     mysqli_query($link, "DELETE FROM alarms_binance WHERE row_num = $row_num");
