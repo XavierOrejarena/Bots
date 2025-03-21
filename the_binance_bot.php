@@ -335,7 +335,7 @@ if (isset($update['inline_query'])) {
 }
 if (isset($update['callback_query'])) {
     // $chat_id = $update['callback_query']['from']['id'];
-    $chat_and_row = explode('/', $update['callback_query']['data'])''
+    $chat_and_row = explode('/', $update['callback_query']['data']);
     $row_num = $chat_and_row[0];
     $chat_id = $chat_and_row[1];
     // $row_num = $update['callback_query']['data'];
