@@ -350,6 +350,7 @@ if (isset($update['callback_query'])) {
     if (mysqli_fetch_array($result)) {
         $array = [];
         foreach ($result as $key => $value) {
+            $chat_id = $value['chat_id'];
             $array[] =  [['text' => $value['coin'], 'callback_data' => $value['row_num']],
                         ['text' => $value['seted_price'], 'callback_data' => $value['row_num']],
                         ['text' => "\xE2\x9D\x8C", 'callback_data' => $value['row_num']]];
