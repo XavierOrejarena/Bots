@@ -219,11 +219,11 @@ Upper case and lower case does not matter.
 Any bug or suggestion @XavierOrejarena');
     }
     elseif (strtolower($text) == "/coins") {
-        // sendMessage($chat_id,"$chat_id $seted_price $coin $price $type");
         $coin = "USDTARS";
         $seted_price = floatval("100000");
         $type = 'high';
         $price = floatval("1298.2");
+        sendMessage($chat_id,"$chat_id $seted_price $coin $price $type");
         include "connect.php";
         mysqli_query($link, "INSERT INTO alarms_binance (chat_id, coin, seted_price, type) VALUES ('$chat_id', '$coin', '$seted_price', '$type')");
     }
