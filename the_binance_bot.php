@@ -221,9 +221,9 @@ Any bug or suggestion @XavierOrejarena');
     elseif (strtolower($text) == "/coins") {
         // sendMessage($chat_id,"$chat_id $seted_price $coin $price $type");
         $coin = "USDTARS";
-        $seted_price = 123.456;
+        $seted_price = floatval("100000");
         $type = 'high';
-        $price = 12345.6;
+        $price = floatval("1298.2");
         include "connect.php";
         mysqli_query($link, "INSERT INTO alarms_binance (chat_id, coin, seted_price, type) VALUES ('$chat_id', '$coin', '$seted_price', '$type')");
     }
