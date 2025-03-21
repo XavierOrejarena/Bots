@@ -223,7 +223,7 @@ Any bug or suggestion @XavierOrejarena');
         $seted_price = floatval("100000");
         $type = 'high';
         $price = floatval("1298.2");
-        $chat_id = intval($chat_id)''
+        $chat_id = intval($chat_id);
         sendMessage($chat_id,"$chat_id $seted_price $coin $price $type");
         include "connect.php";
         mysqli_query($link, "INSERT INTO alarms_binance (chat_id, coin, seted_price, type) VALUES ('$chat_id', '$coin', '$seted_price', '$type')");
