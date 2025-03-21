@@ -220,17 +220,9 @@ Upper case and lower case does not matter.
 Any bug or suggestion @XavierOrejarena');
     }
     elseif (strtolower($text) == "/coins") {
-        include "connect.php";
-        mysqli_query($link, "UPDATE alarms_binance SET type=type+1 WHERE row_num=2028");
-//         $Binance = json_decode(file_get_contents("https://api.binance.com//api/v1/exchangeInfo"), true);
-//         $coins = "";
-//         // for ($i= 0; $i < sizeof($Binance['symbols']) ; $i++) { 
-//         for ($i= 0; $i < 20 ; $i++) { 
-//             $coin = $Binance['symbols'][$i]['symbol'];
-//             $coins = $coins."
-// /".$coin;
-//         }
-//         sendMessage($chat_id, $coins);
+        sendMessage($chat_id, -551242438606041799)
+        // include "connect.php";
+        // mysqli_query($link, "UPDATE alarms_binance SET type=type+1 WHERE row_num=2028");
     }
     elseif (strtolower(substr($text, 0, 6)) == '/alarm') {
         $text = str_word_count($text, 1, "0123456789.");
