@@ -220,7 +220,7 @@ Upper case and lower case does not matter.
 Any bug or suggestion @XavierOrejarena');
     }
     elseif (strtolower($text) == "/coins") {
-        sendMessage('-551242438606041799', "xd");
+        sendMessage(-551242438606041799, "xd");
         // include "connect.php";
         // mysqli_query($link, "UPDATE alarms_binance SET type=type+1 WHERE row_num=2028");
     }
