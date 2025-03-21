@@ -342,7 +342,8 @@ if (isset($update['inline_query'])) {
     saveUser($update['inline_query']['from']);
 }
 if (isset($update['callback_query'])) {
-    $chat_id = $update['callback_query']['from']['id'];
+    // $chat_id = $update['callback_query']['from']['id'];
+    $chat_id = $update['callback_query']['chat_instance']
     $row_num = $update['callback_query']['data'];
     include "connect.php";
     mysqli_query($link, "DELETE FROM alarms_binance WHERE row_num = $row_num");
@@ -350,8 +351,6 @@ if (isset($update['callback_query'])) {
     if (mysqli_fetch_array($result)) {
         $array = [];
         foreach ($result as $key => $value) {
-            sendMessage($chat_id, $value['chat_id']);
-            $chat_id = $value['chat_id'];
             $array[] =  [['text' => $value['coin'], 'callback_data' => $value['row_num']],
                         ['text' => $value['seted_price'], 'callback_data' => $value['row_num']],
                         ['text' => "\xE2\x9D\x8C", 'callback_data' => $value['row_num']]];
