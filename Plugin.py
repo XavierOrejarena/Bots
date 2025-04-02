@@ -251,7 +251,7 @@ QtBind.setChecked(gui, comandosCheck, comandos)
 QtBind.setChecked(gui, spawnCheck, spawn)
 QtBind.setChecked(gui, unionCheck, unionNotify)
 QtBind.setChecked(gui, countCheck, count)
-QtBind.setChecked(gui, dropCheck, dropTelegram)
+QtBind.setChecked(gui, dropTelegramCheck, dropTelegram)
 
 def buscarMerca():
 	global merca
