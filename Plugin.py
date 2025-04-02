@@ -961,6 +961,9 @@ def handle_chat(t,player,msg):
 						log((' '.join('{:02X}'.format(x) for x in data)))
 						inject_joymax(0xA459,data,True)
 						return True
+		elif msg == 'tlp':
+			tlp()
+
 
 def useSpecialReturnScroll():
 	i = 0
@@ -1235,6 +1238,57 @@ def exitBandit():
 for unique in uniqueList:
 	QtBind.append(gui,qtUniqueList,unique)
 
-version = '4.9.3'
+def tlp():
+	inject_joymax(0x705B, bytearray(), False)
+	npcs = get_npcs()
+	for id, npc in npcs.items():
+		log(npc['name'])
+		if npc['name'] == 'Tunnelaufseher Salhap':#Tunel 1
+			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x1E\x00\x00\x00', False)
+		elif npc['name'] == 'Tunnelaufseher Maryokuk':
+			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x1B\x00\x00\x00', False)
+		elif npc['name'] == 'Tunnelaufseher Topni': #Tunel 2
+			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x1D\x00\x00\x00', False)
+		elif npc['name'] == 'Tunnelaufseher Asui':
+			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x1A\x00\x00\x00', False)
+		elif npc['name'] == 'Ferry Ticket Seller Hageuk': #Jangan West
+			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x09\x00\x00\x00', False)
+		elif npc['name'] == 'Ferry Ticket Seller Chau':
+			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x06\x00\x00\x00', False)
+		elif npc['name'] == 'Ferry Ticket Seller Doji': #Jangan East
+			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x04\x00\x00\x00', False)
+		elif npc['name'] == 'Ferry Ticket Seller Tayun':
+			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x03\x00\x00\x00', False)
+		elif npc['name'] == 'Boat Ticket Seller Rahan': #Hotan Ravine
+			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x0E\x00\x00\x00', False)
+		elif npc['name'] == 'Boat Ticket Seller Salmai':
+			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x0C\x00\x00\x00', False)
+		elif npc['name'] == 'Boat Ticket Seller Asa': #Hotan Black Robber
+			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x0D\x00\x00\x00', False)
+		elif npc['name'] == 'Boat Ticket Seller Asimo':
+			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x0F\x00\x00\x00', False)
+		elif npc['name'] == 'Flugkartenverkäuferin Shard': #Ivy
+			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x1F\x00\x00\x00', False)
+		elif npc['name'] == 'Flugkartenverkäuferin Sangnia':
+			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x18\x00\x00\x00', False)
+		elif npc['name'] == 'Harbor Manager Marwa' or npc['name'] == 'Pirate Morgun': #Alexandria
+			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x15\x00\x00\x00', False)
+		elif npc['name'] == 'Harbor Manager Gale': #Dock
+			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x16\x00\x00\x00', False)
+		elif npc['name'] == 'Pirate Blackbeard': #Sigia
+			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x15\x00\x00\x00', False)
+		elif npc['name'] == 'Grab des Kaisers Qin-Shi Lv.4': #Medusa
+			data = struct.pack('h',id)+b'\x00\x00\x03\x00'
+			log((' '.join('{:02X}'.format(x) for x in data)))
+			inject_joymax(0x705A, data, False)
+		elif npc['name'] == 'Dimensionslücke':
+			#54 FF 4D 05 03 00
+			data = struct.pack('I',id)+b'\x03\x00'
+			log((' '.join('{:02X}'.format(x) for x in data)))
+			inject_joymax(0x705A, data, False)
+
+
+
+version = '4.0.0'
 ver = QtBind.createLabel(gui,'v'+version,690,300)
 log('[Super Plugin v'+version+' by Rahim]')
