@@ -24,6 +24,7 @@ idTelegram = ''
 unionNotify = False
 alertar_hunter = False
 count = False
+dropTelegram = False
 
 def loadConfig():
 	global partyAlert
@@ -40,6 +41,7 @@ def loadConfig():
 	global unionNotify
 	global alertar_hunter
 	global count
+	global dropTelegram
 	if os.path.isfile('sample.json'):
 		with open('sample.json', 'r') as openfile:
 			json_object = json.load(openfile)
@@ -60,6 +62,8 @@ def loadConfig():
 				unionNotify = json_object['unionNotify']
 			if 'alertar_hunter' in json_object:
 				alertar_hunter = json_object['alertar_hunter']
+			if 'dropTelegram' in json_object:
+				dropTelegram = json_object['dropTelegram']
 			QtBind.createLineEdit(gui,idTelegram,650,276,70,20)
 
 loadConfig()
@@ -80,6 +84,7 @@ def saveConfig():
 	global unionNotify
 	global alertar_hunter
 	global count
+	global dropTelegram
 	# Data to be written
 	dictionary = {
 	    'partyAlert': partyAlert,
@@ -96,6 +101,7 @@ def saveConfig():
 		'unionNotify': unionNotify,
 		'alertar_hunter': alertar_hunter,
 		'count': count,
+		'dropTelegram': dropTelegram
 	}
 
 	# Serializing json
@@ -173,6 +179,7 @@ countCheck = QtBind.createCheckBox(gui,'checkCount','Auto Count',10,230)
 TelegramID = QtBind.createLineEdit(gui,idTelegram,650,276,70,20)
 TelegramBot = QtBind.createLineEdit(gui,"https://t.me/The_Silkroad_bot",20,276,160,20)
 TelegramLabel = QtBind.createLabel(gui,'Telegram ID:',587,280)
+dropTelegramCheck = QtBind.createCheckBox(gui,'dropCheck','Drop Telegram',10,250)
 
 lstOpcodes = QtBind.createList(gui,621,30,100,80)
 btnRemOpcode = QtBind.createButton(gui,'removeIgnore',"     GO & BOT     ",635,113)
@@ -244,6 +251,7 @@ QtBind.setChecked(gui, comandosCheck, comandos)
 QtBind.setChecked(gui, spawnCheck, spawn)
 QtBind.setChecked(gui, unionCheck, unionNotify)
 QtBind.setChecked(gui, countCheck, count)
+QtBind.setChecked(gui, dropCheck, dropTelegram)
 
 def buscarMerca():
 	global merca
@@ -360,6 +368,11 @@ def checkCount(checked):
 	count = checked
 	saveConfig()
 
+def checkCount(checked):
+	global dropTelegram
+	dropTelegram = checked
+	saveConfig()
+
 def llenarLista():
 	QtBind.clear(gui,lstOpcodes)
 	Party = get_party()
@@ -395,6 +408,7 @@ def handle_event(t, data):
 	global perma_trace
 	global pmList
 	global bolnotify
+	global dropTelegram
 	if t == 0:
 		bolnotify = True
 		notice(data)
@@ -475,6 +489,8 @@ def handle_event(t, data):
 				Desconectar()
 				while True:
 					os.kill(os.getpid(), 9)
+	elif t == 5 and dropTelegram:
+		threading.Thread(target=sendTelegram, args=['*'+get_character_data()['name'] + '* -> `'+get_item(int(data))['name']+'`'],).start()
 
 def startUnique():
 	log('el bot iniciara en 1 segundo')
