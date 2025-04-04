@@ -179,7 +179,7 @@ countCheck = QtBind.createCheckBox(gui,'checkCount','Auto Count',10,230)
 TelegramID = QtBind.createLineEdit(gui,idTelegram,650,276,70,20)
 TelegramBot = QtBind.createLineEdit(gui,"https://t.me/The_Silkroad_bot",20,276,160,20)
 TelegramLabel = QtBind.createLabel(gui,'Telegram ID:',587,280)
-dropTelegramCheck = QtBind.createCheckBox(gui,'dropCheck','Drop Telegram',10,250)
+dropTelegramCheck = QtBind.createCheckBox(gui,'checkDrop','Drop Telegram',10,250)
 
 lstOpcodes = QtBind.createList(gui,621,30,100,80)
 btnRemOpcode = QtBind.createButton(gui,'removeIgnore',"     GO & BOT     ",635,113)
@@ -368,7 +368,7 @@ def checkCount(checked):
 	count = checked
 	saveConfig()
 
-def checkCount(checked):
+def checkDrop(checked):
 	global dropTelegram
 	dropTelegram = checked
 	saveConfig()
@@ -489,8 +489,10 @@ def handle_event(t, data):
 				Desconectar()
 				while True:
 					os.kill(os.getpid(), 9)
-	elif t == 5 and dropTelegram:
-		threading.Thread(target=sendTelegram, args=['*'+get_character_data()['name'] + '* -> `'+get_item(int(data))['name']+'`'],).start()
+	elif t == 5:
+		log('xd')
+		if dropTelegram:
+			threading.Thread(target=sendTelegram, args=['*'+get_character_data()['name'] + '* -> `'+get_item(int(data))['name']+'`'],).start()
 
 def startUnique():
 	log('el bot iniciara en 1 segundo')
@@ -1151,7 +1153,7 @@ def handle_joymax(opcode, data):
 
 def sendTelegram(data):
 	global idTelegram
-	url = 'https://api.telegram.org/bot6863881576:AAFjOYMaXdH_K_OBUnuDGaKNfJFkOQfoMgc/sendMessage?chat_id='+idTelegram+'&parse_mode=Markdown&text='
+	url = 'https://api.telegram.org/bot6863881576:AAGne-zey5r0DF-nAQr0XrslGrhb0lSaKFU/sendMessage?chat_id='+idTelegram+'&parse_mode=Markdown&text='
 	if '_' in data:
 		url = 'https://api.telegram.org/bot6863881576:AAFjOYMaXdH_K_OBUnuDGaKNfJFkOQfoMgc/sendMessage?chat_id='+idTelegram+'&text='
 	url = url + urllib.parse.quote(data)
