@@ -1023,6 +1023,7 @@ def handle_joymax(opcode, data):
 	global uniqueList
 	global alarma
 	global unionNotify
+	global dropTelegram
 	if opcode == 0x3040 and len(data) == 23:
 		verdemini(get_item(struct.unpack_from('i', data, 7)[0])['name']+' [Rahim]')
 		return True
@@ -1054,12 +1055,15 @@ def handle_joymax(opcode, data):
 					azulPerma('['+itemName +'] gained.')
 					break
 			if itemID['rare']:
-				azulPerma('['+itemName +'] gained.')
+				msg = '['+itemName +'] gained.'
+				azulPerma(msg)
+				if dropTelegram:
+					sendTelegram(msg)
 			if unionNotify:
 				for item in otrosItems:
 					if item == itemName:
 						Union('['+itemName+'] gained')
-		if dropType == 1537:#1537
+		if dropType == 1537:
 			itemID = get_item(struct.unpack_from('I', data, 7)[0])
 			itemName = itemID['name']
 			if 'Poro' in itemID['name']:
@@ -1069,7 +1073,10 @@ def handle_joymax(opcode, data):
 					azulPerma('['+itemName +'] gained.')
 					break
 			if itemID['rare']:
-				azulPerma('['+itemName +'] gained.')
+				msg = '['+itemName +'] gained.'
+				azulPerma(msg)
+				if dropTelegram:
+					sendTelegram(msg)
 			if unionNotify:
 				log('union yes')
 				for item in otrosItems:
@@ -1088,7 +1095,10 @@ def handle_joymax(opcode, data):
 				# phBotChat.Party('item ['+itemName +']is distributed to ['+ playerName+']')
 				break
 		if get_item(struct.unpack_from('<I', data, 4)[0])['rare']:
-			azulPerma('['+itemName +']is distributed to ['+ playerName+']')
+			msg = '['+itemName +']is distributed to ['+ playerName+']'
+			azulPerma(msg)
+			if dropTelegram:
+				sendTelegram(msg)
 		if unionNotify:
 			for item in otrosItems:
 				if item == itemName:
