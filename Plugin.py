@@ -142,7 +142,7 @@ pm_hunter = False
 bol = True
 ignore = ['Rahim']
 
-if get_character_data()['name'] in WhiteList:
+if get_character_data()['name'] in WhiteList and False:
 	gui2 = QtBind.init(__name__,'Job Expert')
 	buscarMercabtn = QtBind.createButton(gui2,'buscarMerca','buscarMerca',150,10)
 	cbxSro3 = QtBind.createCheckBox(gui2,'cbxSro_clicked3','Thief Activate',10,150)
@@ -424,7 +424,7 @@ def handle_event(t, data):
 			Timer(2,goUnique).start()
 		if startBotUnique:
 			Timer(2,startUnique).start()
-	if get_character_data()['name'] in WhiteList:
+	if get_character_data()['name'] in WhiteList and False:
 		if t == 1 and data not in QtBind.getItems(gui2,lstOpcodes) and data not in ignore:
 			log('[HUNTER] '+data)
 			if alertar_hunter:
@@ -1050,6 +1050,8 @@ def handle_joymax(opcode, data):
 		if dropType == 4353 or dropType == 7169:
 			itemID = get_item(struct.unpack_from('I', data, 11)[0])
 			itemName = itemID['name']
+			if struct.unpack_from('I', data, 11)[0] > 33892 and struct.unpack_from('I', data, 11)[0] < 33901:
+				red('item ['+itemName +'] gained. By Rahim xD')
 			if 'Poro' in itemID['name']:
 				itemName = 'Poro Balloon'
 			for item in itemListAzul:
@@ -1068,6 +1070,8 @@ def handle_joymax(opcode, data):
 		if dropType == 1537:
 			itemID = get_item(struct.unpack_from('I', data, 7)[0])
 			itemName = itemID['name']
+			if struct.unpack_from('I', data, 7)[0] > 33892 and struct.unpack_from('I', data, 7)[0] < 33901:
+				red('item ['+itemName +'] gained. By Rahim xD')
 			if 'Poro' in itemID['name']:
 				itemName = 'Poro Balloon'
 			for item in itemListAzul:
@@ -1089,6 +1093,8 @@ def handle_joymax(opcode, data):
 	elif opcode == 0x3068: #party item droped distributed
 		itemName = get_item(struct.unpack_from('<I', data, 4)[0])['name']
 		playerName = get_party()[struct.unpack_from('<I', data, 0)[0]]['name']
+		if struct.unpack_from('<I', data, 4)[0] > 33892 and struct.unpack_from('<I', data, 4)[0] < 33901:
+			red('item ['+itemName +']is distributed to ['+ playerName+']'+' By Rahim xD')
 		if 'Poro' in itemName:
 			itemName = 'Poro Balloon'
 		for item in itemListAzul:
