@@ -5,6 +5,14 @@ version = '0.1.0'
  
 white_list = ['Space']
 
+def Dismount():
+	pets = get_pets()
+	for k, v in pets.items():
+		if v['mounted']:
+			log('Dismounting')
+			inject_joymax(0x70CB, b'\x00'+struct.pack('I', k), False)
+			return True
+			
 def handle_chat(t,player,msg):
 	if is_whitelisted():
 		if msg == 'tlp':
@@ -49,12 +57,5 @@ def green(message):
 	data += b'\x00\xFF\x00\xFF\xF1\x2C\x30\x01\x00'
 	inject_silkroad(0x30CF,data,False)
 
-def Dismount():
-	pets = get_pets()
-	for k, v in pets.items():
-		if v['mounted']:
-			log('Dismounting')
-			inject_joymax(0x70CB, b'\x00'+struct.pack('I', k), False)
-			return True
-			
+
 log(f'[FGW Plugin v{version} by Rahim]')
