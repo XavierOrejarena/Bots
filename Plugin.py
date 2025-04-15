@@ -1,4 +1,5 @@
 from phBot import *
+import struct
 
 log('Ahora el plugin by Rahim es privado... Incluye auto FGW por 10k')
 version = '0.1.0'
@@ -12,7 +13,7 @@ def Dismount():
 			log('Dismounting')
 			inject_joymax(0x70CB, b'\x00'+struct.pack('I', k), False)
 			return True
-			
+
 def handle_chat(t,player,msg):
 	if is_whitelisted():
 		if msg == 'tlp':
