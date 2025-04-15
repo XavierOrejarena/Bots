@@ -9,6 +9,8 @@ def handle_chat(t,player,msg):
 	if is_whitelisted():
 		if msg == 'tlp':
 			tlp()
+			if get_character_data()['name'] == player:
+				green('Teleported by Rahim.')
 
 def tlp():
 	npcs = get_npcs()
@@ -33,5 +35,18 @@ def is_whitelisted():
 		if get_character_data()['name'] in white_list:
 			return True
 	return False
+
+def green(message):
+	name = 'Rahim'
+	data = b'\x42'+struct.pack('H', len(name))
+	for word in name:
+		data += word.encode('ascii')
+		data += b'\x00'
+	data += struct.pack('H', len(message))
+	for word in message:
+		data += word.encode('ascii')
+		data += b'\x00'
+	data += b'\x00\xFF\x00\xFF\xF1\x2C\x30\x01\x00'
+	inject_silkroad(0x30CF,data,False)
 
 log(f'[FGW Plugin v{version} by Rahim]')
