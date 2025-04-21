@@ -26,7 +26,7 @@ alertar_hunter = False
 count = False
 dropTelegram = False
 VIP = False
-white_list = ['Hamtay','AIICaps','Auron','AllCaps','Dalton','Hamtay','Kalimyst','KaIimyst','Hamtay','THE_BARD','THE_BARD1','THE_CHINITO','TH3_WIZARD','THE_WIZARD','THE_CLERIK','THE_MAST3R','THE_WARRIOR']
+white_list = ['Ross','Asterith','27CM','KLR','Space','SpaceJis','Grego','Suarez','Hamtay','AIICaps','Auron','AllCaps','Dalton','Hamtay','Kalimyst','KaIimyst','Hamtay','THE_BARD','THE_BARD1','THE_CHINITO','TH3_WIZARD','THE_WIZARD','THE_CLERIK','THE_MAST3R','THE_WARRIOR']
 
 def loadConfig():
 	global partyAlert
