@@ -23,7 +23,7 @@ tiempo = [actual,time.time()]
 start = False
 n = 20
 R = 35
-lideres = ['Seven','Zoser','Norte','dcarnage']
+lideres = ['Seven','Zoser','Norte','dCarnage']
 for lider in lideres:
 	if get_character_data()['name'] == lider:
 		break
