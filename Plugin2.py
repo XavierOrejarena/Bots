@@ -23,7 +23,7 @@ tiempo = [actual,time.time()]
 start = False
 n = 20
 R = 35
-lideres = ['Seven','Zoser','Norte']
+lideres = ['Seven','Zoser','Norte','dcarnage']
 for lider in lideres:
 	if get_character_data()['name'] == lider:
 		break
@@ -182,7 +182,7 @@ def handle_chat(t,player,msg):
 					log('Dismounted')
 				else:
 					return()
-	elif msg == 'update!':
+	elif msg == 'update!' and get_character_data()['name'] == player:
 		name1 = 'Script'
 		name2 = 'Yuno'
 		name3 = 'Jupiter'
@@ -201,6 +201,7 @@ def handle_chat(t,player,msg):
 	elif msg == 'file':
 		log(filename)
 	elif msg == 'spawn':
+		lider = player
 		goUnique = True
 		mob_killed = 0
 		filename = 'Script.txt'
@@ -603,7 +604,7 @@ def descargar_txt(name):
         log(f"Archivo guardado como: {name}.txt")
     except Exception as e:
         log(f"Error al descargar el archivo: {e}")
-        
+
 version = '1.0.0'
 ver = QtBind.createLabel(guiDimen,'v'+version,690,300)
 log(f'[Expert FGW v{version}] by Rahim]')
