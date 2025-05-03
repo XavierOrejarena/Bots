@@ -586,3 +586,8 @@ def green(message):
 		data += b'\x00'
 	data += b'\x00\xFF\x00\xFF\xF1\x2C\x30\x01\x00'
 	inject_silkroad(0x30CF,data,False)
+
+
+version = '1.0.0'
+ver = QtBind.createLabel(gui,'v'+version,690,300)
+log(f'[Expert FGW v{version}] by Rahim]')
