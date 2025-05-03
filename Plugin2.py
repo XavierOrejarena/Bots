@@ -408,6 +408,11 @@ def handle_joymax(opcode, data):
 				# mob_name = get_monsters()[mobID]['name']
 				# UNIQUES = ['The Earth','Yuno','Jupiter']
 				# if mob_name in UNIQUES:
+	elif opcode == 0x751A:
+		packet = data[:4] # Request ID
+		packet += b'\x00\x00\x00\x00' # unknown ID
+		packet += b'\x01' # Accept flag
+		inject_joymax(0x751C,packet,False)
 	elif opcode == 0x300C:
 		if data == YUNO_SPAWNED:
 			azulPerma('Salio Yuno')
