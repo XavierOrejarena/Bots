@@ -589,5 +589,5 @@ def green(message):
 
 
 version = '1.0.0'
-ver = QtBind.createLabel(gui,'v'+version,690,300)
+ver = QtBind.createLabel(guiDimen,'v'+version,690,300)
 log(f'[Expert FGW v{version}] by Rahim]')
