@@ -182,9 +182,19 @@ def handle_chat(t,player,msg):
 					log('Dismounted')
 				else:
 					return()
-	elif msg.isnumeric():
-		R = msg
-		red(f'R ahora es {R}')
+	elif msg == 'update!':
+		name1 = 'Script'
+		name2 = 'Yuno'
+		name3 = 'Jupiter'
+		name4 = 'Salir'
+
+		descargar_txt(name1)
+		descargar_txt(name2)
+		descargar_txt(name3)
+		descargar_txt(name4)
+	# elif msg.isnumeric():
+	# 	R = msg
+	# 	red(f'R ahora es {R}')
 	elif msg == 'talk'and is_master():
 		phBotChat.Party('~'+str(is_master()))
 		talk_npc()
@@ -587,7 +597,13 @@ def green(message):
 	data += b'\x00\xFF\x00\xFF\xF1\x2C\x30\x01\x00'
 	inject_silkroad(0x30CF,data,False)
 
-
+def descargar_txt(name):
+    try:
+        urllib.request.urlretrieve(f'https://raw.githubusercontent.com/RahimSRO/Serapis/865db4031ef9007b7546cdca62b7ea630a61f7b6/{name}.txt', f'{name}.txt')
+        log(f"Archivo guardado como: {name}.txt")
+    except Exception as e:
+        log(f"Error al descargar el archivo: {e}")
+        
 version = '1.0.0'
 ver = QtBind.createLabel(guiDimen,'v'+version,690,300)
 log(f'[Expert FGW v{version}] by Rahim]')
