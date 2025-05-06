@@ -7,9 +7,11 @@ import urllib.request
 import ssl
 import time
 import math
+from urllib.request import urlopen
+import threading
 
 guiDimen = QtBind.init(__name__,'Dimen')
-
+token = urlopen('https://raw.githubusercontent.com/RahimSRO/Serapis/refs/heads/main/test.txt').read().decode("utf-8")[:-1]
 setProfile_Btn = QtBind.createButton(guiDimen,'spawn_dimension','Spawn Dimen',20,20)
 talk_npc_Btn = QtBind.createButton(guiDimen,'talk_npc','Talk to NPC',20,50)
 call_one_Btn = QtBind.createButton(guiDimen,'call_one_for_one','Call One For One',20,80)
@@ -41,11 +43,7 @@ CUARTA_PUERTA_K247 = bytes.fromhex('1C 0C 01 16 00 55 49 49 54 5F 53 54 54 5F 4A
 QUINTA_PUERTA_K357 = bytes.fromhex('1C 0C 01 16 00 55 49 49 54 5F 53 54 54 5F 4A 55 50 49 54 45 52 5F 41 5F 30 30 35')
 SEXTA_PUERTA_K380 = bytes.fromhex('1C 0C 01 16 00 55 49 49 54 5F 53 54 54 5F 4A 55 50 49 54 45 52 5F 41 5F 30 30 35')
 TERCERA_PUERTA_K247 = bytes.fromhex('1C 0C 01 16 00 55 49 49 54 5F 53 54 54 5F 4A 55 50 49 54 45 52 5F 41 5F 30 30 34')
-
-# data = bytes.fromhex('16 EF FA 06 89 A1 06 10 00 00 00 00 C2 52 18 00 00 00 00 00 00')
-# data = bytes.fromhex('9D 99 FA 06 89 A1 06 10 00 00 00 00 C2 52 18 00 00 00 00 00 00')
-# log(str(struct.unpack_from('I',data,4)[0]))#268870025
-
+JUPITER_ID = False
 
 def start_stop():
 	global start
@@ -76,9 +74,10 @@ def teleported():
 		stop_trace()
 		if is_master():
 			log('Soy master')
-			urllib.request.urlopen('https://api.telegram.org/bot6863881576:AAHQ34H1cMzGz8XsNf5SqiCkY2wQ-dpBBG4/sendMessage?chat_id=149273661&parse_mode=Markdown&text=Dimension%20%20`'+get_character_data()['name']+'`',context=ssl._create_unverified_context())
 			phBotChat.Party('~'+str(is_master()))
 			Timer(1,move_to_npc,[19480,6425]).start()
+			threading.Thread(target=sendTelegram, args=['Dimension   `'+get_character_data()['name']+'`']).start()
+			# sendTelegram('Dimension   `'+get_character_data()['name']+'`')
 		else:
 			go_to_buff(32236,19480,6425,839)
 			if get_character_data()['name'] == lider and murio_tierra:
@@ -187,11 +186,13 @@ def handle_chat(t,player,msg):
 		name2 = 'Yuno'
 		name3 = 'Jupiter'
 		name4 = 'Salir'
+		name5 = 'test'
 
 		descargar_txt(name1)
 		descargar_txt(name2)
 		descargar_txt(name3)
 		descargar_txt(name4)
+		descargar_txt(name5)
 	# elif msg.isnumeric():
 	# 	R = msg
 	# 	red(f'R ahora es {R}')
@@ -310,6 +311,10 @@ def event_loop():
 						log(poss[1])
 						phBotChat.Private(Party[memberID]['name'],poss[1])
 						break
+			elif poss[0] == '/party':
+				phBotChat.Party(poss[1])
+			elif poss[0] == '/start':
+				start_bot()
 			actual +=1
 			tiempo[0] = actual
 			tiempo[1] = time.time()
@@ -320,7 +325,7 @@ def event_loop():
 		set_training_position(0,x1,y1,0)
 		# log(f"moving to: {str(x1)},{str(y1)}")
 		dis = ((x2-x1)**2+(y2-y1)**2)**1/2
-		if dis < 2 and no_hay_mobs():
+		if dis < 2 and no_hay_mobs() and todos_cerca():
 			actual +=1
 			tiempo[0] = actual
 			tiempo[1] = time.time()
@@ -332,6 +337,20 @@ def event_loop():
 		if tiempo[0] != actual:
 			tiempo[0] = actual
 			tiempo[1] = time.time()
+
+def todos_cerca():
+	Party = get_party()
+	if Party:
+		for memberID in Party:
+			x1 = Party[memberID]['x']
+			y1 = Party[memberID]['y']
+			x2 = get_position()['x']
+			y2 = get_position()['y']
+			dis = (((x2-x1)**2+(y2-y1)**2)**1/2)
+			if dis > 2:
+				return False
+	return True
+
 
 
 def leer_linea_n(archivo="Script.txt", numero_linea=1):
@@ -383,22 +402,20 @@ def go_to_buff(region,x,y,z):
 	Timer(0.2,go_to_buff,[region, x, y, z]).start()
 	log(str(dis))
 
-# data = bytes.fromhex('9B F8 61 00 54 FE C9 10 00 00 00 00 70 7B 19 00 00 00 00 00 00')
-# log(str(struct.unpack_from('I',data,4)[0]))
-
-
 def handle_joymax(opcode, data):
 	global tiempo
 	global lider
 	global filename
 	global mob_killed
 	global actual
+	global JUPITER_ID
 	if opcode == 0x3056:
 		tiempo[1] = time.time()
 		if get_zone_name(get_character_data()['region']) == 'Anbetungshalle':
 			mob_killed +=1
 			log(f'Mobs: {mob_killed}')
-			if struct.unpack_from('I',data,4)[0] == 281673300 and get_character_data()['name'] == lider:#268870025
+			# if struct.unpack_from('I',data,4)[0] == 281673300 and get_character_data()['name'] == lider:#268870025
+			if struct.unpack_from('I',data,0)[0] == JUPITER_ID and get_character_data()['name'] == lider:
 				red(f'Murio Jupiter')
 				log(f'Murio Jupiter')
 				Timer(5,exitFGW).start()
@@ -409,10 +426,7 @@ def handle_joymax(opcode, data):
 				# UNIQUES = ['The Earth','Yuno','Jupiter']
 				# if mob_name in UNIQUES:
 	elif opcode == 0x751A:
-		packet = data[:4] # Request ID
-		packet += b'\x00\x00\x00\x00' # unknown ID
-		packet += b'\x01' # Accept flag
-		inject_joymax(0x751C,packet,False)
+		inject_joymax(0x751C,data[:4]+b'\x00\x00\x00\x00\x01',False) #accept FGW request
 	elif opcode == 0x300C:
 		if data == YUNO_SPAWNED:
 			azulPerma('Salio Yuno')
@@ -465,9 +479,10 @@ def handle_joymax(opcode, data):
 	return True
 
 def sendTelegram(data='quest'):
+	global token
 	if data[0] == 'sendTelegram':
 		data = 'quest'
-	url = 'https://api.telegram.org/bot6863881576:AAHQ34H1cMzGz8XsNf5SqiCkY2wQ-dpBBG4/sendMessage?chat_id=149273661&parse_mode=Markdown&text='
+	url = f'https://api.telegram.org/bot{token}/sendMessage?chat_id=149273661&parse_mode=Markdown&text='
 	url = url + urllib.parse.quote(data)
 	urllib.request.urlopen(url,context=ssl._create_unverified_context())
 	return True
@@ -501,6 +516,21 @@ def red(message):
 	data += b'\x00\x00\xFF\xFF\xEC\xEB\x10\x01\x00'
 	inject_silkroad(0x30CF,data,False)
 
+def get_jupiter_id():
+	log('get_jupiter_id')
+	global JUPITER_ID
+	if not JUPITER_ID:
+		mobs = get_monsters()
+		if mobs:
+			for mobID in mobs:
+				if mobs[mobID]['type'] == 24:
+					JUPITER_ID =  mobID
+	else:
+		log(str(JUPITER_ID))
+		return
+	Timer(1,get_jupiter_id).start()
+
+
 def handle_event(t, data):
 	global start
 	global lider
@@ -509,6 +539,8 @@ def handle_event(t, data):
 		green(f'Unique: {data}')
 		if get_character_data()['name'] == lider:
 			Timer(0.5,goJupiter).start()
+		if data == 'Jupiter':
+			get_jupiter_id()
 
 def goJupiter():
 	global goUnique
@@ -605,7 +637,7 @@ def green(message):
 
 def descargar_txt(name):
     try:
-        urllib.request.urlretrieve(f'https://raw.githubusercontent.com/RahimSRO/Serapis/865db4031ef9007b7546cdca62b7ea630a61f7b6/{name}.txt', f'{name}.txt')
+        urllib.request.urlretrieve(f'https://raw.githubusercontent.com/RahimSRO/Serapis/refs/heads/main/{name}.txt', f'{name}.txt')
         log(f"Archivo guardado como: {name}.txt")
     except Exception as e:
         log(f"Error al descargar el archivo: {e}")
@@ -613,3 +645,19 @@ def descargar_txt(name):
 version = '1.0.0'
 ver = QtBind.createLabel(guiDimen,'v'+version,690,300)
 log(f'[Expert FGW v{version}] by Rahim]')
+
+# data = bytes.fromhex('16 EF FA 06 89 A1 06 10 00 00 00 00 C2 52 18 00 00 00 00 00 00')
+# data = bytes.fromhex('9D 99 FA 06 89 A1 06 10 00 00 00 00 C2 52 18 00 00 00 00 00 00')
+# log(str(struct.unpack_from('I',data,4)[0]))#268870025
+
+# data = bytes.fromhex('9B F8 61 00 54 FE C9 10 00 00 00 00 70 7B 19 00 00 00 00 00 00')
+# log(str(struct.unpack_from('I',data,4)[0]))
+
+
+# f = open("test.txt")
+# token = f.read()[:-1]
+# log(token)
+
+# token = leer_linea_n('test.txt')
+
+# sendTelegram('Dimension`     '+get_character_data()['name']+'`')
