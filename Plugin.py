@@ -920,11 +920,18 @@ def handle_chat(t,player,msg):
 				log(get_config_dir().replace('Config','Scripts')+msg[2:]+'.txt')
 				set_training_script(get_config_dir().replace('Config','Scripts')+msg[2:]+'.txt')
 				start_bot()
-			elif msg.lower() == 'here' and get_character_data()['name'] == player:
+			elif msg.lower() == 'here':
+				log('dijo here en all')
 				stop_bot()
 				stop_trace()
 				set_training_position(0, get_character_data()['x'], get_character_data()['y'], 0)
 				start_bot()
+			elif (t == 4 or t == 2) and msg.lower() == 'coo' and (char['name'] == player or char['job_name'] == player):
+				log('dijo coo en party')
+				region = str(get_position()['region'])
+				x = str(int(get_position()['x']))
+				y = str(int(get_position()['y']))
+				phBotChat.Party(region+','+x+','+y)
 			elif (t == 1 or t == 2 or t == 4) and msg[0] == 'r' and msg[1:].isnumeric() and len(msg[1:]) < 4:
 				r = float(msg[1:len(msg)])
 				set_training_radius(r)
@@ -940,8 +947,8 @@ def handle_chat(t,player,msg):
 					morado('Wolf desactivado')
 			elif msg == 'set' and get_character_data()['name'] == player:
 				set_training_position(0, get_character_data()['x'], get_character_data()['y'], 0)
-			elif t == 4 and ',' in msg and msg.replace(',','').replace('-','').isnumeric():
-				log('Coordenadas')
+			elif (t == 4 or t == 2 or t == 1) and ',' in msg and msg.replace(',','').replace('-','').isnumeric():
+				log('aca hay comas')
 				stop_trace()
 				stop_bot()
 				set_training_script('')
