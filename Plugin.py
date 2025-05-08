@@ -933,7 +933,7 @@ def handle_chat(t,player,msg):
 				if get_training_area()['radius'] == 0:
 					set_training_radius(20)
 				start_bot()
-			elif get_character_data()['name'] == player and msg[:2] == ':>':
+			elif (get_character_data()['name'] or t == 4) == player and msg[:2] == ':>':
 				log('Cambiando a perfil -> '+msg[2:])
 				set_profile(msg[2:])
 			elif player == get_character_data()['name'] and msg == 'tomb':
@@ -1532,6 +1532,6 @@ def tlp():
 
 
 
-version = '4.1.2'
+version = '4.1.3'
 ver = QtBind.createLabel(gui,f'v{version}',690,300)
 log(f'[Super Plugin v{version} by Rahim]')
