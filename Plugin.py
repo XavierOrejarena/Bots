@@ -1248,8 +1248,8 @@ def handle_joymax(opcode, data):
 					phBotChat.Party('true')
 					phBotChat.Party('zerc')
 					start_no_drop()
-				elif 'UIIT_STT_JUPITER_A_' in str(data):
-					azulPerma(f'Puerta: {str(data)[-4:-1]}')
+			elif 'UIIT_STT_JUPITER_A_' in str(data):
+				azulPerma(f'Puerta: {str(data)[-4:-1]}')
 			uniqueName = get_monster(struct.unpack_from('<I', data, 2)[0])['name']
 			log(uniqueName)
 			for unique in uniqueList:
