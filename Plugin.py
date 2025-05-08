@@ -874,6 +874,9 @@ def handle_chat(t,player,msg):
 					notice(word)
 					partyNumber = int(word)
 					break
+		if msg.isnumeric():
+			notice(msg)
+			partyNumber = int(msg)
 		elif msg[0] == '~' and t == 4 and msg[1:].isnumeric():
 			Party = get_party()
 			if Party:
