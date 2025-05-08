@@ -510,10 +510,11 @@ def startUnique():
 
 def Dismount():
 	pets = get_pets()
-	for k, v in pets.items():
-		if v['mounted']:
-			inject_joymax(0x70CB, b'\x00'+struct.pack('I', k), False)
-			return True
+	if pets:
+		for k, v in pets.items():
+			if v['mounted']:
+				inject_joymax(0x70CB, b'\x00'+struct.pack('I', k), False)
+				return True
 	return True
 
 def DismountHorse():
