@@ -1236,7 +1236,7 @@ def handle_joymax(opcode, data):
 					if item == itemName:
 						Union('['+itemName +']is distributed to ['+ playerName+']')
 			Timer(12,rahim).start()
-		elif opcode == 0x300C and data[0] == 5: # Unique Spawn
+		elif opcode == 0x300C: # Unique Spawn
 			if data == YUNO_SPAWNED:
 				azulPerma('Yuno spawned')
 				earth()
@@ -1250,15 +1250,16 @@ def handle_joymax(opcode, data):
 					start_no_drop()
 			elif 'UIIT_STT_JUPITER_A_' in str(data):
 				azulPerma(f'Puerta: {str(data)[-4:-1]}')
-			uniqueName = get_monster(struct.unpack_from('<I', data, 2)[0])['name']
-			log(uniqueName)
-			for unique in uniqueList:
-				if unique in uniqueName.lower() :
-					if spawn:
-						play_wav('Sounds/Unique.wav')
-					if UniqueTelegram:
-						threading.Thread(target=sendTelegram, args=[uniqueName],).start()
-					return True
+			elif data[0] == 5
+				uniqueName = get_monster(struct.unpack_from('<I', data, 2)[0])['name']
+				log(uniqueName)
+				for unique in uniqueList:
+					if unique in uniqueName.lower() :
+						if spawn:
+							play_wav('Sounds/Unique.wav')
+						if UniqueTelegram:
+							threading.Thread(target=sendTelegram, args=[uniqueName],).start()
+						return True
 		elif opcode == 0x30CF: #Mensajes de eventos
 			if data == b'\x15\x02\x55\x00\x59\x6F\x75\x20\x6D\x75\x73\x74\x20\x63\x6F\x6D\x70\x6C\x65\x74\x65\x20\x74\x68\x65\x20\x63\x61\x70\x74\x63\x68\x61\x20\x76\x65\x72\x69\x66\x63\x61\x74\x69\x6F\x6E\x20\x74\x6F\x20\x70\x72\x6F\x63\x65\x65\x64\x20\x77\x69\x74\x68\x20\x62\x75\x79\x69\x6E\x67\x2F\x73\x65\x6C\x6C\x69\x6E\x67\x20\x74\x72\x61\x64\x65\x20\x67\x6F\x6F\x64\x73\x2E': # Trader Sell
 				deleteClean()
@@ -1543,6 +1544,6 @@ def tlp():
 
 
 
-version = '4.3.1'
+version = '4.4.1'
 ver = QtBind.createLabel(gui,f'v{version}',690,300)
 log(f'[Super Plugin v{version} by Rahim]')
