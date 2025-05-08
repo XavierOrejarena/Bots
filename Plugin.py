@@ -1519,5 +1519,5 @@ def tlp():
 
 
 version = '4.1.0'
-ver = QtBind.createLabel(gui,'v'+version,690,300)
-log('[Super Plugin v'+version+' by Rahim]')
+ver = QtBind.createLabel(gui,f'v{version}',690,300)
+log(f'[Super Plugin v{version} by Rahim]')
