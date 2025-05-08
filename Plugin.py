@@ -11,6 +11,12 @@ import os.path
 import time
 
 gui = QtBind.init(__name__,'Super Plugin')
+guiDimen = QtBind.init(__name__,'Dimen')
+setProfile_Btn = QtBind.createButton(guiDimen,'spawn_dimension','Spawn Dimen',20,20)
+talk_npc_Btn = QtBind.createButton(guiDimen,'talk_npc','Talk to NPC',20,50)
+call_one_Btn = QtBind.createButton(guiDimen,'call_one_for_one','Call One For One',20,80)
+tlp_Btn = QtBind.createButton(guiDimen,'tlp','Teleport',20,110)
+start_Btn = QtBind.createButton(guiDimen,'start_stop','START/STOP',140,260)
 partyAlert = True
 alarma = True
 DesmontarPet = True
@@ -46,6 +52,11 @@ YUNO_SPAWNED = bytes.fromhex('1C 0C 02 1D 00 55 49 49 54 5F 53 54 54 5F 57 4F 52
 JUPITER_SPAWNED = bytes.fromhex('1C 0C 02 20 00 55 49 49 54 5F 53 54 54 5F 57 4F 52 53 48 49 50 5F 4A 55 50 49 54 45 52 5F 53 50 41 57 4E 45 44')
 token2 = urlopen('https://raw.githubusercontent.com/RahimSRO/Serapis/refs/heads/main/test.txt').read().decode("utf-8")[:-1]
 token = urlopen('https://raw.githubusercontent.com/RahimSRO/Serapis/refs/heads/main/test2.txt').read().decode("utf-8")[:-1]
+distance = QtBind.createLineEdit(guiDimen,'320',100,200,150,20)
+actualLine = QtBind.createLineEdit(guiDimen,'1',100,230,150,20)
+actual  = int(QtBind.text(guiDimen,actualLine))
+tiempo = [actual,time.time()]
+
 
 def loadConfig():
 	global partyAlert
@@ -1532,6 +1543,6 @@ def tlp():
 
 
 
-version = '4.1.4'
+version = '4.2.4'
 ver = QtBind.createLabel(gui,f'v{version}',690,300)
 log(f'[Super Plugin v{version} by Rahim]')
