@@ -56,6 +56,7 @@ distance = QtBind.createLineEdit(guiDimen,'320',100,200,150,20)
 actualLine = QtBind.createLineEdit(guiDimen,'1',100,230,150,20)
 actual  = int(QtBind.text(guiDimen,actualLine))
 tiempo = [actual,time.time()]
+UNIQUE_IGNORE = ['The Earth','Yuno','Jupiter','Beakyung The White Viper']
 
 
 def loadConfig():
@@ -451,6 +452,7 @@ def handle_event(t, data):
 	global pmList
 	global bolnotify
 	global dropTelegram
+	global UNIQUE_IGNORE
 	if VIP:
 		if t == 0:
 			bolnotify = True
@@ -461,7 +463,7 @@ def handle_event(t, data):
 				play_wav('Sounds/Unique In Range.wav')
 			if DesmontarPet:
 				DismountHorse()
-			if goToUnique:
+			if goToUnique and data not in UNIQUE_IGNORE:
 				goUnique()
 				Timer(1,goUnique).start()
 				Timer(2,goUnique).start()
@@ -1550,6 +1552,6 @@ def tlp():
 
 
 
-version = '4.5.1'
+version = '4.5.2'
 ver = QtBind.createLabel(gui,f'v{version}',690,300)
 log(f'[Super Plugin v{version} by Rahim]')
