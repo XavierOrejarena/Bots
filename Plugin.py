@@ -1383,8 +1383,6 @@ def teleported():
 	if get_zone_name(get_character_data()['region']) == 'Diebesstadt':
 		stop_bot()
 		moveToBandit()
-	elif get_zone_name(get_character_data()['region']) == 'The Earths Raum':
-		delete_pet()
 	elif get_zone_name(get_character_data()['region']) == 'Anbetungshalle':
 		Timer(4,delete_pet).start()
 		stop_trace()
@@ -1552,6 +1550,6 @@ def tlp():
 
 
 
-version = '4.5.0'
+version = '4.5.1'
 ver = QtBind.createLabel(gui,f'v{version}',690,300)
 log(f'[Super Plugin v{version} by Rahim]')
