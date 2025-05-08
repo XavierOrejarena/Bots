@@ -1250,7 +1250,7 @@ def handle_joymax(opcode, data):
 					start_no_drop()
 			elif 'UIIT_STT_JUPITER_A_' in str(data):
 				azulPerma(f'Puerta: {str(data)[-4:-1]}')
-			elif data[0] == 5
+			elif data[0] == 5:
 				uniqueName = get_monster(struct.unpack_from('<I', data, 2)[0])['name']
 				log(uniqueName)
 				for unique in uniqueList:
