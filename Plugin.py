@@ -25,7 +25,7 @@ unionNotify = False
 alertar_hunter = False
 count = False
 dropTelegram = False
-white_list = ['Ross','Asterith','27CM','KLR','Space','SpaceJis','Grego','Suarez','Hamtay','AIICaps','Auron','AllCaps','Dalton','Hamtay','Kalimyst','KaIimyst','Hamtay','THE_BARD','THE_BARD1','THE_CHINITO','TH3_WIZARD','THE_WIZARD','THE_CLERIK','THE_MAST3R','THE_WARRIOR','_AkaZa','_Kirby_','NoSoyBardo','xShuTheFckUp','_BlooD_','xAeon','xTremeCreW_','_Yazsoke_']
+white_list = ['Seven','Apple','Amor','Paz','Yeico','Sol','Amanda','How','Ross','Asterith','27CM','KLR','Space','SpaceJis','Grego','Suarez','Hamtay','AIICaps','Auron','AllCaps','Dalton','Hamtay','Kalimyst','KaIimyst','Hamtay','THE_BARD','THE_BARD1','THE_CHINITO','TH3_WIZARD','THE_WIZARD','THE_CLERIK','THE_MAST3R','THE_WARRIOR','_AkaZa','_Kirby_','NoSoyBardo','xShuTheFckUp','_BlooD_','xAeon','xTremeCreW_','_Yazsoke_']
 VIP = False
 
 if get_character_data()['name'] in white_list:
