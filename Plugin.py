@@ -1393,8 +1393,8 @@ def call_one_for_one(slot,id):
 		Party = get_party()
 		for i,memberID in enumerate(Party):
 			if i == slot:
-				log(f'calling: {Party[memberID]['name']}')
-				red(f'calling: {Party[memberID]['name']}')
+				# log(f'calling: {Party[memberID]['name']}')
+				# red(f'calling: {Party[memberID]['name']}')
 				inject_joymax(0x751A, struct.pack('I',memberID), False)
 				Timer(0.5,call_one_for_one,[slot+1,id]).start()
 				return
