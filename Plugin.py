@@ -905,6 +905,7 @@ def handle_chat(t,player,msg):
 				stop_trace()
 				stop_bot()
 			elif msg == 'scroll':
+				red('Usando Return Scroll')
 				useSpecialReturnScroll()
 			elif msg == 'f':
 				stop_bot()
