@@ -1091,6 +1091,19 @@ def rahim():
 		bolnotify = False
 		azulPerma('Blue Notify By Rahim')
 
+def red(message):
+	name = 'Rahim'
+	data = b'\x42'+struct.pack('H', len(name))
+	for word in name:
+		data += word.encode('ascii')
+		data += b'\x00'
+	data += struct.pack('H', len(message))
+	for word in message:
+		data += word.encode('ascii')
+		data += b'\x00'
+	data += b'\x00\x00\xFF\xFF\xEC\xEB\x10\x01\x00'
+	inject_silkroad(0x30CF,data,False)
+
 def handle_joymax(opcode, data):
 	global VIP
 	global UniqueTelegram
@@ -1518,6 +1531,6 @@ def tlp():
 
 
 
-version = '4.1.0'
+version = '4.1.1'
 ver = QtBind.createLabel(gui,f'v{version}',690,300)
 log(f'[Super Plugin v{version} by Rahim]')
