@@ -1069,6 +1069,8 @@ def handle_chat(t,player,msg):
 							return True
 			elif msg == 'tlp':
 				tlp()
+			elif msg.lower() == 'back':
+				inject_joymax(0x3053, b'\x01', False)
 			elif msg.lower() == 'dwjg':
 				npcs = get_npcs()
 				for id, npc in npcs.items():
