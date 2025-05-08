@@ -926,7 +926,7 @@ def handle_chat(t,player,msg):
 				stop_trace()
 				set_training_position(0, get_character_data()['x'], get_character_data()['y'], 0)
 				start_bot()
-			elif (t == 4 or t == 2) and msg.lower() == 'coo' and (char['name'] == player or char['job_name'] == player):
+			elif (t == 4 or t == 2) and msg.lower() == 'coo' and (get_character_data()['name'] == player or get_character_data()['job_name'] == player):
 				log('dijo coo en party')
 				region = str(get_position()['region'])
 				x = str(int(get_position()['x']))
