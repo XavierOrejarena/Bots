@@ -933,7 +933,7 @@ def handle_chat(t,player,msg):
 				if get_training_area()['radius'] == 0:
 					set_training_radius(20)
 				start_bot()
-			elif (get_character_data()['name'] == player t == 4) and msg[:2] == ':>':
+			elif (get_character_data()['name'] == player or t == 4) and msg[:2] == ':>':
 				log('Cambiando a perfil -> '+msg[2:])
 				set_profile(msg[2:])
 			elif player == get_character_data()['name'] and msg == 'tomb':
