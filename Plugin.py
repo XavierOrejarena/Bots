@@ -1449,11 +1449,11 @@ def teleported():
 				Timer(20,phBotChat.All,['k']).start()
 	elif get_zone_name(get_character_data()['region']) == 'The Earths Raum':
 		delete_pet()
-		if get_character_data()['name'] in lideres:
-			go_to_buff(-32749,-20851,126,-134) #buff
-			filename = 'Salir.txt'
-			Timer(50,phBotChat.All,['k']).start()
-			# go_to_buff(-32749,-20812,125,-134) #bug
+		stop_trace()
+		go_to_buff(-32749,-20851,126,-134) #buff
+		filename = 'Salir.txt'
+		Timer(50,phBotChat.All,['k']).start()
+		# go_to_buff(-32749,-20812,125,-134) #bug
 
 def go_to_buff(region,x,y,z):
 	log('go_to_buff')
