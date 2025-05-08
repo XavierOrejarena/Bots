@@ -677,11 +677,14 @@ def is_master():
 				return False
 	return False
 
+start_stop = False
+
 def handle_silkroad(opcode,data):
 	global VIP
 	global partyNumber
 	global energy
 	global PICK
+	global start_stop
 	if VIP:
 		if opcode == 0x7034: #put item equip wear
 			if data[0] == 0:
@@ -693,12 +696,17 @@ def handle_silkroad(opcode,data):
 				joinParty(partyNumber)
 				return False
 			elif data ==  b'\x01':
-				PICK = not PICK
-				if PICK:
-					notice('Pick activado')
+				if start_stop:
+					morado('STOP BOT')
+					stop_bot()
+					stop_trace()
 				else:
-					notice('Pick desactivado.')
-				threading.Thread(target=pick_loop).start()
+					morado('START BOT')
+					stop_bot()
+					stop_trace()
+					set_training_position(0, get_character_data()['x'], get_character_data()['y'], 0)
+					start_bot()
+				start_stop = not start_stop
 				return False
 			elif data ==  b'\x02':
 				followUnique()
