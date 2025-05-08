@@ -453,6 +453,7 @@ def handle_event(t, data):
 	global bolnotify
 	global dropTelegram
 	global UNIQUE_IGNORE
+	global start
 	if VIP:
 		if t == 0:
 			bolnotify = True
@@ -469,6 +470,13 @@ def handle_event(t, data):
 				Timer(2,goUnique).start()
 			if startBotUnique:
 				Timer(2,startUnique).start()
+			if get_zone_name(get_character_data()['region']) == 'Anbetungshalle':
+				start = False
+				green(f'Unique: {data}')
+				if get_character_data()['name'] in lideres:
+					Timer(0.5,goJupiter).start()
+				if data == 'Jupiter':
+					get_jupiter_id()
 		if get_character_data()['name'] in WhiteList and False:
 			if t == 1 and data not in QtBind.getItems(gui2,lstOpcodes) and data not in ignore:
 				log('[HUNTER] '+data)
@@ -848,7 +856,6 @@ def handle_chat(t,player,msg):
 	global mob_killed
 	global goUnique
 	global R
-	global JUPITER_ID
 	if VIP:
 		if t == 2:
 			if TelegramBol:
@@ -869,7 +876,6 @@ def handle_chat(t,player,msg):
 					else:
 						return
 		elif msg == 'spawn':
-			JUPITER_ID = False
 			goUnique = True
 			mob_killed = 0
 			filename = 'Script.txt'
@@ -1118,6 +1124,20 @@ def red(message):
 	data += b'\x00\x00\xFF\xFF\xEC\xEB\x10\x01\x00'
 	inject_silkroad(0x30CF,data,False)
 
+def get_jupiter_id():
+	log('get_jupiter_id')
+	global JUPITER_ID
+	if not JUPITER_ID:
+		mobs = get_monsters()
+		if mobs:
+			for mobID in mobs:
+				if mobs[mobID]['type'] == 24:
+					JUPITER_ID =  mobID
+	else:
+		log(str(JUPITER_ID))
+		return
+	Timer(1,get_jupiter_id).start()
+
 def handle_joymax(opcode, data):
 	global VIP
 	global UniqueTelegram
@@ -1214,7 +1234,7 @@ def handle_joymax(opcode, data):
 							Union('['+itemName+'] gained')
 			if dropType == 1537 or dropType == 4353 or dropType == 7169:
 				pass
-				Timer(10,rahim).start()
+				# Timer(10,rahim).start()
 		elif opcode == 0x3068: #party item droped distributed
 			itemName = get_item(struct.unpack_from('<I', data, 4)[0])['name']
 			playerName = get_party()[struct.unpack_from('<I', data, 0)[0]]['name']
@@ -1552,6 +1572,6 @@ def tlp():
 
 
 
-version = '4.5.2'
+version = '4.6.2'
 ver = QtBind.createLabel(gui,f'v{version}',690,300)
 log(f'[Super Plugin v{version} by Rahim]')
