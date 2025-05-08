@@ -457,7 +457,7 @@ def handle_event(t, data):
 		if t == 0:
 			bolnotify = True
 			notice(data)
-			if partyAlert and 'Ballon' not in data:
+			if partyAlert and 'Ballon' not in data and data not in UNIQUE_IGNORE:
 				phBotChat.Party('Here ---> ['+ data + ']')
 			if spawn:
 				play_wav('Sounds/Unique In Range.wav')
