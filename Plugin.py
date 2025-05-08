@@ -1061,6 +1061,12 @@ def handle_chat(t,player,msg):
 							return True
 			elif msg == 'tlp':
 				tlp()
+			elif msg.lower() == 'dwjg':
+				npcs = get_npcs()
+				for id, npc in npcs.items():
+					if "Donwhang" in npc['name']:
+						inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x01\x00\x00\x00', False) #DWJG
+						break
 
 
 def useSpecialReturnScroll():
@@ -1572,6 +1578,6 @@ def tlp():
 
 
 
-version = '4.6.2'
+version = '4.6.3'
 ver = QtBind.createLabel(gui,f'v{version}',690,300)
 log(f'[Super Plugin v{version} by Rahim]')
