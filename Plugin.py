@@ -886,7 +886,7 @@ def handle_chat(t,player,msg):
 				stop_bot()
 			elif msg == 'scroll':
 				useSpecialReturnScroll()
-			elif msg == 'follow':
+			elif msg == 'f':
 				stop_bot()
 				stop_trace()
 				if get_character_data()['name'] != player:
@@ -908,7 +908,7 @@ def handle_chat(t,player,msg):
 			elif (t == 1 or t == 2 or t == 4) and msg[0] == 'r' and msg[1:].isnumeric() and len(msg[1:]) < 4:
 				r = float(msg[1:len(msg)])
 				set_training_radius(r)
-			elif msg == 'spawnhorse':
+			elif msg == 'sh':
 				spawnHorse()
 			elif msg.lower() == 'leave':
 				inject_joymax(0x7061, bytearray(), False)
@@ -1502,49 +1502,17 @@ def earth():
 		Timer(1,earth).start()
 
 def tlp():
-	inject_joymax(0x705B, bytearray(), False)
 	npcs = get_npcs()
 	for id, npc in npcs.items():
-		# log(npc['name'])
-		if npc['name'] == 'Tunnelaufseher Salhap':#Tunel 1
-			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x1E\x00\x00\x00', False)
-		elif npc['name'] == 'Tunnelaufseher Maryokuk':
-			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x1B\x00\x00\x00', False)
-		elif npc['name'] == 'Tunnelaufseher Topni': #Tunel 2
-			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x1D\x00\x00\x00', False)
-		elif npc['name'] == 'Tunnelaufseher Asui':
-			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x1A\x00\x00\x00', False)
-		elif npc['name'] == 'Ferry Ticket Seller Hageuk': #Jangan West
-			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x09\x00\x00\x00', False)
-		elif npc['name'] == 'Ferry Ticket Seller Chau':
-			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x06\x00\x00\x00', False)
-		elif npc['name'] == 'Ferry Ticket Seller Doji': #Jangan East
-			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x04\x00\x00\x00', False)
-		elif npc['name'] == 'Ferry Ticket Seller Tayun':
-			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x03\x00\x00\x00', False)
-		elif npc['name'] == 'Boat Ticket Seller Rahan': #Hotan Ravine
-			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x0E\x00\x00\x00', False)
-		elif npc['name'] == 'Boat Ticket Seller Salmai':
-			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x0C\x00\x00\x00', False)
-		elif npc['name'] == 'Boat Ticket Seller Asa': #Hotan Black Robber
-			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x0D\x00\x00\x00', False)
-		elif npc['name'] == 'Boat Ticket Seller Asimo':
-			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x0F\x00\x00\x00', False)
-		elif npc['name'] == 'Flugkartenverkäuferin Shard': #Ivy
-			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x1F\x00\x00\x00', False)
-		elif npc['name'] == 'Flugkartenverkäuferin Sangnia':
-			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x18\x00\x00\x00', False)
-		elif npc['name'] == 'Harbor Manager Marwa' or npc['name'] == 'Pirate Morgun': #Alexandria
-			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x15\x00\x00\x00', False)
-		elif npc['name'] == 'Harbor Manager Gale': #Dock
-			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x16\x00\x00\x00', False)
-		elif npc['name'] == 'Pirate Blackbeard': #Sigia
-			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x15\x00\x00\x00', False)
-		elif npc['name'] == 'Grab des Kaisers Qin-Shi Lv.4': #Medusa
-			inject_joymax(0x705A, struct.pack('h',id)+b'\x00\x00\x03\x00', False)
-		elif npc['name'] == 'Dimensionslücke':
-			log('Teleporting to dimension area.')
-			red('Teleporting to dimension area.')
+		log(npc['name'])
+		if npc['name'] == 'Dimensionslücke':
+			log('Teleporting to The Earth')
+			red('Teleporting to The Earth')
+			Dismount()
+			inject_joymax(0x705A, struct.pack('I',id)+b'\x03\x00', False)
+		if npc['name'] == '':
+			log('Teleporting to FGW')
+			red('Teleporting to FGW')
 			Dismount()
 			inject_joymax(0x705A, struct.pack('I',id)+b'\x03\x00', False)
 
