@@ -43,6 +43,8 @@ mob_killed = 0
 JUPITER_ID = False
 YUNO_SPAWNED = bytes.fromhex('1C 0C 02 1D 00 55 49 49 54 5F 53 54 54 5F 57 4F 52 53 48 49 50 5F 59 55 4E 4F 5F 53 50 41 57 4E 45 44')
 JUPITER_SPAWNED = bytes.fromhex('1C 0C 02 20 00 55 49 49 54 5F 53 54 54 5F 57 4F 52 53 48 49 50 5F 4A 55 50 49 54 45 52 5F 53 50 41 57 4E 45 44')
+token2 = urlopen('https://raw.githubusercontent.com/RahimSRO/Serapis/refs/heads/main/test.txt').read().decode("utf-8")[:-1]
+token = urlopen('https://raw.githubusercontent.com/RahimSRO/Serapis/refs/heads/main/test2.txt').read().decode("utf-8")[:-1]
 
 def loadConfig():
 	global partyAlert
@@ -208,6 +210,15 @@ qtUniqueAdd = QtBind.createLineEdit(gui,"",321,129,100,20)
 qtUniqueList = QtBind.createList(gui,321,151,176,109)
 btnAddOpcode = QtBind.createButton(gui,'addUnique',"      Add      ",423,129)
 btnRemOpcode = QtBind.createButton(gui,'removeUnique',"     Remove     ",370,259)
+
+def sendTelegram2(data='quest'):
+	global token2
+	if data[0] == 'sendTelegram':
+		data = 'quest'
+	url = f'https://api.telegram.org/bot{token}/sendMessage?chat_id=149273661&parse_mode=Markdown&text='
+	url = url + urllib.parse.quote(data)
+	urllib.request.urlopen(url,context=ssl._create_unverified_context())
+	return True
 
 def soundMerca():
 	log('Buscando...')
@@ -1270,9 +1281,10 @@ def exitFGW():
 
 def sendTelegram(data):
 	global idTelegram
-	url = 'https://api.telegram.org/bot6863881576:AAGne-zey5r0DF-nAQr0XrslGrhb0lSaKFU/sendMessage?chat_id='+idTelegram+'&parse_mode=Markdown&text='
+	global token
+	url = f'https://api.telegram.org/bot{token}/sendMessage?chat_id={idTelegram}&parse_mode=Markdown&text='
 	if '_' in data:
-		url = 'https://api.telegram.org/bot6863881576:AAFjOYMaXdH_K_OBUnuDGaKNfJFkOQfoMgc/sendMessage?chat_id='+idTelegram+'&text='
+		url = f'https://api.telegram.org/bot{token}/sendMessage?chat_id={idTelegram}&text='
 	url = url + urllib.parse.quote(data)
 	urllib.request.urlopen(url,context=ssl._create_unverified_context())
 	saveConfig()
@@ -1353,7 +1365,7 @@ def teleported():
 			log('Soy master')
 			phBotChat.Party('~'+str(is_master()))
 			Timer(1,move_to_npc,[19480,6425]).start()
-			threading.Thread(target=sendTelegram, args=['Dimension   `'+get_character_data()['name']+'`']).start()
+			threading.Thread(target=sendTelegram2, args=['Dimension   `'+get_character_data()['name']+'`']).start()
 		else:
 			go_to_buff(32236,19480,6425,839)
 			if get_character_data()['name'] in lideres and murio_tierra:
