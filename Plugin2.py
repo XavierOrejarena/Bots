@@ -23,7 +23,7 @@ actualLine = QtBind.createLineEdit(guiDimen,'1',100,230,150,20)
 actual  = int(QtBind.text(guiDimen,actualLine))
 tiempo = [actual,time.time()]
 start = False
-n = 20
+n = 10
 R = 35
 lideres = ['Seven','Zoser','Norte','dCarnage']
 for lider in lideres:
@@ -68,7 +68,7 @@ def azulPerma(message):
 def teleported():
 	global murio_tierra
 	global filename
-	global lider
+	global lideres
 	if get_zone_name(get_character_data()['region']) == 'Anbetungshalle':
 		Timer(4,delete_pet).start()
 		stop_trace()
@@ -80,14 +80,14 @@ def teleported():
 			# sendTelegram('Dimension   `'+get_character_data()['name']+'`')
 		else:
 			go_to_buff(32236,19480,6425,839)
-			if get_character_data()['name'] == lider and murio_tierra:
+			if get_character_data()['name'] in lideres and murio_tierra:
 				filename = 'Yuno.txt'
-			if get_character_data()['name'] == lider:
+			if get_character_data()['name'] in lideres:
 				log('dire k en all en 20 seg')
 				Timer(20,phBotChat.All,['k']).start()
 	elif get_zone_name(get_character_data()['region']) == 'The Earths Raum':
 		delete_pet()
-		if get_character_data()['name'] == lider:
+		if get_character_data()['name'] in lideres:
 			go_to_buff(-32749,-20851,126,-134) #buff
 			filename = 'Salir.txt'
 			Timer(50,phBotChat.All,['k']).start()
@@ -165,13 +165,14 @@ def handle_chat(t,player,msg):
 	global start
 	global actual
 	global tiempo
-	global lider
+	global lideres
 	global goUnique
 	global filename
 	global murio_tierra
 	global mob_killed
 	global goUnique
 	global R
+	global JUPITER_ID
 	if msg[0] == '~' and t == 4 and msg[1:].isnumeric():
 		Party = get_party()
 		if Party:
@@ -202,7 +203,7 @@ def handle_chat(t,player,msg):
 	elif msg == 'file':
 		log(filename)
 	elif msg == 'spawn':
-		lider = player
+		JUPITER_ID = False
 		goUnique = True
 		mob_killed = 0
 		filename = 'Script.txt'
@@ -211,9 +212,14 @@ def handle_chat(t,player,msg):
 			spawn_dimension()
 	elif msg == 'tlp':
 		tlp()
-	elif msg == 'fgw':
-		lider = player
-		FGW(player)
+	elif msg == 'fgw' and get_character_data()['name'] == player:
+		phBotChat.Guild(':>FGW')
+		phBotChat.Guild('stop')
+		phBotChat.Guild('scroll')
+		phBotChat.Guild('false')
+		phBotChat.Guild('r25')
+		phBotChat.Private('How','r30')
+		phBotChat.Private('Woke','r30')
 	elif msg == 'y' and get_character_data()['name'] != player:
 		start_trace(player)
 	elif msg == 'k':
@@ -329,7 +335,7 @@ def event_loop():
 			actual +=1
 			tiempo[0] = actual
 			tiempo[1] = time.time()
-		if time.time()-tiempo[1] > n and  dis < 2:
+		if time.time()-tiempo[1] > n and  dis < 2 and todos_cerca():
 			phBotChat.Party('k')
 			actual +=1
 			azulPerma(f'Pasaron {n} seg...')
@@ -404,7 +410,7 @@ def go_to_buff(region,x,y,z):
 
 def handle_joymax(opcode, data):
 	global tiempo
-	global lider
+	global lideres
 	global filename
 	global mob_killed
 	global actual
@@ -415,7 +421,7 @@ def handle_joymax(opcode, data):
 			mob_killed +=1
 			log(f'Mobs: {mob_killed}')
 			# if struct.unpack_from('I',data,4)[0] == 281673300 and get_character_data()['name'] == lider:#268870025
-			if struct.unpack_from('I',data,0)[0] == JUPITER_ID and get_character_data()['name'] == lider:
+			if struct.unpack_from('I',data,0)[0] == JUPITER_ID and get_character_data()['name'] in lideres:
 				red(f'Murio Jupiter')
 				log(f'Murio Jupiter')
 				Timer(5,exitFGW).start()
@@ -431,7 +437,7 @@ def handle_joymax(opcode, data):
 		if data == YUNO_SPAWNED:
 			azulPerma('Salio Yuno')
 			earth()
-		if get_character_data()['name'] == lider:
+		if get_character_data()['name'] in lideres:
 			if data == JUPITER_SPAWNED:
 				azulPerma('Salio Jupiter')
 				filename = 'Jupiter.txt'
@@ -443,14 +449,14 @@ def handle_joymax(opcode, data):
 				azulPerma(f'Puerta: {str(data)[-4:-1]}')
 				azulPerma(str(mob_killed))
 				log(f'Puerta: {str(data)[-4:-1]} & {str(mob_killed)} actual: {actual}')
-	elif opcode == 0x3068 and get_character_data()['name'] == lider: #party item droped distributed
+	elif opcode == 0x3068 and get_character_data()['name'] in lideres: #party item droped distributed
 		itemName = get_item(struct.unpack_from('<I', data, 4)[0])['name']
 		playerName = get_party()[struct.unpack_from('<I', data, 0)[0]]['name']
 		if struct.unpack_from('<I', data, 4)[0] > 33892 and struct.unpack_from('<I', data, 4)[0] < 33901:
 			msg = f'item [{itemName}] is distributed to [{playerName}]'
 			azulPerma(msg)
 			sendTelegram(f'item `{itemName}` is distributed to `{playerName}`')
-	elif opcode == 0xB034 and len(data) > 11 and get_character_data()['name'] == lider: #item gained
+	elif opcode == 0xB034 and len(data) > 11 and get_character_data()['name'] in lideres: #item gained
 		dropType = struct.unpack_from('h', data, 0)[0]
 		# log(str(dropType))
 		if dropType == 7169 or dropType == 4353:
@@ -467,7 +473,7 @@ def handle_joymax(opcode, data):
 				azulPerma(f'item [{itemName}] gained.')
 				playerName = get_character_data()['name']
 				sendTelegram(f'`{itemName}` Gained. ---> `{playerName}`')
-	elif opcode == 0x3057 and len(data) == 15 and get_zone_name(get_character_data()['region']) == 'Anbetungshalle' and struct.unpack_from('I',data,9)[0] == 0 and get_character_data()['name'] == lider:
+	elif opcode == 0x3057 and len(data) == 15 and get_zone_name(get_character_data()['region']) == 'Anbetungshalle' and struct.unpack_from('I',data,9)[0] == 0 and get_character_data()['name'] in lideres:
 		return True
 		mobID = struct.unpack_from('I',data,0)[0]
 		mob_name = get_monsters()[mobID]['name']
@@ -487,8 +493,8 @@ def sendTelegram(data='quest'):
 	urllib.request.urlopen(url,context=ssl._create_unverified_context())
 	return True
 
-def FGW(lider):
-	if get_character_data()['name'] == lider:
+def FGW():
+	if get_character_data()['name'] in lideres:
 		phBotChat.Party(':>FGW')
 		phBotChat.Party('stop')
 		phBotChat.Party('scroll')
@@ -533,11 +539,11 @@ def get_jupiter_id():
 
 def handle_event(t, data):
 	global start
-	global lider
+	global lideres
 	if t == 0 and get_zone_name(get_character_data()['region']) == 'Anbetungshalle':
 		start = False
 		green(f'Unique: {data}')
-		if get_character_data()['name'] == lider:
+		if get_character_data()['name'] in lideres:
 			Timer(0.5,goJupiter).start()
 		if data == 'Jupiter':
 			get_jupiter_id()
