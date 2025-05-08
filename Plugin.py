@@ -27,8 +27,22 @@ count = False
 dropTelegram = False
 white_list = ['Ross','Asterith','27CM','KLR','Space','SpaceJis','Grego','Suarez','Hamtay','AIICaps','Auron','AllCaps','Dalton','Hamtay','Kalimyst','KaIimyst','Hamtay','THE_BARD','THE_BARD1','THE_CHINITO','TH3_WIZARD','THE_WIZARD','THE_CLERIK','THE_MAST3R','THE_WARRIOR','_AkaZa','_Kirby_','NoSoyBardo','xShuTheFckUp','_BlooD_','xAeon','xTremeCreW_','_Yazsoke_']
 VIP = False
+
 if get_character_data()['name'] in white_list:
 	VIP = True
+
+start = False
+n = 10
+R = 35
+lideres = ['Seven','Zoser','Norte','dCarnage']
+filename = 'Script.txt'
+goUnique = True
+murio_tierra = False
+display = 0
+mob_killed = 0
+JUPITER_ID = False
+YUNO_SPAWNED = bytes.fromhex('1C 0C 02 1D 00 55 49 49 54 5F 53 54 54 5F 57 4F 52 53 48 49 50 5F 59 55 4E 4F 5F 53 50 41 57 4E 45 44')
+JUPITER_SPAWNED = bytes.fromhex('1C 0C 02 20 00 55 49 49 54 5F 53 54 54 5F 57 4F 52 53 48 49 50 5F 4A 55 50 49 54 45 52 5F 53 50 41 57 4E 45 44')
 
 def loadConfig():
 	global partyAlert
@@ -620,6 +634,16 @@ def spawnHorse():
 				break
 		i+=1
 
+def is_master():
+	Party = get_party()
+	if Party:
+		for memberID in Party:
+			if get_character_data()['name'] == Party[memberID]['name']:
+				return memberID
+			else:
+				return False
+	return False
+
 def handle_silkroad(opcode,data):
 	global VIP
 	global partyNumber
@@ -789,6 +813,17 @@ def handle_chat(t,player,msg):
 	global partyNumber
 	global comandos
 	global attackWolf
+	global start
+	global actual
+	global tiempo
+	global lideres
+	global goUnique
+	global filename
+	global murio_tierra
+	global mob_killed
+	global goUnique
+	global R
+	global JUPITER_ID
 	if VIP:
 		if t == 2:
 			if TelegramBol:
@@ -799,6 +834,23 @@ def handle_chat(t,player,msg):
 					notice(word)
 					partyNumber = int(word)
 					break
+		elif msg[0] == '~' and t == 4 and msg[1:].isnumeric():
+			Party = get_party()
+			if Party:
+				for memberID in Party:
+					if memberID == int(msg[1:]):
+						Dismount()
+						log('Dismounted')
+					else:
+						return
+		elif msg == 'spawn':
+			JUPITER_ID = False
+			goUnique = True
+			mob_killed = 0
+			filename = 'Script.txt'
+			murio_tierra = False
+			if is_master():
+				spawn_dimension()
 		elif get_character_data()['name'] == player and msg == 'comandos':
 			notice("tptg")
 			notice("tpcerb")
@@ -821,6 +873,8 @@ def handle_chat(t,player,msg):
 			if msg == 'stop':
 				stop_trace()
 				stop_bot()
+			elif msg == 'scroll':
+				useSpecialReturnScroll()
 			elif msg == 'follow':
 				stop_bot()
 				stop_trace()
@@ -979,18 +1033,13 @@ def handle_chat(t,player,msg):
 
 
 def useSpecialReturnScroll():
-	i = 0
-	for x in get_inventory()['items']:
-		if x:
-			if x['name'] == 'Special Return Scroll' or x['name'] == 'Beginner Return Scroll':
-				log(x['name'])
-				Packet = bytearray()
-				Packet.append(i)
-				Packet.append(0xEC)
-				Packet.append(0x09)
-				inject_joymax(0x704C, Packet, True)
-				break
-		i+=1
+	for i,x in enumerate(get_inventory()['items']):
+		if x and i > 13:
+			if x['name'] == 'Special Return Scroll':
+				log('Usando: '+x['name'])
+				inject_joymax(0x704C, struct.pack('B',i)+b'\xEC\x09',True)
+				return
+	log('No hay retun scrol...')
 
 def cancelReturnScroll():
 	Packet = bytearray()
@@ -1038,7 +1087,27 @@ def handle_joymax(opcode, data):
 	global alarma
 	global unionNotify
 	global dropTelegram
+	global tiempo
+	global lideres
+	global filename
+	global mob_killed
+	global actual
+	global JUPITER_ID
 	if VIP:
+		if opcode == 0x3056 and get_zone_name(get_character_data()['region']) == 'Anbetungshalle':
+			tiempo[1] = time.time()
+			mob_killed +=1
+			log(f'Mobs: {mob_killed}')
+			if struct.unpack_from('I',data,0)[0] == JUPITER_ID and get_character_data()['name'] in lideres:
+				red(f'Murio Jupiter')
+				log(f'Murio Jupiter')
+				Timer(5,exitFGW).start()
+				log((' '.join('{:02X}'.format(x) for x in data)))
+				return True
+		elif opcode == 0x751A:
+			inject_joymax(0x751C,data[:4]+b'\x00\x00\x00\x00\x01',False) #accept FGW request
+			log('Acepting FGW request.')
+			red('Acepting FGW request.')
 		if opcode == 0x3040 and len(data) == 23:
 			verdemini(get_item(struct.unpack_from('i', data, 7)[0])['name']+' [Rahim]')
 			return True
@@ -1064,7 +1133,9 @@ def handle_joymax(opcode, data):
 				itemID = get_item(struct.unpack_from('I', data, 11)[0])
 				itemName = itemID['name']
 				if struct.unpack_from('I', data, 11)[0] > 33892 and struct.unpack_from('I', data, 11)[0] < 33901:
-					red('item ['+itemName +'] gained. By Rahim xD')
+					azulPerma(f'item [{itemName}] gained.')
+					playerName = get_character_data()['name']
+					sendTelegram2(f'`{itemName}` Gained. ---> `{playerName}`')
 				if 'Poro' in itemID['name']:
 					itemName = 'Poro Balloon'
 				for item in itemListAzul:
@@ -1084,7 +1155,9 @@ def handle_joymax(opcode, data):
 				itemID = get_item(struct.unpack_from('I', data, 7)[0])
 				itemName = itemID['name']
 				if struct.unpack_from('I', data, 7)[0] > 33892 and struct.unpack_from('I', data, 7)[0] < 33901:
-					red('item ['+itemName +'] gained. By Rahim xD')
+					azulPerma(f'item [{itemName}] gained.')
+					playerName = get_character_data()['name']
+					sendTelegram2(f'`{itemName}` Gained. ---> `{playerName}`')
 				if 'Poro' in itemID['name']:
 					itemName = 'Poro Balloon'
 				for item in itemListAzul:
@@ -1107,7 +1180,9 @@ def handle_joymax(opcode, data):
 			itemName = get_item(struct.unpack_from('<I', data, 4)[0])['name']
 			playerName = get_party()[struct.unpack_from('<I', data, 0)[0]]['name']
 			if struct.unpack_from('<I', data, 4)[0] > 33892 and struct.unpack_from('<I', data, 4)[0] < 33901:
-				red('item ['+itemName +']is distributed to ['+ playerName+']'+' By Rahim xD')
+				msg = f'item [{itemName}] is distributed to [{playerName}]'
+				azulPerma(msg)
+				sendTelegram2(f'item `{itemName}` is distributed to `{playerName}`')
 			if 'Poro' in itemName:
 				itemName = 'Poro Balloon'
 			for item in itemListAzul:
@@ -1126,15 +1201,28 @@ def handle_joymax(opcode, data):
 						Union('['+itemName +']is distributed to ['+ playerName+']')
 			Timer(12,rahim).start()
 		elif opcode == 0x300C and data[0] == 5: # Unique Spawn
-				uniqueName = get_monster(struct.unpack_from('<I', data, 2)[0])['name']
-				log(uniqueName)
-				for unique in uniqueList:
-					if unique in uniqueName.lower() :
-						if spawn:
-							play_wav('Sounds/Unique.wav')
-						if UniqueTelegram:
-							threading.Thread(target=sendTelegram, args=[uniqueName],).start()
-						return True
+			if data == YUNO_SPAWNED:
+				azulPerma('Yuno spawned')
+				earth()
+			if data == JUPITER_SPAWNED:
+				azulPerma('Jupiter spawned')
+				if get_character_data()['name'] in lideres:
+					filename = 'Jupiter.txt'
+					phBotChat.Party('stop')
+					phBotChat.Party('true')
+					phBotChat.Party('zerc')
+					start_no_drop()
+				elif 'UIIT_STT_JUPITER_A_' in str(data):
+					azulPerma(f'Puerta: {str(data)[-4:-1]}')
+			uniqueName = get_monster(struct.unpack_from('<I', data, 2)[0])['name']
+			log(uniqueName)
+			for unique in uniqueList:
+				if unique in uniqueName.lower() :
+					if spawn:
+						play_wav('Sounds/Unique.wav')
+					if UniqueTelegram:
+						threading.Thread(target=sendTelegram, args=[uniqueName],).start()
+					return True
 		elif opcode == 0x30CF: #Mensajes de eventos
 			if data == b'\x15\x02\x55\x00\x59\x6F\x75\x20\x6D\x75\x73\x74\x20\x63\x6F\x6D\x70\x6C\x65\x74\x65\x20\x74\x68\x65\x20\x63\x61\x70\x74\x63\x68\x61\x20\x76\x65\x72\x69\x66\x63\x61\x74\x69\x6F\x6E\x20\x74\x6F\x20\x70\x72\x6F\x63\x65\x65\x64\x20\x77\x69\x74\x68\x20\x62\x75\x79\x69\x6E\x67\x2F\x73\x65\x6C\x6C\x69\x6E\x67\x20\x74\x72\x61\x64\x65\x20\x67\x6F\x6F\x64\x73\x2E': # Trader Sell
 				deleteClean()
@@ -1169,6 +1257,16 @@ def handle_joymax(opcode, data):
 								return True
 				return True
 	return True
+
+def exitFGW():
+	log('exitFGW')
+	if get_drops():
+		Timer(1,exitFGW).start()
+	else:
+		phBotChat.All('scroll')
+		phBotChat.All('stop')
+		# phBotChat.All(':>1')
+		# Timer(1,phBotChat.Party['f']).start()
 
 def sendTelegram(data):
 	global idTelegram
@@ -1227,6 +1325,9 @@ def teleported():
 	global attackWolf
 	global bolnotify
 	global count
+	global murio_tierra
+	global filename
+	global lideres
 	bolnotify = False
 	attackWolf = False
 	ScrollAfterZerk = False
@@ -1243,17 +1344,94 @@ def teleported():
 	if get_zone_name(get_character_data()['region']) == 'Diebesstadt':
 		stop_bot()
 		moveToBandit()
-	elif get_zone_name(get_character_data()['region']) == 'Anbetungshalle':
-		if is_master():
-			# urllib.request.urlopen('https://api.telegram.org/bot6863881576:AAGne-zey5r0DF-nAQr0XrslGrhb0lSaKFU/sendMessage?chat_id=149273661&parse_mode=Markdown&text=Dimension%20%20`'+get_character_data()['name']+'`',context=ssl._create_unverified_context())
-			phBotChat.Party('~'+str(is_master()))
-			stop_trace()
-			Timer(1,move_to_npc,[19480,6425]).start()
-		else:
-			set_training_position(0, 19480, 6425, 0)
-			start_bot()
 	elif get_zone_name(get_character_data()['region']) == 'The Earths Raum':
 		delete_pet()
+	elif get_zone_name(get_character_data()['region']) == 'Anbetungshalle':
+		Timer(4,delete_pet).start()
+		stop_trace()
+		if is_master():
+			log('Soy master')
+			phBotChat.Party('~'+str(is_master()))
+			Timer(1,move_to_npc,[19480,6425]).start()
+			threading.Thread(target=sendTelegram, args=['Dimension   `'+get_character_data()['name']+'`']).start()
+		else:
+			go_to_buff(32236,19480,6425,839)
+			if get_character_data()['name'] in lideres and murio_tierra:
+				filename = 'Yuno.txt'
+			if get_character_data()['name'] in lideres:
+				log('dire k en all en 20 seg')
+				Timer(20,phBotChat.All,['k']).start()
+
+def go_to_buff(region,x,y,z):
+	log('go_to_buff')
+	x1 = get_position()['x']
+	y1 = get_position()['y']
+	dis = ((x-x1)**2+(y-y1)**2)**1/2
+	move_to(x,y,0)
+	if dis < 5:
+		set_training_position(region, x, y, z)
+		Timer(1,start_bot).start()
+		return
+	Timer(0.2,go_to_buff,[region, x, y, z]).start()
+	# log(str(dis))
+
+def call_one_for_one(slot,id):
+	log('call_one_for_one')
+	if slot < 8:
+		Party = get_party()
+		for i,memberID in enumerate(Party):
+			if i == slot:
+				log(f'calling: ' {get_party()[memberID]['name']})
+				red(f'calling: ' {get_party()[memberID]['name']})
+				inject_joymax(0x751A, struct.pack('I',memberID), False)
+				Timer(0.5,call_one_for_one,[slot+1,id]).start()
+				return
+	log('Exit NPC')
+	red('Exit NPC')
+	inject_joymax(0x704B, struct.pack('L', id), False)
+	set_training_position(0, 19480, 6425, 0)
+	start_bot()
+
+def spawn_dimension():
+	for slot, item in enumerate(get_inventory()['items']):
+		if slot > 13 and item:
+			if 'Hall of Worship (Level 1)' in item['name']:
+				inject_joymax(0x704C, struct.pack('b', slot)+b'\x6C\x3E', True)
+				log('Spawming dimension...')
+				return
+
+def talk_npc():
+	npcs = get_npcs()
+	for id, npc in npcs.items():
+		if npc['name'] == 'Säule zum Rückruf der Gruppenmitglieder':
+			inject_joymax(0x7045, struct.pack('L', id), False)
+			log('Selecting NPC')
+			Timer(1,inject_joymax,[0x7519, struct.pack('L', id), False]).start()
+			Timer(1.5,log,['Starting to call members...']).start()
+			Timer(2,call_one_for_one,[0,id]).start()
+			return
+
+def move_to_npc(x,y):
+	phBotChat.Party('~'+str(is_master()))
+	log('move_to_npc')
+	x1 = get_position()['x']
+	y1 = get_position()['y']
+	dis = ((x-x1)**2+(y-y1)**2)**1/2
+	move_to(x,y,0)
+	if dis > 5:
+		talk_npc()
+		return
+	Timer(0.2,move_to_npc,[x,y]).start()
+
+def delete_pet():
+	log('delete_pet')
+	pets = get_pets()
+	if pets:
+		for petID in pets:
+			if pets[petID]['type'] == 'wolf':
+				inject_joymax(0x7116, struct.pack('i',petID) + b'\x00', True)
+				Timer(0.5,delete_pet).start()
+				return
 
 def deleteClean():
 	pets = get_pets()
@@ -1285,11 +1463,36 @@ def exitBandit():
 for unique in uniqueList:
 	QtBind.append(gui,qtUniqueList,unique)
 
+def start_no_drop():
+	if not get_drops():
+		phBotChat.All('k')
+		return
+	Timer(1,start_no_drop).start()
+
+def earth():
+	log('earth')
+	global murio_tierra
+	global start
+	if get_zone_name(get_character_data()['region']) == 'The Earths Raum':
+		if not get_monsters():
+			start = False
+			x1 = get_position()['x']
+			y1 = get_position()['y']
+			x = -20832
+			y = 101
+			move_to(x,y,-134)
+			dis = ((x-x1)**2+(y-y1)**2)**1/2
+			if dis < 2 and not get_drops() and get_npcs():
+				murio_tierra = True
+				tlp()
+				return
+		Timer(1,earth).start()
+
 def tlp():
 	inject_joymax(0x705B, bytearray(), False)
 	npcs = get_npcs()
 	for id, npc in npcs.items():
-		log(npc['name'])
+		# log(npc['name'])
 		if npc['name'] == 'Tunnelaufseher Salhap':#Tunel 1
 			inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x1E\x00\x00\x00', False)
 		elif npc['name'] == 'Tunnelaufseher Maryokuk':
@@ -1327,6 +1530,8 @@ def tlp():
 		elif npc['name'] == 'Grab des Kaisers Qin-Shi Lv.4': #Medusa
 			inject_joymax(0x705A, struct.pack('h',id)+b'\x00\x00\x03\x00', False)
 		elif npc['name'] == 'Dimensionslücke':
+			log('Teleporting to dimension area.')
+			red('Teleporting to dimension area.')
 			Dismount()
 			inject_joymax(0x705A, struct.pack('I',id)+b'\x03\x00', False)
 
