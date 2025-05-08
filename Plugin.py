@@ -693,9 +693,6 @@ def handle_silkroad(opcode,data):
 					return Dismount()
 		elif opcode == 0x3091:
 			if data ==  b'\x00':
-				joinParty(partyNumber)
-				return False
-			elif data ==  b'\x01':
 				if start_stop:
 					morado('STOP BOT')
 					stop_bot()
@@ -707,6 +704,9 @@ def handle_silkroad(opcode,data):
 					set_training_position(0, get_character_data()['x'], get_character_data()['y'], 0)
 					start_bot()
 				start_stop = not start_stop
+				return False
+			elif data ==  b'\x01':
+				joinParty(partyNumber)
 				return False
 			elif data ==  b'\x02':
 				followUnique()
