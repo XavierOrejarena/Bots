@@ -1329,6 +1329,19 @@ def red(message):
 	data += b'\x00\x00\xFF\xFF\xEC\xEB\x10\x01\x00'
 	inject_silkroad(0x30CF,data,False)
 
+def green(message):
+	name = 'Rahim'
+	data = b'\x42'+struct.pack('H', len(name))
+	for word in name:
+		data += word.encode('ascii')
+		data += b'\x00'
+	data += struct.pack('H', len(message))
+	for word in message:
+		data += word.encode('ascii')
+		data += b'\x00'
+	data += b'\x00\xFF\x00\xFF\xF1\x2C\x30\x01\x00'
+	inject_silkroad(0x30CF,data,False)
+
 def get_jupiter_id():
 	log('get_jupiter_id')
 	global JUPITER_ID
