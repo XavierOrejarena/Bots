@@ -1145,6 +1145,75 @@ def handle_chat(t,player,msg):
 				tlp()
 			elif msg.lower() == 'back':
 				inject_joymax(0x3053, b'\x01', False)
+			elif msg == 'update!' and get_character_data()['name'] == player:
+				name1 = 'Script'
+				name2 = 'Yuno'
+				name3 = 'Jupiter'
+				name4 = 'Salir'
+				name5 = 'test'
+				descargar_txt(name1)
+				descargar_txt(name2)
+				descargar_txt(name3)
+				descargar_txt(name4)
+				descargar_txt(name5)
+			elif msg == 'talk'and is_master():
+				phBotChat.Party('~'+str(is_master()))
+				talk_npc()
+			elif msg == 'file':
+				log(filename)
+			elif msg == 'spawn':
+				goUnique = True
+				mob_killed = 0
+				filename = 'Script.txt'
+				murio_tierra = False
+				if is_master():
+					spawn_dimension()
+			elif msg == 'k':
+				if get_character_data()['name'] != player:
+					stop_bot()
+					stop_trace()
+					log('k start tracing to '+player)
+					start_trace(player)
+				else:
+					start = not start
+					if start:
+						# actual = int(QtBind.text(guiDimen,actualLine))
+						actual = 1
+						tiempo[0] = actual
+						tiempo[1] = time.time()
+						start_bot()
+					else:
+						green(f'k = {str(actual)}')
+						stop_bot()
+			elif msg[0] == 'k' and msg[1:].isnumeric() and get_character_data()['name'] == player:
+				start = True
+				actual = int(msg[1:])
+				tiempo[0] = actual
+				tiempo[1] = time.time()
+				start_bot()
+			elif msg == 'm':
+				log(str(get_monsters()))
+				return
+				mobs = get_monsters()
+				if mobs:
+					for mobID in mobs:
+						if mobs[mobID]['hp'] != 0:
+							x1 = mobs[mobID]['x']
+							y1 = mobs[mobID]['y']
+							x2 = get_position()['x']
+							y2 = get_position()['y']
+							dis = (((x2-x1)**2+(y2-y1)**2)**1/2)
+							log(str(dis))
+			elif msg == 'next':
+				actual +=1
+			elif msg == 'go!':
+				goUnique = not goUnique
+			elif msg == 'yuno':
+				filename = 'Yuno.txt'
+			elif msg == 'jupiter':
+				filename = 'Jupiter.txt'
+			elif msg == 'salir':
+				filename = 'Salir.txt'
 			elif msg.lower() == 'dwjg':
 				npcs = get_npcs()
 				for id, npc in npcs.items():
@@ -1152,6 +1221,12 @@ def handle_chat(t,player,msg):
 						inject_joymax(0x705A, struct.pack('I',id)+b'\x02\x01\x00\x00\x00', False) #DWJG
 						break
 
+def descargar_txt(name):
+    try:
+        urllib.request.urlretrieve(f'https://raw.githubusercontent.com/RahimSRO/Serapis/refs/heads/main/{name}.txt', f'{name}.txt')
+        log(f"Archivo guardado como: {name}.txt")
+    except Exception as e:
+        log(f"Error al descargar el archivo: {e}")
 
 def useSpecialReturnScroll():
 	for i,x in enumerate(get_inventory()['items']):
