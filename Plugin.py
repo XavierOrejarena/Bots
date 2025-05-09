@@ -9,6 +9,7 @@ import threading
 import json
 import os.path
 import time
+from urllib.request import urlopen
 
 gui = QtBind.init(__name__,'Super Plugin')
 guiDimen = QtBind.init(__name__,'Dimen')
