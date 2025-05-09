@@ -446,6 +446,34 @@ def leer_linea_n(archivo="Script.txt", numero_linea=1):
     except FileNotFoundError:
         return f"❌ El archivo '{archivo}' no se encontró."
 
+def no_hay_mobs():
+	mobs = get_monsters()
+	if mobs:
+		for mobID in mobs:
+			if mobs[mobID]['hp'] != 0:
+				x1 = mobs[mobID]['x']
+				y1 = mobs[mobID]['y']
+				x2 = get_position()['x']
+				y2 = get_position()['y']
+				dis = (((x2-x1)**2+(y2-y1)**2)**1/2)
+				# log(str(dis))
+				if dis < int(QtBind.text(guiDimen,distance)):
+					return False
+	return True
+
+def todos_cerca():
+	Party = get_party()
+	if Party:
+		for memberID in Party:
+			x1 = Party[memberID]['x']
+			y1 = Party[memberID]['y']
+			x2 = get_position()['x']
+			y2 = get_position()['y']
+			dis = (((x2-x1)**2+(y2-y1)**2)**1/2)
+			if dis > 2:
+				return False
+	return True	
+
 def event_loop():
 	global start
 	global actual
