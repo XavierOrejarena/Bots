@@ -650,6 +650,24 @@ def handle_event(t, data):
 			if dropTelegram:
 				threading.Thread(target=sendTelegram, args=['*'+get_character_data()['name'] + '* -> `'+get_item(int(data))['name']+'`'],).start()
 
+def goJupiter():
+	global goUnique
+	if goUnique:
+		mobs = get_monsters()
+		if mobs:
+			for mobID in mobs:
+				if mobs[mobID]['type'] == 24:
+					x2 = mobs[mobID]['x']
+					y2 = mobs[mobID]['y']
+					x1 = get_position()['x']
+					y1 = get_position()['y']
+					region = mobs[mobID]['region']
+					move_to(x2,y2,0)
+					dis = ((x2-x1)**2+(y2-y1)**2)**1/2
+					if dis < 10:
+						set_training_position(region,x1,y1,0)
+					Timer(0.5,goJupiter).start()
+
 def startUnique():
 	log('el bot iniciara en 1 segundo')
 	mobs = get_monsters()
