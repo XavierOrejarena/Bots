@@ -434,6 +434,70 @@ def removeIgnore():
 					set_training_position(Party[memberID]['region'], Party[memberID]['x'], Party[memberID]['y'], 0.0)
 					start_bot()
 
+def event_loop():
+	global start
+	global actual
+	global tiempo
+	global filename
+	global display
+	if start:
+		if display != actual:
+			log(str(actual))
+			display = actual
+		x2 = get_position()['x']
+		y2 = get_position()['y']
+		poss = leer_linea_n(archivo=filename,numero_linea=actual)
+		if '❌' in poss:
+			log(f'No existe la linea... en {filename}')
+			stop_bot()
+			start = False
+			return
+		elif '/' in poss:
+			azulPerma('Ejecutando comando...')
+			poss = poss.split(',')
+			if poss[0] == '/bard':
+				Party = get_party()
+				for memberID in Party:
+					if Party[memberID]['name'] in poss:
+						phBotChat.Private(Party[memberID]['name'],'scroll')
+			elif poss[0] == '/chat':
+				phBotChat.Party(poss[1])
+			elif poss[0] == '/private':
+				WARRIORS = ['How','Wan','Woke']
+				Party = get_party()
+				for memberID in Party:
+					if Party[memberID]['name'] in WARRIORS:
+						log(Party[memberID]['name'])
+						log(poss[1])
+						phBotChat.Private(Party[memberID]['name'],poss[1])
+						break
+			elif poss[0] == '/party':
+				phBotChat.Party(poss[1])
+			elif poss[0] == '/start':
+				start_bot()
+			actual +=1
+			tiempo[0] = actual
+			tiempo[1] = time.time()
+			return
+		x1 = int(poss.split(',')[1])
+		y1 = int(poss.split(',')[2])
+		move_to(x1,y1,0)
+		set_training_position(0,x1,y1,0)
+		# log(f"moving to: {str(x1)},{str(y1)}")
+		dis = ((x2-x1)**2+(y2-y1)**2)**1/2
+		if dis < 2 and no_hay_mobs() and todos_cerca():
+			actual +=1
+			tiempo[0] = actual
+			tiempo[1] = time.time()
+		if time.time()-tiempo[1] > n and  dis < 2 and todos_cerca():
+			phBotChat.Party('k')
+			actual +=1
+			azulPerma(f'Pasaron {n} seg...')
+			phBotChat.Party(f'k{actual}')
+		if tiempo[0] != actual:
+			tiempo[0] = actual
+			tiempo[1] = time.time()
+
 def handle_event(t, data):
 	global VIP
 	global partyAlert
@@ -470,12 +534,10 @@ def handle_event(t, data):
 				Timer(2,goUnique).start()
 			if startBotUnique:
 				Timer(2,startUnique).start()
-			if get_zone_name(get_character_data()['region']) == 'Anbetungshalle':
-				log('Jupiter?')
-				if data == 'Jupiter':
-					get_jupiter_id()
-				start = False
+			if get_zone_name(get_character_data()['region']) == 'Anbetungshalle' and data == 'Jupiter':
+				get_jupiter_id()
 				green(f'Unique: {data}')
+				start = False
 				if get_character_data()['name'] in lideres:
 					Timer(0.5,goJupiter).start()
 		if get_character_data()['name'] in WhiteList and False:
