@@ -471,12 +471,13 @@ def handle_event(t, data):
 			if startBotUnique:
 				Timer(2,startUnique).start()
 			if get_zone_name(get_character_data()['region']) == 'Anbetungshalle':
+				log('Jupiter?')
+				if data == 'Jupiter':
+					get_jupiter_id()
 				start = False
 				green(f'Unique: {data}')
 				if get_character_data()['name'] in lideres:
 					Timer(0.5,goJupiter).start()
-				if data == 'Jupiter':
-					get_jupiter_id()
 		if get_character_data()['name'] in WhiteList and False:
 			if t == 1 and data not in QtBind.getItems(gui2,lstOpcodes) and data not in ignore:
 				log('[HUNTER] '+data)
@@ -1285,7 +1286,7 @@ def handle_joymax(opcode, data):
 				for item in otrosItems:
 					if item == itemName:
 						Union('['+itemName +']is distributed to ['+ playerName+']')
-			Timer(12,rahim).start()
+			# Timer(12,rahim).start()
 		elif opcode == 0x300C: # Unique Spawn
 			if data == YUNO_SPAWNED:
 				azulPerma('Yuno spawned')
@@ -1600,6 +1601,6 @@ def tlp():
 
 
 
-version = '4.6.3'
+version = '4.8.0'
 ver = QtBind.createLabel(gui,f'v{version}',690,300)
 log(f'[Super Plugin v{version} by Rahim]')
