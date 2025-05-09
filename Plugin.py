@@ -435,6 +435,17 @@ def removeIgnore():
 					set_training_position(Party[memberID]['region'], Party[memberID]['x'], Party[memberID]['y'], 0.0)
 					start_bot()
 
+def leer_linea_n(archivo="Script.txt", numero_linea=1):
+    try:
+        with open(archivo, 'r', encoding='utf-8') as f:
+            lineas = f.readlines()
+            if 1 <= numero_linea <= len(lineas):
+                return lineas[numero_linea - 1].rstrip('\n')
+            else:
+                return f"❌ El archivo solo tiene {len(lineas)} líneas. Línea {numero_linea} no disponible."
+    except FileNotFoundError:
+        return f"❌ El archivo '{archivo}' no se encontró."
+
 def event_loop():
 	global start
 	global actual
