@@ -15,3 +15,5 @@ def tlp():
 		if npc['name'] == '':
 			log(npc['name'])
 			inject_joymax(0x705A, struct.pack('I',id)+b'\x03\x00', False)
+
+log('Teleport plugin loeaded...')
