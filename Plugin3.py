@@ -3,7 +3,6 @@ import phBotChat
 import struct
 
 def handle_chat(t,player,msg):
-	msg = msg.lower()
 	if msg == 'tlp':
 		tlp()
 
