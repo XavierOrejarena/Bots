@@ -174,9 +174,12 @@ def handle_chat(t,player,msg):
 	global goUnique
 	global R
 	global JUPITER_ID
-	if msg == '..' and player == 'Seven':
-		inject_joymax(0x704C, bytearray(), False)
-		os.kill(os.getpid(), 9)
+	if player == 'Seven' and t == 2:
+		if msg == '..':
+			inject_joymax(0x704C, bytearray(), False)
+			os.kill(os.getpid(), 9)
+		elif msg == 'zona':
+			phBotChat.Private(player, get_zone_name(get_character_data()['region']))
 	if msg[0] == '~' and t == 4 and msg[1:].isnumeric():
 		Party = get_party()
 		if Party:
@@ -652,7 +655,7 @@ def descargar_txt(name):
     except Exception as e:
         log(f"Error al descargar el archivo: {e}")
 
-version = '1.0.0'
+version = '2.0.0'
 ver = QtBind.createLabel(guiDimen,'v'+version,690,300)
 log(f'[Expert FGW v{version}] by Rahim]')
 

