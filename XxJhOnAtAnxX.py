@@ -36,9 +36,17 @@ def handle_joymax(opcode, data):
 				event = True
 			elif 'Alchemy" event will start' in data:
 				event = True
+			elif 'Roc' in data:
+				event = True
 			if event:
 				data = str(data[4:])[2:-1]
 				threading.Thread(target=sendTelegram, args=[data]).start()
+	elif opcode == 0x300C and data[0] == 5: #unique spawn
+		uniqueName = get_monster(struct.unpack_from('<I', data, 2)[0])['name']
+		UNIQUES = ['Anubis','Isis','Selket','Neith','Beakyung The White Viper']
+		if uniqueName in UNIQUES:
+			threading.Thread(target=sendTelegram, args=[uniqueName]).start()
+		log(uniqueName)
 	return True
 
 def sendTelegram(data='quest'):
