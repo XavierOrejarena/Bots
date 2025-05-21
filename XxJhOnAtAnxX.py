@@ -17,7 +17,8 @@ def handle_joymax(opcode, data):
 		elif not isinstance(data, str):
 			data = str(data)
 		if data.isascii() and 'Changelog' not in data and '2025.05.12' not in data:
-			log(data)
+			pass
+			# log(data)
 		if 'Styria Clash' in data:
 			event = True
 		elif 'Last Man Standing' in data:
