@@ -16,8 +16,8 @@ def handle_joymax(opcode, data):
 		event = False
 		# data = str(data[4:])[2:-1]
 		data = str(data)
-		if 'Changelog' not in data and '2025.05.12' not in data and 'with' not in data and '(BANDIT)' not in data:
-			log(data)
+		if 'Changelog' not in data and '2025.05.12' not in data and 'with' not in data and '(BANDIT)' not in data and 'item to plus' not in :
+			# log(data)
 			if 'Styria Clash' in data:
 				event = True
 			elif 'Last Man Standing' in data:
