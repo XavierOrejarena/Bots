@@ -13,7 +13,7 @@ TELEGRAM_ID = '5987889810'
 ignore = ['(BANDIT)','Changelog','2025.05.12','with']
 
 def handle_joymax(opcode, data):
-	if opcode == 0x30CF and len(data) > 6 and get_character_data()['name'] == 'Zoser':
+	if opcode == 0x30CF and len(data) > 6:# and get_character_data()['name'] == 'Zoser':
 		event = False
 		data = str(data)
 		if 'Changelog' not in data and '2025.05.12' not in data and 'with' not in data and '(BANDIT)' not in data and 'item to plus' not in data:
