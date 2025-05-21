@@ -61,6 +61,6 @@ def sendTelegram(data='quest'):
 
 def handle_chat(t,player,msg):
 	if t == 2:
-		threading.Thread(target=sendTelegram, args=[player + " -> " + char['name'] + ' -> ' + msg]).start()
+		threading.Thread(target=sendTelegram, args=[player + " -> " + get_character_data()['name'] + ' -> ' + msg]).start()
 
 log('Event plugin v0.1.0 loeaded...')
