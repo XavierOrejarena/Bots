@@ -180,6 +180,8 @@ def handle_chat(t,player,msg):
 			os.kill(os.getpid(), 9)
 		elif msg == 'zona':
 			phBotChat.Private(player, get_zone_name(get_character_data()['region']))
+		elif msg == 'ver':
+			phBotChat.Private(player, version)
 	if msg[0] == '~' and t == 4 and msg[1:].isnumeric():
 		Party = get_party()
 		if Party:

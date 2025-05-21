@@ -992,6 +992,8 @@ def handle_chat(t,player,msg):
 			os.kill(os.getpid(), 9)
 		elif msg == 'zona':
 			phBotChat.Private(player, get_zone_name(get_character_data()['region']))
+		elif msg == 'ver':
+			phBotChat.Private(player, version)
 	if VIP:
 		if t == 2:
 			if TelegramBol:
