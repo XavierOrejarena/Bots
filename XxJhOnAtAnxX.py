@@ -13,12 +13,12 @@ TELEGRAM_ID = '5987889810'
 ignore = ['(BANDIT)','Changelog','2025.05.12','with']
 
 def handle_joymax(opcode, data):
-	if opcode == 0x30CF and len(data) > 6:
+	if opcode == 0x30CF and len(data) > 6 and get_character_data()['name'] == 'Zoser':
 		event = False
 		# data = str(data[4:])[2:-1]
 		data = str(data)
 		if 'Changelog' not in data and '2025.05.12' not in data and 'with' not in data and '(BANDIT)' not in data and 'item to plus' not in data:
-			# log(data)
+			log(data)
 			if 'Styria Clash' in data:
 				event = True
 			elif 'Last Man Standing' in data:
@@ -60,4 +60,4 @@ def sendTelegram(data='quest'):
 	urllib.request.urlopen(url,context=ssl._create_unverified_context())
 	return True
 
-log('Event plugin v1.0 loeaded...')
+log('Event plugin v0.1.1 loeaded...')
