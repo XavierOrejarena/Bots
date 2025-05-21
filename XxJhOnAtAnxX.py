@@ -27,6 +27,8 @@ def handle_joymax(opcode, data):
 			event = True
 		elif 'Roc will start' in data:
 			event = True
+		elif 'tower' in data.lower():
+			event = True
 		elif 'lucky global' in data.lower():
 			event = True
 		if event:
