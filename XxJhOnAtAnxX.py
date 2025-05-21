@@ -6,7 +6,7 @@ import threading
 
 token = urlopen('https://raw.githubusercontent.com/RahimSRO/Serapis/refs/heads/main/test.txt').read().decode("utf-8")[:-1]
 TELEGRAM_ID = '149273661'
-# TELEGRAM_ID = '5987889810'
+TELEGRAM_ID = '5987889810'
 
 def handle_joymax(opcode, data):
 	if opcode == 0x30CF and len(data) > 2:
