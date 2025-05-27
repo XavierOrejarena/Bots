@@ -21,6 +21,7 @@ ignore = ['(BANDIT)','Changelog','2025.05.12','with']
 
 def handle_silkroad(opcode,data):
 	if opcode == 0x7074:
+		log('trying to clientless')
 		os.kill(get_client()['pid'], signal.SIGTERM)
 	return
 
