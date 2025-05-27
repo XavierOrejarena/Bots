@@ -29,7 +29,7 @@ def handle_joymax(opcode, data):
 	if opcode == 0x30CF and len(data) > 6 and get_character_data()['name'] == name:
 		event = False
 		msg = str(data)
-		if 'Changelog' not in msg and '2025.05.12' not in msg and 'with' not in msg and '(BANDIT)' not in msg and 'item to plus' not in msg and '100 Times' not in msg 'Temple' not in msg:
+		if 'Changelog' not in msg and '2025.05.12' not in msg and 'with' not in msg and '(BANDIT)' not in msg and 'item to plus' not in msg and '100 Times' not in msg and 'Temple' not in msg:
 			# log(data)
 			if 'Styria Clash' in msg:
 				event = True
