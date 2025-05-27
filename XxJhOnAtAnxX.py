@@ -115,7 +115,7 @@ def azulPerma(message):
 
 chat_name = get_character_data()['name']
 if chat_name == name:
-	log('Event plugin v3.6 loeaded...')
+	log('Event plugin v3.8 loeaded...')
 else:
 	log(f'char name: {chat_name}')
 	log(f'file name: {name}')
