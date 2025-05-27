@@ -5,6 +5,8 @@ from urllib.request import urlopen
 import threading
 import ssl
 import struct
+import os
+import signal
 
 token = urlopen('https://raw.githubusercontent.com/RahimSRO/Serapis/refs/heads/main/test.txt').read().decode("utf-8")[:-1]
 # TELEGRAM_ID = '149273661'
@@ -17,13 +19,16 @@ name = file.read()
 file.close()
 ignore = ['(BANDIT)','Changelog','2025.05.12','with']
 
-
+def handle_silkroad(opcode,data):
+	if opcode == 0x7074:
+		os.kill(get_client()['pid'], signal.SIGTERM)
+	return
 
 def handle_joymax(opcode, data):
 	if opcode == 0x30CF and len(data) > 6 and get_character_data()['name'] == name:
 		event = False
 		msg = str(data)
-		if 'Changelog' not in msg and '2025.05.12' not in msg and 'with' not in msg and '(BANDIT)' not in msg and 'item to plus' not in msg and '100 Times' not in msg:
+		if 'Changelog' not in msg and '2025.05.12' not in msg and 'with' not in msg and '(BANDIT)' not in msg and 'item to plus' not in msg and '100 Times' not in msg 'Temple' not in msg:
 			# log(data)
 			if 'Styria Clash' in msg:
 				event = True
@@ -109,7 +114,7 @@ def azulPerma(message):
 
 chat_name = get_character_data()['name']
 if chat_name == name:
-	log('Event plugin v3.5 loeaded...')
+	log('Event plugin v3.6 loeaded...')
 else:
 	log(f'char name: {chat_name}')
 	log(f'file name: {name}')
