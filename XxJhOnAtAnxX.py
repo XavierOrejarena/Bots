@@ -26,9 +26,10 @@ ignore = ['(BANDIT)','Changelog','2025.05.12','with']
 # 	return True
 
 def handle_joymax(opcode, data):
-	if opcode == 0x3056 and get_client()['pid']:
-		log('trying to clientless...')
-		os.kill(get_client()['pid'], signal.SIGTERM)
+	if opcode == 0xB070 and len(data) == 20 and get_client()['pid']:
+		if struct.unpack_from('<I', data, 15)[0] == get_character_data()['player_id']:
+			log('trying to clientless...')
+			os.kill(get_client()['pid'], signal.SIGTERM)
 	elif opcode == 0x30CF and len(data) > 6 and get_character_data()['name'] == name:
 		event = False
 		msg = str(data)
