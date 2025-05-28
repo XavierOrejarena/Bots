@@ -19,14 +19,17 @@ name = file.read()
 file.close()
 ignore = ['(BANDIT)','Changelog','2025.05.12','with']
 
-def handle_silkroad(opcode,data):
-	if opcode == 0x7074:
-		log('trying to clientless...')
-		os.kill(get_client()['pid'], signal.SIGTERM)
-	return True
+# def handle_silkroad(opcode,data):
+# 	if opcode == 0x7074:
+# 		log('trying to clientless...')
+# 		os.kill(get_client()['pid'], signal.SIGTERM)
+# 	return True
 
 def handle_joymax(opcode, data):
-	if opcode == 0x30CF and len(data) > 6 and get_character_data()['name'] == name:
+	if opcode == 0x3056 and get_client()['pid']:
+		log('trying to clientless...')
+		os.kill(get_client()['pid'], signal.SIGTERM)
+	elif opcode == 0x30CF and len(data) > 6 and get_character_data()['name'] == name:
 		event = False
 		msg = str(data)
 		if 'Changelog' not in msg and '2025.05.12' not in msg and 'with' not in msg and '(BANDIT)' not in msg and 'item to plus' not in msg and '100 Times' not in msg and 'Temple' not in msg:
@@ -118,7 +121,7 @@ def azulPerma(message):
 # else:
 # 	log(f'char name: {chat_name}')
 # 	log(f'file name: {name}')
-log('Jhonatan Plugin v2.0 loeaded...')
+log('Jhonatan Plugin v2.1 loeaded...')
 
 # data = bytes.fromhex('15 01 1F 00 22 54 6F 77 65 72 20 44 65 66 65 6E 64 22 20 65 76 65 6E 74 20 68 61 73 20 65 6E 64 65 64 2E')
 # data = bytes.fromhex('15 01 2E 00 22 50 76 50 20 4D 61 74 63 68 69 6E 67 22 20 65 76 65 6E 74 20 77 69 6C 6C 20 73 74 61 72 74 20 69 6E 20 31 30 20 6D 69 6E 75 74 65 73 2E')
