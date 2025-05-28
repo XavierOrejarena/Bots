@@ -26,7 +26,11 @@ ignore = ['(BANDIT)','Changelog','2025.05.12','with']
 # 	return True
 
 def handle_joymax(opcode, data):
-	if opcode == 0xB070 and len(data) == 20 and get_client()['pid']:
+	# if opcode == 0x34B1:
+	if opcode == 0x30BF:
+		# threading.Thread(target=sendTelegram, args=['Capture The Flag']).start()
+		log(('Capture '.join('{:02X}'.format(x) for x in data)))
+	elif opcode == 0xB070 and len(data) == 20 and get_client()['pid']:
 		if struct.unpack_from('<I', data, 15)[0] == get_character_data()['player_id']:
 			log('trying to clientless...')
 			os.kill(get_client()['pid'], signal.SIGTERM)
@@ -122,7 +126,7 @@ def azulPerma(message):
 # else:
 # 	log(f'char name: {chat_name}')
 # 	log(f'file name: {name}')
-log('Jhonatan Plugin v3.1 loeaded...')
+log('Jhonatan Plugin v3.2 loeaded...')
 
 # data = bytes.fromhex('15 01 1F 00 22 54 6F 77 65 72 20 44 65 66 65 6E 64 22 20 65 76 65 6E 74 20 68 61 73 20 65 6E 64 65 64 2E')
 # data = bytes.fromhex('15 01 2E 00 22 50 76 50 20 4D 61 74 63 68 69 6E 67 22 20 65 76 65 6E 74 20 77 69 6C 6C 20 73 74 61 72 74 20 69 6E 20 31 30 20 6D 69 6E 75 74 65 73 2E')
