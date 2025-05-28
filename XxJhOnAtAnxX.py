@@ -27,7 +27,7 @@ ignore = ['(BANDIT)','Changelog','2025.05.12','with']
 
 def handle_joymax(opcode, data):
 	# if opcode == 0x30BF:
-	if opcode == 0x34B1:
+	if opcode == 0x34B1 and get_character_data()['name'] == name:
 		threading.Thread(target=sendTelegram, args=['Capture The Flag']).start()
 		log('Capture: '+(' '.join('{:02X}'.format(x) for x in data)))
 	elif opcode == 0xB070 and len(data) == 20 and get_client()['pid']:
