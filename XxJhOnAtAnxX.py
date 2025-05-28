@@ -26,9 +26,9 @@ ignore = ['(BANDIT)','Changelog','2025.05.12','with']
 # 	return True
 
 def handle_joymax(opcode, data):
-	# if opcode == 0x34B1:
-	if opcode == 0x30BF:
-		# threading.Thread(target=sendTelegram, args=['Capture The Flag']).start()
+	# if opcode == 0x30BF:
+	if opcode == 0x34B1:
+		threading.Thread(target=sendTelegram, args=['Capture The Flag']).start()
 		log('Capture: '+(' '.join('{:02X}'.format(x) for x in data)))
 	elif opcode == 0xB070 and len(data) == 20 and get_client()['pid']:
 		if struct.unpack_from('<I', data, 15)[0] == get_character_data()['player_id']:
