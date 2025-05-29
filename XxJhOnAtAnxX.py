@@ -29,13 +29,13 @@ def handle_joymax(opcode, data):
 	# if opcode == 0x30BF:
 	if opcode == 0x34B1 and get_character_data()['name'] == name:
 		msg = 'Capture The Flag'
-		if data == 2:
+		if data[0] == 2:
 			msg == 'Capture The flag 10 minutes.'
-		elif data == 13:
+		elif data[0] == 13:
 			msg == 'Capture The flag 5 minutes.'
-		elif data == 14:
+		elif data[0] == 14:
 			msg == 'Capture The flag 1 minute.'
-		elif data == 3:
+		elif data[0] == 3:
 			msg == 'Capture The flag has started.'
 		threading.Thread(target=sendTelegram, args=[msg]).start()
 		log('Capture: '+(' '.join('{:02X}'.format(x) for x in data)))
