@@ -38,7 +38,7 @@ def handle_joymax(opcode, data):
 		threading.Thread(target=sendTelegram, args=[msg]).start()
 		log('Capture: '+(' '.join('{:02X}'.format(x) for x in data)))
 	elif opcode == 0xB070 and len(data) == 20 and get_client()['pid']:
-		return
+		return True
 		# if struct.unpack_from('<I', data, 15)[0] == get_character_data()['player_id']:
 			# log('trying to clientless...')
 			# os.kill(get_client()['pid'], signal.SIGTERM)
