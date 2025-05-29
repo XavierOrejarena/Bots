@@ -10,9 +10,7 @@ import signal
 
 token = urlopen('https://raw.githubusercontent.com/RahimSRO/Serapis/refs/heads/main/test.txt').read().decode("utf-8")[:-1]
 TELEGRAM_ID = '149273661'
-# name = 'Seven'
-# TELEGRAM_ID = '5987889810'
-# name = 'BardBuff_2'
+TELEGRAM_ID = '5987889810'
 
 file = open('name.txt',mode='r')
 name = file.read()
@@ -40,9 +38,10 @@ def handle_joymax(opcode, data):
 		threading.Thread(target=sendTelegram, args=[msg]).start()
 		log('Capture: '+(' '.join('{:02X}'.format(x) for x in data)))
 	elif opcode == 0xB070 and len(data) == 20 and get_client()['pid']:
-		if struct.unpack_from('<I', data, 15)[0] == get_character_data()['player_id']:
-			log('trying to clientless...')
-			os.kill(get_client()['pid'], signal.SIGTERM)
+		return
+		# if struct.unpack_from('<I', data, 15)[0] == get_character_data()['player_id']:
+			# log('trying to clientless...')
+			# os.kill(get_client()['pid'], signal.SIGTERM)
 	elif opcode == 0x30CF and len(data) > 6 and get_character_data()['name'] == name:
 		event = False
 		msg = str(data)
@@ -135,7 +134,7 @@ def azulPerma(message):
 # else:
 # 	log(f'char name: {chat_name}')
 # 	log(f'file name: {name}')
-log('Jhonatan Plugin v3.9 loeaded...')
+log('Jhonatan Plugin v4.0 loeaded...')
 
 # data = bytes.fromhex('15 01 1F 00 22 54 6F 77 65 72 20 44 65 66 65 6E 64 22 20 65 76 65 6E 74 20 68 61 73 20 65 6E 64 65 64 2E')
 # data = bytes.fromhex('15 01 2E 00 22 50 76 50 20 4D 61 74 63 68 69 6E 67 22 20 65 76 65 6E 74 20 77 69 6C 6C 20 73 74 61 72 74 20 69 6E 20 31 30 20 6D 69 6E 75 74 65 73 2E')
