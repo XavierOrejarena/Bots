@@ -10,7 +10,7 @@ import signal
 
 token = urlopen('https://raw.githubusercontent.com/RahimSRO/Serapis/refs/heads/main/test.txt').read().decode("utf-8")[:-1]
 TELEGRAM_ID = '149273661'
-TELEGRAM_ID = '5987889810'
+# TELEGRAM_ID = '5987889810'
 
 file = open('name.txt',mode='r')
 name = file.read()
@@ -24,18 +24,36 @@ ignore = ['(BANDIT)','Changelog','2025.05.12','with']
 # 	return True
 
 def handle_joymax(opcode, data):
-	# if opcode == 0x30BF:
-	if opcode == 0x34B1 and get_character_data()['name'] == name:
-		msg = 'Capture The Flag'
+	if opcode == 0x34D2 and get_character_data()['name'] == name:
+		msg = False
+		if data == bytes.fromhex('02 00 20 00'):
+			msg = 'Battle Arena (Score) will begin in [10] minutes.'
+		elif data == bytes.fromhex('0D 00 20 00'):
+			msg = 'Battle Arena (Score) will begin in [5] minutes.'
+		elif data == bytes.fromhex('0E 00 20 00'):
+			msg = 'Battle Arena (Score) will begin in [1] minutes.'
+		elif data == bytes.fromhex('02 00 40 00'):
+			msg = 'Battle Arena (CTF) will begin in [10] minutes.'
+		elif data == bytes.fromhex('0D 00 40 00'):
+			msg = 'Battle Arena (CTF) will begin in [5] minutes.'
+		elif data == bytes.fromhex('0E 00 40 00'):
+			msg = 'Battle Arena (CTF) will begin in [1] minutes.'
+		elif data == bytes.fromhex('03 00 00 00'):
+			msg = 'Battle Arena has begun.'
+		if msg:
+			threading.Thread(target=sendTelegram, args=[msg]).start()
+	elif opcode == 0x34B1 and get_character_data()['name'] == name:
+		msg = False
 		if data[0] == 2:
-			msg == 'Capture The flag 10 minutes.'
+			msg = 'Capture The flag 10 minutes.'
 		elif data[0] == 13:
-			msg == 'Capture The flag 5 minutes.'
+			msg = 'Capture The flag 5 minutes.'
 		elif data[0] == 14:
-			msg == 'Capture The flag 1 minute.'
+			msg = 'Capture The flag 1 minute.'
 		elif data[0] == 3:
-			msg == 'Capture The flag has started.'
-		threading.Thread(target=sendTelegram, args=[msg]).start()
+			msg = 'Capture The flag has started.'
+		if msg:
+			threading.Thread(target=sendTelegram, args=[msg]).start()
 		log('Capture: '+(' '.join('{:02X}'.format(x) for x in data)))
 	elif opcode == 0xB070 and len(data) == 20 and get_client()['pid']:
 		return True
@@ -128,15 +146,4 @@ def azulPerma(message):
 	p += message.encode('ascii')
 	inject_silkroad(0x30CF,p,False)
 
-
-# chat_name = get_character_data()['name']
-# if chat_name == name:
-# else:
-# 	log(f'char name: {chat_name}')
-# 	log(f'file name: {name}')
 log('Jhonatan Plugin v4.0 loeaded...')
-
-# data = bytes.fromhex('15 01 1F 00 22 54 6F 77 65 72 20 44 65 66 65 6E 64 22 20 65 76 65 6E 74 20 68 61 73 20 65 6E 64 65 64 2E')
-# data = bytes.fromhex('15 01 2E 00 22 50 76 50 20 4D 61 74 63 68 69 6E 67 22 20 65 76 65 6E 74 20 77 69 6C 6C 20 73 74 61 72 74 20 69 6E 20 31 30 20 6D 69 6E 75 74 65 73 2E')
-# msg = str(data[4:])[2:-1]
-# log(msg)
