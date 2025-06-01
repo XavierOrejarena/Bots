@@ -146,4 +146,4 @@ def azulPerma(message):
 	p += message.encode('ascii')
 	inject_silkroad(0x30CF,p,False)
 
-log('Jhonatan Plugin v4.0 loeaded...')
+log('Jhonatan Plugin v4.5 loeaded...')
