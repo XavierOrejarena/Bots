@@ -10,7 +10,7 @@ import signal
 
 token = urlopen('https://raw.githubusercontent.com/RahimSRO/Serapis/refs/heads/main/test.txt').read().decode("utf-8")[:-1]
 TELEGRAM_ID = '149273661'
-# TELEGRAM_ID = '5987889810'
+TELEGRAM_ID = '5987889810'
 
 file = open('name.txt',mode='r')
 name = file.read()
@@ -146,4 +146,4 @@ def azulPerma(message):
 	p += message.encode('ascii')
 	inject_silkroad(0x30CF,p,False)
 
-log('Jhonatan Plugin v4.5 loeaded...')
+log('Jhonatan Plugin v4.6 loeaded...')
