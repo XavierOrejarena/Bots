@@ -11,6 +11,8 @@ from urllib.request import urlopen
 import threading
 import os
 
+log('loading...')
+
 guiDimen = QtBind.init(__name__,'Dimen')
 token = urlopen('https://raw.githubusercontent.com/RahimSRO/Serapis/refs/heads/main/test.txt').read().decode("utf-8")[:-1]
 setProfile_Btn = QtBind.createButton(guiDimen,'spawn_dimension','Spawn Dimen',20,20)
