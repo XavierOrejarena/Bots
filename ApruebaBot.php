@@ -208,6 +208,7 @@ function processQuery($inline_query)
         ];
     } else {
         $text = str_replace(" ","",str_replace("x","*",$inline_query['query']));
+        $text = str_replace("X","*",$text);
         $original = str_replace(" ","",$inline_query['query']);
         $Cal = new Field_calculate();
 
@@ -280,7 +281,7 @@ function processMessage($message) {
     $chat_id = $message['chat']['id'];
     $text = str_replace(" ","",str_replace("x","*",$message['text']));
     $text = str_replace("X","*",$text);
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "Hola", "parse_mode" => "markdown"));
+    // apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "Hola", "parse_mode" => "markdown"));
 
     $check = preg_split('/[\/*+-]/', $text);
 
