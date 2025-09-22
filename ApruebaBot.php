@@ -277,31 +277,32 @@ if (php_sapi_name() == 'cli') {
 }
 
 function processMessage($message) {
-    $message_id = $message['message_id'];
-    $chat_id = $message['chat']['id'];
-    $text = str_replace(" ","",str_replace("x","*",$message['text']));
-    $text = str_replace("X","*",$text);
-    if ($text == "/ver"){
+    if ($message['text'] == "/ver"){
         apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "version 3", "parse_mode" => "markdown"));
+    }else{
+        $message_id = $message['message_id'];
+        $chat_id = $message['chat']['id'];
+        $text = str_replace(" ","",str_replace("x","*",$message['text']));
+        $text = str_replace("X","*",$text);
+
+        $check = preg_split('/[\/*+-]/', $text);
+
+        for ($i=0; $i < sizeof($check); $i++) { 
+            if (strpos($check[$i], ".") < strpos($check[$i], ",")) {
+                $text = str_replace($check[$i],str_replace(".", "", $check[$i]),$text);
+                }
+            elseif (strpos($check[$i], ",") < strpos($check[$i], ".")) {
+                $text = str_replace($check[$i],str_replace(",", "", $check[$i]),$text);
+                }
+            }
+
+
+        
+        $Cal = new Field_calculate();
+        $result = $Cal->calculate($text);
+        $result = number_format((float)$result, 2, ',', '');
+        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`".$result."`", "parse_mode" => "markdown"));
     }
-
-    $check = preg_split('/[\/*+-]/', $text);
-
-    for ($i=0; $i < sizeof($check); $i++) { 
-        if (strpos($check[$i], ".") < strpos($check[$i], ",")) {
-            $text = str_replace($check[$i],str_replace(".", "", $check[$i]),$text);
-            }
-        elseif (strpos($check[$i], ",") < strpos($check[$i], ".")) {
-            $text = str_replace($check[$i],str_replace(",", "", $check[$i]),$text);
-            }
-        }
-
-
-    
-    $Cal = new Field_calculate();
-    $result = $Cal->calculate($text);
-    $result = number_format((float)$result, 2, ',', '');
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`".$result."`", "parse_mode" => "markdown"));
 }
 
 $content = file_get_contents('php://input');
