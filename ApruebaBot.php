@@ -280,6 +280,7 @@ function processMessage($message) {
     $chat_id = $message['chat']['id'];
     $text = str_replace(" ","",str_replace("x","*",$message['text']));
     $text = str_replace("X","*",$text);
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`".$text."`", "parse_mode" => "markdown"));
 
     $check = preg_split('/[\/*+-]/', $text);
 
