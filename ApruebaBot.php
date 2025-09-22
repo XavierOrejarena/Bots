@@ -281,6 +281,7 @@ function processMessage($message) {
     $chat_id = $message['chat']['id'];
     $text = str_replace(" ","",str_replace("x","*",$message['text']));
     $text = str_replace("X","*",$text);
+    sendMessage($chat_id, "Este bot es privado, para usarlo escribir a @XavierOrejarena");
 
     $check = preg_split('/[\/*+-]/', $text);
 
