@@ -282,7 +282,7 @@ function processMessage($message) {
     $text = str_replace(" ","",str_replace("x","*",$message['text']));
     $text = str_replace("X","*",$text);
     if ($text == "/ver"){
-        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "version 2", "parse_mode" => "markdown"));
+        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "version 3", "parse_mode" => "markdown"));
     }
 
     $check = preg_split('/[\/*+-]/', $text);
