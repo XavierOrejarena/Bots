@@ -281,8 +281,8 @@ function processMessage($message) {
     $chat_id = $message['chat']['id'];
     $text = str_replace(" ","",str_replace("x","*",$message['text']));
     $text = str_replace("X","*",$text);
-    if ($text == "/help"){
-        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "No te ayudo", "parse_mode" => "markdown"));
+    if ($text == "/ver"){
+        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "version 1", "parse_mode" => "markdown"));
     }
 
     $check = preg_split('/[\/*+-]/', $text);
