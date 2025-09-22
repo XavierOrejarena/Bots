@@ -280,6 +280,7 @@ function processMessage($message) {
     $message_id = $message['message_id'];
     $chat_id = $message['chat']['id'];
     $text = str_replace(" ","",str_replace("x","*",$message['text']));
+    $text = str_replace("X","*",$text);
 
     $check = preg_split('/[\/*+-]/', $text);
 
