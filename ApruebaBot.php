@@ -278,7 +278,7 @@ if (php_sapi_name() == 'cli') {
 
 function processMessage($message) {
     if ($message['text'] == "/ver"){
-        apiRequest("sendMessage", array('chat_id' => $message['chat']['id'], "text" => "version: 5", "parse_mode" => "markdown"));
+        apiRequest("sendMessage", array('chat_id' => $message['chat']['id'], "text" => "version: 6", "parse_mode" => "markdown"));
     }else{
         $message_id = $message['message_id'];
         $chat_id = $message['chat']['id'];
