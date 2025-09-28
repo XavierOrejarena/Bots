@@ -43,12 +43,6 @@ if ($result->num_rows > 0 && $text != "") {
 }
 
 // $text = json_decode(file_get_contents("https://exchange.vcoud.com/coins/latest?type=bolivar&base=usd"), true)[0]['price'];
-$arrContextOptions=array(
-    "ssl"=>array(
-        "verify_peer"=>false,
-        "verify_peer_name"=>false,
-    ),
-);  
 
 $data = file_get_contents("http://bcv.org.ve", false, stream_context_create($arrContextOptions));
 preg_match_all('/EUR/', $data, $matches, PREG_OFFSET_CAPTURE);
