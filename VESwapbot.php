@@ -272,7 +272,7 @@ function processMessage($message) {
     // apiRequestJson('sendMessage', ['chat_id' => $chat_id, 'text' => 'Resultados:', 'reply_markup' => ['inline_keyboard' => $array]]);
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`$text` *USD* Equivalen a:
 
-*USD BCV:*      `".$result1."`\n\n*Promedio:*       `$result3`\n\n*EUR BCV:*        `".$result2."`", "parse_mode" => "markdown"));
+*USD BCV:*      `".$result1."`\n\n*Promedio:*   `$result3`\n\n*EUR BCV:*   `".$result2."`", "parse_mode" => "markdown"));
 }
 
 $content = file_get_contents('php://input');
