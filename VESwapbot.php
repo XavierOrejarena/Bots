@@ -257,7 +257,7 @@ function processMessage($message) {
     $porcentaje3 = number_format(((1-$tasaBCV/(($tasaBCV+$tasaParallel)/2))*100),2,",","");
     $porcentaje2 = number_format((1-$tasaBCV/$tasaParallel)*100,2,",","");
     $array = [];
-    $array[] =  [['text' => "USD", 'callback_data' => $result1],
+    $array[] =  [['text' => "USD BCV", 'callback_data' => $result1],
                 ['text' => $result1, 'callback_data' => $result1],
                 ['text' => "0%", 'callback_data' => $result1]];
 
@@ -265,14 +265,14 @@ function processMessage($message) {
                 ['text' => $result3, 'callback_data' => $result3],
                 ['text' => $porcentaje3, 'callback_data' => $result3]];
 
-    $array[] =  [['text' => "EUR", 'callback_data' => $result2],
+    $array[] =  [['text' => "EUR BCV", 'callback_data' => $result2],
                 ['text' => $result2, 'callback_data' => $result2],
                 ['text' => $porcentaje2, 'callback_data' => $result2]];
 
     // apiRequestJson('sendMessage', ['chat_id' => $chat_id, 'text' => 'Resultados:', 'reply_markup' => ['inline_keyboard' => $array]]);
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`$text` *USD* Equivalen a:
 
-*USD:*            `".$result1."`\n\n*Promedio:*   `$result3`\n\n*EUR:*   `".$result2."`", "parse_mode" => "markdown"));
+*USD BCV:*            `".$result1."`\n\n*Promedio:*   `$result3`\n\n*EUR BCV:*   `".$result2."`", "parse_mode" => "markdown"));
 }
 
 $content = file_get_contents('php://input');
