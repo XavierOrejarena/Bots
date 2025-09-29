@@ -48,6 +48,7 @@ $data = file_get_contents("http://bcv.org.ve", false, stream_context_create($arr
 preg_match_all('/EUR/', $data, $matches, PREG_OFFSET_CAPTURE);
 $text = substr($data, $matches[0][0][1]+104, 11);
 $text = (string)$text;
+file_get_contents("https://api.telegram.org/bot7$token/sendMessage?chat_id=149273661&text=$text");
 
 $chat_id = '@DolarParallel';
 $sql = "SELECT tasa FROM DICOM WHERE id = 5";
@@ -60,7 +61,7 @@ if ($result->num_rows > 0) {
 		if ($link->query($sql) === TRUE) {
 			file_get_contents("https://api.telegram.org/bot7$token/sendMessage?chat_id=$chat_id&text=`$text`&parse_mode=markdown");
 		} else {
-			file_get_contents("https://api.telegram.org/bot7$token/sendMessage?chat_id=149273661&text=error".$conn->error); 
+			file_get_contents("https://api.telegram.org/bot7$token/sendMessage?chat_id=149273661&text=error".$conn->error);
 		}
 	}
 } else {
