@@ -72,7 +72,7 @@ function USD(){
 	if ($text =! ""){
 		return $text;
 	} else{
-		return USD()
+		return USD();
 	}
 }
 
@@ -91,7 +91,7 @@ function EUR(){
 	if ($text =! ""){
 		return $text;
 	} else{
-		return EUR()
+		return EUR();
 	}
 }
 
