@@ -66,7 +66,7 @@ function USD(){
     "http" => array(
         "method" => "GET", // HTTP request method
         "header" => "User-Agent: MyCustomAgent/1.0\r\n", // Custom HTTP headers
-        "timeout" => 500, // Request timeout in seconds
+        "timeout" => 1000, // Request timeout in seconds
         // ... other HTTP options
     ),
 	);  
@@ -92,7 +92,7 @@ function EUR(){
     "http" => array(
         "method" => "GET", // HTTP request method
         "header" => "User-Agent: MyCustomAgent/1.0\r\n", // Custom HTTP headers
-        "timeout" => 500, // Request timeout in seconds
+        "timeout" => 1000, // Request timeout in seconds
         // ... other HTTP options
     ),
 	);  
