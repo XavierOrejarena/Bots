@@ -9,7 +9,7 @@ $result = $link->query($sql);
 
 $text = USD();
 
-if ($result->num_rows > 0 && $text) {
+if ($result->num_rows > 0 && $text != "") {
     $OldText = mysqli_fetch_assoc($result)['tasa'];
 	if ($text !== $OldText) {
 		if (!preg_match('/[a-zA-Z]/', $text)) {
@@ -42,7 +42,7 @@ $result = $link->query($sql);
 
 $text = EUR();
 
-if ($result->num_rows > 0 && $text) {
+if ($result->num_rows > 0 && $text != "") {
     $OldText = mysqli_fetch_assoc($result)['tasa'];
 	if ($text != $OldText) {
 		$sql = "UPDATE DICOM SET tasa = '$text' WHERE id = 5";
