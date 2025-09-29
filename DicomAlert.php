@@ -67,7 +67,7 @@ function USD(){
 	preg_match_all('/> USD</', $data, $matches, PREG_OFFSET_CAPTURE);
 	$text = substr($data, $matches[0][0][1]+122, 11);
 	$text = (string)$text;
-	return $text
+	return $text;
 }
 
 function EUR(){
@@ -75,6 +75,7 @@ function EUR(){
 	preg_match_all('/EUR/', $data, $matches, PREG_OFFSET_CAPTURE);
 	$text = substr($data, $matches[0][0][1]+104, 11);
 	$text = (string)$text;
+	return $text;
 }
 
 ?>
