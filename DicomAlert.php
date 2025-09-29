@@ -75,7 +75,7 @@ function USD(){
 	$text = substr($data, $matches[0][0][1]+122, 11);
 	$text = (string)$text;
 	print_r("USD: ".$text."\n");
-	if ($text =! ""){
+	if ($text != "" && $text != "1"){
 		print_r("UESEDE: ".$text."\n");
 		return $text;
 	} else{
@@ -102,7 +102,7 @@ function EUR(){
 	$text = substr($data, $matches[0][0][1]+104, 11);
 	$text = (string)$text;
 	print_r("EUR: ".$text."\n");
-	if ($text =! ""){
+	if ($text != "" && $text != "1"){
 		print_r("EURILLO: ".$text."\n");
 		return $text;
 	} else{
