@@ -76,7 +76,7 @@ function USD(){
 	$text = (string)$text;
 	print_r("USD: ".$text."\n");
 	if ($text =! ""){
-		echo "UESEDE";
+		echo "UESEDE: ".$text."\n";
 		return $text;
 	} else{
 		return USD();
@@ -102,7 +102,7 @@ function EUR(){
 	$text = (string)$text;
 	print_r("EUR: ".$text."\n");
 	if ($text =! ""){
-		echo "EURILLO";
+		echo "EURILLO: ".$text."\n";
 		return $text;
 	} else{
 		return EUR();
