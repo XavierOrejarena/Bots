@@ -9,17 +9,14 @@ $arrContextOptions=array(
     ),
 );  
 
-$data = file_get_contents("http://bcv.org.ve", false, stream_context_create($arrContextOptions));
-preg_match_all('/> USD</', $data, $matches, PREG_OFFSET_CAPTURE);
-$text = substr($data, $matches[0][0][1]+122, 11);
-$text = (string)$text;
+
 $token = '16396100:AAG_6y_pnkgYCKNRMyFVHow2eefR719DfCk';
 $chat_id = '@AlertaBCV';
 $sql = "SELECT tasa FROM DICOM WHERE id = 1";
 $result = $link->query($sql);
 
 
-if ($result->num_rows > 0 && $text != "") {
+if ($result->num_rows > 0 && USD()) {
     $OldText = mysqli_fetch_assoc($result)['tasa'];
 	if ($text !== $OldText) {
 		if (!preg_match('/[a-zA-Z]/', $text)) {
@@ -44,17 +41,13 @@ if ($result->num_rows > 0 && $text != "") {
 
 // $text = json_decode(file_get_contents("https://exchange.vcoud.com/coins/latest?type=bolivar&base=usd"), true)[0]['price'];
 
-$data = file_get_contents("http://bcv.org.ve", false, stream_context_create($arrContextOptions));
-preg_match_all('/EUR/', $data, $matches, PREG_OFFSET_CAPTURE);
-$text = substr($data, $matches[0][0][1]+104, 11);
-$text = (string)$text;
 file_get_contents("https://api.telegram.org/bot7$token/sendMessage?chat_id=149273661&text=$text xD");
 
 $chat_id = '@DolarParallel';
 $sql = "SELECT tasa FROM DICOM WHERE id = 5";
 $result = $link->query($sql);
 
-if ($result->num_rows > 0 && $text != "") {
+if ($result->num_rows > 0 && EUR()) {
     $OldText = mysqli_fetch_assoc($result)['tasa'];
 	if ($text != $OldText) {
 		$sql = "UPDATE DICOM SET tasa = '$text' WHERE id = 5";
@@ -69,6 +62,19 @@ if ($result->num_rows > 0 && $text != "") {
     file_get_contents("https://api.telegram.org/bot7$token/sendMessage?chat_id=149273661&text=? Results");
 }
 
+function USD(){
+	$data = file_get_contents("http://bcv.org.ve", false, stream_context_create($arrContextOptions));
+	preg_match_all('/> USD</', $data, $matches, PREG_OFFSET_CAPTURE);
+	$text = substr($data, $matches[0][0][1]+122, 11);
+	$text = (string)$text;
+	return $text
+}
 
+function EUR(){
+	$data = file_get_contents("http://bcv.org.ve", false, stream_context_create($arrContextOptions));
+	preg_match_all('/EUR/', $data, $matches, PREG_OFFSET_CAPTURE);
+	$text = substr($data, $matches[0][0][1]+104, 11);
+	$text = (string)$text;
+}
 
 ?>
