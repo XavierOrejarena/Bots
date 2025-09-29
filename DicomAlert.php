@@ -2,14 +2,6 @@
 <?php
 include "connect.php";
 
-$arrContextOptions=array(
-    "ssl"=>array(
-        "verify_peer"=>false,
-        "verify_peer_name"=>false,
-    ),
-);  
-
-
 $token = '16396100:AAG_6y_pnkgYCKNRMyFVHow2eefR719DfCk';
 $chat_id = '@AlertaBCV';
 $sql = "SELECT tasa FROM DICOM WHERE id = 1";
@@ -63,6 +55,12 @@ if ($result->num_rows > 0 && EUR()) {
 }
 
 function USD(){
+	$arrContextOptions=array(
+    "ssl"=>array(
+        "verify_peer"=>false,
+        "verify_peer_name"=>false,
+    	),
+	);  
 	$data = file_get_contents("http://bcv.org.ve", false, stream_context_create($arrContextOptions));
 	preg_match_all('/> USD</', $data, $matches, PREG_OFFSET_CAPTURE);
 	$text = substr($data, $matches[0][0][1]+122, 11);
@@ -72,6 +70,12 @@ function USD(){
 }
 
 function EUR(){
+	$arrContextOptions=array(
+    "ssl"=>array(
+        "verify_peer"=>false,
+        "verify_peer_name"=>false,
+    ),
+	);  
 	$data = file_get_contents("http://bcv.org.ve", false, stream_context_create($arrContextOptions));
 	preg_match_all('/EUR/', $data, $matches, PREG_OFFSET_CAPTURE);
 	$text = substr($data, $matches[0][0][1]+104, 11);
