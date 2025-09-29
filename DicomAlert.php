@@ -54,7 +54,7 @@ $chat_id = '@DolarParallel';
 $sql = "SELECT tasa FROM DICOM WHERE id = 5";
 $result = $link->query($sql);
 
-if ($result->num_rows > 0) {
+if ($result->num_rows > 0 && $text != "") {
     $OldText = mysqli_fetch_assoc($result)['tasa'];
 	if ($text != $OldText) {
 		$sql = "UPDATE DICOM SET tasa = '$text' WHERE id = 5";
