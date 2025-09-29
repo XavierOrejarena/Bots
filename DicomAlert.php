@@ -70,8 +70,7 @@ function USD(){
         // ... other HTTP options
     ),
 	);  
-	// $data = file_get_contents("http://bcv.org.ve", false, stream_context_create($arrContextOptions));
-	$data = file_get_contents("45.190.124.48", false, stream_context_create($arrContextOptions));
+	$data = file_get_contents("http://bcv.org.ve", false, stream_context_create($arrContextOptions));
 	preg_match_all('/> USD</', $data, $matches, PREG_OFFSET_CAPTURE);
 	$text = substr($data, $matches[0][0][1]+122, 11);
 	$text = (string)$text;
@@ -97,8 +96,7 @@ function EUR(){
         // ... other HTTP options
     ),
 	);  
-	// $data = file_get_contents("http://bcv.org.ve", false, stream_context_create($arrContextOptions));
-	$data = file_get_contents("45.190.124.48", false, stream_context_create($arrContextOptions));
+	$data = file_get_contents("http://bcv.org.ve", false, stream_context_create($arrContextOptions));
 	preg_match_all('/EUR/', $data, $matches, PREG_OFFSET_CAPTURE);
 	$text = substr($data, $matches[0][0][1]+104, 11);
 	$text = (string)$text;
