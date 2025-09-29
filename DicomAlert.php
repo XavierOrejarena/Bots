@@ -7,8 +7,9 @@ $chat_id = '@AlertaBCV';
 $sql = "SELECT tasa FROM DICOM WHERE id = 1";
 $result = $link->query($sql);
 
+$text = USD()
 
-if ($result->num_rows > 0 && USD()) {
+if ($result->num_rows > 0 && $text) {
     $OldText = mysqli_fetch_assoc($result)['tasa'];
 	if ($text !== $OldText) {
 		if (!preg_match('/[a-zA-Z]/', $text)) {
@@ -39,7 +40,9 @@ $chat_id = '@DolarParallel';
 $sql = "SELECT tasa FROM DICOM WHERE id = 5";
 $result = $link->query($sql);
 
-if ($result->num_rows > 0 && EUR()) {
+$text = EUR()
+
+if ($result->num_rows > 0 && $text) {
     $OldText = mysqli_fetch_assoc($result)['tasa'];
 	if ($text != $OldText) {
 		$sql = "UPDATE DICOM SET tasa = '$text' WHERE id = 5";
