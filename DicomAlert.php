@@ -79,6 +79,7 @@ function USD(){
 		print_r("UESEDE: ".$text."\n");
 		return $text;
 	} else{
+		print_r("FAILEED\n");
 		return USD();
 	}
 }
@@ -105,6 +106,7 @@ function EUR(){
 		print_r("EURILLO: ".$text."\n");
 		return $text;
 	} else{
+		print_r("FAILEEED\n");
 		return EUR();
 	}
 }
