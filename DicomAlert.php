@@ -74,12 +74,11 @@ function USD(){
 	preg_match_all('/> USD</', $data, $matches, PREG_OFFSET_CAPTURE);
 	$text = substr($data, $matches[0][0][1]+122, 11);
 	$text = (string)$text;
-	print_r("USD: ".$text."\n");
 	if ($text != "" && $text != "1"){
 		print_r("UESEDE: ".$text."\n");
 		return $text;
 	} else{
-		print_r("FAILEED\n");
+		print_r("USD: ".$text."\n");
 		return USD();
 	}
 }
@@ -101,12 +100,11 @@ function EUR(){
 	preg_match_all('/EUR/', $data, $matches, PREG_OFFSET_CAPTURE);
 	$text = substr($data, $matches[0][0][1]+104, 11);
 	$text = (string)$text;
-	print_r("EUR: ".$text."\n");
 	if ($text != "" && $text != "1"){
 		print_r("EURILLO: ".$text."\n");
 		return $text;
 	} else{
-		print_r("FAILEEED\n");
+		print_r("EUR: ".$text."\n");
 		return EUR();
 	}
 }
