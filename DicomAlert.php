@@ -7,7 +7,7 @@ $chat_id = '@AlertaBCV';
 $sql = "SELECT tasa FROM DICOM WHERE id = 1";
 $result = $link->query($sql);
 
-$text = USD()
+$text = USD();
 
 if ($result->num_rows > 0 && $text) {
     $OldText = mysqli_fetch_assoc($result)['tasa'];
@@ -40,7 +40,7 @@ $chat_id = '@DolarParallel';
 $sql = "SELECT tasa FROM DICOM WHERE id = 5";
 $result = $link->query($sql);
 
-$text = EUR()
+$text = EUR();
 
 if ($result->num_rows > 0 && $text) {
     $OldText = mysqli_fetch_assoc($result)['tasa'];
