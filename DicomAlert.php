@@ -63,6 +63,12 @@ function USD(){
         "verify_peer"=>false,
         "verify_peer_name"=>false,
     	),
+    "http" => array(
+        "method" => "GET", // HTTP request method
+        "header" => "User-Agent: MyCustomAgent/1.0\r\n", // Custom HTTP headers
+        "timeout" => 30, // Request timeout in seconds
+        // ... other HTTP options
+    ),
 	);  
 	$data = file_get_contents("http://bcv.org.ve", false, stream_context_create($arrContextOptions));
 	preg_match_all('/> USD</', $data, $matches, PREG_OFFSET_CAPTURE);
@@ -81,6 +87,12 @@ function EUR(){
     "ssl"=>array(
         "verify_peer"=>false,
         "verify_peer_name"=>false,
+    ),
+    "http" => array(
+        "method" => "GET", // HTTP request method
+        "header" => "User-Agent: MyCustomAgent/1.0\r\n", // Custom HTTP headers
+        "timeout" => 30, // Request timeout in seconds
+        // ... other HTTP options
     ),
 	);  
 	$data = file_get_contents("http://bcv.org.ve", false, stream_context_create($arrContextOptions));
