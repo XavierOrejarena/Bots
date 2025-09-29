@@ -48,7 +48,7 @@ $data = file_get_contents("http://bcv.org.ve", false, stream_context_create($arr
 preg_match_all('/EUR/', $data, $matches, PREG_OFFSET_CAPTURE);
 $text = substr($data, $matches[0][0][1]+104, 11);
 $text = (string)$text;
-file_get_contents("https://api.telegram.org/bot7$token/sendMessage?chat_id=149273661&text=$text");
+file_get_contents("https://api.telegram.org/bot7$token/sendMessage?chat_id=149273661&text=$text xD");
 
 $chat_id = '@DolarParallel';
 $sql = "SELECT tasa FROM DICOM WHERE id = 5";
