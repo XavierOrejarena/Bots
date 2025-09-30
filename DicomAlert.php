@@ -36,7 +36,7 @@ if ($result->num_rows > 0 && $text != "") {
 
 // file_get_contents("https://api.telegram.org/bot7$token/sendMessage?chat_id=149273661&text=$text xD");
 
-$chat_id = '@DolarParallel';
+$chat_id = '@EURBCV';
 $sql = "SELECT tasa FROM DICOM WHERE id = 5";
 $result = $link->query($sql);
 
