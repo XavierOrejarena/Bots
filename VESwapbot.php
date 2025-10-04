@@ -256,7 +256,7 @@ function processMessage($message) {
     $result3 = $text*($tasaBCV+$binance)/2;
     $result3 = number_format($result3, 2, ',', '');
 
-    $equival = $result1/$binance*$text;
+    $equival = $tasaBCV/$binance*$text;
     $equival = number_format($equival, 2, '.', '');
     $binance = $text*$binance;
     $binance = number_format($binance, 2, ',', '');
