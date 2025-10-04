@@ -256,6 +256,8 @@ function processMessage($message) {
     $result3 = $text*($tasaBCV+$binance)/2;
     $result3 = number_format($result3, 2, ',', '');
 
+    $equival = $result1/$binance*$text;
+    $equival = number_format($equival, 2, '.', '');
     $binance = $text*$binance;
     $binance = number_format($binance, 2, ',', '');
     $porcentaje3 = number_format(((1-$tasaBCV/(($tasaBCV+$binance)/2))*100),2,",","");
@@ -277,7 +279,10 @@ function processMessage($message) {
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`$text` *USD* Equivalen a:
 
 *USD BCV:*      `".$result1."`\n\n*Promedio:*       `$result3`\n\n*EUR BCV:*        `".$result2."`\n\n*Binance:*        `$binance`", "parse_mode" => "markdown"));
+
+    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`$text` *USD BCV* equivalen a `$equival` *USDT Binance*", "parse_mode" => "markdown"));
 }
+
 
 $content = file_get_contents('php://input');
 $update = json_decode($content, true);
