@@ -257,7 +257,7 @@ function processMessage($message) {
     $result3 = number_format($result3, 2, ',', '');
 
     $binance = $text*$binance;
-    $binance = number_format($result2, 2, ',', '');
+    $binance = number_format($binance, 2, ',', '');
     $porcentaje3 = number_format(((1-$tasaBCV/(($tasaBCV+$binance)/2))*100),2,",","");
     $porcentaje2 = number_format((1-$tasaBCV/$binance)*100,2,",","");
     $array = [];
