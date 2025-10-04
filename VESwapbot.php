@@ -252,10 +252,12 @@ function processMessage($message) {
         $result2 = number_format($result2, 2, ',', '');
     }
     $binance = json_decode(file_get_contents("https://criptoya.com/api/saldo/USDT/VES/0.0001"), true)["ask"];
-    $binance = $text*$binance;
 
     $result3 = $text*($tasaBCV+$binance)/2;
     $result3 = number_format($result3, 2, ',', '');
+
+    $binance = $text*$binance;
+    $binance = number_format($result2, 2, ',', '');
     $porcentaje3 = number_format(((1-$tasaBCV/(($tasaBCV+$binance)/2))*100),2,",","");
     $porcentaje2 = number_format((1-$tasaBCV/$binance)*100,2,",","");
     $array = [];
