@@ -269,10 +269,12 @@ function processMessage($message) {
                 ['text' => $result2, 'callback_data' => $result2],
                 ['text' => $porcentaje2, 'callback_data' => $result2]];
 
+    $binance = json_decode(file_get_contents("https://criptoya.com/api/saldo/USDT/VES/0.0001"), true)["ask"];
+    $binance = $text*$binance;
     // apiRequestJson('sendMessage', ['chat_id' => $chat_id, 'text' => 'Resultados:', 'reply_markup' => ['inline_keyboard' => $array]]);
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`$text` *USD* Equivalen a:
 
-*USD BCV:*            `".$result1."`\n\n*Promedio:*   `$result3`\n\n*EUR BCV:*   `".$result2."`", "parse_mode" => "markdown"));
+*USD BCV:*            `".$result1."`\n\n*Promedio:*   `$result3`\n\n*EUR BCV:*   `".$result2."`\n\n*Binance>*       `$binance`", "parse_mode" => "markdown"));
 }
 
 $content = file_get_contents('php://input');
