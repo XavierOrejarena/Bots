@@ -251,11 +251,13 @@ function processMessage($message) {
         $result2 = $text*$tasaParallel;
         $result2 = number_format($result2, 2, ',', '');
     }
+    $binance = json_decode(file_get_contents("https://criptoya.com/api/saldo/USDT/VES/0.0001"), true)["ask"];
+    $binance = $text*$binance;
 
-    $result3 = $text*($tasaBCV+$tasaParallel)/2;
+    $result3 = $text*($tasaBCV+$binance)/2;
     $result3 = number_format($result3, 2, ',', '');
-    $porcentaje3 = number_format(((1-$tasaBCV/(($tasaBCV+$tasaParallel)/2))*100),2,",","");
-    $porcentaje2 = number_format((1-$tasaBCV/$tasaParallel)*100,2,",","");
+    $porcentaje3 = number_format(((1-$tasaBCV/(($tasaBCV+$binance)/2))*100),2,",","");
+    $porcentaje2 = number_format((1-$tasaBCV/$binance)*100,2,",","");
     $array = [];
     $array[] =  [['text' => "USD BCV", 'callback_data' => $result1],
                 ['text' => $result1, 'callback_data' => $result1],
@@ -269,8 +271,6 @@ function processMessage($message) {
                 ['text' => $result2, 'callback_data' => $result2],
                 ['text' => $porcentaje2, 'callback_data' => $result2]];
 
-    $binance = json_decode(file_get_contents("https://criptoya.com/api/saldo/USDT/VES/0.0001"), true)["ask"];
-    $binance = $text*$binance;
     // apiRequestJson('sendMessage', ['chat_id' => $chat_id, 'text' => 'Resultados:', 'reply_markup' => ['inline_keyboard' => $array]]);
     apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`$text` *USD* Equivalen a:
 
