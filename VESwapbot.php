@@ -305,7 +305,7 @@ function processMessage($message) {
             $result2 = number_format($text/$EUR_BCV, 2, '.', '');
         }
         $binance = json_decode(file_get_contents("https://criptoya.com/api/saldo/USDT/VES/0.0001"), true)["ask"];
-        $result2 = number_format($text/$binance, 2, '.', '');
+        $result3 = number_format($text/$binance, 2, '.', '');
 
         apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`$text` *VES* Equivalen a:
 
