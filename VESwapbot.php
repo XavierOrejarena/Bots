@@ -225,62 +225,75 @@ function processMessage($message) {
     include "connect.php";
     $text = str_replace(" ","",$message['text']);
     $check = preg_split('/[\/*+-]/', $text);
+    if (is_numeric($text)){
+        for ($i=0; $i < sizeof($check); $i++) { 
+            if (strpos($check[$i], ".") < strpos($check[$i], ",")) {
+                $text = (float)str_replace($check[$i],str_replace(".", "", $check[$i]),$text);
+                }
+            elseif (strpos($check[$i], ",") < strpos($check[$i], ".")) {
+                $text = (float)str_replace($check[$i],str_replace(",", "", $check[$i]),$text);
+                }
+            }
 
-    for ($i=0; $i < sizeof($check); $i++) { 
-        if (strpos($check[$i], ".") < strpos($check[$i], ",")) {
-            $text = (float)str_replace($check[$i],str_replace(".", "", $check[$i]),$text);
-            }
-        elseif (strpos($check[$i], ",") < strpos($check[$i], ".")) {
-            $text = (float)str_replace($check[$i],str_replace(",", "", $check[$i]),$text);
-            }
+        $sql = "SELECT tasa FROM DICOM WHERE id = 1";
+        $result = $link->query($sql);
+        if ($result->num_rows > 0) {
+            $tasaBCV = (float)str_replace(",",".",mysqli_fetch_assoc($result)['tasa']);
+            $result1 = $text*$tasaBCV;
+            $result1 = number_format($result1, 2, ',', '');
         }
 
-    $sql = "SELECT tasa FROM DICOM WHERE id = 1";
-    $result = $link->query($sql);
-    if ($result->num_rows > 0) {
-        $tasaBCV = (float)str_replace(",",".",mysqli_fetch_assoc($result)['tasa']);
-        $result1 = $text*$tasaBCV;
-        $result1 = number_format($result1, 2, ',', '');
+        $sql = "SELECT tasa FROM DICOM WHERE id = 5";
+        $result = $link->query($sql);
+        if ($result->num_rows > 0) {
+            $tasaParallel = (float)str_replace(",",".",mysqli_fetch_assoc($result)['tasa']);
+            
+            $result2 = $text*$tasaParallel;
+            $result2 = number_format($result2, 2, ',', '');
+        }
+        $binance = json_decode(file_get_contents("https://criptoya.com/api/saldo/USDT/VES/0.0001"), true)["ask"];
+
+        $result3 = $text*($tasaBCV+$binance)/2;
+        $result3 = number_format($result3, 2, ',', '');
+
+        $equival = $tasaBCV/$binance*$text;
+        $equival = number_format($equival, 2, '.', '');
+        $binance = $text*$binance;
+        $binance = number_format($binance, 2, ',', '');
+        $porcentaje3 = number_format(((1-$tasaBCV/(($tasaBCV+$binance)/2))*100),2,",","");
+        $porcentaje2 = number_format((1-$tasaBCV/$binance)*100,2,",","");
+        $array = [];
+        $array[] =  [['text' => "USD BCV", 'callback_data' => $result1],
+                    ['text' => $result1, 'callback_data' => $result1],
+                    ['text' => "0%", 'callback_data' => $result1]];
+
+        $array[] =  [['text' => "Promedio", 'callback_data' => $result3],
+                    ['text' => $result3, 'callback_data' => $result3],
+                    ['text' => $porcentaje3, 'callback_data' => $result3]];
+
+        $array[] =  [['text' => "EUR BCV", 'callback_data' => $result2],
+                    ['text' => $result2, 'callback_data' => $result2],
+                    ['text' => $porcentaje2, 'callback_data' => $result2]];
+
+        // apiRequestJson('sendMessage', ['chat_id' => $chat_id, 'text' => 'Resultados:', 'reply_markup' => ['inline_keyboard' => $array]]);
+        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`$text` *USD* Equivalen a:
+
+    *USD BCV:*      `".$result1."`\n\n*Promedio:*       `$result3`\n\n*EUR BCV:*        `".$result2."`\n\n*Binance:*        `$binance`", "parse_mode" => "markdown"));
+
+        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`$text` *USD BCV* equivalen a `$equival` *USDT Binance*", "parse_mode" => "markdown"));
+
+    } else{
+        $text = preg_replace("/[^0-9.,]/", "", $text);
+        $text = str_replace(" ","",$text)
+        if (strpos($text, ".") < strpos($text, ",")) {
+            $text = str_replace(".", "", $text);
+        }
+        elseif (strpos($text, ",") < strpos($text, ".")) {
+            $text = str_replace(",", "", $text);
+        }
+        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`$text`", "parse_mode" => "markdown"));
     }
 
-    $sql = "SELECT tasa FROM DICOM WHERE id = 5";
-    $result = $link->query($sql);
-    if ($result->num_rows > 0) {
-        $tasaParallel = (float)str_replace(",",".",mysqli_fetch_assoc($result)['tasa']);
-        
-        $result2 = $text*$tasaParallel;
-        $result2 = number_format($result2, 2, ',', '');
-    }
-    $binance = json_decode(file_get_contents("https://criptoya.com/api/saldo/USDT/VES/0.0001"), true)["ask"];
-
-    $result3 = $text*($tasaBCV+$binance)/2;
-    $result3 = number_format($result3, 2, ',', '');
-
-    $equival = $tasaBCV/$binance*$text;
-    $equival = number_format($equival, 2, '.', '');
-    $binance = $text*$binance;
-    $binance = number_format($binance, 2, ',', '');
-    $porcentaje3 = number_format(((1-$tasaBCV/(($tasaBCV+$binance)/2))*100),2,",","");
-    $porcentaje2 = number_format((1-$tasaBCV/$binance)*100,2,",","");
-    $array = [];
-    $array[] =  [['text' => "USD BCV", 'callback_data' => $result1],
-                ['text' => $result1, 'callback_data' => $result1],
-                ['text' => "0%", 'callback_data' => $result1]];
-
-    $array[] =  [['text' => "Promedio", 'callback_data' => $result3],
-                ['text' => $result3, 'callback_data' => $result3],
-                ['text' => $porcentaje3, 'callback_data' => $result3]];
-
-    $array[] =  [['text' => "EUR BCV", 'callback_data' => $result2],
-                ['text' => $result2, 'callback_data' => $result2],
-                ['text' => $porcentaje2, 'callback_data' => $result2]];
-
-    // apiRequestJson('sendMessage', ['chat_id' => $chat_id, 'text' => 'Resultados:', 'reply_markup' => ['inline_keyboard' => $array]]);
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`$text` *USD* Equivalen a:
-
-*USD BCV:*      `".$result1."`\n\n*Promedio:*       `$result3`\n\n*EUR BCV:*        `".$result2."`\n\n*Binance:*        `$binance`", "parse_mode" => "markdown"));
-
-    apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`$text` *USD BCV* equivalen a `$equival` *USDT Binance*", "parse_mode" => "markdown"));
 }
 
 
