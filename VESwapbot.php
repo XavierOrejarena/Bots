@@ -238,30 +238,30 @@ function processMessage($message) {
         $sql = "SELECT tasa FROM DICOM WHERE id = 1";
         $result = $link->query($sql);
         if ($result->num_rows > 0) {
-            $tasaBCV = (float)str_replace(",",".",mysqli_fetch_assoc($result)['tasa']);
-            $result1 = $text*$tasaBCV;
+            $USD_BCV = (float)str_replace(",",".",mysqli_fetch_assoc($result)['tasa']);
+            $result1 = $text*$USD_BCV;
             $result1 = number_format($result1, 2, ',', '');
         }
 
         $sql = "SELECT tasa FROM DICOM WHERE id = 5";
         $result = $link->query($sql);
         if ($result->num_rows > 0) {
-            $tasaParallel = (float)str_replace(",",".",mysqli_fetch_assoc($result)['tasa']);
+            $EUR_BCV = (float)str_replace(",",".",mysqli_fetch_assoc($result)['tasa']);
             
-            $result2 = $text*$tasaParallel;
+            $result2 = $text*$EUR_BCV;
             $result2 = number_format($result2, 2, ',', '');
         }
         $binance = json_decode(file_get_contents("https://criptoya.com/api/saldo/USDT/VES/0.0001"), true)["ask"];
 
-        $result3 = $text*($tasaBCV+$binance)/2;
+        $result3 = $text*($USD_BCV+$binance)/2;
         $result3 = number_format($result3, 2, ',', '');
 
-        $equival = $tasaBCV/$binance*$text;
+        $equival = $USD_BCV/$binance*$text;
         $equival = number_format($equival, 2, '.', '');
         $binance = $text*$binance;
         $binance = number_format($binance, 2, ',', '');
-        $porcentaje3 = number_format(((1-$tasaBCV/(($tasaBCV+$binance)/2))*100),2,",","");
-        $porcentaje2 = number_format((1-$tasaBCV/$binance)*100,2,",","");
+        $porcentaje3 = number_format(((1-$USD_BCV/(($USD_BCV+$binance)/2))*100),2,",","");
+        $porcentaje2 = number_format((1-$USD_BCV/$binance)*100,2,",","");
         $array = [];
         $array[] =  [['text' => "USD BCV", 'callback_data' => $result1],
                     ['text' => $result1, 'callback_data' => $result1],
@@ -278,7 +278,7 @@ function processMessage($message) {
         // apiRequestJson('sendMessage', ['chat_id' => $chat_id, 'text' => 'Resultados:', 'reply_markup' => ['inline_keyboard' => $array]]);
         apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`$text` *USD* Equivalen a:
 
-    *USD BCV:*      `".$result1."`\n\n*Promedio:*       `$result3`\n\n*EUR BCV:*        `".$result2."`\n\n*Binance:*        `$binance`", "parse_mode" => "markdown"));
+*USD BCV:*      `".$result1."`\n\n*Promedio:*       `$result3`\n\n*EUR BCV:*        `".$result2."`\n\n*Binance:*        `$binance`", "parse_mode" => "markdown"));
 
         apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`$text` *USD BCV* equivalen a `$equival` *USDT Binance*", "parse_mode" => "markdown"));
 
@@ -291,7 +291,25 @@ function processMessage($message) {
         elseif (strpos($text, ",") < strpos($text, ".")) {
             $text = str_replace(",", "", $text);
         }
-        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`$text`", "parse_mode" => "markdown"));
+        $text = str_replace(",",".",$text);
+        $sql = "SELECT tasa FROM DICOM WHERE id = 1";
+        $result = $link->query($sql);
+        if ($result->num_rows > 0) {
+            $USD_BCV = (float)str_replace(",",".",mysqli_fetch_assoc($result)['tasa']);
+            $result1 = number_format($text/$USD_BCV, 2, '.', '');
+        }
+        $sql = "SELECT tasa FROM DICOM WHERE id = 5";
+        $result = $link->query($sql);
+        if ($result->num_rows > 0) {
+            $EUR_BCV = (float)str_replace(",",".",mysqli_fetch_assoc($result)['tasa']);
+            $result2 = number_format($text/$EUR_BCV, 2, '.', '');
+        }
+        $binance = json_decode(file_get_contents("https://criptoya.com/api/saldo/USDT/VES/0.0001"), true)["ask"];
+        $result2 = number_format($text/$binance, 2, '.', '');
+
+        apiRequest("sendMessage", array('chat_id' => $chat_id, "text" => "`$text` *VES* Equivalen a:
+
+*USD BCV:*      `".$result1."`\n\n*EUR BCV:*        `".$result2."`\n\n*Binance:*        `$result3`", "parse_mode" => "markdown"));
     }
 
 }
