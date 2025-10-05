@@ -284,7 +284,7 @@ function processMessage($message) {
 
     } else{
         $text = preg_replace("/[^0-9.,]/", "", $text);
-        $text = str_replace(" ","",$text)
+        $text = str_replace(" ","",$text);
         if (strpos($text, ".") < strpos($text, ",")) {
             $text = str_replace(".", "", $text);
         }
