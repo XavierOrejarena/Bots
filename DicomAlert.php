@@ -72,7 +72,7 @@ function USD(){
 	);  
 	$data = file_get_contents("http://bcv.org.ve", false, stream_context_create($arrContextOptions));
 	preg_match_all('/> USD</', $data, $matches, PREG_OFFSET_CAPTURE);
-	$text = substr($data, $matches[0][0][1]+122, 11);
+	$text = substr($data, $matches[0][0][1]+146, 11);
 	$text = (string)$text;
 	if ($text != "" && $text != "1"){
 		print_r("UESEDE: ".$text."\n");
