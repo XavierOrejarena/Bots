@@ -98,7 +98,7 @@ function EUR(){
 	);  
 	$data = file_get_contents("http://bcv.org.ve", false, stream_context_create($arrContextOptions));
 	preg_match_all('/EUR/', $data, $matches, PREG_OFFSET_CAPTURE);
-	$text = substr($data, $matches[0][0][1]+104, 11);
+	$text = substr($data, $matches[0][0][1]+128, 11);
 	$text = (string)$text;
 	if ($text != "" && $text != "1"){
 		print_r("EURILLO: ".$text."\n");
