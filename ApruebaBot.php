@@ -8,7 +8,7 @@ define('API_BOT', '-eBPzOE6Ux5vTpdr6pPru6sWJc');
 define('API_URL', 'https://api.telegram.org/bot'.BOT_TOKEN.TOKEN_BOT.API_BOT.'/');
 define('WEBHOOK_URL', 'https://vps239318.vps.ovh.ca/xavier/ApruebaBot.php');
 
-echo .BOT_TOKEN.TOKEN_BOT.API_BOT
+echo BOT_TOKEN.TOKEN_BOT.API_BOT
 
 function gen_uuid() {
     return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
