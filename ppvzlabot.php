@@ -238,7 +238,7 @@ if (php_sapi_name() == 'cli') {
     exit;
 }
 
-$malaPaga = array('Xavier','440413394');
+$malaPaga = array('Xavier','440413394---');
 
 function processMessage($message) {
     $message_id = $message['message_id'];
