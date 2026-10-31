@@ -237,8 +237,6 @@ if (php_sapi_name() == 'cli') {
     exit;
 }
 
-$malaPaga = array('Alexis','123456');
-
 function processMessage($message) {
     $message_id = $message['message_id'];
     $chat_id = $message['chat']['id'];
@@ -250,7 +248,7 @@ function processMessage($message) {
     // $URL = API_URL."sendMessage?chat_id=".$chat_id."&text=`".$text."`&parse_mode=MarkDown";
     // file_get_contents($URL);
 
-    if (in_array($message['from']['first_name'], $malaPaga)) {
+    if (false)) {
         sendMessage($chat_id, "Hola ".$message['from']['first_name'].", comunícate con @OrejarenaXavier para activar el bot.");
     }else {
         if(strtolower($text) == "/start") {
