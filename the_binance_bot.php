@@ -334,7 +334,7 @@ if (isset($update['message'])) {
 }
 if (isset($update['inline_query'])) {
     processQuery($update['inline_query']);
-    saveUser($update['inline_query']['from']);
+    //saveUser($update['inline_query']['from']);
 }
 if (isset($update['callback_query'])) {
     // $chat_id = $update['callback_query']['from']['id'];
