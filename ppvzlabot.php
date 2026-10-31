@@ -262,7 +262,7 @@ function processMessage($message) {
                 $USD = str_word_count($text, 1, '0123456789.')[0];
                 $BS = str_word_count($text, 1, '0123456789.')[1];
                 $signal = str_word_count($text, 1, '*xX/\def')[0];
-                $BS = pow(1000,strlen(stristr($BS, 'k')))*(real)$BS;
+                $BS = pow(1000,strlen(stristr($BS, 'k')))*(float)$BS;
                 $emoji = "\xE2\x98\x95: Bs ".number_format($BS, 2, ',', '');
     
                 if ($signal == 'x' || $signal == '*' || is_null($signal) || $signal == 'X') {
