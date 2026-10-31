@@ -329,7 +329,7 @@ if (isset($update['message'])) {
         // $text = $update['message']['text'];
         // file_get_contents("https://api.telegram.org/bot$token/sendMessage?chat_id=$chat_id&text=$text");
         processMessage($update['message']);
-        saveUser($update['message']['from']);
+        //saveUser($update['message']['from']);
     }
 }
 if (isset($update['inline_query'])) {
