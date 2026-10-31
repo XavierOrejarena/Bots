@@ -177,7 +177,7 @@ class Field_calculate {
     }
 
     private function compute($input){
-        $compute = function(){('', 'return '.$input.';');
+        $compute = eval("return function() { return " . $input . "; };");
 
         return 0 + $compute();
     }
