@@ -246,8 +246,8 @@ function processMessage($message) {
         $sql = "SELECT tasa FROM DICOM WHERE id = 5";
         $result = $link->query($sql);
         if ($result->num_rows > 0) {
-            $EUR_BCV = (float)str_replace(",",".",mysqli_fetch_assoc($result)['tasa']);
-            
+            $EUR_BCV = (float)str_replace(".","",mysqli_fetch_assoc($result)['tasa']);
+            $EUR_BCV = (float)str_replace(",",".",$EUR_BCV);
             $result2 = $text*$EUR_BCV;
             $result2 = number_format($result2, 2, ',', '');
         }
